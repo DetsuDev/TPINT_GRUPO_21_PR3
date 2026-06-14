@@ -67,10 +67,43 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GestionAdmin\GestionMedicos.aspx" />
+    <Content Include="GestionAdmin\GestionPacientes.aspx" />
+    <Content Include="GestionAdmin\GestionTurnos.aspx" />
+    <Content Include="GestionAdmin\Informes.aspx" />
     <Content Include="Web.config" />
     <Content Include="login.aspx" />
+    <Content Include="GestionAdmin\Inicio.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GestionAdmin\GestionMedicos.aspx.cs">
+      <DependentUpon>GestionMedicos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionAdmin\GestionMedicos.aspx.designer.cs">
+      <DependentUpon>GestionMedicos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionAdmin\GestionPacientes.aspx.cs">
+      <DependentUpon>GestionPacientes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionAdmin\GestionPacientes.aspx.designer.cs">
+      <DependentUpon>GestionPacientes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionAdmin\GestionTurnos.aspx.cs">
+      <DependentUpon>GestionTurnos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionAdmin\GestionTurnos.aspx.designer.cs">
+      <DependentUpon>GestionTurnos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionAdmin\Informes.aspx.cs">
+      <DependentUpon>Informes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionAdmin\Informes.aspx.designer.cs">
+      <DependentUpon>Informes.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="login.aspx.cs">
       <DependentUpon>login.aspx</DependentUpon>
@@ -78,6 +111,13 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionAdmin\Inicio.aspx.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionAdmin\Inicio.aspx.designer.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

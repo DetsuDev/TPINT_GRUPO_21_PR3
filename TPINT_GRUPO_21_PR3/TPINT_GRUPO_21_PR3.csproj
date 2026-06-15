@@ -71,6 +71,7 @@
     <Content Include="GestionAdmin\GestionPacientes.aspx" />
     <Content Include="GestionAdmin\GestionTurnos.aspx" />
     <Content Include="GestionAdmin\Informes.aspx" />
+    <Content Include="GestionMedico\GestionMedicos.aspx" />
     <Content Include="Web.config" />
     <Content Include="login.aspx" />
     <Content Include="GestionAdmin\Inicio.aspx" />
@@ -103,6 +104,13 @@
     </Compile>
     <Compile Include="GestionAdmin\Informes.aspx.designer.cs">
       <DependentUpon>Informes.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GestionMedico\GestionMedicos.aspx.cs">
+      <DependentUpon>GestionMedicos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GestionMedico\GestionMedicos.aspx.designer.cs">
+      <DependentUpon>GestionMedicos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="login.aspx.cs">

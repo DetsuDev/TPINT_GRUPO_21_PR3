@@ -5,9 +5,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-
-    <title></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"/>
+    <title>Gestión de Médicos</title>
 </head>
 <body style="background-color: #f8f9fa;">
     
@@ -18,48 +17,140 @@
       </div>
     </div>
 
-
     <div style="padding: 50px; margin: 50px;">
-        <ul class="nav nav-tabs" style=" min-width: 1000px;">
-            <li class="nav-item">
-                <a class="nav-link" href="AdminInicio.aspx">Inicio</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="AdminPacientes.aspx">Gestionar Pacientes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="AdminMedicos.aspx">Gestionar Medicos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="AdminTurnos.aspx">Gestionar Turnos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="AdminInformes.aspx">Informes</a>
-            </li>
+        <ul class="nav nav-tabs" style="min-width: 1000px;">
+            <li class="nav-item"><a class="nav-link" href="AdminInicio.aspx">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="AdminPacientes.aspx">Gestionar Pacientes</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="AdminMedicos.aspx">Gestionar Medicos</a></li>
+            <li class="nav-item"><a class="nav-link" href="AdminTurnos.aspx">Gestionar Turnos</a></li>
+            <li class="nav-item"><a class="nav-link" href="AdminInformes.aspx">Informes</a></li>
         </ul>
-        <div class="border border-top-0 p-5" style="background-color: white;" >
 
+        <div class="border border-top-0 p-5" style="background-color: white;">
             <form id="form1" runat="server">
-                <asp:GridView ID="gvGestionMedicos" runat="server" AutoGenerateColumns="False" OnRowCancelingEdit="gvGestionMedicos_RowCancelingEdit" OnRowDeleting="gvGestionMedicos_RowDeleting" OnRowEditing="gvGestionMedicos_RowEditing" OnRowUpdating="gvGestionMedicos_RowUpdating">
-                    <Columns>
-                        <asp:CommandField ShowEditButton="True" />
-                        <asp:BoundField DataField="ID" HeaderText="ID" />
-                        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                        <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                        <asp:BoundField DataField="Sexo" HeaderText="Sexo" />
-                        <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" />
-                        <asp:BoundField DataField="FechaNac" HeaderText="Fecha Nac" />
-                        <asp:BoundField DataField="Direccion" HeaderText="Direccion" />
-                        <asp:BoundField DataField="Localidad" HeaderText="Localidad" />
-                        <asp:BoundField DataField="Provincia" HeaderText="Provincia" />
-                        <asp:BoundField DataField="Email" HeaderText="Email" />
-                        <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
-                        <asp:BoundField DataField="Horario" HeaderText="Horario Atencion" />
-                        <asp:BoundField DataField="Usuario" HeaderText="Usuario" />
-                        <asp:BoundField DataField="Contrasenia" HeaderText="Contrasenia" />
-                        <asp:CommandField ShowDeleteButton="True" />
-                    </Columns>
-                </asp:GridView>
+                
+                <div class="card border-primary mb-5 shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Listado de Médicos</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="table-responsive">
+                            <asp:GridView ID="gvGestionMedicos" runat="server" 
+                                AutoGenerateColumns="False" 
+                                AllowPaging="True" 
+                                PageSize="5" 
+                                CssClass="table table-striped table-hover table-bordered align-middle"
+                                OnPageIndexChanging="gvGestionMedicos_PageIndexChanging"
+                                OnRowCancelingEdit="gvGestionMedicos_RowCancelingEdit" 
+                                OnRowDeleting="gvGestionMedicos_RowDeleting" 
+                                OnRowEditing="gvGestionMedicos_RowEditing" 
+                                OnRowUpdating="gvGestionMedicos_RowUpdating">
+                                <Columns>
+                                    <asp:CommandField ShowEditButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-warning" />
+                                    <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" />
+                                    <asp:BoundField DataField="Legajo" HeaderText="Legajo" />
+                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                                    <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
+                                    <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
+                                    <asp:BoundField DataField="Horario" HeaderText="Horario Atención" />
+                                    <asp:BoundField DataField="Sexo" HeaderText="Sexo" />
+                                    <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" />
+                                    <asp:BoundField DataField="FechaNac" HeaderText="Fecha Nac" />
+                                    <asp:BoundField DataField="Direccion" HeaderText="Direccion" />
+                                    <asp:BoundField DataField="Localidad" HeaderText="Localidad" />
+                                    <asp:BoundField DataField="Provincia" HeaderText="Provincia" />
+                                    <asp:BoundField DataField="Email" HeaderText="Email" />
+                                    <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
+                                    <asp:BoundField DataField="Usuario" HeaderText="Usuario" />
+                                    <asp:BoundField DataField="Contrasenia" HeaderText="Contraseña" />
+                                    <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" />
+                                </Columns>
+                                <PagerStyle CssClass="pagination justify-content-center pt-3" />
+                            </asp:GridView>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-primary shadow-sm">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Cargar Nuevo Médico</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label font-weight-bold">Legajo Médico</label>
+                                <asp:TextBox ID="txtLegajo" runat="server" CssClass="form-control" placeholder="Ej: MED-999"></asp:TextBox>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">DNI</label>
+                                <asp:TextBox ID="txtDni" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Nombre</label>
+                                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Apellido</label>
+                                <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Especialidad</label>
+                                <asp:DropDownList ID="ddlEspecialidad" runat="server" CssClass="form-select"></asp:DropDownList>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Horario de Disponibilidad</label>
+                                <asp:DropDownList ID="ddlHorario" runat="server" CssClass="form-select"></asp:DropDownList>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Sexo</label>
+                                <asp:DropDownList ID="ddlSexo" runat="server" CssClass="form-select">
+                                    <asp:ListItem Value="M">Masculino</asp:ListItem>
+                                    <asp:ListItem Value="F">Femenino</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <div class="col-md-2">
+                                <label class="form-label">Nacionalidad</label>
+                                <asp:TextBox ID="txtNacionalidad" runat="server" CssClass="form-control" placeholder="Ej: Argentina"></asp:TextBox>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Fecha de Nacimiento</label>
+                                <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Teléfono</label>
+                                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Dirección</label>
+                                <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Provincia</label>
+                                <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-select"></asp:DropDownList>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Localidad</label>
+                                <asp:DropDownList ID="ddlLocalidad" runat="server" CssClass="form-select"></asp:DropDownList>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Correo Electrónico</label>
+                                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="medico@clinica.com"></asp:TextBox>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Usuario de Login</label>
+                                <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Contraseña</label>
+                                <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                            </div>
+                            <div class="col-12 text-end pt-3">
+                                <asp:Button ID="btnCargar" runat="server" Text="Cargar Médico" CssClass="btn btn-primary px-4" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </form>
         </div>
     </div>

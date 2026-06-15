@@ -67,7 +67,11 @@
                 ErrorMessage="Ingrese la contraseña"
                 CssClass="error" Display="Dynamic"></asp:RequiredFieldValidator>
 
-            <asp:Button ID="btnLogin" runat="server" Text="Login" CssClass="boton" OnClick="btnLogin_Click" />
+            <asp:Button ID="btnTestLoginAdmin" runat="server" Text="Login Admin" CssClass="boton" OnClick="btnTestLoginAdmin_Click" />
+
+            <br />
+
+            <asp:Button ID="btnTestLoginMedico" runat="server" Text="Login Medico" CssClass="boton" OnClick="btnTestLoginMedico_Click" />
 
             <asp:Label ID="lblMensaje" runat="server" CssClass="error"></asp:Label>
         </div>

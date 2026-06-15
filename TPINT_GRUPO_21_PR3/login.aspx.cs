@@ -14,11 +14,19 @@ namespace TPINT_GRUPO_21_PR3
             ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
         }
 
-        protected void btnLogin_Click(object sender, EventArgs e)
+        protected void btnTestLoginMedico_Click(object sender, EventArgs e)
         {
             if (Page.IsValid)
             {
-                lblMensaje.Text = "";
+                Response.Redirect("~/GestionAdmin/GestionMedicos.aspx");
+            }
+        }
+
+        protected void btnTestLoginAdmin_Click(object sender, EventArgs e)
+        {
+            if (Page.IsValid)
+            {
+                Response.Redirect("~/GestionAdmin/Inicio.aspx");
             }
         }
     }

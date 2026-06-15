@@ -40,6 +40,26 @@
         <div class="border border-top-0 p-5" style="background-color: white;" >
 
             <form id="form1" runat="server">
+                <asp:GridView ID="gvGestionMedicos" runat="server" AutoGenerateColumns="False" OnRowCancelingEdit="gvGestionMedicos_RowCancelingEdit" OnRowDeleting="gvGestionMedicos_RowDeleting" OnRowEditing="gvGestionMedicos_RowEditing" OnRowUpdating="gvGestionMedicos_RowUpdating">
+                    <Columns>
+                        <asp:CommandField ShowEditButton="True" />
+                        <asp:BoundField DataField="ID" HeaderText="ID" />
+                        <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
+                        <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
+                        <asp:BoundField DataField="Sexo" HeaderText="Sexo" />
+                        <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" />
+                        <asp:BoundField DataField="FechaNac" HeaderText="Fecha Nac" />
+                        <asp:BoundField DataField="Direccion" HeaderText="Direccion" />
+                        <asp:BoundField DataField="Localidad" HeaderText="Localidad" />
+                        <asp:BoundField DataField="Provincia" HeaderText="Provincia" />
+                        <asp:BoundField DataField="Email" HeaderText="Email" />
+                        <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
+                        <asp:BoundField DataField="Horario" HeaderText="Horario Atencion" />
+                        <asp:BoundField DataField="Usuario" HeaderText="Usuario" />
+                        <asp:BoundField DataField="Contrasenia" HeaderText="Contrasenia" />
+                        <asp:CommandField ShowDeleteButton="True" />
+                    </Columns>
+                </asp:GridView>
             </form>
         </div>
     </div>

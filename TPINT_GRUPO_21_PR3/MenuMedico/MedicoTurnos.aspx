@@ -31,6 +31,24 @@
         <div class="border border-top-0 p-5" style="background-color: white;" >
 
             <form id="form1" runat="server">
+                <asp:GridView ID="gvMedicoTurnos" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered align-middle">
+                    <Columns>
+                        <asp:BoundField DataField="ID" HeaderText="ID" />
+                        <asp:BoundField DataField="Paciente" HeaderText="Paciente" />
+                        <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
+                        <asp:BoundField DataField="Hora" HeaderText="Hora" />
+                        <asp:BoundField DataField="Observacion" HeaderText="Observacion" />
+                        <asp:TemplateField HeaderText="Estado">
+                            <ItemTemplate>
+                                <asp:RadioButtonList ID="rblPresentismo" runat="server">
+                                    <asp:ListItem Value="1">Presente</asp:ListItem>
+                                    <asp:ListItem Value="2">Ausente</asp:ListItem>
+                                </asp:RadioButtonList>
+                                <asp:Button ID="btnConfirmarPresentismo" runat="server" Text="Confirmar seleccion" />
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                    </Columns>
+                </asp:GridView>
             </form>
         </div>
     </div>

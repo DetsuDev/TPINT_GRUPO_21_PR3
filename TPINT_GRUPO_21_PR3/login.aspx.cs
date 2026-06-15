@@ -18,7 +18,7 @@ namespace TPINT_GRUPO_21_PR3
         {
             if (Page.IsValid)
             {
-                Response.Redirect("~/GestionAdmin/GestionMedicos.aspx");
+                Response.Redirect("~/GestionAdmin/InicioMedicos.aspx");
             }
         }
 

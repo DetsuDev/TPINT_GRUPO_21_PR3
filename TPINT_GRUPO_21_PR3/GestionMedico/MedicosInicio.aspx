@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" 
-    CodeBehind="GestionMedicos.aspx.cs" 
+    CodeBehind="MedicosInicio.aspx.cs" 
     Inherits="TPINT_GRUPO_21_PR3.GestionMedico.GestionMedicos" %>
 <!DOCTYPE html>
 

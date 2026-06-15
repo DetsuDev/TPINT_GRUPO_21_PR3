@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Inicio.aspx.cs" Inherits="TPINT_GRUPO_21_PR3.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminInicio.aspx.cs" Inherits="TPINT_GRUPO_21_PR3.WebForm1" %>
 
 <!DOCTYPE html>
 
@@ -22,19 +22,19 @@
     <div style="padding: 50px; margin: 50px;">
         <ul class="nav nav-tabs" style=" min-width: 1000px;">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="Inicio.aspx">Inicio</a>
+                <a class="nav-link active" aria-current="page" href="AdminInicio.aspx">Inicio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="GestionPacientes.aspx">Gestionar Pacientes</a>
+                <a class="nav-link" href="AdminPacientes.aspx">Gestionar Pacientes</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="GestionMedicos.aspx">Gestionar Medicos</a>
+                <a class="nav-link" href="AdminMedicos.aspx">Gestionar Medicos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="GestionTurnos.aspx">Gestionar Turnos</a>
+                <a class="nav-link" href="AdminTurnos.aspx">Gestionar Turnos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Informes.aspx">Informes</a>
+                <a class="nav-link" href="AdminInformes.aspx">Informes</a>
             </li>
         </ul>
         <div class="border border-top-0 p-5" style="background-color: white;" >

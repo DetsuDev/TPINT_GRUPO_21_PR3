@@ -67,50 +67,50 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="GestionAdmin\GestionMedicos.aspx" />
-    <Content Include="GestionAdmin\GestionPacientes.aspx" />
-    <Content Include="GestionAdmin\GestionTurnos.aspx" />
-    <Content Include="GestionAdmin\Informes.aspx" />
-    <Content Include="GestionMedico\MedicosInicio.aspx" />
+    <Content Include="MenuAdmin\AdminMedicos.aspx" />
+    <Content Include="MenuAdmin\AdminPacientes.aspx" />
+    <Content Include="MenuAdmin\AdminTurnos.aspx" />
+    <Content Include="MenuAdmin\AdminInformes.aspx" />
+    <Content Include="MenuMedico\MedicoInicio.aspx" />
     <Content Include="Web.config" />
     <Content Include="login.aspx" />
-    <Content Include="GestionAdmin\Inicio.aspx" />
+    <Content Include="MenuAdmin\AdminInicio.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GestionAdmin\GestionMedicos.aspx.cs">
-      <DependentUpon>GestionMedicos.aspx</DependentUpon>
+    <Compile Include="MenuAdmin\AdminMedicos.aspx.cs">
+      <DependentUpon>AdminMedicos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GestionAdmin\GestionMedicos.aspx.designer.cs">
-      <DependentUpon>GestionMedicos.aspx</DependentUpon>
+    <Compile Include="MenuAdmin\AdminMedicos.aspx.designer.cs">
+      <DependentUpon>AdminMedicos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GestionAdmin\GestionPacientes.aspx.cs">
-      <DependentUpon>GestionPacientes.aspx</DependentUpon>
+    <Compile Include="MenuAdmin\AdminPacientes.aspx.cs">
+      <DependentUpon>AdminPacientes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GestionAdmin\GestionPacientes.aspx.designer.cs">
-      <DependentUpon>GestionPacientes.aspx</DependentUpon>
+    <Compile Include="MenuAdmin\AdminPacientes.aspx.designer.cs">
+      <DependentUpon>AdminPacientes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GestionAdmin\GestionTurnos.aspx.cs">
-      <DependentUpon>GestionTurnos.aspx</DependentUpon>
+    <Compile Include="MenuAdmin\AdminTurnos.aspx.cs">
+      <DependentUpon>AdminTurnos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GestionAdmin\GestionTurnos.aspx.designer.cs">
-      <DependentUpon>GestionTurnos.aspx</DependentUpon>
+    <Compile Include="MenuAdmin\AdminTurnos.aspx.designer.cs">
+      <DependentUpon>AdminTurnos.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GestionAdmin\Informes.aspx.cs">
-      <DependentUpon>Informes.aspx</DependentUpon>
+    <Compile Include="MenuAdmin\AdminInformes.aspx.cs">
+      <DependentUpon>AdminInformes.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GestionAdmin\Informes.aspx.designer.cs">
-      <DependentUpon>Informes.aspx</DependentUpon>
+    <Compile Include="MenuAdmin\AdminInformes.aspx.designer.cs">
+      <DependentUpon>AdminInformes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GestionMedico\MedicosInicio.aspx.cs">
-      <DependentUpon>MedicosInicio.aspx</DependentUpon>
+    <Compile Include="MenuMedico\MedicoInicio.aspx.cs">
+      <DependentUpon>MedicoInicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GestionMedico\MedicosInicio.aspx.designer.cs">
-      <DependentUpon>MedicosInicio.aspx</DependentUpon>
+    <Compile Include="MenuMedico\MedicoInicio.aspx.designer.cs">
+      <DependentUpon>MedicoInicio.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="login.aspx.cs">
@@ -120,12 +120,12 @@
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
     </Compile>
-    <Compile Include="GestionAdmin\Inicio.aspx.cs">
-      <DependentUpon>Inicio.aspx</DependentUpon>
+    <Compile Include="MenuAdmin\AdminInicio.aspx.cs">
+      <DependentUpon>AdminInicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="GestionAdmin\Inicio.aspx.designer.cs">
-      <DependentUpon>Inicio.aspx</DependentUpon>
+    <Compile Include="MenuAdmin\AdminInicio.aspx.designer.cs">
+      <DependentUpon>AdminInicio.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

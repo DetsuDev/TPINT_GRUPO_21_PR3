@@ -1,6 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="GestionTurnos.aspx.cs" Inherits="TPINT_GRUPO_21_PR3.GestionAdmin.GestionTurnos" %>
-
-
+﻿<%@ Page Language="C#" AutoEventWireup="true" 
+    CodeBehind="MedicoInicio.aspx.cs" 
+    Inherits="TPINT_GRUPO_21_PR3.GestionMedico.GestionMedicos" %>
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -15,7 +15,7 @@
     <div class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
         <p class="card-text">Bienvenido: [Usuario].</p>
-        <a href="login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
+        <a href="../GestionMedico/login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
       </div>
     </div>
 
@@ -23,19 +23,10 @@
     <div style="padding: 50px; margin: 50px;">
         <ul class="nav nav-tabs" style=" min-width: 1000px;">
             <li class="nav-item">
-                <a class="nav-link" href="Inicio.aspx">Inicio</a>
+                <a class="nav-link active" href="../GestionMedico/Inicio.aspx">Inicio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="GestionPacientes.aspx">Gestionar Pacientes</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="GestionMedicos.aspx">Gestionar Medicos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="GestionTurnos.aspx">Gestionar Turnos</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="Informes.aspx">Informes</a>
+                <a class="nav-link" href="../GestionMedico/GestionTurnos.aspx">Gestionar Turnos</a>
             </li>
         </ul>
         <div class="border border-top-0 p-5" style="background-color: white;" >

@@ -1,6 +1,6 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" 
-    CodeBehind="MedicosInicio.aspx.cs" 
-    Inherits="TPINT_GRUPO_21_PR3.GestionMedico.GestionMedicos" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="AdminTurnos.aspx.cs" Inherits="TPINT_GRUPO_21_PR3.MenuAdmin.GestionTurnos" %>
+
+
 <!DOCTYPE html>
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -23,10 +23,19 @@
     <div style="padding: 50px; margin: 50px;">
         <ul class="nav nav-tabs" style=" min-width: 1000px;">
             <li class="nav-item">
-                <a class="nav-link active" href="Inicio.aspx">Inicio</a>
+                <a class="nav-link" href="AdminInicio.aspx">Inicio</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="GestionTurnos.aspx">Gestionar Turnos</a>
+                <a class="nav-link" href="AdminPacientes.aspx">Gestionar Pacientes</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="AdminMedicos.aspx">Gestionar Medicos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="AdminTurnos.aspx">Gestionar Turnos</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="AdminInformes.aspx">Informes</a>
             </li>
         </ul>
         <div class="border border-top-0 p-5" style="background-color: white;" >

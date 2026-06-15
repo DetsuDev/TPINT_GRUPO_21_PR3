@@ -18,7 +18,7 @@ namespace TPINT_GRUPO_21_PR3
         {
             if (Page.IsValid)
             {
-                Response.Redirect("~/GestionAdmin/MedicosInicio.aspx");
+                Response.Redirect("~/MenuMedico/MedicoInicio.aspx");
             }
         }
 
@@ -26,7 +26,7 @@ namespace TPINT_GRUPO_21_PR3
         {
             if (Page.IsValid)
             {
-                Response.Redirect("~/GestionAdmin/Inicio.aspx");
+                Response.Redirect("~/MenuAdmin/AdminInicio.aspx");
             }
         }
     }

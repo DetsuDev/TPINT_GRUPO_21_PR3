@@ -13,7 +13,7 @@
     <div class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
         <p class="card-text">Bienvenido: [Usuario].</p>
-        <a href="login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
+        <ahref="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
       </div>
     </div>
 

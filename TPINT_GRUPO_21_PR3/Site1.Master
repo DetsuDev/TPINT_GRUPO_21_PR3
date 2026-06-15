@@ -1,0 +1,25 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site1.Master.cs" Inherits="TPINT_GRUPO_21_PR3.Site1" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+       
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"/>
+         <div>
+          <div class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
+            <div class="card-body" >
+                <p class="card-text">Bienvenido: [Usuario].</p>
+                <a href="login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
+            </div>
+         </div>
+        </div>
+    </form>
+</body>
+</html>

@@ -76,8 +76,21 @@
                 </div>
 
             </div>
+            </div>
             <div class="card">
-
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Presentismo por medico</h4>
+                    </div>
+                    <div class="card-body p-4">
+                         <div class="progress-stacked">
+                              <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                                <div class="progress-bar  bg-success">70%</div>
+                              </div>
+                              <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+                                <div class="progress-bar  bg-danger">30%</div>
+                              </div>
+                            </div>
+                    </div>
             </div>
         </div>
 

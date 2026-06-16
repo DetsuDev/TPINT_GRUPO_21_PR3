@@ -6,6 +6,8 @@
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <title>Gestión de Médicos</title>
 </head>
 <body style="background-color: #f8f9fa;">
@@ -62,7 +64,17 @@
                                     <asp:BoundField DataField="Email" HeaderText="Email" />
                                     <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
                                     <asp:BoundField DataField="Usuario" HeaderText="Usuario" />
-                                    <asp:BoundField DataField="Contrasenia" HeaderText="Contraseña" />
+                                    <asp:TemplateField HeaderText="Contraseña">
+                                        <ItemTemplate>
+                                            <span class="password-text">********</span>
+
+                                            <button type="button"
+                                                    class="btn btn-sm btn-outline-secondary toggle-password"
+                                                    data-password='<%# Eval("Contrasenia") %>'>
+                                                <i class="bi bi-eye-slash"></i>
+                                            </button>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" />
                                 </Columns>
                                 <PagerStyle CssClass="pagination justify-content-center pt-3" />

@@ -11,7 +11,7 @@
     <title></title>
 </head>
 <body style="background-color: #f8f9fa;">
-    
+   <form id="form1" runat="server">
     <div class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
         <p class="card-text">Bienvenido: [Usuario].</p>
@@ -38,13 +38,50 @@
                 <a class="nav-link active" aria-current="page" href="AdminInformes.aspx">Informes</a>
             </li>
         </ul>
+
         <div class="border border-top-0 p-5" style="background-color: white;" >
-
-            <form id="form1" runat="server">
-            </form>
-        </div>
+    <div class="card">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Presentismo</h4>
     </div>
-    <script src="../js/bootstrap.bundle.min.js"></script>
+            <div class="card-body p-4">
+                <br />
+                <br />
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <label class="form-label" for="start-date">Fecha inicial:</label>
+                        <input type="date" class="form-control" id="start-date" />
+                    </div>
+                        <div class="col-md-3">
+                            <label class="form-label" for="end-date">Fecha final:</label>
+                            <input type="date" class="form-control" id="end-date" />
+                        </div>
+                        <div class="col-md-3">
+                            <asp:Button ID="btnFiltrarPorFechaInforme"  class="btn btn-primary px-4" runat="server" Text="Filtrar" Height="75px" Width="93px" />
+                    </div>
+                    
+                </div>
+                    
+                
+                <p>Pacientes presentes: 70</p>
+                <p>Pacientes ausentes: 30</p>
+                 <div class="progress-stacked">
+                  <div class="progress" role="progressbar" aria-label="Segment one" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+                    <div class="progress-bar  bg-success">70%</div>
+                  </div>
+                  <div class="progress" role="progressbar" aria-label="Segment two" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
+                    <div class="progress-bar  bg-danger">30%</div>
+                  </div>
+                </div>
+                </div>
 
+            </div>
+            <div class="card">
+
+            </div>
+        </div>
+
+    <script src="../js/bootstrap.bundle.min.js"></script>
+            </form>
 </body>
 </html>

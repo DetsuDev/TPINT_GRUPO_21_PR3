@@ -43,6 +43,41 @@
             <form id="form1" runat="server">
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Buscar Turnos</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-3">
+                                <label class="form-label">DNI</label>
+                                <asp:TextBox ID="txtBuscarDni" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Paciente</label>
+                                <asp:TextBox ID="txtBuscarPaciente" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Fecha</label>
+                                <asp:TextBox ID="txtBuscarFecha" runat="server" CssClass="form-control" placeholder="Ej: 15/06/2026"></asp:TextBox>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Estado</label>
+                                <asp:DropDownList ID="ddlBuscarEstado" runat="server" CssClass="form-select">
+                                    <asp:ListItem Value="">Todos</asp:ListItem>
+                                    <asp:ListItem Value="Presente">Presente</asp:ListItem>
+                                    <asp:ListItem Value="Ausente">Ausente</asp:ListItem>
+                                    <asp:ListItem Value="Pendiente">Pendiente</asp:ListItem>
+                                </asp:DropDownList>
+                            </div>
+                            <div class="col-12 text-end pt-3">
+                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary px-4" OnClick="btnBuscar_Click" />
+                                <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" CssClass="btn btn-outline-secondary px-4" OnClick="btnLimpiar_Click" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-5 shadow-sm">
+                    <div class="card-header bg-primary text-white">
                         <h4 class="mb-0">Listado de Turnos</h4>
                     </div>
                     <div class="card-body p-4">

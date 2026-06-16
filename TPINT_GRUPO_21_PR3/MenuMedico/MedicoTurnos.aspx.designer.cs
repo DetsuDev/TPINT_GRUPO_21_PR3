@@ -31,5 +31,30 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvMedicoTurnos;
+
+        /// <summary>
+        /// Control txtBuscarDni.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarDni;
+
+        /// <summary>
+        /// Control txtBuscarPaciente.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarPaciente;
+
+        /// <summary>
+        /// Control txtBuscarFecha.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarFecha;
+
+        /// <summary>
+        /// Control btnBuscar.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
+
+        /// <summary>
+        /// Control btnLimpiar.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnLimpiar;
     }
 }

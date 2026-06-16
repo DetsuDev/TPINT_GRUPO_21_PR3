@@ -33,6 +33,36 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.GridView gvGestionTurnos;
 
         /// <summary>
+        /// txtBuscarDni control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarDni;
+
+        /// <summary>
+        /// txtBuscarPaciente control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarPaciente;
+
+        /// <summary>
+        /// txtBuscarFecha control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarFecha;
+
+        /// <summary>
+        /// ddlBuscarEstado control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.DropDownList ddlBuscarEstado;
+
+        /// <summary>
+        /// btnBuscar control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
+
+        /// <summary>
+        /// btnLimpiar control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Button btnLimpiar;
+
+        /// <summary>
         /// txtLegajoMedico control.
         /// </summary>
         /// <remarks>

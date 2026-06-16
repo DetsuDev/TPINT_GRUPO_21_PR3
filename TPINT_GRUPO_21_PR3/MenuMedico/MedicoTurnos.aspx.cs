@@ -22,6 +22,25 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
 
         private void CargarGrillaTurnos()
         {
+            DataTable dt = ObtenerTurnos();
+
+            List<string> filtros = new List<string>();
+            if (!string.IsNullOrWhiteSpace(txtBuscarDni.Text))
+                filtros.Add("DNI LIKE '%" + txtBuscarDni.Text.Trim().Replace("'", "''") + "%'");
+            if (!string.IsNullOrWhiteSpace(txtBuscarPaciente.Text))
+                filtros.Add("Paciente LIKE '%" + txtBuscarPaciente.Text.Trim().Replace("'", "''") + "%'");
+            if (!string.IsNullOrWhiteSpace(txtBuscarFecha.Text))
+                filtros.Add("Fecha LIKE '%" + txtBuscarFecha.Text.Trim().Replace("'", "''") + "%'");
+
+            DataView dv = dt.DefaultView;
+            dv.RowFilter = string.Join(" AND ", filtros);
+
+            gvMedicoTurnos.DataSource = dv;
+            gvMedicoTurnos.DataBind();
+        }
+
+        private DataTable ObtenerTurnos()
+        {
             DataTable dt = new DataTable();
 
             dt.Columns.Add("ID");
@@ -40,8 +59,20 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
             dt.Rows.Add("7", "12345345", "Diego Sánchez", "15/06/2026", "12:00", "Dolor lumbar");
             dt.Rows.Add("8", "12345443", "Sofía Torres", "15/06/2026", "12:30", "Control pediátrico");
 
-            gvMedicoTurnos.DataSource = dt;
-            gvMedicoTurnos.DataBind();
+            return dt;
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            CargarGrillaTurnos();
+        }
+
+        protected void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            txtBuscarDni.Text = "";
+            txtBuscarPaciente.Text = "";
+            txtBuscarFecha.Text = "";
+            CargarGrillaTurnos();
         }
     }
 }

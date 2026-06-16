@@ -59,7 +59,9 @@
                                 OnRowUpdating="gvGestionTurnos_RowUpdating">
                                 <Columns>
 
-                                    <asp:CommandField ShowEditButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-warning" />
+                                    <asp:CommandField ShowEditButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-warning" >
+<ControlStyle CssClass="btn btn-sm btn-outline-warning"></ControlStyle>
+                                    </asp:CommandField>
                                     <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true" />
                                     <asp:BoundField DataField="DNI" HeaderText="DNI" />
                                     <asp:BoundField DataField="Paciente" HeaderText="Paciente" />
@@ -68,16 +70,21 @@
                                     <asp:BoundField DataField="Observacion" HeaderText="Observacion" />
                                     <asp:TemplateField HeaderText="Estado">
 
-                                        <ItemTemplate>
+                                        <EditItemTemplate>
                                             <asp:RadioButtonList ID="rblPresentismo" runat="server">
                                                 <asp:ListItem Value="1">Presente</asp:ListItem>
                                                 <asp:ListItem Value="2">Ausente</asp:ListItem>
+                                                <asp:ListItem Value="3">Pendiente</asp:ListItem>
                                             </asp:RadioButtonList>
-                                            <asp:Button ID="btnConfirmarPresentismo" runat="server" Text="Confirmar seleccion" />
+                                        </EditItemTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblEstadoTurno" runat="server" Text='<%# Bind("Estado") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
-                                    <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" />
+                                    <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" >
+<ControlStyle CssClass="btn btn-sm btn-outline-danger"></ControlStyle>
+                                    </asp:CommandField>
                                 </Columns>
                                 <PagerStyle CssClass="pagination justify-content-center pt-3" />
                             </asp:GridView>

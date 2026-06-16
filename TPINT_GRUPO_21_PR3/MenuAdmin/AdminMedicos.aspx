@@ -5,7 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"/>
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     <title>Gestión de Médicos</title>
 </head>
 <body style="background-color: #f8f9fa;">
@@ -13,7 +13,7 @@
     <div class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
         <p class="card-text">Bienvenido: [Usuario].</p>
-        <ahref="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
+        <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
       </div>
     </div>
 
@@ -48,7 +48,7 @@
                                 <Columns>
                                     <asp:CommandField ShowEditButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-warning" />
                                     <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" />
-                                    <asp:BoundField DataField="Legajo" HeaderText="Legajo" />
+                                    <asp:BoundField DataField="Legajo" HeaderText="Legajo" ReadOnly="True"/>
                                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                                     <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
                                     <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
@@ -154,6 +154,8 @@
             </form>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+
+        <script src="../js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

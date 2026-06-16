@@ -5,44 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
+   
     <title>Login - Clínica</title>
     <style type="text/css">
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #eef1f5;
-        }
-        .contenedor {
-            width: 320px;
-            margin: 120px auto;
-            padding: 30px;
-            background-color: #ffffff;
-            border: 1px solid #cccccc;
-            border-radius: 8px;
-            text-align: center;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        }
-        .contenedor h2 {
-            margin-top: 0;
-            color: #333333;
-        }
-        .campo {
-            width: 100%;
-            padding: 8px;
-            margin: 8px 0;
-            box-sizing: border-box;
-            border: 1px solid #aaaaaa;
-            border-radius: 4px;
-        }
-        .boton {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            background-color: #2a6fb0;
-            color: #ffffff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
         .error {
             color: red;
             display: block;
@@ -50,31 +16,34 @@
         }
     </style>
 </head>
-<body>
+<body style=" font-family: Arial, sans-serif; background-color: #eef1f5;">
     <form id="form1" runat="server">
-        <div class="contenedor">
+        <div class="card" style="width: 320px; margin: 120px auto; padding: 30px; text-align: center; top: 0px; left: 0px;">
             <h2>Bienvenido</h2>
 
-            <asp:TextBox ID="txtUsuario" runat="server" CssClass="campo" placeholder="Usuario"></asp:TextBox>
+            <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control" placeholder="Usuario"></asp:TextBox>
             <asp:RequiredFieldValidator ID="rfvUsuario" runat="server"
                 ControlToValidate="txtUsuario"
                 ErrorMessage="Ingrese el usuario"
-                CssClass="error" Display="Dynamic"></asp:RequiredFieldValidator>
+                class="alert alert-danger" Style="margin-top: 10px" Display="Dynamic"></asp:RequiredFieldValidator>
 
-            <asp:TextBox ID="txtContrasena" runat="server" CssClass="campo" TextMode="Password" placeholder="Contraseña"></asp:TextBox>
+            <asp:TextBox ID="txtContrasena" runat="server" CssClass="form-control" Style="margin: 8px 0;"
+                TextMode="Password" placeholder="Contraseña"></asp:TextBox>
+            
             <asp:RequiredFieldValidator ID="rfvContrasena" runat="server"
                 ControlToValidate="txtContrasena"
                 ErrorMessage="Ingrese la contraseña"
-                CssClass="error" Display="Dynamic"></asp:RequiredFieldValidator>
+                class="alert alert-danger" Style="margin-top: 10px;" Display="Dynamic" ></asp:RequiredFieldValidator>
 
-            <asp:Button ID="btnTestLoginAdmin" runat="server" Text="Login Admin" CssClass="boton" OnClick="btnTestLoginAdmin_Click" />
 
-            <br />
+            <asp:Button ID="btnTestLoginAdmin" runat="server" Text="Ingresar como Administrador" CssClass="btn btn-primary" Style="margin-top: 10px;" OnClick="btnTestLoginAdmin_Click" />
 
-            <asp:Button ID="btnTestLoginMedico" runat="server" Text="Login Medico" CssClass="boton" OnClick="btnTestLoginMedico_Click" />
+            <asp:Button ID="btnTestLoginMedico" runat="server" Text="Ingresar como Medico" CssClass="btn btn-primary" Style="margin-top: 10px;" OnClick="btnTestLoginMedico_Click" />
 
-            <asp:Label ID="lblMensaje" runat="server" CssClass="error"></asp:Label>
+            <asp:Label ID="lblMensaje" runat="server" CssClass="error" ></asp:Label>
         </div>
     </form>
+    
+        <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

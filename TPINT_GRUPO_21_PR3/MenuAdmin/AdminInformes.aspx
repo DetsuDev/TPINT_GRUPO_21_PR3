@@ -13,7 +13,7 @@
     <div class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
         <p class="card-text">Bienvenido: [Usuario].</p>
-        <a href="login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
+        <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
       </div>
     </div>
 
@@ -64,7 +64,7 @@
                      <div class="col-md-6">
                            <div class="card border-primary shadow-sm">
                             <div class="card-header bg-primary text-white">
-                                <h5 class="mb-0">presentismo segun fechas</h5>
+                                <h5 class="mb-0">Presentismo segun fechas</h5>
                             </div>
                             <div class="card-body p-4">
                                 <div class="row g-3 mb-4">
@@ -90,14 +90,14 @@
                          <br />
                         <div class="card border-primary shadow-sm">
                             <div class="card-header bg-primary text-white">
-                                <h5 class="mb-0"> presentismo segun especialidad / medico</h5>
+                                <h5 class="mb-0"> Presentismo segun especialidad / medico</h5>
                             </div>
                             <div class="card-body p-4">
+                                <div>
+                                        <p>Filtrar segun</p>
+                                </div>
                                 <div class="row g-3 mb-4">
-                                    <div class="col-2">
-                                            <p>Filtrar segun</p>
-                                    </div>
-                                    <div class="col-4">
+                                    <div class="col-6">
                                         <div class="form-group">
                                         <asp:DropDownList ID="ddlPresentismoFiltrado" runat="server" CssClass="form-control">
                                             <asp:ListItem Value="0">-- seleccione una opcion --</asp:ListItem>
@@ -106,17 +106,17 @@
                                         </asp:DropDownList>
                                         </div>
                                     </div>
-                                     <div class="col-4">
+                                     <div class="col-6">
                                          <div class="form-group">
                                             <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control">
                                                 <asp:ListItem Value="0">-- seleccione una opcion --</asp:ListItem>
                                             </asp:DropDownList>
                                             </div>
                                     </div>
-                                    <div class="col-2">
+                                </div>
+                                    <div class="text-end">
                                         <asp:Button ID="Button2" runat="server" Text="Filtrar" CssClass="btn btn-primary btn-sm px-4" />
                                     </div>
-                                </div>
                                 <br />
                                 <br />
                                 <div class="progress">

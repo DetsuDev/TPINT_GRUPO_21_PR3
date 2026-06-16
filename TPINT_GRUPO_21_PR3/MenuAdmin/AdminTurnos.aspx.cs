@@ -5,7 +5,6 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using TPINT_GRUPO_21_PR3.GestionMedico;
 
 namespace TPINT_GRUPO_21_PR3.MenuAdmin
 {
@@ -16,6 +15,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         {
             if (!IsPostBack)
             {
+                divEliminar.Visible = false;
                 CargarGrillaTurnos();
             }
 
@@ -61,6 +61,19 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             gvGestionTurnos.EditIndex = -1;
             CargarGrillaTurnos();
         }
-        protected void gvGestionTurnos_RowDeleting(object sender, GridViewDeleteEventArgs e) { }
+        protected void gvGestionTurnos_RowDeleting(object sender, GridViewDeleteEventArgs e) { 
+            divEliminar.Visible = true;
+        }
+
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            divEliminar.Visible = false;
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            divEliminar.Visible = false;
+        }
     }
 }

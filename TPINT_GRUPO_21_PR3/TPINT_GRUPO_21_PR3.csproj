@@ -71,11 +71,9 @@
     <Content Include="MenuAdmin\AdminPacientes.aspx" />
     <Content Include="MenuAdmin\AdminTurnos.aspx" />
     <Content Include="MenuAdmin\AdminInformes.aspx" />
-    <Content Include="MenuMedico\MedicoInicio.aspx" />
     <Content Include="MenuMedico\MedicoTurnos.aspx" />
     <Content Include="Web.config" />
     <Content Include="login.aspx" />
-    <Content Include="MenuAdmin\AdminInicio.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MenuAdmin\AdminMedicos.aspx.cs">
@@ -106,13 +104,6 @@
     <Compile Include="MenuAdmin\AdminInformes.aspx.designer.cs">
       <DependentUpon>AdminInformes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="MenuMedico\MedicoInicio.aspx.cs">
-      <DependentUpon>MedicoInicio.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MenuMedico\MedicoInicio.aspx.designer.cs">
-      <DependentUpon>MedicoInicio.aspx</DependentUpon>
-    </Compile>
     <Compile Include="MenuMedico\MedicoTurnos.aspx.cs">
       <DependentUpon>MedicoTurnos.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -127,13 +118,6 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="MenuAdmin\AdminInicio.aspx.cs">
-      <DependentUpon>AdminInicio.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="MenuAdmin\AdminInicio.aspx.designer.cs">
-      <DependentUpon>AdminInicio.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>

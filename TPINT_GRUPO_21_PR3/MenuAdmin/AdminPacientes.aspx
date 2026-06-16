@@ -5,30 +5,42 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="../css/bootstrap.min.css" rel="stylesheet"/>
-   <title>Gestión de Pacientes</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" />
+    <title>Gestión de Pacientes</title>
 </head>
 <body style="background-color: #f8f9fa;">
-    
+
     <div class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
-      <div class="card-body">
-        <p class="card-text">Bienvenido: [Usuario].</p>
-        <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
-      </div>
+        <div class="card-body">
+            <p class="card-text">Bienvenido: [Usuario].</p>
+            <a href="../login.aspx" class="btn btn-primary">Cerrar Sesion </a>
+        </div>
     </div>
 
     <div style="padding: 50px; margin: 50px;">
         <ul class="nav nav-tabs" style="min-width: 1000px;">
-            <li class="nav-item"><a class="nav-link" href="AdminInicio.aspx">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link" href="AdminInformes.aspx">Informes</a></li>
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="AdminPacientes.aspx">Gestionar Pacientes</a></li>
             <li class="nav-item"><a class="nav-link" href="AdminMedicos.aspx">Gestionar Medicos</a></li>
-            <li class="nav-item"><a class="nav-link" href="AdminTurnos.aspx">Gestionar Turnos</a></li>
-            <li class="nav-item"><a class="nav-link" href="AdminInformes.aspx">Informes</a></li>
+            <li class="nav-item"><a class="nav-link" href="AdminTurnos.aspx">Gestionar Turnos
+                </a></li>
         </ul>
 
         <div class="border border-top-0 p-5" style="background-color: white;">
             <form id="form1" runat="server">
                 
+                    <div class="card" runat="server"
+                        id="divEliminar"
+                        style="z-index: 9999; width: 320px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; padding: 10px;">
+                        <div class="card-body">
+                            <p class="card-text">Desea Eliminar a: [elemento]?</p>
+                            <div style="text-align: right">
+                                <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" class="btn btn-danger" OnClick="btnEliminar_Click"/>
+                                <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" class="btn btn-secondary" OnClick="btnCancelar_Click"/>
+                            </div>
+                        </div>
+                    </div>
+
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
                         <h4 class="mb-0">Listado de Pacientes</h4>

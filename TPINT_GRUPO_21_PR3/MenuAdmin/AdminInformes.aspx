@@ -4,7 +4,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous"/>
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     <title>Informes Estadísticos</title>
 </head>
@@ -19,15 +18,16 @@
 
     <div style="padding: 50px; margin: 50px;">
         <ul class="nav nav-tabs" style=" min-width: 1000px;">
-            <li class="nav-item"><a class="nav-link" href="AdminInicio.aspx">Inicio</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="AdminInformes.aspx">Informes</a></li>
             <li class="nav-item"><a class="nav-link" href="AdminPacientes.aspx">Gestionar Pacientes</a></li>
             <li class="nav-item"><a class="nav-link" href="AdminMedicos.aspx">Gestionar Medicos</a></li>
             <li class="nav-item"><a class="nav-link" href="AdminTurnos.aspx">Gestionar Turnos</a></li>
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="AdminInformes.aspx">Informes</a></li>
         </ul>
         
         <div class="border border-top-0 p-5" style="background-color: white;" >
             <form id="form1" runat="server">
+                
+
                 <div class="row">     
                     <div class="col-md-6">
                         <div class="card border-primary shadow-sm">
@@ -130,7 +130,6 @@
             </form>
         </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

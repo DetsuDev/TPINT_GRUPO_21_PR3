@@ -14,6 +14,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         {
             if (!IsPostBack)
             {
+
                 CargarRankingMock();
             }
 
@@ -50,5 +51,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 barraAusentes.InnerText = $"{danger}%";
             
         }
+
     }
 }

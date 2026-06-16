@@ -14,6 +14,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         {
             if (!IsPostBack)
             {
+                divEliminar.Visible = false;
                 CargarGrillaMedicos();
             }
 
@@ -78,6 +79,20 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             gvGestionMedicos.EditIndex = -1;
             CargarGrillaMedicos();
         }
-        protected void gvGestionMedicos_RowDeleting(object sender, GridViewDeleteEventArgs e) { }
+        protected void gvGestionMedicos_RowDeleting(object sender, GridViewDeleteEventArgs e) {
+
+            divEliminar.Visible = true;
+        }
+
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            divEliminar.Visible = false;
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            divEliminar.Visible = false;
+        }
     }
 }

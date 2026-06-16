@@ -16,6 +16,8 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             {
                 CargarRankingMock();
             }
+
+            CargarPresentismo();
         }
 
         private void CargarRankingMock()
@@ -33,6 +35,20 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             gvRankingEspecialidades.DataSource = dt;
             gvRankingEspecialidades.DataBind(); 
+        }
+
+        private void CargarPresentismo()
+        {
+
+                int success = 70;
+                int danger = 30;
+
+                barraPresentes.Attributes["style"] = $"width: {success}%";
+                barraPresentes.InnerText = $"{success}%";
+
+                barraAusentes.Attributes["style"] = $"width: {danger}%";
+                barraAusentes.InnerText = $"{danger}%";
+            
         }
     }
 }

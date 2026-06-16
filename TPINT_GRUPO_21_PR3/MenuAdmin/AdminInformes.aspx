@@ -59,7 +59,73 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
+                     <div class="col-md-6">
+                           <div class="card border-primary shadow-sm">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0">presentismo segun fechas</h5>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row g-3 mb-4">
+                                    <div class="col-6">
+                                        <label class="form-label font-weight-bold">Fecha Inicio</label>
+                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                    </div>
+                                    <div class="col-6">
+                                        <label class="form-label font-weight-bold">Fecha Fin</label>
+                                        <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                    </div>
+                                    <div class="col-12 text-end">
+                                        <asp:Button ID="Button1" runat="server" Text="Filtrar" CssClass="btn btn-primary btn-sm px-4" />
+                                    </div>
+                                </div>
+                                <div class="progress">
+                                  <div class="progress-bar bg-success" id="barraPresentes" runat="server" role="progressbar" style="width: 70%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">70%</div>
+                                  <div class="progress-bar bg-danger" id="barraAusentes" runat="server" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+                                </div>
+                            </div>
+                        </div>
+                         <br />
+                         <br />
+                        <div class="card border-primary shadow-sm">
+                            <div class="card-header bg-primary text-white">
+                                <h5 class="mb-0"> presentismo segun especialidad / medico</h5>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row g-3 mb-4">
+                                    <div class="col-2">
+                                            <p>Filtrar segun</p>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                        <asp:DropDownList ID="ddlPresentismoFiltrado" runat="server" CssClass="form-control">
+                                            <asp:ListItem Value="0">-- seleccione una opcion --</asp:ListItem>
+                                            <asp:ListItem Value="1">Medico</asp:ListItem>
+                                            <asp:ListItem Value="2">Especialidad</asp:ListItem>
+                                        </asp:DropDownList>
+                                        </div>
+                                    </div>
+                                     <div class="col-4">
+                                         <div class="form-group">
+                                            <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control">
+                                                <asp:ListItem Value="0">-- seleccione una opcion --</asp:ListItem>
+                                            </asp:DropDownList>
+                                            </div>
+                                    </div>
+                                    <div class="col-2">
+                                        <asp:Button ID="Button2" runat="server" Text="Filtrar" CssClass="btn btn-primary btn-sm px-4" />
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="progress">
+                                  <div class="progress-bar bg-success" id="Div1" runat="server" role="progressbar" style="width: 70%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">70%</div>
+                                  <div class="progress-bar bg-danger" id="Div2" runat="server" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+                                </div>
+                            </div>
+                        </div>
+                     </div>
                 </div> 
             </form>
         </div>

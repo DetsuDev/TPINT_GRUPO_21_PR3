@@ -14,6 +14,8 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         {
             if (!IsPostBack)
             {
+
+                divEliminar.Visible = false;
                 CargarGrillaPacientes();
             }
         }
@@ -69,10 +71,26 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void gvGestionPacientes_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            divEliminar.Visible = true;
         }
 
         protected void btnCargar_Click(object sender, EventArgs e)
         {
+        }
+
+        protected void gvGestionPacientes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            divEliminar.Visible = false;
+        }
+
+        protected void btnCancelar_Click(object sender, EventArgs e)
+        {
+            divEliminar.Visible = false;
         }
     }
 }

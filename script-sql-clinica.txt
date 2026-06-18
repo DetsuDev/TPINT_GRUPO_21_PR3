@@ -1,0 +1,149 @@
+/* ============================================================
+   SCRIPT DE BASE DE DATOS - SISTEMA DE TURNOS MEDICOS
+   Motor: SQL Server (T-SQL)
+   ============================================================
+   Notas de diseño (ajustes respecto al diagrama original):
+   - LOCALIDADES: la PK se llamaba "Id_Persona" en el diagrama;
+     se corrigió a "Id_Localidad".
+   - MEDICO ya no tiene FK "Id_Disponibilidad" (generaba referencia
+     circular con DISPONIBILIDAD). La relación queda: un MEDICO
+     tiene muchas DISPONIBILIDAD (FK Id_Medico en DISPONIBILIDAD).
+   - MEDICO.Legajo_Medico se trata como atributo único (no FK),
+     ya que no referencia ninguna otra tabla.
+   - PERSONA-USUARIO y PERSONA-MEDICO se modelan como 1 a 1
+     (UNIQUE en la FK correspondiente).
+   ============================================================ */
+
+CREATE DATABASE ClinicaDB;
+GO
+
+USE ClinicaDB;
+GO
+
+-- ============================================================
+-- TABLA: PROVINCIA
+-- ============================================================
+CREATE TABLE PROVINCIA (
+    Id_Provincia    INT IDENTITY(1,1) NOT NULL,
+    NombreProvincia NVARCHAR(100) NOT NULL,
+    CONSTRAINT PK_PROVINCIA PRIMARY KEY (Id_Provincia)
+);
+GO
+
+-- ============================================================
+-- TABLA: LOCALIDADES
+-- ============================================================
+CREATE TABLE LOCALIDADES (
+    Id_Localidad    INT IDENTITY(1,1) NOT NULL,
+    Id_Provincia    INT NOT NULL,
+    NombreLocalidad NVARCHAR(100) NOT NULL,
+    CONSTRAINT PK_LOCALIDADES PRIMARY KEY (Id_Localidad),
+    CONSTRAINT FK_LOCALIDADES_PROVINCIA FOREIGN KEY (Id_Provincia)
+        REFERENCES PROVINCIA (Id_Provincia)
+);
+GO
+
+-- ============================================================
+-- TABLA: PERSONA
+-- ============================================================
+CREATE TABLE PERSONA (
+    Id_Persona        INT IDENTITY(1,1) NOT NULL,
+    Id_Localidad      INT NOT NULL,
+    DNI               VARCHAR(15) NOT NULL,
+    Nombre            NVARCHAR(100) NOT NULL,
+    Apellido          NVARCHAR(100) NOT NULL,
+    Sexo              CHAR(1) NOT NULL,
+    Nacionalidad      NVARCHAR(50) NOT NULL,
+    FechaNacimiento   DATE NOT NULL,
+    Direccion         NVARCHAR(150) NULL,
+    CorreoElectronico NVARCHAR(150) NULL,
+    Telefono          VARCHAR(30) NULL,
+    CONSTRAINT PK_PERSONA PRIMARY KEY (Id_Persona),
+    CONSTRAINT UQ_PERSONA_DNI UNIQUE (DNI),
+    CONSTRAINT FK_PERSONA_LOCALIDAD FOREIGN KEY (Id_Localidad)
+        REFERENCES LOCALIDADES (Id_Localidad)
+);
+GO
+
+-- ============================================================
+-- TABLA: USUARIO  (1 a 1 con PERSONA)
+-- ============================================================
+CREATE TABLE USUARIO (
+    Id_Usuario   INT IDENTITY(1,1) NOT NULL,
+    Id_Persona   INT NOT NULL,
+    Usuario      NVARCHAR(20) NOT NULL,
+    Contrasenia  NVARCHAR(25) NOT NULL,
+    Estado       BIT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_USUARIO PRIMARY KEY (Id_Usuario),
+    CONSTRAINT UQ_USUARIO_NOMBRE UNIQUE (Usuario),
+    CONSTRAINT UQ_USUARIO_PERSONA UNIQUE (Id_Persona),
+    CONSTRAINT FK_USUARIO_PERSONA FOREIGN KEY (Id_Persona)
+        REFERENCES PERSONA (Id_Persona)
+);
+GO
+
+-- ============================================================
+-- TABLA: ESPECIALIDADES
+-- ============================================================
+CREATE TABLE ESPECIALIDADES (
+    Id_Especialidad INT IDENTITY(1,1) NOT NULL,
+    Nombre          NVARCHAR(100) NOT NULL,
+    CONSTRAINT PK_ESPECIALIDADES PRIMARY KEY (Id_Especialidad)
+);
+GO
+
+-- ============================================================
+-- TABLA: MEDICO  (1 a 1 con PERSONA, N a 1 con ESPECIALIDADES)
+-- ============================================================
+CREATE TABLE MEDICO (
+    Id_Medico       INT IDENTITY(1,1) NOT NULL,
+    Legajo_Medico   VARCHAR(20) NOT NULL,
+    Id_Persona      INT NOT NULL,
+    Id_Especialidad INT NOT NULL,
+    Estado          BIT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_MEDICO PRIMARY KEY (Id_Medico),
+    CONSTRAINT UQ_MEDICO_LEGAJO UNIQUE (Legajo_Medico),
+    CONSTRAINT UQ_MEDICO_PERSONA UNIQUE (Id_Persona),
+    CONSTRAINT FK_MEDICO_PERSONA FOREIGN KEY (Id_Persona)
+        REFERENCES PERSONA (Id_Persona),
+    CONSTRAINT FK_MEDICO_ESPECIALIDAD FOREIGN KEY (Id_Especialidad)
+        REFERENCES ESPECIALIDADES (Id_Especialidad)
+);
+GO
+
+-- ============================================================
+-- TABLA: DISPONIBILIDAD  (N a 1 con MEDICO)
+-- ============================================================
+CREATE TABLE DISPONIBILIDAD (
+    Id_Disponibilidad INT IDENTITY(1,1) NOT NULL,
+    Id_Medico         INT NOT NULL,
+    DiasDisponibles   VARCHAR(5) NOT NULL,
+    HoraInicio        TIME NOT NULL,
+    HoraFin           TIME NOT NULL,
+    CONSTRAINT PK_DISPONIBILIDAD PRIMARY KEY (Id_Disponibilidad),
+    CONSTRAINT FK_DISPONIBILIDAD_MEDICO FOREIGN KEY (Id_Medico)
+        REFERENCES MEDICO (Id_Medico),
+    CONSTRAINT CK_DISPONIBILIDAD_HORARIO CHECK (HoraFin > HoraInicio)
+);
+GO
+
+-- ============================================================
+-- TABLA: TURNO  (N a 1 con MEDICO, N a 1 con PERSONA)
+-- ============================================================
+CREATE TABLE TURNO (
+    Id_Turno     INT IDENTITY(1,1) NOT NULL,
+    Id_Medico    INT NOT NULL,
+    Id_Persona   INT NOT NULL,
+    Fecha        DATE NOT NULL,
+    Hora         TIME NOT NULL,
+    Observacion  NVARCHAR(255) NULL,
+    EstadoTurno  NVARCHAR(20) NOT NULL DEFAULT 'Pendiente',
+    Estado       BIT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_TURNO PRIMARY KEY (Id_Turno),
+    CONSTRAINT FK_TURNO_MEDICO FOREIGN KEY (Id_Medico)
+        REFERENCES MEDICO (Id_Medico),
+    CONSTRAINT FK_TURNO_PERSONA FOREIGN KEY (Id_Persona)
+        REFERENCES PERSONA (Id_Persona)
+);
+GO
+

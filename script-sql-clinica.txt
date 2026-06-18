@@ -137,7 +137,8 @@ CREATE TABLE TURNO (
     Fecha        DATE NOT NULL,
     Hora         TIME NOT NULL,
     Observacion  NVARCHAR(255) NULL,
-    Estado       NVARCHAR(20) NOT NULL DEFAULT 'Pendiente',
+    EstadoTurno  NVARCHAR(20) NOT NULL DEFAULT 'Pendiente',
+    Estado       BIT NOT NULL DEFAULT 1,
     CONSTRAINT PK_TURNO PRIMARY KEY (Id_Turno),
     CONSTRAINT FK_TURNO_MEDICO FOREIGN KEY (Id_Medico)
         REFERENCES MEDICO (Id_Medico),

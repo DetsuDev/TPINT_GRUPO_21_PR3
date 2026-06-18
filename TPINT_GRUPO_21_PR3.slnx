@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="Datos/Datos.csproj" Id="e091dbab-1fb3-4a62-ac73-34317c6e396a" />
+  <Project Path="Entidades/Entidades.csproj" Id="e3dfa932-7499-43a3-858d-0e986b51c5a3" />
+  <Project Path="Negocio/Negocio.csproj" Id="84ec3f88-da98-4799-89b3-e5929194e4dd" />
   <Project Path="TPINT_GRUPO_21_PR3/TPINT_GRUPO_21_PR3.csproj" Id="29bba010-bd86-42ef-82a1-3c31dead8360" />
 </Solution>

@@ -71,9 +71,9 @@ GO
 CREATE TABLE USUARIO (
     Id_Usuario   INT IDENTITY(1,1) NOT NULL,
     Id_Persona   INT NOT NULL,
-    Usuario      NVARCHAR(50) NOT NULL,
-    Contrasenia  NVARCHAR(255) NOT NULL,
-    Estado       NVARCHAR(20) NOT NULL DEFAULT 'Activo',
+    Usuario      NVARCHAR(20) NOT NULL,
+    Contrasenia  NVARCHAR(25) NOT NULL,
+    Estado       BIT NOT NULL DEFAULT 1,
     CONSTRAINT PK_USUARIO PRIMARY KEY (Id_Usuario),
     CONSTRAINT UQ_USUARIO_NOMBRE UNIQUE (Usuario),
     CONSTRAINT UQ_USUARIO_PERSONA UNIQUE (Id_Persona),
@@ -100,7 +100,7 @@ CREATE TABLE MEDICO (
     Legajo_Medico   VARCHAR(20) NOT NULL,
     Id_Persona      INT NOT NULL,
     Id_Especialidad INT NOT NULL,
-    Estado          NVARCHAR(20) NOT NULL DEFAULT 'Activo',
+    Estado          BIT NOT NULL DEFAULT 1,
     CONSTRAINT PK_MEDICO PRIMARY KEY (Id_Medico),
     CONSTRAINT UQ_MEDICO_LEGAJO UNIQUE (Legajo_Medico),
     CONSTRAINT UQ_MEDICO_PERSONA UNIQUE (Id_Persona),
@@ -146,12 +146,3 @@ CREATE TABLE TURNO (
 );
 GO
 
--- ============================================================
--- INDICES recomendados para mejorar performance de búsquedas
--- ============================================================
-CREATE INDEX IX_PERSONA_LOCALIDAD ON PERSONA (Id_Localidad);
-CREATE INDEX IX_TURNO_MEDICO ON TURNO (Id_Medico);
-CREATE INDEX IX_TURNO_PERSONA ON TURNO (Id_Persona);
-CREATE INDEX IX_TURNO_FECHA ON TURNO (Fecha);
-CREATE INDEX IX_MEDICO_ESPECIALIDAD ON MEDICO (Id_Especialidad);
-GO

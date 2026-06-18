@@ -117,7 +117,7 @@ GO
 CREATE TABLE DISPONIBILIDAD (
     Id_Disponibilidad INT IDENTITY(1,1) NOT NULL,
     Id_Medico         INT NOT NULL,
-    DiasDisponibles   NVARCHAR(100) NOT NULL,
+    DiasDisponibles   VARCHAR(5) NOT NULL,
     HoraInicio        TIME NOT NULL,
     HoraFin           TIME NOT NULL,
     CONSTRAINT PK_DISPONIBILIDAD PRIMARY KEY (Id_Disponibilidad),

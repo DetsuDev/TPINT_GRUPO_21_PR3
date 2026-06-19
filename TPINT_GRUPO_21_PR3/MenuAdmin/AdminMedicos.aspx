@@ -60,12 +60,12 @@
                                 OnRowUpdating="gvGestionMedicos_RowUpdating">
                                 <Columns>
                                     <asp:CommandField ShowEditButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-warning" />
-                                    <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" />
-                                    <asp:BoundField DataField="Legajo" HeaderText="Legajo" ReadOnly="True"/>
+                                    <asp:BoundField DataField="Id_Medico" HeaderText="ID" ReadOnly="True" />
+                                    <asp:BoundField DataField="Legajo_Medico" HeaderText="Legajo" ReadOnly="True"/>
                                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                                     <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                                    <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
-                                    <asp:BoundField DataField="Horario" HeaderText="Horario Atención" />
+                                    <asp:BoundField DataField="Id_Especialidad" HeaderText="Especialidad" />
+                                    <%--<asp:BoundField DataField="Horario" HeaderText="Horario Atención" /> --%>
                                     <asp:BoundField DataField="Sexo" HeaderText="Sexo" />
                                     <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" />
                                     <asp:BoundField DataField="FechaNac" HeaderText="Fecha Nac" />

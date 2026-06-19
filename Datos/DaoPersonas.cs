@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entidades
+namespace Datos
 {
-    public class Paciente : Persona
+    public class DaoPersonas
     {
-        public Paciente() : base() { }
     }
 }

@@ -114,6 +114,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.DropDownList ddlHorario;
 
         /// <summary>
+        /// cblDiasDisponibles control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBoxList cblDiasDisponibles;
+
+        /// <summary>
         /// ddlSexo control.
         /// </summary>
         /// <remarks>

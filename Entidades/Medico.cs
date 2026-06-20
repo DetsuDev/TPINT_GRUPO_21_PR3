@@ -13,6 +13,13 @@ namespace Entidades
         public int IdEspecialidad { get; set; }
         public bool Estado { get; set; }
 
+        public string Usuario { get; set; }
+        public string Contrasenia { get; set; }
+
+        public string DiasDisponibles { get; set; }
+        public string HoraInicio { get; set; }
+        public string HoraFin { get; set; }
+
         public Medico() : base() { }
     }
 }

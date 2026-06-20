@@ -40,7 +40,9 @@
 
         <div class="border border-top-0 p-5" style="background-color: white;">
             <form id="form1" runat="server">
-                
+                <asp:HiddenField ID="hdnIdMedico" runat="server" />
+                <asp:HiddenField ID="hdnIdPersona" runat="server" />
+
                     <div class="card" runat="server"
                         id="divEliminar"
                         style="z-index: 9999; width: 320px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; padding: 10px;">
@@ -59,10 +61,11 @@
                     </div>
                     <div class="card-body p-4">
                         <div class="table-responsive">
-                            <asp:GridView ID="gvGestionMedicos" runat="server" 
-                                AutoGenerateColumns="False" 
-                                AllowPaging="True" 
-                                PageSize="5" 
+                            <asp:GridView ID="gvGestionMedicos" runat="server"
+                                AutoGenerateColumns="False"
+                                AllowPaging="True"
+                                PageSize="5"
+                                DataKeyNames="Id_Medico"
                                 CssClass="table table-striped table-hover table-bordered align-middle"
                                 OnPageIndexChanging="gvGestionMedicos_PageIndexChanging"
                                 OnRowCancelingEdit="gvGestionMedicos_RowCancelingEdit" 
@@ -107,19 +110,19 @@
 
                 <div class="card border-primary shadow-sm">
                     <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Cargar Nuevo Médico</h4>
+                        <h4 class="mb-0" id="hCargarMedico" runat="server">Cargar Nuevo Médico</h4>
                     </div>
                     <div class="card-body p-4">
                         <div class="row g-3">
                             <div class="col-md-3">
                                 <label class="form-label font-weight-bold">Legajo Médico</label>
-                                <asp:RequiredFieldValidator ID="rfvLegajoMedico" runat="server" ErrorMessage="*" ControlToValidate="txtLegajo"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="rfvLegajoMedico" runat="server" ErrorMessage="*" ControlToValidate="txtLegajo" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtLegajo" runat="server" CssClass="form-control" placeholder="Ej: MED-999"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">DNI</label>
-                                <asp:RegularExpressionValidator ID="revDNI" runat="server" ErrorMessage="*" ValidationExpression="&quot;^[\d\.]+$&quot;" ControlToValidate="txtDni"></asp:RegularExpressionValidator>
-                                <asp:RequiredFieldValidator ID="rfvDNI" runat="server" ErrorMessage="*" ControlToValidate="txtDni"></asp:RequiredFieldValidator>
+                                <asp:RequiredFieldValidator ID="rfvDNI" runat="server" ErrorMessage="*" ControlToValidate="txtDni" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
+                                <asp:RegularExpressionValidator ID="revDNI" runat="server" ErrorMessage="* Solo números" ValidationExpression="^\d{7,9}$" ControlToValidate="txtDni" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
                                 <asp:TextBox ID="txtDni" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
@@ -173,7 +176,7 @@
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Provincia</label>
-                                <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-select"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Localidad</label>
@@ -193,10 +196,13 @@
                             </div>
                                <div class="col-md-3">
                                 <label class="form-label">Confirmar contraseña</label>
+                                <asp:CompareValidator ID="cvContrasenia" runat="server" ControlToValidate="txtConfirmarContrasenia" ControlToCompare="txtContrasenia" ErrorMessage="* No coinciden" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:CompareValidator>
                                 <asp:TextBox ID="txtConfirmarContrasenia" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                             </div>
                             <div class="col-12 text-end pt-3">
-                                <asp:Button ID="btnCargar" runat="server" Text="Cargar Médico" CssClass="btn btn-primary px-4" />
+                                <asp:Label ID="lblMensaje" runat="server" Font-Bold="true" CssClass="me-3"></asp:Label>
+                                <asp:Button ID="btnCargar" runat="server" Text="Cargar Médico" CssClass="btn btn-primary px-4" OnClick="btnCargar_Click" ValidationGroup="GrupoMedico" />
+                                <asp:Button ID="btnCancelarEdicion" runat="server" Text="Cancelar" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancelarEdicion_Click" CausesValidation="false" Visible="false" />
                             </div>
                         </div>
                     </div>

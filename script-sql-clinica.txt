@@ -65,6 +65,19 @@ CREATE TABLE PERSONA (
 );
 GO
 
+CREATE TABLE PACIENTE (
+    Id_Paciente       INT IDENTITY(1,1) NOT NULL,
+    Id_Persona        INT NOT NULL,
+    Estado            BIT NOT NULL DEFAULT 1,
+    CONSTRAINT PK_PACIENTE PRIMARY KEY (Id_Paciente),
+    CONSTRAINT FK_PACIENTE_PERSONA FOREIGN KEY (Id_Persona)
+    	REFERENCES PERSONA (Id_Persona)
+);
+GO
+
+
+
+
 -- ============================================================
 -- TABLA: USUARIO  (1 a 1 con PERSONA)
 -- ============================================================

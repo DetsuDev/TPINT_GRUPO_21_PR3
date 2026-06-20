@@ -64,7 +64,7 @@
                                     <asp:BoundField DataField="Legajo_Medico" HeaderText="Legajo" ReadOnly="True"/>
                                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                                     <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                                    <asp:BoundField DataField="Id_Especialidad" HeaderText="Especialidad" />
+                                    <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
                                     <%--<asp:BoundField DataField="Horario" HeaderText="Horario Atención" /> --%>
                                     <asp:BoundField DataField="Sexo" HeaderText="Sexo" />
                                     <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" />

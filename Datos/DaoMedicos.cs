@@ -15,7 +15,7 @@ namespace Datos
         {
 
             string consulta = "SELECT M.Id_Medico, M.Legajo_Medico, P.Nombre, P.Apellido, " +
-                "E.Nombre AS Id_Especialidad, P.Sexo, P.Nacionalidad, P.FechaNacimiento AS FechaNac, " +
+                "E.Nombre AS Especialidad, P.Sexo, P.Nacionalidad, P.FechaNacimiento AS FechaNac, " +
                 "P.Direccion, L.NombreLocalidad AS Localidad, PR.NombreProvincia AS Provincia, " +
                 "P.CorreoElectronico AS Email, P.Telefono, U.Usuario, U.Contrasenia " +
                 "FROM MEDICO M " +

@@ -9,8 +9,9 @@ namespace Entidades
     public class Paciente : Persona
     {
         public Paciente() { }
-        public int IdPaciente { set; get; }
-        public bool Estado { set; get; }
+        public Paciente(int IdPaciente, bool Estado) { IdPaciente = _IdPaciente; Estado = _Estado; }
+        public int _IdPaciente { set; get; }
+        public bool _Estado { set; get; }
 
         ///  El IdPersona ya se hereda de la clase Persona
 

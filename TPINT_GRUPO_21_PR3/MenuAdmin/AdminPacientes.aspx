@@ -65,7 +65,7 @@
                                     <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
                                     <asp:BoundField DataField="Sexo" HeaderText="Sexo" />
                                     <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" />
-                                    <asp:BoundField DataField="FechaNac" HeaderText="Fecha Nac" />
+                                    <asp:BoundField DataField="FechaNac" HeaderText="Fecha Nac" DataFormatString="{0:dd/MM/yyyy}"/>
                                     <asp:BoundField DataField="Direccion" HeaderText="Dirección" />
                                     <asp:BoundField DataField="Localidad" HeaderText="Localidad" />
                                     <asp:BoundField DataField="Provincia" HeaderText="Provincia" />

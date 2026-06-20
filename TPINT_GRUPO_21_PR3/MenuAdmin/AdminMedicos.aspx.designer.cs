@@ -60,6 +60,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.GridView gvGestionMedicos;
 
         /// <summary>
+        /// rfvLegajoMedico control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvLegajoMedico;
+
+        /// <summary>
         /// txtLegajo control.
         /// </summary>
         /// <remarks>
@@ -67,6 +76,24 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtLegajo;
+
+        /// <summary>
+        /// revDNI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revDNI;
+
+        /// <summary>
+        /// rfvDNI control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDNI;
 
         /// <summary>
         /// txtDni control.

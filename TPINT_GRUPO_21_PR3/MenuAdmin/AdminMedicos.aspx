@@ -113,10 +113,13 @@
                         <div class="row g-3">
                             <div class="col-md-3">
                                 <label class="form-label font-weight-bold">Legajo Médico</label>
+                                <asp:RequiredFieldValidator ID="rfvLegajoMedico" runat="server" ErrorMessage="*" ControlToValidate="txtLegajo"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtLegajo" runat="server" CssClass="form-control" placeholder="Ej: MED-999"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">DNI</label>
+                                <asp:RegularExpressionValidator ID="revDNI" runat="server" ErrorMessage="*" ValidationExpression="&quot;^[\d\.]+$&quot;" ControlToValidate="txtDni"></asp:RegularExpressionValidator>
+                                <asp:RequiredFieldValidator ID="rfvDNI" runat="server" ErrorMessage="*" ControlToValidate="txtDni"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtDni" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-3">

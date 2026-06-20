@@ -9,6 +9,17 @@
     <link rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <title>Gestión de Médicos</title>
+    <style>
+        .custom-checkboxlist label {
+            margin-right: 6px;
+            margin-left: 2px;
+            font-size: 15px;
+        }
+        .custom-checkboxlist  {
+
+            transform: translateY(3px);
+        }
+    </style>
 </head>
 <body style="background-color: #f8f9fa;">
     
@@ -102,10 +113,13 @@
                         <div class="row g-3">
                             <div class="col-md-3">
                                 <label class="form-label font-weight-bold">Legajo Médico</label>
+                                <asp:RequiredFieldValidator ID="rfvLegajoMedico" runat="server" ErrorMessage="*" ControlToValidate="txtLegajo"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtLegajo" runat="server" CssClass="form-control" placeholder="Ej: MED-999"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">DNI</label>
+                                <asp:RegularExpressionValidator ID="revDNI" runat="server" ErrorMessage="*" ValidationExpression="&quot;^[\d\.]+$&quot;" ControlToValidate="txtDni"></asp:RegularExpressionValidator>
+                                <asp:RequiredFieldValidator ID="rfvDNI" runat="server" ErrorMessage="*" ControlToValidate="txtDni"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtDni" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
@@ -120,13 +134,23 @@
                                 <label class="form-label">Especialidad</label>
                                 <asp:DropDownList ID="ddlEspecialidad" runat="server" CssClass="form-select"></asp:DropDownList>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-2">
                                 <label class="form-label">Horario de Disponibilidad</label>
                                 <asp:DropDownList ID="ddlHorario" runat="server" CssClass="form-select"></asp:DropDownList>
                             </div>
-                            <div class="col-md-2">
+                            <div class ="col-md-3">
+                                <label class="form-label">Dias disponibles</label>
+                                <asp:CheckBoxList ID="cblDiasDisponibles" runat="server" RepeatDirection="Horizontal" CssClass="custom-checkboxlist">
+                                    <asp:ListItem Value="L">Lunes</asp:ListItem>
+                                    <asp:ListItem Value="M">Martes</asp:ListItem>
+                                    <asp:ListItem Value="X">Miercoles</asp:ListItem>
+                                    <asp:ListItem Value="J">Jueves</asp:ListItem>
+                                    <asp:ListItem Value="V">Viernes</asp:ListItem>
+                                </asp:CheckBoxList>
+                            </div>
+                            <div class="col-md-1">
                                 <label class="form-label">Sexo</label>
-                                <asp:DropDownList ID="ddlSexo" runat="server" CssClass="form-select">
+                                <asp:DropDownList ID="ddlSexo" runat="server" CssClass="form-select" style="font-size:14px;">
                                     <asp:ListItem Value="M">Masculino</asp:ListItem>
                                     <asp:ListItem Value="F">Femenino</asp:ListItem>
                                 </asp:DropDownList>

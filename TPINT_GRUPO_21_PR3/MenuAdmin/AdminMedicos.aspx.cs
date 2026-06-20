@@ -17,12 +17,11 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             {
                 divEliminar.Visible = false;
                 CargarGrillaMedicos();
+                CargarDdlEspecialidades();
             }
 
             if (!IsPostBack)
             {
-                ddlEspecialidad.Items.Add(new ListItem("Pediatría", "1"));
-                ddlEspecialidad.Items.Add(new ListItem("Traumatología", "2"));
                 ddlHorario.Items.Add(new ListItem("08:00 - 16:00", "1"));
                 ddlHorario.Items.Add(new ListItem("10:00 - 18:00", "2"));
                 ddlProvincia.Items.Add(new ListItem("Buenos Aires", "1"));
@@ -37,6 +36,18 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             dt = negocioMedicos.getTabla();
             gvGestionMedicos.DataSource = dt;
             gvGestionMedicos.DataBind();
+        }
+
+        private void CargarDdlEspecialidades()
+        {
+            NegocioEspecialidades negocioEspecialidades = new NegocioEspecialidades();
+            DataTable dt = negocioEspecialidades.getTabla();
+            ddlEspecialidad.DataSource = dt;
+            ddlEspecialidad.DataTextField = "Nombre";
+            ddlEspecialidad.DataValueField = "Id_Especialidad";
+            ddlEspecialidad.DataBind();
+
+            
         }
         protected void gvGestionMedicos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {

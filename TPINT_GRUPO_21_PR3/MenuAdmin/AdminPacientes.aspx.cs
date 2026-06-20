@@ -18,6 +18,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
                 divEliminar.Visible = false;
                 CargarGrillaPacientes();
+                CargarddlProvincias();
             }
         }
 
@@ -30,6 +31,20 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             dt = negocioPacientes.getTabla();
             gvGestionPacientes.DataSource = dt;
             gvGestionPacientes.DataBind();
+        }
+
+        private void CargarddlProvincias()
+        {
+            DataTable dt = new DataTable();
+            NegocioProvincias negocioProvincias= new NegocioProvincias();
+            dt = negocioProvincias.getTabla();
+
+            ddlProvincia.DataSource = dt;
+            ddlProvincia.DataTextField = "NombreProvincia";
+            ddlProvincia.DataValueField = "Id_Provincia";
+            ddlProvincia.DataBind();
+
+            ddlProvincia.Items.Insert(0, new ListItem("-- Elija una provincia --", ""));
         }
 
         protected void gvGestionPacientes_PageIndexChanging(object sender, GridViewPageEventArgs e)
@@ -74,6 +89,22 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             divEliminar.Visible = false;
+        }
+
+        protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            NegocioLocalidades negocioLocalidades = new NegocioLocalidades();
+
+            DataTable dt = negocioLocalidades.getTabla();
+
+            DataView dv = dt.DefaultView;
+            dv.RowFilter = "Id_Provincia = " + ddlProvincia.SelectedValue;
+
+            ddlLocalidad.DataSource = dv;
+            ddlLocalidad.DataTextField = "NombreLocalidad";
+            ddlLocalidad.DataValueField = "Id_Localidad";
+            ddlLocalidad.DataBind();
+
         }
     }
 }

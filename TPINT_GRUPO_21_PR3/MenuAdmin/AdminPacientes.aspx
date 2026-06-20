@@ -87,14 +87,17 @@
                         <div class="row g-3">
                             <div class="col-md-3">
                                 <label class="form-label font-weight-bold">DNI</label>
+                                <asp:RequiredFieldValidator ID="rfvNombrePaciente" runat="server" ErrorMessage="*" ControlToValidate="txtDni" ForeColor="Red"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtDni" runat="server" CssClass="form-control" placeholder="Ej: 45123456"></asp:TextBox>
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">Nombre</label>
+                                <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ErrorMessage="*" ControlToValidate="txtNombre" ForeColor="Red"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-5">
                                 <label class="form-label">Apellido</label>
+                                <asp:RequiredFieldValidator ID="rfvApellidoPaciente" runat="server" ErrorMessage="*" ControlToValidate="txtApellido" ForeColor="Red"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-2">
@@ -107,23 +110,27 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">Nacionalidad</label>
+                                <asp:RequiredFieldValidator ID="rfvNacionalidadPaciente" runat="server" ErrorMessage="*" ControlToValidate="txtNacionalidad" ForeColor="Red"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtNacionalidad" runat="server" CssClass="form-control" placeholder="Ej: Argentina"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Fecha de Nacimiento</label>
+                                <asp:RequiredFieldValidator ID="rfvFechaNacimientoPaciente" runat="server" ErrorMessage="*" ControlToValidate="txtFechaNac" ForeColor="Red"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Teléfono</label>
+                                <asp:RequiredFieldValidator ID="rfvTelefonoPaciente" runat="server" ErrorMessage="*" ControlToValidate="txtTelefono" ForeColor="Red"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Dirección</label>
+                                <asp:RequiredFieldValidator ID="rfvDireccionPaciente" runat="server" ErrorMessage="*" ControlToValidate="txtDireccion" ForeColor="Red"></asp:RequiredFieldValidator>
                                 <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Provincia</label>
-                                <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-select"></asp:DropDownList>
+                                <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Localidad</label>
@@ -131,6 +138,7 @@
                             </div>
                             <div class="col-md-6">
                                 <label class="form-label">Correo Electrónico</label>
+                                <asp:RegularExpressionValidator ID="revEmailPaciente" runat="server" ErrorMessage="*" ControlToValidate="txtEmail" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ForeColor="Red"></asp:RegularExpressionValidator>
                                 <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="nombre@correo.com"></asp:TextBox>
                             </div>
                             <div class="col-12 text-end pt-3">

@@ -35,6 +35,11 @@ INSERT INTO PERSONA (Id_Localidad, DNI, Nombre, Apellido, Sexo, Nacionalidad, Fe
 (1, '41666777', 'Lucía',   'Martínez',   'F', 'Argentina', '1999-12-01', 'Mitre 159',         'lmartinez@mail.com',  '2211987654');
 GO
 
+
+INSERT INTO PACIENTE (Id_Persona, Estado) VALUES
+(5, 1),
+(6, 1);
+GO
 -- ============================================================
 -- USUARIO  (1 a 1 con PERSONA)
 -- ============================================================

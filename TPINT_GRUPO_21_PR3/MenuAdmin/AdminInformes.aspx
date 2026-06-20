@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     <title>Informes Estadísticos</title>
 </head>
@@ -18,16 +19,15 @@
 
     <div style="padding: 50px; margin: 50px;">
         <ul class="nav nav-tabs" style=" min-width: 1000px;">
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="AdminInformes.aspx">Informes</a></li>
+            <li class="nav-item"><a class="nav-link" href="AdminInicio.aspx">Inicio</a></li>
             <li class="nav-item"><a class="nav-link" href="AdminPacientes.aspx">Gestionar Pacientes</a></li>
             <li class="nav-item"><a class="nav-link" href="AdminMedicos.aspx">Gestionar Medicos</a></li>
             <li class="nav-item"><a class="nav-link" href="AdminTurnos.aspx">Gestionar Turnos</a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="AdminInformes.aspx">Informes</a></li>
         </ul>
         
         <div class="border border-top-0 p-5" style="background-color: white;" >
             <form id="form1" runat="server">
-                
-
                 <div class="row">     
                     <div class="col-md-6">
                         <div class="card border-primary shadow-sm">
@@ -59,10 +59,9 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
-                     <div class="col-md-6">
-                           <div class="card border-primary shadow-sm">
+                    <div class="col-md-6">
+                        <div class="card border-primary shadow-sm mb-4">
                             <div class="card-header bg-primary text-white">
                                 <h5 class="mb-0">Presentismo segun fechas</h5>
                             </div>
@@ -81,26 +80,22 @@
                                     </div>
                                 </div>
                                 <div class="progress">
-                                    <div class="progress-bar bg-success" id="barraPresentes" runat="server" role="progressbar" style="width: 70%" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100">70%</div>
+                                    <div class="progress-bar bg-success" id="barraPresentes" runat="server" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
                                     <div class="progress-bar bg-danger" id="barraAusentes" runat="server" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
                                 </div>
                             </div>
-                           </div>
-                         <br />
-                         <br />
-                         <div class="card border-primary shadow-sm">
+                        </div>
+
+                        <div class="card border-primary shadow-sm">
                              <div class="card-header bg-primary text-white">
                                  <h5 class="mb-0">Presentismo segun especialidad / medico</h5>
                              </div>
-
                              <div class="card-body p-4">
                                  <p class="fw-bold mb-3">Filtrar segun</p>
                                  <div class="row g-3 mb-4">
                                      <div class="col-6">
                                          <div class="form-group">
-                                             <asp:DropDownList ID="ddlPresentismoFiltrado"
-                                                 runat="server"
-                                                 CssClass="form-control">
+                                             <asp:DropDownList ID="ddlPresentismoFiltrado" runat="server" CssClass="form-control">
                                                  <asp:ListItem Value="0"> -- seleccione una opcion -- </asp:ListItem>
                                                  <asp:ListItem Value="1">Medico</asp:ListItem>
                                                  <asp:ListItem Value="2">Especialidad</asp:ListItem>
@@ -109,32 +104,27 @@
                                      </div>
                                      <div class="col-6">
                                          <div class="form-group">
-                                             <asp:DropDownList ID="DropDownList1"
-                                                 runat="server"
-                                                 CssClass="form-control">
+                                             <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control">
                                                  <asp:ListItem Value="0"> -- seleccione una opcion -- </asp:ListItem>
                                              </asp:DropDownList>
                                          </div>
                                      </div>
                                      <div class="col-12 text-end">
-                                         <asp:Button ID="Button2"
-                                             runat="server"
-                                             Text="Filtrar"
-                                             CssClass="btn btn-primary btn-sm px-4" />
+                                         <asp:Button ID="Button2" runat="server" Text="Filtrar" CssClass="btn btn-primary btn-sm px-4" />
                                      </div>
                                  </div>
                                  <div class="progress">
                                      <div class="progress-bar bg-success" id="Div1" runat="server" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 70% </div>
-                                     <div class="progress-bar bg-danger" id="Div2" runat="server" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"> 30%
-                                     </div>
+                                     <div class="progress-bar bg-danger" id="Div2" runat="server" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"> 30% </div>
                                  </div>
                              </div>
-                         </div>
-                     </div>
-                </div>
+                        </div>
+                    </div>
+                </div> 
             </form>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

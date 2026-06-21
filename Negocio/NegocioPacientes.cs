@@ -28,5 +28,9 @@ namespace Negocio
             int filasAfectadas = dao.actualizarPaciente(pac);
             return filasAfectadas > 0;
         }
+        public bool eliminarPaciente(int idPaciente)
+        {
+            return dao.eliminarPaciente(idPaciente) > 0;
+        }
     }
 }

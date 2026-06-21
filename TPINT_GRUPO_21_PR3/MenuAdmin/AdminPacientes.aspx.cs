@@ -28,6 +28,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             if (!IsPostBack)
             {
                 divEliminar.Visible = false;
+                CargarFiltroProvincias();
                 CargarGrillaPacientes();
                 CargarddlProvincias();
             }
@@ -36,12 +37,49 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         private void CargarGrillaPacientes()
         {
-            DataTable dt = new DataTable();
             NegocioPacientes negocioPacientes = new NegocioPacientes();
+            DataTable dt = negocioPacientes.getTabla();
 
-            dt = negocioPacientes.getTabla();
-            gvGestionPacientes.DataSource = dt;
+            List<string> filtros = new List<string>();
+            if (!string.IsNullOrWhiteSpace(txtBuscar.Text))
+            {
+                string b = txtBuscar.Text.Trim().Replace("'", "''");
+                filtros.Add($"(DNI LIKE '%{b}%' OR Nombre LIKE '%{b}%' OR Apellido LIKE '%{b}%')");
+            }
+            if (ddlFiltroProvincia.SelectedIndex > 0)
+                filtros.Add($"Provincia = '{ddlFiltroProvincia.SelectedItem.Text.Replace("'", "''")}'");
+
+            DataView dv = dt.DefaultView;
+            dv.RowFilter = string.Join(" AND ", filtros);
+
+            gvGestionPacientes.DataSource = dv;
             gvGestionPacientes.DataBind();
+        }
+
+        private void CargarFiltroProvincias()
+        {
+            NegocioProvincias negocioProvincias = new NegocioProvincias();
+            ddlFiltroProvincia.DataSource = negocioProvincias.getTabla();
+            ddlFiltroProvincia.DataTextField = "NombreProvincia";
+            ddlFiltroProvincia.DataValueField = "Id_Provincia";
+            ddlFiltroProvincia.DataBind();
+            ddlFiltroProvincia.Items.Insert(0, new ListItem("-- Todas --", ""));
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            gvGestionPacientes.EditIndex = -1;
+            gvGestionPacientes.PageIndex = 0;
+            CargarGrillaPacientes();
+        }
+
+        protected void btnLimpiarBusqueda_Click(object sender, EventArgs e)
+        {
+            txtBuscar.Text = "";
+            ddlFiltroProvincia.SelectedIndex = 0;
+            gvGestionPacientes.EditIndex = -1;
+            gvGestionPacientes.PageIndex = 0;
+            CargarGrillaPacientes();
         }
 
         private void CargarddlProvincias()
@@ -198,6 +236,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void gvGestionPacientes_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            hdnIdEliminar.Value = gvGestionPacientes.DataKeys[e.RowIndex].Value.ToString();
             divEliminar.Visible = true;
         }
 
@@ -208,7 +247,24 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+            int id = Convert.ToInt32(hdnIdEliminar.Value);
+            NegocioPacientes negocio = new NegocioPacientes();
+            bool exito = negocio.eliminarPaciente(id);
+
+            if (exito)
+            {
+                lblMensaje.ForeColor = System.Drawing.Color.Green;
+                lblMensaje.Text = "Se eliminó correctamente de la base de datos.";
+            }
+            else
+            {
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
+                lblMensaje.Text = "Hubo un error al eliminar el registro.";
+            }
+
             divEliminar.Visible = false;
+            gvGestionPacientes.EditIndex = -1;
+            CargarGrillaPacientes();
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)

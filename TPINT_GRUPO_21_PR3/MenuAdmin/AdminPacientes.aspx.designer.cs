@@ -292,5 +292,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
+
+        protected global::System.Web.UI.WebControls.HiddenField hdnIdEliminar;
+
+        protected global::System.Web.UI.WebControls.TextBox txtBuscar;
+
+        protected global::System.Web.UI.WebControls.DropDownList ddlFiltroProvincia;
+
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
+
+        protected global::System.Web.UI.WebControls.Button btnLimpiarBusqueda;
     }
 }

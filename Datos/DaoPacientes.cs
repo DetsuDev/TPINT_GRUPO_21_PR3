@@ -19,7 +19,8 @@ namespace Datos
                                "FROM PACIENTE Pa " +
                                "INNER JOIN PERSONA P ON PA.Id_Persona = P.Id_Persona " +
                                "INNER JOIN LOCALIDADES L ON P.Id_Localidad = L.Id_Localidad " +
-                               "INNER JOIN PROVINCIA PR ON L.Id_Provincia = PR.Id_Provincia ";
+                               "INNER JOIN PROVINCIA PR ON L.Id_Provincia = PR.Id_Provincia " +
+                               "WHERE PA.Estado = 1";
             return accesoDatos.obtenerTabla(consulta);
         }
         public int agregarPaciente(Paciente pac)
@@ -58,6 +59,19 @@ namespace Datos
                     Telefono = '{pac.Telefono}',
                     Id_Localidad = {pac.IdLocalidad} 
                 WHERE DNI = '{pac.Dni}';";
+            try
+            {
+                accesoDatos.ejecutarConsulta(consulta);
+                return 1;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
+        public int eliminarPaciente(int idPaciente)
+        {
+            string consulta = $"UPDATE PACIENTE SET Estado = 0 WHERE Id_Paciente = {idPaciente};";
             try
             {
                 accesoDatos.ejecutarConsulta(consulta);

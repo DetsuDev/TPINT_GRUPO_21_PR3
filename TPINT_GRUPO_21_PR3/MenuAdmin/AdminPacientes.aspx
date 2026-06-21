@@ -34,12 +34,13 @@
                 </a></li>
         </ul>
         <div class="border border-top-0 p-5" style="background-color: white;">
-            <form id="form1" runat="server">          
+            <form id="form1" runat="server">
+                <asp:HiddenField ID="hdnIdEliminar" runat="server" />
                 <div class="card" runat="server"
                     id="divEliminar"
                     style="z-index: 9999; width: 320px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; padding: 10px;">
                     <div class="card-body">
-                        <p class="card-text">Desea Eliminar a: [elemento]?</p>
+                        <p class="card-text">¿Está seguro que desea eliminar el registro?</p>
                         <div style="text-align: right">
                             <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" class="btn btn-danger" OnClick="btnEliminar_Click"/>
                             <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" class="btn btn-secondary" OnClick="btnCancelar_Click"/>
@@ -48,14 +49,37 @@
                 </div>
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Buscar Pacientes</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-5">
+                                <label class="form-label">Búsqueda (DNI, nombre o apellido)</label>
+                                <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control"></asp:TextBox>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Provincia</label>
+                                <asp:DropDownList ID="ddlFiltroProvincia" runat="server" CssClass="form-select"></asp:DropDownList>
+                            </div>
+                            <div class="col-12 text-end pt-3">
+                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary px-4" OnClick="btnBuscar_Click" CausesValidation="false" />
+                                <asp:Button ID="btnLimpiarBusqueda" runat="server" Text="Limpiar" CssClass="btn btn-outline-secondary px-4" OnClick="btnLimpiarBusqueda_Click" CausesValidation="false" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card border-primary mb-5 shadow-sm">
+                    <div class="card-header bg-primary text-white">
                         <h4 class="mb-0">Listado de Pacientes</h4>
                     </div>
                     <div class="card-body p-4">
                         <div class="table-responsive">
-                            <asp:GridView ID="gvGestionPacientes" runat="server" 
-                                AutoGenerateColumns="False" 
-                                AllowPaging="True" 
-                                PageSize="5" 
+                            <asp:GridView ID="gvGestionPacientes" runat="server"
+                                AutoGenerateColumns="False"
+                                AllowPaging="True"
+                                PageSize="5"
+                                DataKeyNames="ID"
                                 CssClass="table table-striped table-hover table-bordered align-middle"
                                 OnPageIndexChanging="gvGestionPacientes_PageIndexChanging"
                                 OnRowCancelingEdit="gvGestionPacientes_RowCancelingEdit" 

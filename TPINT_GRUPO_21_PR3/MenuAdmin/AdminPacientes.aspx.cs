@@ -13,6 +13,16 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 {
     public partial class AdminPacientes : System.Web.UI.Page
     {
+        public class LocalidadesEventArgs : EventArgs // esta es una clase auxiliar para actualizar las localidades
+        {
+            public Label LabelLocalidad { get; }
+
+            public LocalidadesEventArgs(Label label)
+            {
+                LabelLocalidad = label;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -55,13 +65,38 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         }
         protected void gvGestionPacientes_RowEditing(object sender, GridViewEditEventArgs e)
         {
+            // (sebastian)
+            // aca van algunos comentarios, para el resto que por ahi no entienda nada de lo que esta aca:
+            // tenia un problema para que los dropdownlists mostraran los valores que venian seleccionados desde la base de datos,
+            // el problema en general yacia en que previamente necesitabamos almacenar los labels de los item templates antes de setear EditIndex
+
+            // lo primero que hice fue crear unos labels vacios (asignados a null)
+            Label lblProvinciaOriginal = null;
+            Label lblLocalidadOriginal = null;
+            Label lblSexoOriginal = null;
+            
+            var row = gvGestionPacientes.Rows[e.NewEditIndex];
+
+
+            lblProvinciaOriginal = (Label)row.FindControl("lbl_it_Provincia");
+            lblSexoOriginal = (Label)row.FindControl("lbl_it_Sexo");
+            lblLocalidadOriginal = (Label)row.FindControl("lbl_it_Localidad");
+
+            LocalidadesEventArgs localidadesEvenArgs = new LocalidadesEventArgs(lblLocalidadOriginal);
+
+
+            // switcheo al modo editor
             gvGestionPacientes.EditIndex = e.NewEditIndex;
             CargarGrillaPacientes();
 
+            // almaceno los dropdownlists del gridview asi puedo trabajar con ellos
             GridViewRow fila = gvGestionPacientes.Rows[e.NewEditIndex];
             DropDownList ddlProv = (DropDownList)fila.FindControl("ddlGridProvincia");
             DropDownList ddlSex = (DropDownList)fila.FindControl("ddlGridSexo");
+            DropDownList ddlLoc = (DropDownList)fila.FindControl("ddlGridLocalidad");
 
+
+            // bind province dropdown and restore selections
             if (ddlProv != null)
             {
                 NegocioProvincias negProv = new NegocioProvincias();
@@ -69,15 +104,43 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 ddlProv.DataTextField = "NombreProvincia";
                 ddlProv.DataValueField = "Id_Provincia";
                 ddlProv.DataBind();
-                ddlProv.Items.Insert(0, new ListItem("-- Seleccione --", ""));
+
+                // y, despues de algunas validaciones, dejo marcada la provincia
+                if (lblProvinciaOriginal != null && !string.IsNullOrWhiteSpace(lblProvinciaOriginal.Text))
+                {
+                    string provText = lblProvinciaOriginal.Text.Trim();
+                    string locText = lblLocalidadOriginal?.Text?.Trim();
+                    ListItem itemByText = ddlProv.Items.FindByText(provText);
+                    if (itemByText != null)
+                    {
+                        ddlProv.SelectedValue = itemByText.Value;
+                        ddlGridProvincia_SelectedIndexChanged(ddlProv, localidadesEvenArgs);
+
+                        ddlLoc = (DropDownList)fila.FindControl("ddlGridLocalidad");
+                        if (ddlLoc != null && !string.IsNullOrEmpty(locText))
+                        {
+                            ListItem locItem = ddlLoc.Items.FindByText(locText) ?? ddlLoc.Items.FindByValue(locText);
+                            if (locItem != null)
+                            {
+                                ddlLoc.SelectedValue = locItem.Value;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        ddlProv.SelectedIndex = 0;
+                    }
+                }
             }
 
-            if (ddlSex != null)
+            if (ddlSex != null && lblSexoOriginal != null && !string.IsNullOrWhiteSpace(lblSexoOriginal.Text))
             {
-                Label lblSexoOriginal = (Label)fila.FindControl("lbl_it_Sexo");
-                if (lblSexoOriginal != null)
+                string sexo = lblSexoOriginal.Text.Trim();
+                ListItem li = ddlSex.Items.FindByValue(sexo) ?? ddlSex.Items.FindByText(sexo);
+                if (li != null)
                 {
-                    ddlSex.SelectedValue = lblSexoOriginal.Text.Trim();
+                    ddlSex.SelectedValue = li.Value;
+
                 }
             }
         }
@@ -152,6 +215,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         {
             divEliminar.Visible = false;
         }
+        // Keep ASP.NET event signature compatible; cast to LocalidadesEventArgs when present
         protected void ddlGridProvincia_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList ddlProv = (DropDownList)sender;
@@ -171,6 +235,21 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 ddlLoc.DataValueField = "Id_Localidad";
                 ddlLoc.DataBind();
             }
+
+            // If caller passed a LocalidadesEventArgs, select the original localidad by text/value
+            var custom = (LocalidadesEventArgs)e;
+            if (custom?.LabelLocalidad != null && ddlLoc != null)
+            {
+                var text = custom.LabelLocalidad.Text?.Trim();
+                if (!string.IsNullOrEmpty(text))
+                {
+                    var li = ddlLoc.Items.FindByText(text) ?? ddlLoc.Items.FindByValue(text);
+                    if (li != null)
+                    {
+                        ddlLoc.SelectedValue = li.Value;
+                    }
+                }
+            }
         }
         protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -189,6 +268,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlLocalidad.DataTextField = "NombreLocalidad";
             ddlLocalidad.DataValueField = "Id_Localidad";
             ddlLocalidad.DataBind();
+
 
         }
         protected void btnCargar_Click(object sender, EventArgs e)

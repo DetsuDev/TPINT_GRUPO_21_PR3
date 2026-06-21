@@ -7,6 +7,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
     <title>Gestión de Pacientes</title>
+        <style>
+        .form-select{
+            min-width:140px;
+        }
+        .form-control{
+            min-width:120px;
+        }
+    </style>
 </head>
 <body style="background-color: #f8f9fa;">
 

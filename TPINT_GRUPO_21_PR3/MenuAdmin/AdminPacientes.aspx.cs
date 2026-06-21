@@ -215,7 +215,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         {
             divEliminar.Visible = false;
         }
-        // Keep ASP.NET event signature compatible; cast to LocalidadesEventArgs when present
         protected void ddlGridProvincia_SelectedIndexChanged(object sender, EventArgs e)
         {
             DropDownList ddlProv = (DropDownList)sender;
@@ -236,7 +235,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 ddlLoc.DataBind();
             }
 
-            // If caller passed a LocalidadesEventArgs, select the original localidad by text/value
             var custom = (LocalidadesEventArgs)e;
             if (custom?.LabelLocalidad != null && ddlLoc != null)
             {

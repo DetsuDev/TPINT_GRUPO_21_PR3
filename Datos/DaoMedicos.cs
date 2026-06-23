@@ -123,5 +123,19 @@ namespace Datos
                 return -1;
             }
         }
+
+        public int eliminarMedico(Medico m)
+        {
+            string consulta = "UPDATE MEDICO SET Estado = 0 WHERE Id_Medico = '" + m.IdMedico + "'";
+            try
+            {
+                accesoDatos.ejecutarConsulta(consulta);
+                return 1;
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
     }
 }

@@ -272,12 +272,31 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void gvGestionMedicos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
+            hdnIdMedico.Value = gvGestionMedicos.DataKeys[e.RowIndex].Value.ToString();
             divEliminar.Visible = true;
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
             divEliminar.Visible = false;
+            int id = Convert.ToInt32(hdnIdMedico.Value);
+            Medico med = new Medico();
+            NegocioMedicos negMed = new NegocioMedicos();
+
+            med.IdMedico = id;
+
+            if (negMed.eliminarMedico(med))
+            {
+                lblMensaje.ForeColor = System.Drawing.Color.Green;
+                lblMensaje.Text = "Se eliminó correctamente de la base de datos.";
+            }
+            else
+            {
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
+                lblMensaje.Text = "Hubo un error al eliminar el registro.";
+            }
+            gvGestionMedicos.EditIndex = -1;
+            CargarGrillaMedicos();
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)

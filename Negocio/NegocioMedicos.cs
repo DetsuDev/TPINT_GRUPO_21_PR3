@@ -32,5 +32,10 @@ namespace Negocio
         {
             return dao.actualizarMedico(m) > 0;
         }
+
+        public bool eliminarMedico(Medico m)
+        {
+            return dao.eliminarMedico(m) > 0;
+        }
     }
 }

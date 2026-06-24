@@ -133,8 +133,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             DropDownList ddlSex = (DropDownList)fila.FindControl("ddlGridSexo");
             DropDownList ddlLoc = (DropDownList)fila.FindControl("ddlGridLocalidad");
 
-
-            // bind province dropdown and restore selections
             if (ddlProv != null)
             {
                 NegocioProvincias negProv = new NegocioProvincias();

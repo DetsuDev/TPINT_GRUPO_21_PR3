@@ -151,6 +151,9 @@
                                 <PagerStyle CssClass="pagination justify-content-center pt-3" />
                             </asp:GridView>
                         </div>
+                        <div class="text-center pt-3">
+                            <asp:Label ID="lblMensajeGrid" runat="server" Font-Bold="true"></asp:Label>
+                        </div>
                     </div>
                 </div>
 

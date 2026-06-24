@@ -217,15 +217,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             if (exito)
             {
-                lblMensaje.ForeColor = System.Drawing.Color.Green;
-                lblMensaje.Text = "Se modificó correctamente en la base de datos.";
+                lblMensajeGrid.ForeColor = System.Drawing.Color.Green;
+                lblMensajeGrid.Text = "Se modificó correctamente en la base de datos.";
                 gvGestionPacientes.EditIndex = -1; 
                 CargarGrillaPacientes();
             }
             else
             {
-                lblMensaje.ForeColor = System.Drawing.Color.Red;
-                lblMensaje.Text = "Hubo un error al intentar modificar el paciente.";
+                lblMensajeGrid.ForeColor = System.Drawing.Color.Red;
+                lblMensajeGrid.Text = "Hubo un error al intentar modificar el paciente.";
             }
         }
         protected void gvGestionPacientes_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -253,13 +253,13 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             if (exito)
             {
-                lblMensaje.ForeColor = System.Drawing.Color.Green;
-                lblMensaje.Text = "Se eliminó correctamente de la base de datos.";
+                lblMensajeGrid.ForeColor = System.Drawing.Color.Green;
+                lblMensajeGrid.Text = "Se eliminó correctamente de la base de datos.";
             }
             else
             {
-                lblMensaje.ForeColor = System.Drawing.Color.Red;
-                lblMensaje.Text = "Hubo un error al eliminar el registro.";
+                lblMensajeGrid.ForeColor = System.Drawing.Color.Red;
+                lblMensajeGrid.Text = "Hubo un error al eliminar el registro.";
             }
 
             divEliminar.Visible = false;
@@ -291,8 +291,9 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 ddlLoc.DataBind();
             }
 
-            var custom = (LocalidadesEventArgs)e;
-            if (custom?.LabelLocalidad != null && ddlLoc != null)
+            var custom = e as LocalidadesEventArgs;
+
+            if (custom != null && custom.LabelLocalidad != null && ddlLoc != null)
             {
                 var text = custom.LabelLocalidad.Text?.Trim();
                 if (!string.IsNullOrEmpty(text))

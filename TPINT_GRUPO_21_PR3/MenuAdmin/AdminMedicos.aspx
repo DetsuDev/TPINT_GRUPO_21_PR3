@@ -67,13 +67,14 @@
                                 PageSize="5"
                                 DataKeyNames="Id_Medico"
                                 CssClass="table table-striped table-hover table-bordered align-middle"
-                                OnPageIndexChanging="gvGestionMedicos_PageIndexChanging"
-                                OnRowCancelingEdit="gvGestionMedicos_RowCancelingEdit" 
-                                OnRowDeleting="gvGestionMedicos_RowDeleting" 
-                                OnRowEditing="gvGestionMedicos_RowEditing" 
-                                OnRowUpdating="gvGestionMedicos_RowUpdating">
+                                OnPageIndexChanging="gvGestionMedicos_PageIndexChanging" 
+                                OnRowDeleting="gvGestionMedicos_RowDeleting">
                                 <Columns>
-                                    <asp:CommandField ShowEditButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-warning" />
+                                    <asp:TemplateField ShowHeader="False">
+                                        <ItemTemplate>
+                                            <asp:Button ID="btnEditar" runat="server" CommandArgument='<%# Eval("Id_Medico") %>' OnClick="btnEditar_Click" Text="Editar" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
                                     <asp:BoundField DataField="Id_Medico" HeaderText="ID" ReadOnly="True" />
                                     <asp:BoundField DataField="Legajo_Medico" HeaderText="Legajo" ReadOnly="True"/>
                                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
@@ -100,7 +101,9 @@
                                             </button>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" />
+                                    <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" >
+<ControlStyle CssClass="btn btn-sm btn-outline-danger"></ControlStyle>
+                                    </asp:CommandField>
                                 </Columns>
                                 <PagerStyle CssClass="pagination justify-content-center pt-3" />
                             </asp:GridView>

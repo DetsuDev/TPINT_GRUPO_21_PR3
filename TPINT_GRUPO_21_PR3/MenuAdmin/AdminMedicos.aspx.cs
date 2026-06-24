@@ -205,13 +205,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 LimpiarFormulario();
             }
         }
-
-        protected void btnCancelarEdicion_Click(object sender, EventArgs e)
-        {
-            LimpiarFormulario();
-            lblMensaje.Text = "";
-        }
-
         private string ObtenerDiasSeleccionados()
         {
             string dias = "";
@@ -230,6 +223,11 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         {
             lblMensaje.Text = texto;
             lblMensaje.ForeColor = ok ? System.Drawing.Color.Green : System.Drawing.Color.Red;
+        }
+        protected void btnCancelarEdicion_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
+            lblMensaje.Text = "";
         }
 
         private void LimpiarFormulario()
@@ -262,13 +260,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             hCargarMedico.InnerText = "Cargar Nuevo Médico";
         }
 
-        protected void gvGestionMedicos_RowUpdating(object sender, GridViewUpdateEventArgs e) { }
-
-        protected void gvGestionMedicos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            gvGestionMedicos.EditIndex = -1;
-            CargarGrillaMedicos();
-        }
 
         protected void gvGestionMedicos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
@@ -302,6 +293,12 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             divEliminar.Visible = false;
+        }
+
+        protected void btnEditar_Click(object sender, EventArgs e)
+        {
+            int idMedico = Convert.ToInt32(((Button)sender).CommandArgument);
+            CargarMedicoEnFormulario(idMedico);
         }
     }
 }

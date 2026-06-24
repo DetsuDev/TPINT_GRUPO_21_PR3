@@ -15,6 +15,15 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
     {
 
         /// <summary>
+        /// Control lblNombreUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNombreUsuario;
+
+        /// <summary>
         /// Control form1.
         /// </summary>
         /// <remarks>
@@ -24,6 +33,51 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// Control txtBuscarDni.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarDni;
+
+        /// <summary>
+        /// Control txtBuscarPaciente.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarPaciente;
+
+        /// <summary>
+        /// Control txtBuscarFecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarFecha;
+
+        /// <summary>
+        /// Control btnBuscar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
+
+        /// <summary>
+        /// Control btnLimpiar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLimpiar;
+
+        /// <summary>
         /// Control gvMedicoTurnos.
         /// </summary>
         /// <remarks>
@@ -31,30 +85,5 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvMedicoTurnos;
-
-        /// <summary>
-        /// Control txtBuscarDni.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.TextBox txtBuscarDni;
-
-        /// <summary>
-        /// Control txtBuscarPaciente.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.TextBox txtBuscarPaciente;
-
-        /// <summary>
-        /// Control txtBuscarFecha.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.TextBox txtBuscarFecha;
-
-        /// <summary>
-        /// Control btnBuscar.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.Button btnBuscar;
-
-        /// <summary>
-        /// Control btnLimpiar.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.Button btnLimpiar;
     }
 }

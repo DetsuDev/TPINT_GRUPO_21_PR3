@@ -26,13 +26,13 @@
 <body style="background-color: #f8f9fa;">
     
 
-    <div class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
-      <div class="card-body" >
-        <p class="card-text">Bienvenido: [Usuario].</p>
-        <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
-      </div>
-    </div>
-
+    <div  class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
+  <div class="card-body" >
+    <p class="card-text">Bienvenido: </p>
+      <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]"></asp:Label>
+    <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
+  </div>
+</div>
 
     <div style="padding: 50px; margin: 50px;">
         <ul class="nav nav-tabs" style="min-width: 1000px;">

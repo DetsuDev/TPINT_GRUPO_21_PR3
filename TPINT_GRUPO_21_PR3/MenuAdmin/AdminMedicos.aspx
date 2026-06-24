@@ -21,14 +21,18 @@
         }
     </style>
 </head>
+
+
 <body style="background-color: #f8f9fa;">
     
+
     <div class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
         <p class="card-text">Bienvenido: [Usuario].</p>
         <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
       </div>
     </div>
+
 
     <div style="padding: 50px; margin: 50px;">
         <ul class="nav nav-tabs" style="min-width: 1000px;">
@@ -37,6 +41,7 @@
             <li class="nav-item"><a class="nav-link active" aria-current="page" href="AdminMedicos.aspx">Gestionar Medicos</a></li>
             <li class="nav-item"><a class="nav-link" href="AdminTurnos.aspx">Gestionar Turnos</a></li>
         </ul>
+
 
         <div class="border border-top-0 p-5" style="background-color: white;">
             <form id="form1" runat="server">
@@ -70,9 +75,10 @@
                                 OnPageIndexChanging="gvGestionMedicos_PageIndexChanging" 
                                 OnRowDeleting="gvGestionMedicos_RowDeleting">
                                 <Columns>
+                                    <%--<asp:BoundField DataField="Horario" HeaderText="Horario Atención" /> --%>
                                     <asp:TemplateField ShowHeader="False">
                                         <ItemTemplate>
-                                            <asp:Button ID="btnEditar" runat="server" CommandArgument='<%# Eval("Id_Medico") %>' OnClick="btnEditar_Click" Text="Editar" />
+                                            <asp:Button ID="btnEditar" runat="server" class="btn btn-outline-warning" CommandArgument='<%# Eval("Id_Medico") %>' OnClick="btnEditar_Click" Text="Editar" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="Id_Medico" HeaderText="ID" ReadOnly="True" />
@@ -80,10 +86,10 @@
                                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                                     <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
                                     <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
-                                    <%--<asp:BoundField DataField="Horario" HeaderText="Horario Atención" /> --%>
                                     <asp:BoundField DataField="Sexo" HeaderText="Sexo" />
                                     <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" />
-                                    <asp:BoundField DataField="FechaNac" HeaderText="Fecha Nac" />
+                                    
+                                    <asp:BoundField DataField="FechaNac" HeaderText="Fecha Nac" DataFormatString="{0:dd/MM/yyyy}" />
                                     <asp:BoundField DataField="Direccion" HeaderText="Direccion" />
                                     <asp:BoundField DataField="Localidad" HeaderText="Localidad" />
                                     <asp:BoundField DataField="Provincia" HeaderText="Provincia" />
@@ -92,13 +98,7 @@
                                     <asp:BoundField DataField="Usuario" HeaderText="Usuario" />
                                     <asp:TemplateField HeaderText="Contraseña">
                                         <ItemTemplate>
-                                            <span class="password-text">********</span>
-
-                                            <button type="button"
-                                                    class="btn btn-sm btn-outline-secondary toggle-password"
-                                                    data-password='<%# Eval("Contrasenia") %>'>
-                                                <i class="bi bi-eye-slash"></i>
-                                            </button>
+                                            <asp:Label ID="pass" runat="server" Text="********"></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" >
@@ -110,27 +110,32 @@
                         </div>
                     </div>
                 </div>
+                <asp:Button ID="btnMostrarForm" runat="server" Text="Nuevo Medico" OnClick="btnMostrarForm_Click" class="btn btn-primary"/>
+                <div class="card" runat="server"
+                    id="divFormulario"
+                    style="z-index: 9999;  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 80%">
+                    <div class="card-body">
 
-                <div class="card border-primary shadow-sm">
-                    <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0" id="hCargarMedico" runat="server">Cargar Nuevo Médico</h4>
-                    </div>
-                    <div class="card-body p-4">
-                        <div class="row g-3">
-                            <div class="col-md-3">
-                                <label class="form-label font-weight-bold">Legajo Médico</label>
-                                <asp:RequiredFieldValidator ID="rfvLegajoMedico" runat="server" ErrorMessage="*" ControlToValidate="txtLegajo" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
-                                <asp:TextBox ID="txtLegajo" runat="server" CssClass="form-control" placeholder="Ej: MED-999"></asp:TextBox>
+                        <div class="card border-primary shadow-sm">
+                            <div class="card-header bg-primary text-white">
+                                <h4 class="mb-0" id="hCargarMedico" runat="server">Cargar Nuevo Médico</h4>
                             </div>
-                            <div class="col-md-3">
-                                <label class="form-label">DNI</label>
-                                <asp:RequiredFieldValidator ID="rfvDNI" runat="server" ErrorMessage="*" ControlToValidate="txtDni" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
-                                <asp:RegularExpressionValidator ID="revDNI" runat="server" ErrorMessage="* Solo números" ValidationExpression="^\d{7,9}$" ControlToValidate="txtDni" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
-                                <asp:TextBox ID="txtDni" runat="server" CssClass="form-control"></asp:TextBox>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Nombre</label>
-                                <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
+                            <div class="card-body p-4">
+                                <div class="row g-3">
+                                    <div class="col-md-3">
+                                        <label class="form-label font-weight-bold">Legajo Médico</label>
+                                        <asp:RequiredFieldValidator ID="rfvLegajoMedico" runat="server" ErrorMessage="*" ControlToValidate="txtLegajo" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
+                                        <asp:TextBox ID="txtLegajo" runat="server" CssClass="form-control" placeholder="Ej: MED-999"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">DNI</label>
+                                        <asp:RequiredFieldValidator ID="rfvDNI" runat="server" ErrorMessage="*" ControlToValidate="txtDni" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revDNI" runat="server" ErrorMessage="* Solo números" ValidationExpression="^\d{7,9}$" ControlToValidate="txtDni" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
+                                        <asp:TextBox ID="txtDni" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Nombre</label>
+                                        <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Apellido</label>
@@ -205,12 +210,15 @@
                             <div class="col-12 text-end pt-3">
                                 <asp:Label ID="lblMensaje" runat="server" Font-Bold="true" CssClass="me-3"></asp:Label>
                                 <asp:Button ID="btnCargar" runat="server" Text="Cargar Médico" CssClass="btn btn-primary px-4" OnClick="btnCargar_Click" ValidationGroup="GrupoMedico" />
-                                <asp:Button ID="btnCancelarEdicion" runat="server" Text="Cancelar" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancelarEdicion_Click" CausesValidation="false" Visible="false" />
+                                <asp:Button ID="btnCancelarEdicion" runat="server" Text="Cancelar" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancelarEdicion_Click" CausesValidation="false" Visible="true" />
                             </div>
                         </div>
                     </div>
+                            
                 </div>
-
+                    
+                </div>
+                    </div>
             </form>
         </div>
     </div>

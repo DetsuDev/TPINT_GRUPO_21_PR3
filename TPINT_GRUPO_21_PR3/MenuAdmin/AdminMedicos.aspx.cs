@@ -17,6 +17,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             if (!IsPostBack)
             {
                 divEliminar.Visible = false;
+                divFormulario.Visible = false;
                 CargarGrillaMedicos();
                 CargarDdlEspecialidades();
                 CargarProvincias();
@@ -135,7 +136,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             txtLegajo.Enabled = false;
             txtDni.Enabled = false;
             btnCargar.Text = "Actualizar Médico";
-            btnCancelarEdicion.Visible = true;
             hCargarMedico.InnerText = "Editar Médico";
             lblMensaje.Text = "";
         }
@@ -228,6 +228,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         {
             LimpiarFormulario();
             lblMensaje.Text = "";
+            divFormulario.Visible = false;
         }
 
         private void LimpiarFormulario()
@@ -256,7 +257,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             txtLegajo.Enabled = true;
             txtDni.Enabled = true;
             btnCargar.Text = "Cargar Médico";
-            btnCancelarEdicion.Visible = false;
             hCargarMedico.InnerText = "Cargar Nuevo Médico";
         }
 
@@ -297,8 +297,18 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
+
             int idMedico = Convert.ToInt32(((Button)sender).CommandArgument);
             CargarMedicoEnFormulario(idMedico);
+            divFormulario.Visible = true;
+
         }
+
+        protected void btnMostrarForm_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
+            divFormulario.Visible = true;
+        }
+
     }
 }

@@ -40,6 +40,8 @@
 
             <asp:Button ID="btnTestLoginMedico" runat="server" Text="Ingresar como Medico" CssClass="btn btn-primary" Style="margin-top: 10px;" OnClick="btnTestLoginMedico_Click" />
 
+            <asp:Button ID="btnLoguearse" runat="server" Text="Ingresar" CssClass="btn btn-primary" Style="margin-top: 10px;" OnClick="btnTestLogearse_Click" />
+
             <asp:Label ID="lblMensaje" runat="server" CssClass="error" ></asp:Label>
         </div>
     </form>

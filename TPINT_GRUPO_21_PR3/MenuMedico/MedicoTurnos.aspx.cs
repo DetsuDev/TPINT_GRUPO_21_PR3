@@ -15,6 +15,7 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
         {
             if (!IsPostBack)
             {
+                lblNombreUsuario.Text = Session["UsuarioLogeado"].ToString();
                 CargarGrillaTurnos();
             }
 

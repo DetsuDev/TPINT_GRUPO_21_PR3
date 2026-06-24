@@ -18,6 +18,7 @@ namespace TPINT_GRUPO_21_PR3
         {
             ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
 
+            Session["UsuarioLogeado"] = "";
         }
 
         protected void btnTestLoginMedico_Click(object sender, EventArgs e)
@@ -51,8 +52,8 @@ namespace TPINT_GRUPO_21_PR3
                 if (usuarios.buscarUsuario(usuario, contrasenia))
                 {
 
-                    Response.Redirect("~/MenuAdmin/AdminInformes.aspx");
                     Session["UsuarioLogeado"] = usuario;
+                    Response.Redirect("~/MenuAdmin/AdminInformes.aspx");
 
                 }
                 else

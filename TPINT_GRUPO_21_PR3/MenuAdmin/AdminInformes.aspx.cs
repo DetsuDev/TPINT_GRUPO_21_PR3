@@ -13,7 +13,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            lblNombreUsuario.Text = (string)Session["UsuarioLogeado"];
+            lblNombreUsuario.Text = Session["UsuarioLogeado"].ToString();
             if (!IsPostBack)
             {
                 CargarRankingMock();

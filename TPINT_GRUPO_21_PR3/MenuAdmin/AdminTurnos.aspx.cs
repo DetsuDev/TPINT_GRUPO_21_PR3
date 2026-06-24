@@ -15,6 +15,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         {
             if (!IsPostBack)
             {
+                lblNombreUsuario.Text = Session["UsuarioLogeado"].ToString();
                 divEliminar.Visible = false;
                 CargarGrillaTurnos();
             }

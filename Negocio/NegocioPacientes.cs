@@ -18,6 +18,11 @@ namespace Negocio
             return dao.getTablaPacientes();
         }
 
+        public DataTable getPacientePorId(int idPaciente)
+        {
+            return dao.getPacientePorId(idPaciente);
+        }
+
         public bool guardarPaciente(Paciente pac)
         {
             int filasAfectadas = dao.agregarPaciente(pac);

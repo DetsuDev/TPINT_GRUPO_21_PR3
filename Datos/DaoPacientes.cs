@@ -23,6 +23,19 @@ namespace Datos
                                "WHERE PA.Estado = 1";
             return accesoDatos.obtenerTabla(consulta);
         }
+
+        public DataTable getPacientePorId(int idPaciente)
+        {
+            string consulta = $@"
+                SELECT PA.Id_Paciente, P.Id_Persona, P.DNI, P.Nombre, P.Apellido, P.Sexo, P.Nacionalidad,
+                       P.FechaNacimiento, P.Direccion, P.CorreoElectronico, P.Telefono,
+                       P.Id_Localidad, L.Id_Provincia
+                FROM PACIENTE PA
+                INNER JOIN PERSONA P ON PA.Id_Persona = P.Id_Persona
+                INNER JOIN LOCALIDADES L ON P.Id_Localidad = L.Id_Localidad
+                WHERE PA.Id_Paciente = {idPaciente}";
+            return accesoDatos.obtenerTabla(consulta);
+        }
         public int agregarPaciente(Paciente pac)
         {
             string consultaCompleta = $@"

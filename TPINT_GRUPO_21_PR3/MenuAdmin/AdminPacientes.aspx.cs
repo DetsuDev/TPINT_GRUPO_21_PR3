@@ -13,25 +13,16 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 {
     public partial class AdminPacientes : System.Web.UI.Page
     {
-        public class LocalidadesEventArgs : EventArgs // esta es una clase auxiliar para actualizar las localidades
-        {
-            public Label LabelLocalidad { get; }
-
-            public LocalidadesEventArgs(Label label)
-            {
-                LabelLocalidad = label;
-            }
-        }
-
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 lblNombreUsuario.Text = Session["UsuarioLogeado"].ToString();
                 divEliminar.Visible = false;
-                CargarFiltroProvincias();
+                divFormulario.Visible = false;
                 CargarGrillaPacientes();
                 CargarddlProvincias();
+                CargarFiltroProvincias();
             }
         }
 
@@ -104,138 +95,24 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         }
         protected void gvGestionPacientes_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            // (sebastian)
-            // aca van algunos comentarios, para el resto que por ahi no entienda nada de lo que esta aca:
-            // tenia un problema para que los dropdownlists mostraran los valores que venian seleccionados desde la base de datos,
-            // el problema en general yacia en que previamente necesitabamos almacenar los labels de los item templates antes de setear EditIndex
-
-            // lo primero que hice fue crear unos labels vacios (asignados a null)
-            Label lblProvinciaOriginal = null;
-            Label lblLocalidadOriginal = null;
-            Label lblSexoOriginal = null;
-            
-            var row = gvGestionPacientes.Rows[e.NewEditIndex];
-
-
-            lblProvinciaOriginal = (Label)row.FindControl("lbl_it_Provincia");
-            lblSexoOriginal = (Label)row.FindControl("lbl_it_Sexo");
-            lblLocalidadOriginal = (Label)row.FindControl("lbl_it_Localidad");
-
-            LocalidadesEventArgs localidadesEvenArgs = new LocalidadesEventArgs(lblLocalidadOriginal);
-
-
-            // switcheo al modo editor
-            gvGestionPacientes.EditIndex = e.NewEditIndex;
-            CargarGrillaPacientes();
-
-            // almaceno los dropdownlists del gridview asi puedo trabajar con ellos
-            GridViewRow fila = gvGestionPacientes.Rows[e.NewEditIndex];
-            DropDownList ddlProv = (DropDownList)fila.FindControl("ddlGridProvincia");
-            DropDownList ddlSex = (DropDownList)fila.FindControl("ddlGridSexo");
-            DropDownList ddlLoc = (DropDownList)fila.FindControl("ddlGridLocalidad");
-
-            if (ddlProv != null)
-            {
-                NegocioProvincias negProv = new NegocioProvincias();
-                ddlProv.DataSource = negProv.getTabla();
-                ddlProv.DataTextField = "NombreProvincia";
-                ddlProv.DataValueField = "Id_Provincia";
-                ddlProv.DataBind();
-
-                // y, despues de algunas validaciones, dejo marcada la provincia
-                if (lblProvinciaOriginal != null && !string.IsNullOrWhiteSpace(lblProvinciaOriginal.Text))
-                {
-                    string provText = lblProvinciaOriginal.Text.Trim();
-                    string locText = lblLocalidadOriginal?.Text?.Trim();
-                    ListItem itemByText = ddlProv.Items.FindByText(provText);
-                    if (itemByText != null)
-                    {
-                        ddlProv.SelectedValue = itemByText.Value;
-                        ddlGridProvincia_SelectedIndexChanged(ddlProv, localidadesEvenArgs);
-
-                        ddlLoc = (DropDownList)fila.FindControl("ddlGridLocalidad");
-                        if (ddlLoc != null && !string.IsNullOrEmpty(locText))
-                        {
-                            ListItem locItem = ddlLoc.Items.FindByText(locText) ?? ddlLoc.Items.FindByValue(locText);
-                            if (locItem != null)
-                            {
-                                ddlLoc.SelectedValue = locItem.Value;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        ddlProv.SelectedIndex = 0;
-                    }
-                }
-            }
-
-            if (ddlSex != null && lblSexoOriginal != null && !string.IsNullOrWhiteSpace(lblSexoOriginal.Text))
-            {
-                string sexo = lblSexoOriginal.Text.Trim();
-                ListItem li = ddlSex.Items.FindByValue(sexo) ?? ddlSex.Items.FindByText(sexo);
-                if (li != null)
-                {
-                    ddlSex.SelectedValue = li.Value;
-
-                }
-            }
+            int idPaciente = Convert.ToInt32(gvGestionPacientes.DataKeys[e.NewEditIndex].Value);
+            CargarPacienteEnFormulario(idPaciente);
+            fullscreenOverlay.Style["display"] = "block";
+            divFormulario.Visible = true;
         }
 
-        protected void gvGestionPacientes_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        protected void btnEditar_Click(object sender, EventArgs e)
         {
-            Paciente pacModificado = new Paciente();
-
-            pacModificado.Dni = ((Label)gvGestionPacientes.Rows[e.RowIndex].FindControl("lbl_eit_Dni")).Text.Trim();
-            pacModificado.Nombre = ((TextBox)gvGestionPacientes.Rows[e.RowIndex].FindControl("txt_eit_Nombre")).Text.Trim();
-            pacModificado.Apellido = ((TextBox)gvGestionPacientes.Rows[e.RowIndex].FindControl("txt_eit_Apellido")).Text.Trim();
-            DropDownList ddlS = (DropDownList)gvGestionPacientes.Rows[e.RowIndex].FindControl("ddlGridSexo");
-            if (ddlS != null) pacModificado.Sexo = Convert.ToChar(ddlS.SelectedValue);
-
-            pacModificado.Nacionalidad = ((TextBox)gvGestionPacientes.Rows[e.RowIndex].FindControl("txt_eit_Nacionalidad")).Text.Trim();
-            pacModificado.FechaNacimiento = Convert.ToDateTime(((TextBox)gvGestionPacientes.Rows[e.RowIndex].FindControl("txt_eit_FechaNac")).Text.Trim());
-            pacModificado.Direccion = ((TextBox)gvGestionPacientes.Rows[e.RowIndex].FindControl("txt_eit_Direccion")).Text.Trim();
-
-            DropDownList ddlL = (DropDownList)gvGestionPacientes.Rows[e.RowIndex].FindControl("ddlGridLocalidad");
-            if (ddlL != null && !string.IsNullOrEmpty(ddlL.SelectedValue))
-            {
-                pacModificado.IdLocalidad = Convert.ToInt32(ddlL.SelectedValue);
-            }
-            else
-            {
-                lblMensaje.ForeColor = System.Drawing.Color.Red;
-                lblMensaje.Text = "Error: Debe seleccionar una provincia y localidad válidas.";
-                return;
-            }
-
-            pacModificado.CorreoElectronico = ((TextBox)gvGestionPacientes.Rows[e.RowIndex].FindControl("txt_eit_Email")).Text.Trim();
-            pacModificado.Telefono = ((TextBox)gvGestionPacientes.Rows[e.RowIndex].FindControl("txt_eit_Telefono")).Text.Trim();
-
-            NegocioPacientes negocio = new NegocioPacientes();
-            bool exito = negocio.modificarPaciente(pacModificado);
-
-            if (exito)
-            {
-                lblMensajeGrid.ForeColor = System.Drawing.Color.Green;
-                lblMensajeGrid.Text = "Se modificó correctamente en la base de datos.";
-                gvGestionPacientes.EditIndex = -1; 
-                CargarGrillaPacientes();
-            }
-            else
-            {
-                lblMensajeGrid.ForeColor = System.Drawing.Color.Red;
-                lblMensajeGrid.Text = "Hubo un error al intentar modificar el paciente.";
-            }
-        }
-        protected void gvGestionPacientes_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-        {
-            gvGestionPacientes.EditIndex = -1;
-            CargarGrillaPacientes();
+            fullscreenOverlay.Style["display"] = "block";
+            int idPaciente = Convert.ToInt32(((Button)sender).CommandArgument);
+            CargarPacienteEnFormulario(idPaciente);
+            divFormulario.Visible = true;
         }
 
         protected void gvGestionPacientes_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             hdnIdEliminar.Value = gvGestionPacientes.DataKeys[e.RowIndex].Value.ToString();
+            fullscreenOverlay.Style["display"] = "block";
             divEliminar.Visible = true;
         }
 
@@ -252,93 +129,45 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             if (exito)
             {
-                lblMensajeGrid.ForeColor = System.Drawing.Color.Green;
-                lblMensajeGrid.Text = "Se eliminó correctamente de la base de datos.";
+                lblMensaje.ForeColor = System.Drawing.Color.Green;
+                lblMensaje.Text = "Se eliminó correctamente de la base de datos.";
             }
             else
             {
-                lblMensajeGrid.ForeColor = System.Drawing.Color.Red;
-                lblMensajeGrid.Text = "Hubo un error al eliminar el registro.";
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
+                lblMensaje.Text = "Hubo un error al eliminar el registro.";
             }
 
             divEliminar.Visible = false;
-            gvGestionPacientes.EditIndex = -1;
+            fullscreenOverlay.Style["display"] = "none";
             CargarGrillaPacientes();
         }
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             divEliminar.Visible = false;
-        }
-        protected void ddlGridProvincia_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            DropDownList ddlProv = (DropDownList)sender;
-            GridViewRow fila = (GridViewRow)ddlProv.NamingContainer;
-            DropDownList ddlLoc = (DropDownList)fila.FindControl("ddlGridLocalidad");
-
-            if (ddlLoc != null && !string.IsNullOrEmpty(ddlProv.SelectedValue))
-            {
-                NegocioLocalidades negLoc = new NegocioLocalidades();
-                DataTable dt = negLoc.getTabla();
-
-                DataView dv = dt.DefaultView;
-                dv.RowFilter = "Id_Provincia = " + ddlProv.SelectedValue;
-
-                ddlLoc.DataSource = dv;
-                ddlLoc.DataTextField = "NombreLocalidad";
-                ddlLoc.DataValueField = "Id_Localidad";
-                ddlLoc.DataBind();
-            }
-
-            var custom = e as LocalidadesEventArgs;
-
-            if (custom != null && custom.LabelLocalidad != null && ddlLoc != null)
-            {
-                var text = custom.LabelLocalidad.Text?.Trim();
-                if (!string.IsNullOrEmpty(text))
-                {
-                    var li = ddlLoc.Items.FindByText(text) ?? ddlLoc.Items.FindByValue(text);
-                    if (li != null)
-                    {
-                        ddlLoc.SelectedValue = li.Value;
-                    }
-                }
-            }
+            fullscreenOverlay.Style["display"] = "none";
         }
         protected void ddlProvincia_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(ddlProvincia.SelectedValue))
-            {
-                ddlLocalidad.Items.Clear();
-                return;
-            }
-            NegocioLocalidades negocioLocalidades = new NegocioLocalidades();
-            DataTable dt = negocioLocalidades.getTabla();
-
-            DataView dv = dt.DefaultView;
-            dv.RowFilter = "Id_Provincia = " + ddlProvincia.SelectedValue;
-
-            ddlLocalidad.DataSource = dv;
-            ddlLocalidad.DataTextField = "NombreLocalidad";
-            ddlLocalidad.DataValueField = "Id_Localidad";
-            ddlLocalidad.DataBind();
-
-
+            CargarLocalidadesFormulario(ddlProvincia.SelectedValue);
         }
+
         protected void btnCargar_Click(object sender, EventArgs e)
         {
+            if (!Page.IsValid) return;
+
             if (string.IsNullOrWhiteSpace(txtDni.Text) ||
                 string.IsNullOrWhiteSpace(txtNombre.Text) ||
-                string.IsNullOrWhiteSpace(txtApellido.Text) || 
-                string.IsNullOrWhiteSpace(txtNacionalidad.Text) || 
-                string.IsNullOrWhiteSpace(txtFechaNac.Text) || 
+                string.IsNullOrWhiteSpace(txtApellido.Text) ||
+                string.IsNullOrWhiteSpace(txtNacionalidad.Text) ||
+                string.IsNullOrWhiteSpace(txtFechaNac.Text) ||
                 string.IsNullOrWhiteSpace(txtTelefono.Text) ||
-                string.IsNullOrWhiteSpace(txtDireccion.Text) || 
-                ddlProvincia.SelectedIndex == 0 ||
+                string.IsNullOrWhiteSpace(txtDireccion.Text) ||
+                string.IsNullOrEmpty(ddlProvincia.SelectedValue) ||
                 string.IsNullOrEmpty(ddlLocalidad.SelectedValue))
             {
-                lblMensaje.ForeColor = System.Drawing.Color.Red;
-                lblMensaje.Text = "Error: Todos los campos son obligatorios";
+                MostrarMensaje("Error: Todos los campos son obligatorios.", false);
                 return;
             }
 
@@ -347,32 +176,109 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             nuevoPaciente.Dni = txtDni.Text.Trim();
             nuevoPaciente.Nombre = txtNombre.Text.Trim();
             nuevoPaciente.Apellido = txtApellido.Text.Trim();
-            nuevoPaciente.Sexo = Convert.ToChar(ddlSexo.SelectedValue); 
+            nuevoPaciente.Sexo = Convert.ToChar(ddlSexo.SelectedValue);
             nuevoPaciente.Nacionalidad = txtNacionalidad.Text.Trim();
-            nuevoPaciente.FechaNacimiento = Convert.ToDateTime(txtFechaNac.Text); 
-            nuevoPaciente.Telefono = txtTelefono.Text.Trim(); 
-            nuevoPaciente.Direccion = txtDireccion.Text.Trim(); 
-            nuevoPaciente.IdLocalidad = Convert.ToInt32(ddlLocalidad.SelectedValue); 
+            nuevoPaciente.FechaNacimiento = Convert.ToDateTime(txtFechaNac.Text);
+            nuevoPaciente.Telefono = txtTelefono.Text.Trim();
+            nuevoPaciente.Direccion = txtDireccion.Text.Trim();
+            nuevoPaciente.IdLocalidad = Convert.ToInt32(ddlLocalidad.SelectedValue);
             nuevoPaciente.CorreoElectronico = txtEmail.Text.Trim();
 
             NegocioPacientes negocio = new NegocioPacientes();
-            bool exito = negocio.guardarPaciente(nuevoPaciente);
+            bool exito;
 
-            if (exito)
+            if (string.IsNullOrEmpty(hdnIdPaciente.Value))
             {
-                lblMensaje.ForeColor = System.Drawing.Color.Green;
-                lblMensaje.Text = "Se agregó correctamente en la base de datos."; 
-                CargarGrillaPacientes();
-                LimpiarFormulario();
+                exito = negocio.guardarPaciente(nuevoPaciente);
+                if (exito) MostrarMensaje("Se agregó correctamente en la base de datos.", true);
+                else MostrarMensaje("Error al guardar. Verifique DNI duplicado.", false);
             }
             else
             {
-                lblMensaje.ForeColor = System.Drawing.Color.Red;
-                lblMensaje.Text = "Hubo un error al guardar el registro. Verifique si el DNI ya existe.";
+                nuevoPaciente._IdPaciente = Convert.ToInt32(hdnIdPaciente.Value);
+                exito = negocio.modificarPaciente(nuevoPaciente);
+                if (exito) MostrarMensaje("Se modificó correctamente en la base de datos.", true);
+                else MostrarMensaje("Hubo un error al modificar el paciente.", false);
+            }
+
+            if (exito)
+            {
+                CargarGrillaPacientes();
+                LimpiarFormulario();
             }
         }
+
+        private void MostrarMensaje(string texto, bool ok)
+        {
+            lblMensaje.Text = texto;
+            lblMensaje.ForeColor = ok ? System.Drawing.Color.Green : System.Drawing.Color.Red;
+        }
+
+        protected void btnCancelarEdicion_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
+            lblMensaje.Text = "";
+            fullscreenOverlay.Style["display"] = "none";
+            divFormulario.Visible = false;
+        }
+
+        protected void btnMostrarForm_Click(object sender, EventArgs e)
+        {
+            LimpiarFormulario();
+            fullscreenOverlay.Style["display"] = "block";
+            divFormulario.Visible = true;
+        }
+        private void CargarPacienteEnFormulario(int idPaciente)
+        {
+            NegocioPacientes negocio = new NegocioPacientes();
+            DataTable dt = negocio.getPacientePorId(idPaciente);
+            if (dt == null || dt.Rows.Count == 0) return;
+
+            DataRow r = dt.Rows[0];
+
+            hdnIdPaciente.Value = r["Id_Paciente"].ToString();
+
+            txtDni.Text = r["DNI"].ToString();
+            txtNombre.Text = r["Nombre"].ToString();
+            txtApellido.Text = r["Apellido"].ToString();
+            txtNacionalidad.Text = r["Nacionalidad"].ToString();
+            txtFechaNac.Text = Convert.ToDateTime(r["FechaNacimiento"]).ToString("yyyy-MM-dd");
+            txtDireccion.Text = r["Direccion"].ToString();
+            txtEmail.Text = r["CorreoElectronico"].ToString();
+            txtTelefono.Text = r["Telefono"].ToString();
+
+            string sexo = r["Sexo"].ToString().Trim();
+            if (ddlSexo.Items.FindByValue(sexo) != null) ddlSexo.SelectedValue = sexo;
+
+            ddlProvincia.SelectedValue = r["Id_Provincia"].ToString();
+            CargarLocalidadesFormulario(r["Id_Provincia"].ToString());
+            if (ddlLocalidad.Items.FindByValue(r["Id_Localidad"].ToString()) != null)
+                ddlLocalidad.SelectedValue = r["Id_Localidad"].ToString();
+
+            txtDni.Enabled = false;
+            btnCargar.Text = "Actualizar Paciente";
+            hCargarPaciente.InnerText = "Editar Paciente";
+        }
+
+        private void CargarLocalidadesFormulario(string idProvincia)
+        {
+            ddlLocalidad.Items.Clear();
+            if (string.IsNullOrEmpty(idProvincia)) return;
+
+            NegocioLocalidades negocioLocalidades = new NegocioLocalidades();
+            DataTable dt = negocioLocalidades.getTabla();
+            DataView dv = dt.DefaultView;
+            dv.RowFilter = "Id_Provincia = " + idProvincia;
+
+            ddlLocalidad.DataSource = dv;
+            ddlLocalidad.DataTextField = "NombreLocalidad";
+            ddlLocalidad.DataValueField = "Id_Localidad";
+            ddlLocalidad.DataBind();
+        }
+
         private void LimpiarFormulario()
         {
+            hdnIdPaciente.Value = "";
             txtDni.Text = string.Empty; 
             txtNombre.Text = string.Empty;
             txtApellido.Text = string.Empty; 
@@ -383,7 +289,10 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             txtEmail.Text = string.Empty;
             ddlSexo.SelectedIndex = 0;
             ddlProvincia.SelectedIndex = 0; 
-            ddlLocalidad.Items.Clear(); 
+            ddlLocalidad.Items.Clear();
+            txtDni.Enabled = true;
+            btnCargar.Text = "Cargar Paciente";
+            hCargarPaciente.InnerText = "Agregar Nuevo Paciente";
         }
     }
 }

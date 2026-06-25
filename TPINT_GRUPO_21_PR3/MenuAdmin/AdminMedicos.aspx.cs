@@ -230,6 +230,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         {
             LimpiarFormulario();
             lblMensaje.Text = "";
+            fullscreenOverlay.Style["display"] = "none";
             divFormulario.Visible = false;
         }
 
@@ -266,11 +267,13 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected void gvGestionMedicos_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             hdnIdMedico.Value = gvGestionMedicos.DataKeys[e.RowIndex].Value.ToString();
+            fullscreenOverlay.Style["display"] = "block";
             divEliminar.Visible = true;
         }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
+
             divEliminar.Visible = false;
             int id = Convert.ToInt32(hdnIdMedico.Value);
             Medico med = new Medico();
@@ -288,6 +291,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 lblMensaje.ForeColor = System.Drawing.Color.Red;
                 lblMensaje.Text = "Hubo un error al eliminar el registro.";
             }
+            fullscreenOverlay.Style["display"] = "none";
             gvGestionMedicos.EditIndex = -1;
             CargarGrillaMedicos();
         }
@@ -295,11 +299,12 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
             divEliminar.Visible = false;
+            fullscreenOverlay.Style["display"] = "none";
         }
 
         protected void btnEditar_Click(object sender, EventArgs e)
         {
-
+            fullscreenOverlay.Style["display"] = "block";
             int idMedico = Convert.ToInt32(((Button)sender).CommandArgument);
             CargarMedicoEnFormulario(idMedico);
             divFormulario.Visible = true;
@@ -307,8 +312,9 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         }
 
         protected void btnMostrarForm_Click(object sender, EventArgs e)
-        {
+        { 
             LimpiarFormulario();
+            fullscreenOverlay.Style["display"] = "block";
             divFormulario.Visible = true;
         }
 

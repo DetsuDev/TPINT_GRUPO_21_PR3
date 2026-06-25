@@ -19,6 +19,19 @@
 
             transform: translateY(3px);
         }
+        #fullscreenOverlay {
+              display: none;
+              position: fixed;       
+              top: 0;
+              left: 0;
+              width: 100%;           
+              height: 100vh;         
+              background-color: rgba(0, 0, 0, 0.7); 
+              z-index: 1000;         
+              justify-content: center;
+              align-items: center;
+            }
+
     </style>
 </head>
 
@@ -45,6 +58,7 @@
 
         <div class="border border-top-0 p-5" style="background-color: white;">
             <form id="form1" runat="server">
+                    <div id="fullscreenOverlay" runat="server"></div>
                 <asp:HiddenField ID="hdnIdMedico" runat="server" />
                 <asp:HiddenField ID="hdnIdPersona" runat="server" />
 
@@ -223,7 +237,13 @@
         </div>
     </div>
 
-        <script src="../js/bootstrap.bundle.min.js"></script>
+        <script src="../js/bootstrap.bundle.min.js">
+        </script>
+    <script>
+
+
+        </script>
+
 
 </body>
 </html>

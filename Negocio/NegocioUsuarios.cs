@@ -29,6 +29,13 @@ namespace Negocio
             }
             return false;
         }
-
+        public DataTable verificarCredenciales(string username, string password)
+        {
+            if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
+            {
+                return null;
+            }
+            return dao.buscarUsuarioConRol(username, password);
+        }
     }
 }

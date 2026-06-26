@@ -35,12 +35,7 @@
                 ErrorMessage="Ingrese la contraseña"
                 class="alert alert-danger" Style="margin-top: 10px;" Display="Dynamic" ></asp:RequiredFieldValidator>
 
-
-            <asp:Button ID="btnTestLoginAdmin" runat="server" Text="Ingresar como Administrador" CssClass="btn btn-primary" Style="margin-top: 10px;" OnClick="btnTestLoginAdmin_Click" />
-
-            <asp:Button ID="btnTestLoginMedico" runat="server" Text="Ingresar como Medico" CssClass="btn btn-primary" Style="margin-top: 10px;" OnClick="btnTestLoginMedico_Click" />
-
-            <asp:Button ID="btnLoguearse" runat="server" Text="Ingresar" CssClass="btn btn-primary" Style="margin-top: 10px;" OnClick="btnTestLogearse_Click" />
+            <asp:Button ID="btnLoguearse" runat="server" Text="Ingresar" CssClass="btn btn-primary" Style="margin-top: 10px;" OnClick="btnLogearse_Click" />
 
             <asp:Label ID="lblMensaje" runat="server" CssClass="error" ></asp:Label>
         </div>

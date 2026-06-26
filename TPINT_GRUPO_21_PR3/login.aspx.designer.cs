@@ -60,24 +60,6 @@ namespace TPINT_GRUPO_21_PR3
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvContrasena;
 
         /// <summary>
-        /// Control btnTestLoginAdmin.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTestLoginAdmin;
-
-        /// <summary>
-        /// Control btnTestLoginMedico.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnTestLoginMedico;
-
-        /// <summary>
         /// Control btnLoguearse.
         /// </summary>
         /// <remarks>

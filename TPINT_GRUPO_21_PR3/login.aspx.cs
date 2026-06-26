@@ -18,50 +18,54 @@ namespace TPINT_GRUPO_21_PR3
         {
             ValidationSettings.UnobtrusiveValidationMode = UnobtrusiveValidationMode.None;
 
-            Session["UsuarioLogeado"] = "";
-        }
-
-        protected void btnTestLoginMedico_Click(object sender, EventArgs e)
-        {
-            
-            if (Page.IsValid)
+            if (!IsPostBack)
             {
-                Response.Redirect("~/MenuMedico/MedicoTurnos.aspx");
+                Session["UsuarioLogeado"] = null;
             }
         }
 
-        protected void btnTestLoginAdmin_Click(object sender, EventArgs e)
+        protected void btnLogearse_Click(object sender, EventArgs e)
         {
-            if (Page.IsValid)
-            {
-                Response.Redirect("~/MenuAdmin/AdminInformes.aspx");
-            }
-        }
-
-        protected void btnTestLogearse_Click(object sender, EventArgs e)
-        {
-
-
-
-        string usuario = txtUsuario.Text;
-            string contrasenia = txtContrasena.Text;
+            lblMensaje.Text = ""; 
 
             if (Page.IsValid)
             {
-                NegocioUsuarios usuarios = new NegocioUsuarios();
-                if (usuarios.buscarUsuario(usuario, contrasenia))
+                string usuario = txtUsuario.Text.Trim();
+                string contrasenia = txtContrasena.Text.Trim();
+
+                NegocioUsuarios negocioUsuarios = new NegocioUsuarios();
+                DataTable dtUsuario = negocioUsuarios.verificarCredenciales(usuario, contrasenia);
+
+                if (dtUsuario != null && dtUsuario.Rows.Count > 0)
                 {
+                    DataRow row = dtUsuario.Rows[0];
 
-                    Session["UsuarioLogeado"] = usuario;
-                    Response.Redirect("~/MenuAdmin/AdminInformes.aspx");
+                    bool estadoActivo = Convert.ToBoolean(row["Estado"]);
+                    if (!estadoActivo)
+                    {
+                        lblMensaje.Text = "Usuario inactivo. Baja logica";
+                        return;
+                    }
 
+                    string nombreCompleto = $"{row["Nombre"]} {row["Apellido"]}";
+                    Session["UsuarioLogeado"] = nombreCompleto;
+
+                    string rol = row["Rol"].ToString();
+
+                    if (rol == "Admin")
+                    {
+                        Response.Redirect("~/MenuAdmin/AdminInformes.aspx");
+                    }
+                    else if (rol == "Medico")
+                    {
+                        Response.Redirect("~/MenuMedico/MedicoTurnos.aspx");
+                    }
                 }
                 else
                 {
-                    lblMensaje.Visible = true;
+                    lblMensaje.Text = "Usuario o contraseña incorrectos.";
                 }
             }
-
         }
     }
 }

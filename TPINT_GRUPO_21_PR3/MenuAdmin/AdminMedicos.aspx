@@ -57,11 +57,13 @@
 
 
         <div class="border border-top-0 p-5" style="background-color: white;">
+
             <form id="form1" runat="server">
                     <div id="fullscreenOverlay" runat="server"></div>
                 <asp:HiddenField ID="hdnIdMedico" runat="server" />
                 <asp:HiddenField ID="hdnIdPersona" runat="server" />
-
+                
+                    <asp:Label ID="lblMensaje" runat="server" Font-Bold="true" CssClass="me-3"></asp:Label>
                     <div class="card" runat="server"
                         id="divEliminar"
                         style="z-index: 9999; width: 320px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; padding: 10px;">
@@ -115,8 +117,8 @@
                                             <asp:Label ID="pass" runat="server" Text="********"></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" >
-<ControlStyle CssClass="btn btn-sm btn-outline-danger"></ControlStyle>
+                                    <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger">
+                                        <ControlStyle CssClass="btn btn-sm btn-outline-danger"></ControlStyle>
                                     </asp:CommandField>
                                 </Columns>
                                 <PagerStyle CssClass="pagination justify-content-center pt-3" />
@@ -124,10 +126,10 @@
                         </div>
                     </div>
                 </div>
-                <asp:Button ID="btnMostrarForm" runat="server" Text="Nuevo Medico" OnClick="btnMostrarForm_Click" class="btn btn-primary"/>
+                <asp:Button ID="btnMostrarForm" runat="server" Text="Nuevo Medico" OnClick="btnMostrarForm_Click" class="btn btn-primary" />
                 <div class="card" runat="server"
                     id="divFormulario"
-                    style="z-index: 9999;  position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 80%">
+                    style="z-index: 9999; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 80%">
                     <div class="card-body">
 
                         <div class="card border-primary shadow-sm">
@@ -139,100 +141,117 @@
                                     <div class="col-md-3">
                                         <label class="form-label font-weight-bold">Legajo Médico</label>
                                         <asp:RequiredFieldValidator ID="rfvLegajoMedico" runat="server" ErrorMessage="*" ControlToValidate="txtLegajo" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revLegajoMedico" runat="server" ErrorMessage="* Ingrese un valor valido" ValidationExpression="^[A-Z]{3}-\d{3}$" ControlToValidate="txtDni" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtLegajo" runat="server" CssClass="form-control" placeholder="Ej: MED-999"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">
                                         <label class="form-label">DNI</label>
                                         <asp:RequiredFieldValidator ID="rfvDNI" runat="server" ErrorMessage="*" ControlToValidate="txtDni" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="revDNI" runat="server" ErrorMessage="* Solo números" ValidationExpression="^\d{7,9}$" ControlToValidate="txtDni" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="revDNI" runat="server" ErrorMessage="* Ingrese 8 digitos numericos" ValidationExpression="^\d{8}$" ControlToValidate="txtDni" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtDni" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">
                                         <label class="form-label">Nombre</label>
+
+                                        <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ErrorMessage="*" ControlToValidate="txtNombre" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revNombre" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNombre" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Apellido</label>
+
+                                        <asp:RequiredFieldValidator ID="rfvApellido" runat="server" ErrorMessage="*" ControlToValidate="txtApellido" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revApellido" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtApellido" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
+                                        <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Especialidad</label>
+                                        <asp:DropDownList ID="ddlEspecialidad" runat="server" CssClass="form-select"></asp:DropDownList>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-label">Horario de Disponibilidad</label>
+                                        <asp:DropDownList ID="ddlHorario" runat="server" CssClass="form-select"></asp:DropDownList>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Dias disponibles</label>
+                                        <asp:CheckBoxList ID="cblDiasDisponibles" runat="server" RepeatDirection="Horizontal" CssClass="custom-checkboxlist">
+                                            <asp:ListItem Value="L">Lunes</asp:ListItem>
+                                            <asp:ListItem Value="M">Martes</asp:ListItem>
+                                            <asp:ListItem Value="X">Miercoles</asp:ListItem>
+                                            <asp:ListItem Value="J">Jueves</asp:ListItem>
+                                            <asp:ListItem Value="V">Viernes</asp:ListItem>
+                                        </asp:CheckBoxList>
+                                    </div>
+                                    <div class="col-md-1">
+                                        <label class="form-label">Sexo</label>
+                                        <asp:DropDownList ID="ddlSexo" runat="server" CssClass="form-select" Style="font-size: 14px;">
+                                            <asp:ListItem Value="M">Masculino</asp:ListItem>
+                                            <asp:ListItem Value="F">Femenino</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label class="form-label">Nacionalidad</label>
+
+                                        <asp:RequiredFieldValidator ID="rfvNacionalidad" runat="server" ErrorMessage="*" ControlToValidate="txtNacionalidad" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revNacionalidad" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNacionalidad" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
+
+                                        &nbsp;<asp:TextBox ID="txtNacionalidad" runat="server" CssClass="form-control" placeholder="Ej: Argentina"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Fecha de Nacimiento</label>
+                                        <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Telefono</label>
+                                        <asp:RequiredFieldValidator ID="rfvTelefono" runat="server" ErrorMessage="*" ControlToValidate="txtTelefono" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revTelefono" runat="server" ErrorMessage="* Ingrese 10 digitos numericos" ValidationExpression="^\d{10}$" ControlToValidate="txtTelefono" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
+                                        &nbsp;<asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label">Dirección</label>
+                                        <asp:RequiredFieldValidator ID="rfvDireccion" runat="server" ErrorMessage="*" ControlToValidate="txtDireccion" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
+                                        <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Provincia</label>
+                                        <asp:RequiredFieldValidator ID="rfvProvincia" runat="server" ErrorMessage="*" ControlToValidate="ddlProvincia" ForeColor="Red" ValidationGroup="GrupoMedico" InitialValue="-- Elija una provincia --"></asp:RequiredFieldValidator>
+                                        <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Localidad</label>
+                                        <asp:RequiredFieldValidator ID="rfvLocalidad" runat="server" ErrorMessage="*" ControlToValidate="ddlLocalidad" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
+                                        <asp:DropDownList ID="ddlLocalidad" runat="server" CssClass="form-select"></asp:DropDownList>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="*" ControlToValidate="txtEmail" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="* Correo no válido" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
+                                        &nbsp;<asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="medico@clinica.com"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">
+                                            Usuario de Login       
+                                            <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Contraseña</label>
+                                        <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">Confirmar contraseña</label>
+                                        <asp:CompareValidator ID="cvContrasenia" runat="server" ControlToValidate="txtConfirmarContrasenia" ControlToCompare="txtContrasenia" ErrorMessage="* No coinciden" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:CompareValidator>
+                                        <asp:TextBox ID="txtConfirmarContrasenia" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
+                                    </div>
+                                    <div class="col-12 text-end pt-3">
+                                        <asp:Button ID="btnCargar" runat="server" Text="Cargar Médico" CssClass="btn btn-primary px-4" OnClick="btnCargar_Click" ValidationGroup="GrupoMedico" />
+                                        <asp:Button ID="btnCancelarEdicion" runat="server" Text="Cancelar" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancelarEdicion_Click" CausesValidation="false" Visible="true" />
+                                    </div>
+                                </div>
                             </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Apellido</label>
-                                <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control"></asp:TextBox>
-                            </div>
-                            <div class="col-md-4">
-                                <label class="form-label">Especialidad</label>
-                                <asp:DropDownList ID="ddlEspecialidad" runat="server" CssClass="form-select"></asp:DropDownList>
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">Horario de Disponibilidad</label>
-                                <asp:DropDownList ID="ddlHorario" runat="server" CssClass="form-select"></asp:DropDownList>
-                            </div>
-                            <div class ="col-md-3">
-                                <label class="form-label">Dias disponibles</label>
-                                <asp:CheckBoxList ID="cblDiasDisponibles" runat="server" RepeatDirection="Horizontal" CssClass="custom-checkboxlist">
-                                    <asp:ListItem Value="L">Lunes</asp:ListItem>
-                                    <asp:ListItem Value="M">Martes</asp:ListItem>
-                                    <asp:ListItem Value="X">Miercoles</asp:ListItem>
-                                    <asp:ListItem Value="J">Jueves</asp:ListItem>
-                                    <asp:ListItem Value="V">Viernes</asp:ListItem>
-                                </asp:CheckBoxList>
-                            </div>
-                            <div class="col-md-1">
-                                <label class="form-label">Sexo</label>
-                                <asp:DropDownList ID="ddlSexo" runat="server" CssClass="form-select" style="font-size:14px;">
-                                    <asp:ListItem Value="M">Masculino</asp:ListItem>
-                                    <asp:ListItem Value="F">Femenino</asp:ListItem>
-                                </asp:DropDownList>
-                            </div>
-                            <div class="col-md-2">
-                                <label class="form-label">Nacionalidad</label>
-                                <asp:TextBox ID="txtNacionalidad" runat="server" CssClass="form-control" placeholder="Ej: Argentina"></asp:TextBox>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Fecha de Nacimiento</label>
-                                <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Teléfono</label>
-                                <asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"></asp:TextBox>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Dirección</label>
-                                <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control"></asp:TextBox>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Provincia</label>
-                                <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Localidad</label>
-                                <asp:DropDownList ID="ddlLocalidad" runat="server" CssClass="form-select"></asp:DropDownList>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Correo Electrónico</label>
-                                <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="medico@clinica.com"></asp:TextBox>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Usuario de Login</label>
-                                <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control"></asp:TextBox>
-                            </div>
-                            <div class="col-md-3">
-                                <label class="form-label">Contraseña</label>
-                                <asp:TextBox ID="txtContrasenia" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
-                            </div>
-                               <div class="col-md-3">
-                                <label class="form-label">Confirmar contraseña</label>
-                                <asp:CompareValidator ID="cvContrasenia" runat="server" ControlToValidate="txtConfirmarContrasenia" ControlToCompare="txtContrasenia" ErrorMessage="* No coinciden" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:CompareValidator>
-                                <asp:TextBox ID="txtConfirmarContrasenia" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
-                            </div>
-                            <div class="col-12 text-end pt-3">
-                                <asp:Label ID="lblMensaje" runat="server" Font-Bold="true" CssClass="me-3"></asp:Label>
-                                <asp:Button ID="btnCargar" runat="server" Text="Cargar Médico" CssClass="btn btn-primary px-4" OnClick="btnCargar_Click" ValidationGroup="GrupoMedico" />
-                                <asp:Button ID="btnCancelarEdicion" runat="server" Text="Cancelar" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancelarEdicion_Click" CausesValidation="false" Visible="true" />
-                            </div>
+
                         </div>
+
                     </div>
-                            
                 </div>
-                    
-                </div>
-                    </div>
             </form>
         </div>
     </div>

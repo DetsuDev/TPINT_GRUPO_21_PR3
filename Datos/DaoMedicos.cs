@@ -126,7 +126,11 @@ namespace Datos
 
         public int eliminarMedico(Medico m)
         {
-            string consulta = "UPDATE MEDICO SET Estado = 0 WHERE Id_Medico = '" + m.IdMedico + "'";
+            // Baja lógica del médico y de su usuario asociado
+            string consulta = $@"
+                UPDATE MEDICO SET Estado = 0 WHERE Id_Medico = {m.IdMedico};
+                UPDATE USUARIO SET Estado = 0
+                WHERE Id_Persona = (SELECT Id_Persona FROM MEDICO WHERE Id_Medico = {m.IdMedico});";
             try
             {
                 accesoDatos.ejecutarConsulta(consulta);

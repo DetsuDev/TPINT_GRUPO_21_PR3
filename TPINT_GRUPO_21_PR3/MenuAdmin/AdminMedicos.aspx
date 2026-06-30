@@ -209,7 +209,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Dirección</label>
-                                        <asp:RequiredFieldValidator ID="rfvDireccion" runat="server" ErrorMessage="*" ControlToValidate="txtDireccion" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="rfvDireccion" runat="server" ErrorMessage="*" ControlToValidate="txtDireccion" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
                                         <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">

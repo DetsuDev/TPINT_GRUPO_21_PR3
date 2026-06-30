@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Security.Policy;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -201,10 +203,13 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 else MostrarMensaje("Hubo un error al modificar el paciente.", false);
             }
 
+            fullscreenOverlay.Style["display"] = "none";
+            divFormulario.Visible = false;
             if (exito)
             {
                 CargarGrillaPacientes();
                 LimpiarFormulario();
+
             }
         }
 

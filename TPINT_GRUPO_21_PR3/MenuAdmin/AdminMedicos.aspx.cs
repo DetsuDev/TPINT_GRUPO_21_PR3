@@ -1,9 +1,10 @@
-using Negocio;
 using Entidades;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -191,6 +192,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 exito = negocio.guardarMedico(m);
                 if (exito) MostrarMensaje("Se agregó correctamente en la base de datos.", true);
                 else MostrarMensaje("Error al guardar. Verifique DNI, legajo o usuario duplicados.", false);
+
             }
             else
             {
@@ -199,12 +201,17 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 exito = negocio.modificarMedico(m);
                 if (exito) MostrarMensaje("Se modificó correctamente en la base de datos.", true);
                 else MostrarMensaje("Hubo un error al modificar el médico.", false);
+
             }
 
+            fullscreenOverlay.Style["display"] = "none";
+            divFormulario.Visible = false;
             if (exito)
             {
+
                 CargarGrillaMedicos();
                 LimpiarFormulario();
+
             }
         }
         private string ObtenerDiasSeleccionados()

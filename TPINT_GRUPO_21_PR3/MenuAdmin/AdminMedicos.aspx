@@ -141,7 +141,7 @@
                                     <div class="col-md-3">
                                         <label class="form-label font-weight-bold">Legajo Médico</label>
                                         <asp:RequiredFieldValidator ID="rfvLegajoMedico" runat="server" ErrorMessage="*" ControlToValidate="txtLegajo" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="revLegajoMedico" runat="server" ErrorMessage="* Ingrese un valor valido" ValidationExpression="^[A-Z]{3}-\d{3}$" ControlToValidate="txtDni" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="revLegajoMedico" runat="server" ErrorMessage="* Ingrese un valor valido" ValidationExpression="^[A-Z]{3}-\d{3}$" ControlToValidate="txtLegajo" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtLegajo" runat="server" CssClass="form-control" placeholder="Ej: MED-999"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">

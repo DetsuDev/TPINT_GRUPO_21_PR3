@@ -46,9 +46,14 @@ GO
 INSERT INTO USUARIO (Id_Persona, Usuario, Contrasenia, Estado) VALUES
 (1, 'jperez',      'hash123', 1),
 (2, 'mlopez',      'hash456', 1),
-(5, 'pramirez',    'hash789', 1),
 (6, 'lmartinez',   'hash321', 1);
 GO
+
+INSERT INTO USUARIO (Id_Persona, Usuario, Contrasenia, Rol, Estado) VALUES
+(5, 'pramirez',    'hash789', 'A', 1),
+GO
+
+
 
 -- ============================================================
 -- ESPECIALIDADES

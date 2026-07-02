@@ -26,10 +26,7 @@ namespace Datos
                     U.Estado,
                     P.Nombre, 
                     P.Apellido,
-                    CASE 
-                        WHEN M.Id_Persona IS NOT NULL THEN 'Medico'
-                        ELSE 'Admin'
-                    END AS Rol
+                    U.Rol
                 FROM dbo.USUARIO U
                 INNER JOIN dbo.PERSONA P ON U.Id_Persona = P.Id_Persona
                 LEFT JOIN dbo.MEDICO M ON P.Id_Persona = M.Id_Persona

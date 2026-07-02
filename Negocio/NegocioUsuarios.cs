@@ -37,5 +37,28 @@ namespace Negocio
             }
             return dao.buscarUsuarioConRol(username, password);
         }
+
+        public string getRolUsuario(string usuario, string password)
+        {
+            DataTable dt = getTabla(usuario, password);
+
+            DataRow row = dt.Rows[0];
+
+            string Rol = (string)row["Rol"];
+
+            if(Rol == "M") 
+            {
+                return "Medico";
+            }
+            else if ( Rol == "A")
+            {
+                return "Admin";
+            }
+            else
+            {
+                return null;
+            }
+        }
+
     }
 }

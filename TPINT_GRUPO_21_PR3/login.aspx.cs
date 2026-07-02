@@ -52,11 +52,11 @@ namespace TPINT_GRUPO_21_PR3
 
                     string rol = row["Rol"].ToString();
 
-                    if (rol == "Admin")
+                    if (rol == "A") /// Admin
                     {
                         Response.Redirect("~/MenuAdmin/AdminInformes.aspx");
                     }
-                    else if (rol == "Medico")
+                    else if (rol == "M") /// Medico
                     {
                         Response.Redirect("~/MenuMedico/MedicoTurnos.aspx");
                     }

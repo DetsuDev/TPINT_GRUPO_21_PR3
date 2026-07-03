@@ -17,6 +17,11 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (Session["UsuarioLogeado"] == null)
+            {
+                Response.Redirect("~/SesionInvalida.html");
+            }
             if (!IsPostBack)
             {
                 lblNombreUsuario.Text = Session["UsuarioLogeado"].ToString();

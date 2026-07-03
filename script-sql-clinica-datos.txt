@@ -50,7 +50,7 @@ INSERT INTO USUARIO (Id_Persona, Usuario, Contrasenia, Estado) VALUES
 GO
 
 INSERT INTO USUARIO (Id_Persona, Usuario, Contrasenia, Rol, Estado) VALUES
-(5, 'pramirez',    'hash789', 'A', 1),
+(5, 'pramirez',    'hash789', 'A', 1);
 GO
 
 

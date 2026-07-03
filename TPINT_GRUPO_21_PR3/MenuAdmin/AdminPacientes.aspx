@@ -37,9 +37,10 @@
 
   <div  class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
   <div class="card-body" >
-    <p class="card-text">Bienvenido: </p>
-      <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]"></asp:Label>
-    <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
+        <p class="card-text">Bienvenido: 
+          <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]"></asp:Label>
+          </p>
+        <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
   </div>
 </div>
     <div style="padding: 50px; margin: 50px;">
@@ -186,7 +187,7 @@
                                     <div class="col-md-3">
                                        <label class="form-label">Telefono</label>
     <asp:RequiredFieldValidator ID="rfvTelefono" runat="server" ErrorMessage="*" ControlToValidate="txtTelefono" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-    <asp:RegularExpressionValidator ID="revTelefono" runat="server" ErrorMessage="* Ingrese 10 digitos numericos" ValidationExpression="^\d{10}$" ControlToValidate="txtTelefono" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+    <asp:RegularExpressionValidator ID="revTelefono" runat="server" ErrorMessage="* Ingrese un teléfono válido (7 a 20 caracteres, puede incluir '+' y espacios)" ValidationExpression="^\+?[0-9\s()-]{7,20}$" ControlToValidate="txtTelefono" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
     &nbsp;<asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-6">

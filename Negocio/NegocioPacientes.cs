@@ -11,31 +11,30 @@ namespace Negocio
 {
     public class NegocioPacientes
     {
-        private DaoPacientes dao = new DaoPacientes();
-
+        private DaoPacientes daoPacientes = new DaoPacientes();
         public DataTable getTabla()
         {
-            return dao.getTablaPacientes();
+            return daoPacientes.getTablaPacientes();
         }
 
         public DataTable getPacientePorId(int idPaciente)
         {
-            return dao.getPacientePorId(idPaciente);
+            return daoPacientes.getPacientePorId(idPaciente);
         }
 
         public bool guardarPaciente(Paciente pac)
         {
-            int filasAfectadas = dao.agregarPaciente(pac);
+            int filasAfectadas = daoPacientes.agregarPaciente(pac);
             return filasAfectadas > 0;
         }
         public bool modificarPaciente(Paciente pac)
         {
-            int filasAfectadas = dao.actualizarPaciente(pac);
+            int filasAfectadas = daoPacientes.actualizarPaciente(pac);
             return filasAfectadas > 0;
         }
         public bool eliminarPaciente(int idPaciente)
         {
-            return dao.eliminarPaciente(idPaciente) > 0;
+            return daoPacientes.eliminarPaciente(idPaciente) > 0;
         }
     }
 }

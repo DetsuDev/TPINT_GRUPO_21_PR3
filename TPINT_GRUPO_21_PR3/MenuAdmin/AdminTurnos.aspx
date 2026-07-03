@@ -39,8 +39,7 @@
         <div class="border border-top-0 p-5" style="background-color: white;">
 
             <form id="form1" runat="server">
-
-                <asp:Label ID="lblMensaje" runat="server" Font-Bold="true"></asp:Label>
+                
                     <div class="card" runat="server"
                         id="divEliminar"
                         style="z-index: 9999; width: 320px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; padding: 10px;">
@@ -98,20 +97,37 @@
                                 AutoGenerateColumns="False"
                                 AllowPaging="True"
                                 PageSize="5"
-                                DataKeyNames="ID"
                                 CssClass="table table-striped table-hover table-bordered align-middle"
                                 OnPageIndexChanging="gvGestionTurnos_PageIndexChanging"
-                                OnRowDeleting="gvGestionTurnos_RowDeleting">
+                                OnRowCancelingEdit="gvGestionTurnos_RowCancelingEdit"
+                                OnRowDeleting="gvGestionTurnos_RowDeleting"
+                                OnRowEditing="gvGestionTurnos_RowEditing"
+                                OnRowUpdating="gvGestionTurnos_RowUpdating">
                                 <Columns>
+
+                                    <asp:CommandField ShowEditButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-warning" >
+<ControlStyle CssClass="btn btn-sm btn-outline-warning"></ControlStyle>
+                                    </asp:CommandField>
                                     <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true" />
                                     <asp:BoundField DataField="DNI" HeaderText="DNI" />
                                     <asp:BoundField DataField="Paciente" HeaderText="Paciente" />
-                                    <asp:BoundField DataField="Medico" HeaderText="Medico" />
-                                    <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
                                     <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
                                     <asp:BoundField DataField="Hora" HeaderText="Hora" />
                                     <asp:BoundField DataField="Observacion" HeaderText="Observacion" />
-                                    <asp:BoundField DataField="Estado" HeaderText="Estado" />
+                                    <asp:TemplateField HeaderText="Estado">
+
+                                        <EditItemTemplate>
+                                            <asp:RadioButtonList ID="rblPresentismo" runat="server">
+                                                <asp:ListItem Value="1">Presente</asp:ListItem>
+                                                <asp:ListItem Value="2">Ausente</asp:ListItem>
+                                                <asp:ListItem Value="3">Pendiente</asp:ListItem>
+                                            </asp:RadioButtonList>
+                                        </EditItemTemplate>
+                                        <ItemTemplate>
+                                            <asp:Label ID="lblEstadoTurno" runat="server" Text='<%# Bind("Estado") %>'></asp:Label>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
                                     <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" >
 <ControlStyle CssClass="btn btn-sm btn-outline-danger"></ControlStyle>
                                     </asp:CommandField>
@@ -129,28 +145,28 @@
     <div class="card-body p-4">
         <div class="row g-3">
             <div class="col-md-3">
-                <label class="form-label">Especialidad</label>
-                <asp:DropDownList ID="ddlEspecialidad" runat="server" CssClass="form-select" AutoPostBack="true" OnSelectedIndexChanged="ddlEspecialidad_SelectedIndexChanged"></asp:DropDownList>
+                <label class="form-label font-weight-bold">Legajo Médico</label>
+                <asp:TextBox ID="txtLegajoMedico" runat="server" CssClass="form-control" placeholder="Ej: MED-999"></asp:TextBox>
             </div>
             <div class="col-md-3">
-                <label class="form-label">Médico</label>
-                <asp:DropDownList ID="ddlMedico" runat="server" CssClass="form-select"></asp:DropDownList>
-            </div>
-            <div class="col-md-3">
-                <label class="form-label">Paciente</label>
-                <asp:DropDownList ID="ddlPaciente" runat="server" CssClass="form-select"></asp:DropDownList>
+                <label class="form-label">DNI Paciente</label>
+                <asp:TextBox ID="txtPaciente" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="col-md-3">
                 <label class="form-label">Fecha</label>
-                <asp:TextBox ID="txtFecha" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                <asp:TextBox ID="txtFecha" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
             <div class="col-md-3">
                 <label class="form-label">Hora</label>
-                <asp:DropDownList ID="ddlHora" runat="server" CssClass="form-select"></asp:DropDownList>
+                <asp:TextBox ID="txtHora" runat="server" CssClass="form-control"></asp:TextBox>
             </div>
-
+            <div class="col-md-4">
+                <label class="form-label">Observacion</label>
+                <asp:DropDownList ID="txtObservacion" runat="server" CssClass="form-select"></asp:DropDownList>
+            </div>
+            
             <div class="col-12 text-end pt-3">
-                <asp:Button ID="btnCargar" runat="server" Text="Cargar Turno" CssClass="btn btn-primary px-4" OnClick="btnCargar_Click" />
+                <asp:Button ID="btnCargar" runat="server" Text="Cargar Médico" CssClass="btn btn-primary px-4" />
             </div>
         </div>
     </div>

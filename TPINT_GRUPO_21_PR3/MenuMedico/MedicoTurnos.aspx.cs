@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -13,10 +14,16 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Usuario user = (Usuario)Session["UsuarioLogueado"];
+
+            if (user == null || user.Rol != "M")
+            {
+                Response.Redirect("~/SesionInvalida.html");
+            }
 
             if (!IsPostBack)
             {
-                lblNombreUsuario.Text = Session["UsuarioLogeado"].ToString();
+                lblNombreUsuario.Text = user.persona.Nombre + " " + user.persona.Apellido;
                 CargarGrillaTurnos();
             }
 

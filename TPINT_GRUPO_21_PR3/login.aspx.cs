@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Entidades;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -47,8 +48,13 @@ namespace TPINT_GRUPO_21_PR3
                         return;
                     }
 
-                    string nombreCompleto = $"{row["Nombre"]} {row["Apellido"]}";
-                    Session["UsuarioLogeado"] = nombreCompleto;
+                    Usuario user = new Usuario();
+
+                    user.persona.Nombre = (string)row["Nombre"];
+                    user.persona.Apellido = (string)row["Apellido"];
+                    user.Rol = (string)row["Rol"];
+
+                    Session["UsuarioLogueado"] = user;
 
                     string rol = row["Rol"].ToString();
 

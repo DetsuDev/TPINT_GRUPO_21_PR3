@@ -1,4 +1,5 @@
 ﻿using System;
+using Entidades;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -12,13 +13,16 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (Session["UsuarioLogeado"] == null)
+            Usuario user = (Usuario)Session["UsuarioLogueado"];
+
+            if (user == null || user.Rol != "A")
             {
                 Response.Redirect("~/SesionInvalida.html");
             }
 
 
-            lblNombreUsuario.Text = Session["UsuarioLogeado"].ToString();
+            lblNombreUsuario.Text = user.persona.Nombre + " " + user.persona.Apellido;
+
             if (!IsPostBack)
             {
                 CargarRankingMock();

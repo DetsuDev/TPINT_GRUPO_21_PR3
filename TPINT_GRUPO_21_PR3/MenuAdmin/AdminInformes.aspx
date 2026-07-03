@@ -12,8 +12,9 @@
     
     <div  class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
-        <p class="card-text">Bienvenido: </p>
+        <p class="card-text">Bienvenido: 
           <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]"></asp:Label>
+          </p>
         <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
       </div>
     </div>

@@ -13,6 +13,7 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
             if (!IsPostBack)
             {
                 lblNombreUsuario.Text = Session["UsuarioLogeado"].ToString();

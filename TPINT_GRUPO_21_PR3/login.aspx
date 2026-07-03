@@ -34,12 +34,6 @@
                 ControlToValidate="txtContrasena"
                 ErrorMessage="Ingrese la contraseña"
                 class="alert alert-danger" Style="margin-top: 10px;" Display="Dynamic" ></asp:RequiredFieldValidator>
-            <div>
-            <asp:Label ID="Label2" runat="server" Text="Usuario: pramirez" ForeColor="#CCCCCC"></asp:Label>
-            <br />
-            <asp:Label ID="Label3" runat="server" Text="Contraseña: hash789" ForeColor="#CCCCCC"></asp:Label>
-            </div>
-
             <asp:Button ID="btnLoguearse" runat="server" Text="Ingresar" CssClass="btn btn-primary" Style="margin-top: 10px;" OnClick="btnLogearse_Click" />
 
             <asp:Label ID="lblMensaje" runat="server" CssClass="error" ></asp:Label>

@@ -23,7 +23,7 @@
     <div style="padding: 50px; margin: 50px;">
         <ul class="nav nav-tabs" style="min-width: 1000px;">
             <li class="nav-item">
-                <a class="nav-link active" href="../GestionMedico/GestionTurnos.aspx">Gestionar Turnos</a>
+                <a class="nav-link active" href="MedicoTurnos.aspx">Gestionar Turnos</a>
             </li>
         </ul>
         <div class="border border-top-0 p-5" style="background-color: white;">

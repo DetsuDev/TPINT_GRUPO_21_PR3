@@ -1,11 +1,6 @@
-﻿using System;
-using Entidades;
-using System.Collections.Generic;
+using Negocio;
+using System;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace TPINT_GRUPO_21_PR3.MenuAdmin
 {
@@ -13,54 +8,67 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            Usuario user = (Usuario)Session["UsuarioLogueado"];
-
-            if (user == null || user.Rol != "A")
+            if (Session["UsuarioLogeado"] == null)
             {
-                Response.Redirect("~/SesionInvalida.html");
+                Response.Redirect("~/login.aspx");
+                return;
             }
 
-
-            lblNombreUsuario.Text = user.persona.Nombre + " " + user.persona.Apellido;
+            lblNombreUsuario.Text = Session["UsuarioLogeado"].ToString();
 
             if (!IsPostBack)
             {
-                CargarRankingMock();
+                CargarRanking();
+                CargarPresentismo();
             }
-
-            CargarPresentismo();
         }
 
-        private void CargarRankingMock()
+        private string FechaODefecto(string valor, string porDefecto)
         {
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Especialidad");
-            dt.Columns.Add("CantidadTurnos");
+            DateTime f;
+            if (DateTime.TryParse(valor, out f)) return f.ToString("yyyy-MM-dd");
+            return porDefecto;
+        }
 
-            dt.Rows.Add("Pediatria", "30");
-            dt.Rows.Add("Traumatologia", "22");
-            dt.Rows.Add("Odontologia", "19");
-            dt.Rows.Add("Cardiologia", "15");
-            dt.Rows.Add("Demartología", "14");
-            dt.Rows.Add("Clinica Médica", "9");
+        private void CargarRanking()
+        {
+            string desde = FechaODefecto(txtFechaInicio.Text, "1900-01-01");
+            string hasta = FechaODefecto(txtFechaFin.Text, "2999-12-31");
 
-            gvRankingEspecialidades.DataSource = dt;
-            gvRankingEspecialidades.DataBind(); 
+            NegocioTurnos neg = new NegocioTurnos();
+            gvRankingEspecialidades.DataSource = neg.getRanking(desde, hasta);
+            gvRankingEspecialidades.DataBind();
         }
 
         private void CargarPresentismo()
         {
+            string desde = FechaODefecto(TextBox1.Text, "1900-01-01");
+            string hasta = FechaODefecto(TextBox2.Text, "2999-12-31");
 
-                int success = 70;
-                int danger = 30;
+            NegocioTurnos neg = new NegocioTurnos();
+            DataTable dt = neg.getPresentismo(desde, hasta);
 
-                barraPresentes.Attributes["style"] = $"width: {success}%";
-                barraPresentes.InnerText = $"{success}%";
+            int presentes = dt.Rows[0]["Presentes"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["Presentes"]);
+            int ausentes = dt.Rows[0]["Ausentes"] == DBNull.Value ? 0 : Convert.ToInt32(dt.Rows[0]["Ausentes"]);
+            int total = presentes + ausentes;
 
-                barraAusentes.Attributes["style"] = $"width: {danger}%";
-                barraAusentes.InnerText = $"{danger}%";
-            
+            int porcPresentes = total == 0 ? 0 : (int)Math.Round(presentes * 100.0 / total);
+            int porcAusentes = total == 0 ? 0 : 100 - porcPresentes;
+
+            barraPresentes.Attributes["style"] = "width: " + porcPresentes + "%";
+            barraPresentes.InnerText = porcPresentes + "%";
+            barraAusentes.Attributes["style"] = "width: " + porcAusentes + "%";
+            barraAusentes.InnerText = porcAusentes + "%";
         }
 
+        protected void btnFiltrarRanking_Click(object sender, EventArgs e)
+        {
+            CargarRanking();
+        }
+
+        protected void btnPresentismo_Click(object sender, EventArgs e)
+        {
+            CargarPresentismo();
+        }
     }
 }

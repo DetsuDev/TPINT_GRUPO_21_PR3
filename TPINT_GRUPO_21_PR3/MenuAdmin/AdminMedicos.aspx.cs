@@ -345,6 +345,19 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             fullscreenOverlay.Style["display"] = "block";
             divFormulario.Visible = true;
         }
+        protected void cvDiasDisponibles_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            bool alMenosUno = false;
 
+            foreach (ListItem item in cblDiasDisponibles.Items)
+            {
+                if (item.Selected)
+                {
+                    alMenosUno = true;
+                    break;
+                }
+            }
+            args.IsValid = alMenosUno;
+        }
     }
 }

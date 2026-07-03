@@ -183,6 +183,13 @@
                                             <asp:ListItem Value="J">Jueves</asp:ListItem>
                                             <asp:ListItem Value="V">Viernes</asp:ListItem>
                                         </asp:CheckBoxList>
+                                        <asp:CustomValidator ID="cvDiasDisponibles" runat="server" 
+                                            ErrorMessage="* Debe seleccionar al menos un día" 
+                                            ForeColor="Red" 
+                                            Display="Dynamic" 
+                                            ValidationGroup="GrupoMedico"
+                                            OnServerValidate="cvDiasDisponibles_ServerValidate">
+                                        </asp:CustomValidator>
                                     </div>
                                     <div class="col-md-1">
                                         <label class="form-label">Sexo</label>
@@ -260,11 +267,5 @@
 
         <script src="../js/bootstrap.bundle.min.js">
         </script>
-    <script>
-
-
-        </script>
-
-
 </body>
 </html>

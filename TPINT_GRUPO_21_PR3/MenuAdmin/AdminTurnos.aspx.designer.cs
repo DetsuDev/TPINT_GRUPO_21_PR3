@@ -123,15 +123,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.GridView gvGestionTurnos;
 
         /// <summary>
-        /// Control txtLegajoMedico.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLegajoMedico;
-
-        /// <summary>
         /// Control txtPaciente.
         /// </summary>
         /// <remarks>
@@ -159,13 +150,31 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.TextBox txtHora;
 
         /// <summary>
-        /// Control txtObservacion.
+        /// Control ddlAltaEspecialidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList txtObservacion;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAltaEspecialidad;
+
+        /// <summary>
+        /// Control ddlAltaMedico.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAltaMedico;
+
+        /// <summary>
+        /// Control txtObservacionAlta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtObservacionAlta;
 
         /// <summary>
         /// Control btnCargar.

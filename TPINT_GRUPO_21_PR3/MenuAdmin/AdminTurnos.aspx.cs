@@ -26,13 +26,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 lblNombreUsuario.Text = user.persona.Nombre + " " + user.persona.Apellido;
                 divEliminar.Visible = false;
                 CargarGrillaTurnos();
+                CargarEspecialidadesAlta();
             }
 
         }
 
         private void CargarGrillaTurnos()
         {
-            DataTable dt = ObtenerTurnos();
+            Negocio.NegocioTurnos negocioTurnos = new Negocio.NegocioTurnos();
+            DataTable dt = negocioTurnos.getTabla();
 
             List<string> filtros = new List<string>();
             if (!string.IsNullOrWhiteSpace(txtBuscarDni.Text))
@@ -41,40 +43,121 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 filtros.Add("Paciente LIKE '%" + txtBuscarPaciente.Text.Trim().Replace("'", "''") + "%'");
             if (!string.IsNullOrWhiteSpace(txtBuscarFecha.Text))
                 filtros.Add("Fecha LIKE '%" + txtBuscarFecha.Text.Trim().Replace("'", "''") + "%'");
-            if (!string.IsNullOrWhiteSpace(ddlBuscarEstado.SelectedValue))
-                filtros.Add("Estado = '" + ddlBuscarEstado.SelectedValue.Replace("'", "''") + "'");
+            if (!string.IsNullOrEmpty(ddlBuscarEstado.SelectedValue))
+                filtros.Add("EstadoTurno = '" + ddlBuscarEstado.SelectedValue.Replace("'", "''") + "'");
 
             DataView dv = dt.DefaultView;
-            dv.RowFilter = string.Join(" AND ", filtros);
+            if (filtros.Count > 0)
+            {
+                dv.RowFilter = string.Join(" AND ", filtros);
+            }
 
             gvGestionTurnos.DataSource = dv;
             gvGestionTurnos.DataBind();
         }
-
-        private DataTable ObtenerTurnos()
+        private void CargarEspecialidadesAlta()
         {
-            DataTable dt = new DataTable();
+            Negocio.NegocioTurnos negocioTurnos = new Negocio.NegocioTurnos();
+            DataTable dt = negocioTurnos.obtenerEspecialidadesAlta();
 
-            dt.Columns.Add("ID");
-            dt.Columns.Add("DNI");
-            dt.Columns.Add("Paciente");
-            dt.Columns.Add("Fecha");
-            dt.Columns.Add("Hora");
-            dt.Columns.Add("Observacion");
-            dt.Columns.Add("Estado");
-
-            dt.Rows.Add("1", "12345465", "Juan Pérez", "15/06/2026", "09:00", "Control general", "Presente");
-            dt.Rows.Add("2", "12345465", "María Gómez", "15/06/2026", "09:30", "Dolor de cabeza", "Ausente");
-            dt.Rows.Add("3", "12345215", "Carlos López", "15/06/2026", "10:00", "Análisis clínicos", "Pendiente");
-            dt.Rows.Add("4", "12345435", "Ana Rodríguez", "15/06/2026", "10:30", "Control anual", "Presente");
-            dt.Rows.Add("5", "12345235", "Pedro Martínez", "15/06/2026", "11:00", "Vacunación", "Presente");
-            dt.Rows.Add("6", "12342355", "Laura Fernández", "15/06/2026", "11:30", "Consulta cardiológica", "Pendiente");
-            dt.Rows.Add("7", "12345345", "Diego Sánchez", "15/06/2026", "12:00", "Dolor lumbar", "Ausente");
-            dt.Rows.Add("8", "12345443", "Sofía Torres", "15/06/2026", "12:30", "Control pediátrico", "Ausente");
-
-            return dt;
+            ddlAltaEspecialidad.DataSource = dt;
+            ddlAltaEspecialidad.DataTextField = "Nombre";
+            ddlAltaEspecialidad.DataValueField = "Id_Especialidad";
+            ddlAltaEspecialidad.DataBind();
+            ddlAltaEspecialidad.Items.Insert(0, new ListItem("-- Seleccione Especialidad --", "0"));
         }
 
+        protected void ddlAltaEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ddlAltaMedico.Items.Clear();
+
+            int idEspecialidad = Convert.ToInt32(ddlAltaEspecialidad.SelectedValue);
+            if (idEspecialidad == 0 || string.IsNullOrWhiteSpace(txtFecha.Text) || string.IsNullOrWhiteSpace(txtHora.Text))
+            {
+                ddlAltaMedico.Items.Insert(0, new ListItem("Complete Fecha, Hora y Especialidad", "0"));
+                return;
+            }
+
+            try
+            {
+                DateTime fechaSeleccionada = Convert.ToDateTime(txtFecha.Text);
+                string letraDia = ObtenerLetraDiaSemana(fechaSeleccionada);
+                string horaTipeada = txtHora.Text.Trim();
+
+                Negocio.NegocioTurnos negocioTurnos = new Negocio.NegocioTurnos();
+                DataTable dtMedicos = negocioTurnos.obtenerMedicosDisponibles(idEspecialidad, letraDia, horaTipeada);
+
+                if (dtMedicos != null && dtMedicos.Rows.Count > 0)
+                {
+                    ddlAltaMedico.DataSource = dtMedicos;
+                    ddlAltaMedico.DataTextField = "NombreCompleto";
+                    ddlAltaMedico.DataValueField = "Id_Medico";
+                    ddlAltaMedico.DataBind();
+                    ddlAltaMedico.Items.Insert(0, new ListItem("-- Seleccione Médico --", "0"));
+                }
+                else
+                {
+                    ddlAltaMedico.Items.Insert(0, new ListItem("No hay médicos disponibles en ese horario", "0"));
+                }
+            }
+            catch (Exception)
+            {
+                ddlAltaMedico.Items.Insert(0, new ListItem("Error al calcular disponibilidad", "0"));
+            }
+        }
+
+        private string ObtenerLetraDiaSemana(DateTime fecha)
+        {
+            switch (fecha.DayOfWeek)
+            {
+                case DayOfWeek.Monday: return "L";
+                case DayOfWeek.Tuesday: return "M";
+                case DayOfWeek.Wednesday: return "X"; 
+                case DayOfWeek.Thursday: return "J";
+                case DayOfWeek.Friday: return "V";
+                default: return "Z"; 
+            }
+        }
+        protected void btnCargar_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtPaciente.Text) ||
+                string.IsNullOrWhiteSpace(txtFecha.Text) ||
+                string.IsNullOrWhiteSpace(txtHora.Text) ||
+                ddlAltaMedico.SelectedValue == "0" ||
+                string.IsNullOrEmpty(ddlAltaMedico.SelectedValue))
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Por favor, complete todos los campos y seleccione un médico disponible.');", true);
+                return;
+            }
+
+            int idMedico = Convert.ToInt32(ddlAltaMedico.SelectedValue);
+            string dniPaciente = txtPaciente.Text.Trim();
+            string fecha = txtFecha.Text;
+            string hora = txtHora.Text.Trim();
+            string observacion = txtObservacionAlta.Text.Trim();
+
+            Negocio.NegocioTurnos negocioTurnos = new Negocio.NegocioTurnos();
+
+            bool exito = negocioTurnos.guardarTurno(idMedico, dniPaciente, fecha, hora, observacion);
+
+            if (exito)
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('¡Turno agendado con éxito!');", true);
+
+                txtPaciente.Text = "";
+                txtFecha.Text = "";
+                txtHora.Text = "";
+                txtObservacionAlta.Text = "";
+                ddlAltaEspecialidad.SelectedIndex = 0;
+                ddlAltaMedico.Items.Clear();
+
+                CargarGrillaTurnos();
+            }
+            else
+            {
+                ScriptManager.RegisterStartupScript(this, this.GetType(), "alert", "alert('Error al agendar el turno. Verifique que el DNI del paciente corresponda a un usuario registrado.');", true);
+            }
+        }
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             gvGestionTurnos.PageIndex = 0;

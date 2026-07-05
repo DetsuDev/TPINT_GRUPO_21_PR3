@@ -106,9 +106,11 @@
                                 <Columns>
 
                                     <asp:CommandField ShowEditButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-warning" >
-<ControlStyle CssClass="btn btn-sm btn-outline-warning"></ControlStyle>
+                                    <ControlStyle CssClass="btn btn-sm btn-outline-warning"></ControlStyle>
                                     </asp:CommandField>
                                     <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true" />
+                                    <asp:BoundField DataField="Medico" HeaderText="Médico" ReadOnly="true" />
+                                    <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" ReadOnly="true" />
                                     <asp:BoundField DataField="DNI" HeaderText="DNI" />
                                     <asp:BoundField DataField="Paciente" HeaderText="Paciente" />
                                     <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
@@ -129,7 +131,7 @@
                                     </asp:TemplateField>
 
                                     <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" >
-<ControlStyle CssClass="btn btn-sm btn-outline-danger"></ControlStyle>
+                                    <ControlStyle CssClass="btn btn-sm btn-outline-danger"></ControlStyle>  
                                     </asp:CommandField>
                                 </Columns>
                                 <PagerStyle CssClass="pagination justify-content-center pt-3" />
@@ -145,28 +147,32 @@
     <div class="card-body p-4">
         <div class="row g-3">
             <div class="col-md-3">
-                <label class="form-label font-weight-bold">Legajo Médico</label>
-                <asp:TextBox ID="txtLegajoMedico" runat="server" CssClass="form-control" placeholder="Ej: MED-999"></asp:TextBox>
-            </div>
-            <div class="col-md-3">
-                <label class="form-label">DNI Paciente</label>
-                <asp:TextBox ID="txtPaciente" runat="server" CssClass="form-control"></asp:TextBox>
+                <label class="form-label font-weight-bold">DNI Paciente</label>
+                <asp:TextBox ID="txtPaciente" runat="server" CssClass="form-control" placeholder="Ej: 45123456"></asp:TextBox>
             </div>
             <div class="col-md-3">
                 <label class="form-label">Fecha</label>
-                <asp:TextBox ID="txtFecha" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtFecha" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
             </div>
             <div class="col-md-3">
                 <label class="form-label">Hora</label>
-                <asp:TextBox ID="txtHora" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:TextBox ID="txtHora" runat="server" CssClass="form-control" placeholder="Ej: 10:30"></asp:TextBox>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Especialidad</label>
+                <asp:DropDownList ID="ddlAltaEspecialidad" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlAltaEspecialidad_SelectedIndexChanged"></asp:DropDownList>
             </div>
             <div class="col-md-4">
-                <label class="form-label">Observacion</label>
-                <asp:DropDownList ID="txtObservacion" runat="server" CssClass="form-select"></asp:DropDownList>
+                <label class="form-label">Médico Asignado</label>
+                <asp:DropDownList ID="ddlAltaMedico" runat="server" CssClass="form-select"></asp:DropDownList>
+            </div>
+            <div class="col-md-8">
+                <label class="form-label">Observación</label>
+                <asp:TextBox ID="txtObservacionAlta" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="2"></asp:TextBox>
             </div>
             
             <div class="col-12 text-end pt-3">
-                <asp:Button ID="btnCargar" runat="server" Text="Cargar Médico" CssClass="btn btn-primary px-4" />
+                <asp:Button ID="btnCargar" runat="server" Text="Agendar Turno" CssClass="btn btn-primary px-4" OnClick="btnCargar_Click" />
             </div>
         </div>
     </div>

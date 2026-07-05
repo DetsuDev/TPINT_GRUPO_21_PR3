@@ -10,12 +10,15 @@
 </head>
 <body style="background-color: #f8f9fa;">
     
-    <div  class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
+    <div  class="card text-center col-1" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
-        <p class="card-text">Bienvenido: 
-          <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]"></asp:Label>
+        <p class="card-text" style="margin: -3px -6px 5px -6px;">Bienvenid@, <br> 
+          <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]" style="font-weight: bold;"></asp:Label>
           </p>
-        <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
+          <div class="text-center">
+            <img src="../assets/admin-placeholder.png" alt="Administrador-placeholder" style="width:100px; height:auto; margin-bottom:5px;"/>
+          </div>
+        <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesión </a>
       </div>
     </div>
 

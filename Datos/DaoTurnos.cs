@@ -17,7 +17,7 @@ namespace Datos
             SELECT 
                 T.Id_Turno AS ID,
                 (P_Med.Nombre + ' ' + P_Med.Apellido) AS Medico,
-                Esp.Nombre AS Especialidad, -- Corregido: se llama 'Nombre' en tu DB
+                Esp.Nombre AS Especialidad,
                 P_Pac.DNI AS DNI,
                 (P_Pac.Nombre + ' ' + P_Pac.Apellido) AS Paciente,
                 CONVERT(VARCHAR(10), T.Fecha, 103) AS Fecha,
@@ -91,6 +91,22 @@ namespace Datos
               AND '{horaTipeada}' < D.HoraFin";
 
             return ds.obtenerTabla(consultaMedicos);
+        }
+
+        public float calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
+        {
+            string consulta = $@"
+            SELECT 
+                (CAST(SUM(CASE WHEN EstadoTurno = 'Confirmado' THEN 1 ELSE 0 END) AS FLOAT) / 
+                NULLIF(COUNT(*), 0)) * 100 AS Presentismo
+            FROM TURNO
+            WHERE Fecha BETWEEN '{fechaInicio:yyyy-MM-dd}' AND '{fechaFin:yyyy-MM-dd}'";
+            DataTable dt = ds.obtenerTabla(consulta);
+            if (dt.Rows.Count > 0 && dt.Rows[0]["Presentismo"] != DBNull.Value)
+            {
+                return Convert.ToSingle(dt.Rows[0]["Presentismo"]);
+            }
+            return 0f;
         }
     }
 }

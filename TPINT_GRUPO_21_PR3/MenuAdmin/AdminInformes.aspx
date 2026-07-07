@@ -73,19 +73,19 @@
                                 <div class="row g-3 mb-4">
                                     <div class="col-6">
                                         <label class="form-label font-weight-bold">Fecha Inicio</label>
-                                        <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                        <asp:TextBox ID="txtFechaInicioPresentismo" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                     </div>
                                     <div class="col-6">
                                         <label class="form-label font-weight-bold">Fecha Fin</label>
-                                        <asp:TextBox ID="TextBox2" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                        <asp:TextBox ID="txtFechaFinPresentismo" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                     </div>
                                     <div class="col-12 text-end">
-                                        <asp:Button ID="Button1" runat="server" Text="Filtrar" CssClass="btn btn-primary btn-sm px-4" />
+                                        <asp:Button ID="btnInformeFechas" runat="server" Text="Generar" CssClass="btn btn-primary btn-sm px-4" OnClick="btnInformeFechas_Click" />
                                     </div>
                                 </div>
-                                <div class="progress">
-                                    <div class="progress-bar bg-success" id="barraPresentes" runat="server" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
-                                    <div class="progress-bar bg-danger" id="barraAusentes" runat="server" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+                                <div runat="server" id="barraPresentismoFechas" class="progress">
+                                    <div class="progress-bar bg-success" id="presentesFecha" runat="server" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
+                                    <div class="progress-bar bg-danger" id="ausentesFecha" runat="server" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
                                 </div>
                             </div>
                         </div>
@@ -117,9 +117,9 @@
                                          <asp:Button ID="Button2" runat="server" Text="Filtrar" CssClass="btn btn-primary btn-sm px-4" />
                                      </div>
                                  </div>
-                                 <div class="progress">
-                                     <div class="progress-bar bg-success" id="Div1" runat="server" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 70% </div>
-                                     <div class="progress-bar bg-danger" id="Div2" runat="server" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"> 30% </div>
+                                 <div runat="server" id="barraEspecialidadMedico" class="progress">
+                                     <div class="progress-bar bg-success" id="presentismoEspecialidadMedico" runat="server" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 70% </div>
+                                     <div class="progress-bar bg-danger" id="ausentismoEspecialidadMedico" runat="server" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"> 30% </div>
                                  </div>
                              </div>
                         </div>

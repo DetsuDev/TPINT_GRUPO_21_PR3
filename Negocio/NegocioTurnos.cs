@@ -30,5 +30,10 @@ namespace Negocio
             int filasAfectadas = daoTurnos.agregarTurno(idMedico, dniPaciente, fecha, hora, observacion);
             return filasAfectadas > 0;
         }
+
+        public float calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
+        {
+            return daoTurnos.calcularPresentismo(fechaInicio, fechaFin);
+        }
     }
 }

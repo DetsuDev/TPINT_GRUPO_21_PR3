@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Negocio;
+using System.Collections;
 
 namespace TPINT_GRUPO_21_PR3.MenuAdmin
 {
@@ -13,6 +15,12 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            presentesFecha.Visible = false;
+            ausentesFecha.Visible = false;
+            /*
+            barraPresentismoFechas.Visible = false;
+            barraEspecialidadMedico.Visible = false;*/
+
             Usuario user = (Usuario)Session["UsuarioLogueado"];
 
             if (user == null || user.Rol != "A")
@@ -28,7 +36,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 CargarRankingMock();
             }
 
-            CargarPresentismo();
         }
 
         private void CargarRankingMock()
@@ -48,19 +55,27 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             gvRankingEspecialidades.DataBind(); 
         }
 
-        private void CargarPresentismo()
+        protected void btnInformeFechas_Click(object sender, EventArgs e)
         {
+            DateTime fechaInicio = DateTime.Parse(txtFechaInicioPresentismo.Text);
+            DateTime fechaFin = DateTime.Parse(txtFechaFinPresentismo.Text);
 
-                int success = 70;
-                int danger = 30;
+            NegocioTurnos negTurnos = new NegocioTurnos();
 
-                barraPresentes.Attributes["style"] = $"width: {success}%";
-                barraPresentes.InnerText = $"{success}%";
+            float presentes = negTurnos.calcularPresentismo(fechaInicio, fechaFin);
+            float ausentes = 100 - presentes;
 
-                barraAusentes.Attributes["style"] = $"width: {danger}%";
-                barraAusentes.InnerText = $"{danger}%";
-            
+            presentesFecha.Attributes["style"] = $"width: {presentes}%";
+            presentesFecha.InnerText = $"{presentes}%";
+
+
+            ausentesFecha.Attributes["style"] = $"width: {ausentes}%";
+            ausentesFecha.InnerText = $"{ausentes}%";
+
+            presentesFecha.Visible = true;
+            ausentesFecha.Visible = true;
+
+
         }
-
     }
 }

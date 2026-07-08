@@ -130,6 +130,42 @@ namespace Datos
             }
             return 0f;
         }
+        public DataTable obtenerTurnoPorId(int idTurno)
+        {
+            string consulta = $@"
+            SELECT T.Id_Turno AS ID, T.Id_Medico, Med.Id_Especialidad,
+                   (P_Med.Nombre + ' ' + P_Med.Apellido) AS Medico,
+                   P_Pac.DNI AS DNI,
+                   CONVERT(VARCHAR(10), T.Fecha, 23) AS Fecha,
+                   CONVERT(VARCHAR(5), T.Hora) AS Hora,
+                   T.Observacion AS Observacion
+            FROM TURNO T
+            INNER JOIN PERSONA P_Pac ON T.Id_Persona = P_Pac.Id_Persona
+            INNER JOIN MEDICO Med ON T.Id_Medico = Med.Id_Medico
+            INNER JOIN PERSONA P_Med ON Med.Id_Persona = P_Med.Id_Persona
+            WHERE T.Id_Turno = {idTurno}";
+
+            return ds.obtenerTabla(consulta);
+        }
+
+        public bool actualizarTurno(int idTurno, string fecha, string hora, string observacion)
+        {
+            string consulta = $@"
+            UPDATE TURNO
+            SET Fecha = '{fecha}', Hora = '{hora}', Observacion = '{observacion.Trim().Replace("'", "''")}'
+            WHERE Id_Turno = {idTurno};";
+
+            try
+            {
+                ds.ejecutarConsulta(consulta);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public int eliminarTurno(int idTurno)
         {
             string consulta = $"UPDATE TURNO SET Estado = 0 WHERE Id_Turno = {idTurno};";

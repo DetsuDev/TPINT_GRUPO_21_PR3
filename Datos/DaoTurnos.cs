@@ -37,40 +37,61 @@ namespace Datos
 
             return ds.obtenerTabla(consulta);
         }
-        public int agregarTurno(int idMedico, string dniPaciente, string fecha, string hora, string observacion)
+        public bool existePaciente(string dni)
         {
-            string consultaCompleta = $@"
-            DECLARE @IdPersonaPaciente INT;
-        
-            SELECT @IdPersonaPaciente = Id_Persona 
-            FROM PERSONA 
-            WHERE DNI = '{dniPaciente.Trim()}';
+            string consulta = $"SELECT COUNT(*) FROM PERSONA WHERE DNI = '{dni.Trim()}'";
+            DataTable dt = ds.obtenerTabla(consulta);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return Convert.ToInt32(dt.Rows[0][0]) > 0;
+            }
+            return false;
+        }
 
-            IF @IdPersonaPaciente IS NOT NULL
-            BEGIN
-                INSERT INTO TURNO (Id_Medico, Id_Persona, Fecha, Hora, Observacion, EstadoTurno, Estado)
-                VALUES ({idMedico}, @IdPersonaPaciente, '{fecha}', '{hora}', '{observacion.Trim().Replace("'", "''")}', 'Pendiente', 1);
-                SELECT 1 AS Resultado;
-            END
-            ELSE
-            BEGIN
-                SELECT -1 AS Resultado; 
-            END";
+        public bool agregarTurno(int idMedico, string dniPaciente, string fecha, string hora, string observacion)
+        {
+            string consulta = $@"
+            INSERT INTO TURNO (Id_Medico, Id_Persona, Fecha, Hora, Observacion, EstadoTurno, Estado)
+            VALUES ({idMedico}, (SELECT Id_Persona FROM PERSONA WHERE DNI = '{dniPaciente.Trim()}'), '{fecha}', '{hora}', '{observacion.Trim().Replace("'", "''")}', 'Pendiente', 1);";
 
             try
             {
-                DataTable dt = ds.obtenerTabla(consultaCompleta);
-                if (dt != null && dt.Rows.Count > 0)
-                {
-                    return Convert.ToInt32(dt.Rows[0]["Resultado"]);
-                }
-                return -1;
+                ds.ejecutarConsulta(consulta);
+                return true;
             }
             catch (Exception)
             {
-                return -1;
+                return false;
             }
         }
+
+        public DataTable verificarTurnoPaciente(string dniPaciente, string fecha, string hora)
+        {
+            string consulta = $@"
+            SELECT T.Id_Turno 
+            FROM TURNO T
+            INNER JOIN PERSONA P ON T.Id_Persona = P.Id_Persona
+            WHERE P.DNI = '{dniPaciente.Trim()}' 
+              AND T.Fecha = '{fecha}' 
+              AND CAST(T.Hora AS TIME) = CAST('{hora}' AS TIME)
+              AND T.Estado = 1";
+
+            return ds.obtenerTabla(consulta);
+        }
+
+        public DataTable verificarTurnoMedico(int idMedico, string fecha, string hora)
+        {
+            string consulta = $@"
+            SELECT Id_Turno 
+            FROM TURNO 
+            WHERE Id_Medico = {idMedico} 
+              AND Fecha = '{fecha}' 
+              AND CAST(Hora AS TIME) = CAST('{hora}' AS TIME)
+              AND Estado = 1";
+
+            return ds.obtenerTabla(consulta);
+        }
+
         public DataTable obtenerEspecialidadesAlta()
         {
             string consulta = "SELECT Id_Especialidad, Nombre FROM ESPECIALIDADES";
@@ -101,12 +122,26 @@ namespace Datos
                 NULLIF(COUNT(*), 0)) * 100 AS Presentismo
             FROM TURNO
             WHERE Fecha BETWEEN '{fechaInicio:yyyy-MM-dd}' AND '{fechaFin:yyyy-MM-dd}'";
+
             DataTable dt = ds.obtenerTabla(consulta);
             if (dt.Rows.Count > 0 && dt.Rows[0]["Presentismo"] != DBNull.Value)
             {
                 return Convert.ToSingle(dt.Rows[0]["Presentismo"]);
             }
             return 0f;
+        }
+        public int eliminarTurno(int idTurno)
+        {
+            string consulta = $"UPDATE TURNO SET Estado = 0 WHERE Id_Turno = {idTurno};";
+            try
+            {
+                ds.ejecutarConsulta(consulta);
+                return 1; 
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
         }
     }
 }

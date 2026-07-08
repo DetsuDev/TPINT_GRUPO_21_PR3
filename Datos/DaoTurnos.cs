@@ -114,11 +114,11 @@ namespace Datos
             return ds.obtenerTabla(consultaMedicos);
         }
 
-        public DataTable calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
+        public DataTable getPresentismo(DateTime fechaInicio, DateTime fechaFin)
         {
             string consulta = $@"
             SELECT * FROM TURNO
-            WHERE Fecha BETWEEN '{fechaInicio:yyyy-MM-dd}' AND '{fechaFin:yyyy-MM-dd}'";
+            WHERE Fecha BETWEEN '{fechaInicio:yyyy-MM-dd}' AND '{fechaFin:yyyy-MM-dd}' AND Estado = 1";
 
             return ds.obtenerTabla(consulta);
         }

@@ -49,23 +49,43 @@ namespace Negocio
             bool guardadoCorrecto = daoTurnos.agregarTurno(idMedico, dniPaciente, fecha, hora, observacion);
             return guardadoCorrecto ? 1 : -4;
         }
-        public float[] calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
+
+        public int[] sumatoriaPresentismo(DateTime fechaInicio, DateTime fechaFin)
         {
-            DataTable dt = daoTurnos.calcularPresentismo(fechaInicio, fechaFin);
+            int[] presentismo = new int[2];
+            int totalTurnos = 0;
+            int totalConfirmados = 0;
+            DataTable dt = daoTurnos.getPresentismo(fechaInicio, fechaFin);
 
-            ///int size = 3;
-           /// float calculoPresentismo[size] = new float(); , arreglate, todo tuyo campeon
-            foreach (var x in dt)
+            foreach (DataRow row in dt.Rows)
             {
-               /// if (dt.Rows.Count > 0 && dt.Rows[0]["EstadoTurno"] != DBNull.Value)
+                totalTurnos++;
                 
-                     /// 1, almacena el total, 2, almacena los presentes, 3, almacena los ausentes. y que retorne el float y despues lo trabajas
-                
+                if (row["EstadoTurno"] != DBNull.Value && row["EstadoTurno"].ToString() == "Confirmado")
+                {
+                    totalConfirmados++;
+                }
             }
+            presentismo[0] = totalTurnos;
+            presentismo[1] = totalConfirmados;
 
-             
-            return daoTurnos.calcularPresentismo(fechaInicio, fechaFin);
+            return presentismo;
         }
+
+
+        public float calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
+        {
+            int[] presentismo = sumatoriaPresentismo(fechaInicio, fechaFin);
+            int totalTurnos = presentismo[0];
+            int totalConfirmados = presentismo[1];
+            if (totalTurnos == 0)
+            {
+                return 0;
+            }
+            return (float)Math.Round((float)totalConfirmados / totalTurnos * 100, 2);
+        }
+
+
         public bool eliminarTurno(int idTurno)
         {
             return daoTurnos.eliminarTurno(idTurno) > 0;

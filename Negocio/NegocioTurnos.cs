@@ -49,8 +49,21 @@ namespace Negocio
             bool guardadoCorrecto = daoTurnos.agregarTurno(idMedico, dniPaciente, fecha, hora, observacion);
             return guardadoCorrecto ? 1 : -4;
         }
-        public float calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
+        public float[] calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
         {
+            DataTable dt = daoTurnos.calcularPresentismo(fechaInicio, fechaFin);
+
+            ///int size = 3;
+           /// float calculoPresentismo[size] = new float(); , arreglate, todo tuyo campeon
+            foreach (var x in dt)
+            {
+               /// if (dt.Rows.Count > 0 && dt.Rows[0]["EstadoTurno"] != DBNull.Value)
+                
+                     /// 1, almacena el total, 2, almacena los presentes, 3, almacena los ausentes. y que retorne el float y despues lo trabajas
+                
+            }
+
+             
             return daoTurnos.calcularPresentismo(fechaInicio, fechaFin);
         }
         public bool eliminarTurno(int idTurno)

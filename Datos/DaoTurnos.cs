@@ -114,21 +114,13 @@ namespace Datos
             return ds.obtenerTabla(consultaMedicos);
         }
 
-        public float calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
+        public DataTable calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
         {
             string consulta = $@"
-            SELECT 
-                (CAST(SUM(CASE WHEN EstadoTurno = 'Confirmado' THEN 1 ELSE 0 END) AS FLOAT) / 
-                NULLIF(COUNT(*), 0)) * 100 AS Presentismo
-            FROM TURNO
+            SELECT * FROM TURNO
             WHERE Fecha BETWEEN '{fechaInicio:yyyy-MM-dd}' AND '{fechaFin:yyyy-MM-dd}'";
 
-            DataTable dt = ds.obtenerTabla(consulta);
-            if (dt.Rows.Count > 0 && dt.Rows[0]["Presentismo"] != DBNull.Value)
-            {
-                return Convert.ToSingle(dt.Rows[0]["Presentismo"]);
-            }
-            return 0f;
+            return ds.obtenerTabla(consulta);
         }
         public int eliminarTurno(int idTurno)
         {

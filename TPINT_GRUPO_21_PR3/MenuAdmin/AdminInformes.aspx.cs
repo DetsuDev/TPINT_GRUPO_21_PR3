@@ -63,19 +63,17 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             NegocioTurnos negTurnos = new NegocioTurnos();
 
-            float pPresentes = negTurnos.calcularPresentismo(fechaInicio, fechaFin);
-            float pAusentes = 100 - pPresentes;
+            float[] presentismo = negTurnos.calcularPresentismo(fechaInicio, fechaFin);
+            float pPresentes = presentismo[0];
+            int cConfirmados = (int)presentismo[1];
+            int tTurnos = (int)presentismo[2];
 
-            int[] sumatoria = negTurnos.sumatoriaPresentismo(fechaInicio, fechaFin);
-            int totalTurnos = sumatoria[0];
-            int totalPresentes = sumatoria[1];
-            int totalAusentes = totalTurnos - totalPresentes;
 
             presentesFecha.Style["width"] = $"{pPresentes.ToString("F2", CultureInfo.InvariantCulture)}%;";
-            presentesFecha.InnerText = $"{pPresentes:F2}% ({totalPresentes})";
+            presentesFecha.InnerText = $"{pPresentes:F2}% ({cConfirmados})";
 
-            ausentesFecha.Style["width"] = $"{pAusentes.ToString("F2", CultureInfo.InvariantCulture)}%;";
-            ausentesFecha.InnerText = $"{pAusentes:F2}% ({totalAusentes})";
+            ausentesFecha.Style["width"] = $"{(100 - pPresentes).ToString("F2", CultureInfo.InvariantCulture)}%;";
+            ausentesFecha.InnerText = $"{100 - pPresentes:F2}% ({tTurnos - cConfirmados})";
 
             presentesFecha.Visible = true;
             ausentesFecha.Visible = true;

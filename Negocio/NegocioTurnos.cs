@@ -50,9 +50,9 @@ namespace Negocio
             return guardadoCorrecto ? 1 : -4;
         }
 
-        public int[] sumatoriaPresentismo(DateTime fechaInicio, DateTime fechaFin)
+        public float[] calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
         {
-            int[] presentismo = new int[2];
+            float[] presentismo = new float[3];
             int totalTurnos = 0;
             int totalConfirmados = 0;
             DataTable dt = daoTurnos.getPresentismo(fechaInicio, fechaFin);
@@ -66,24 +66,12 @@ namespace Negocio
                     totalConfirmados++;
                 }
             }
-            presentismo[0] = totalTurnos;
+            presentismo[0] = (float)Math.Round((float)totalConfirmados / totalTurnos * 100, 2);
             presentismo[1] = totalConfirmados;
-
+            presentismo[2] = totalTurnos;
             return presentismo;
         }
 
-
-        public float calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
-        {
-            int[] presentismo = sumatoriaPresentismo(fechaInicio, fechaFin);
-            int totalTurnos = presentismo[0];
-            int totalConfirmados = presentismo[1];
-            if (totalTurnos == 0)
-            {
-                return 0;
-            }
-            return (float)Math.Round((float)totalConfirmados / totalTurnos * 100, 2);
-        }
 
 
         public bool eliminarTurno(int idTurno)

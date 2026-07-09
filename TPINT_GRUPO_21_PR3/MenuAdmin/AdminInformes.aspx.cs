@@ -71,7 +71,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             presentesFecha.Style["width"] = $"{pPresentes.ToString("F2", CultureInfo.InvariantCulture)}%;";
             presentesFecha.InnerText = $"{pPresentes:F2}% ({cConfirmados})";
-
+            
             ausentesFecha.Style["width"] = $"{(100 - pPresentes).ToString("F2", CultureInfo.InvariantCulture)}%;";
             ausentesFecha.InnerText = $"{100 - pPresentes:F2}% ({tTurnos - cConfirmados})";
 

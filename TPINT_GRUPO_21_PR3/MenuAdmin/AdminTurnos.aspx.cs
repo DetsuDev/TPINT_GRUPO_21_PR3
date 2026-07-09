@@ -299,6 +299,9 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             fullscreenOverlay.Style["display"] = "block";
             divFormulario.Visible = true;
             divEliminar.Visible = false;
+
+
+
         }
 
         private void GuardarModificacion()

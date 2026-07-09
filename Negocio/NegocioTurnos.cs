@@ -71,10 +71,6 @@ namespace Negocio
             presentismo[2] = totalTurnos;
             return presentismo;
         }
-<<<<<<< HEAD
-
-
-=======
         public DataTable obtenerTurnoPorId(int idTurno)
         {
             return daoTurnos.obtenerTurnoPorId(idTurno);
@@ -90,7 +86,6 @@ namespace Negocio
 
             return daoTurnos.actualizarTurno(idTurno, fecha, hora, observacion) ? 1 : 0;
         }
->>>>>>> c95037506c70713a991c17da8b9f269dcb899837
 
         public bool eliminarTurno(int idTurno)
         {

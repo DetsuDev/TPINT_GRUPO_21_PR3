@@ -37,6 +37,7 @@ namespace Datos
 
             return ds.obtenerTabla(consulta);
         }
+
         public bool existePaciente(string dni)
         {
             string consulta = $"SELECT COUNT(*) FROM PERSONA WHERE DNI = '{dni.Trim()}'";

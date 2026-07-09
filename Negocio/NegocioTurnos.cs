@@ -71,8 +71,26 @@ namespace Negocio
             presentismo[2] = totalTurnos;
             return presentismo;
         }
+<<<<<<< HEAD
 
 
+=======
+        public DataTable obtenerTurnoPorId(int idTurno)
+        {
+            return daoTurnos.obtenerTurnoPorId(idTurno);
+        }
+
+        public int modificarTurno(int idTurno, int idMedico, string dniPaciente, string fecha, string hora, string observacion)
+        {
+            foreach (DataRow r in daoTurnos.verificarTurnoPaciente(dniPaciente, fecha, hora).Rows)
+                if (Convert.ToInt32(r["Id_Turno"]) != idTurno) return -2;
+
+            foreach (DataRow r in daoTurnos.verificarTurnoMedico(idMedico, fecha, hora).Rows)
+                if (Convert.ToInt32(r["Id_Turno"]) != idTurno) return -3;
+
+            return daoTurnos.actualizarTurno(idTurno, fecha, hora, observacion) ? 1 : 0;
+        }
+>>>>>>> c95037506c70713a991c17da8b9f269dcb899837
 
         public bool eliminarTurno(int idTurno)
         {

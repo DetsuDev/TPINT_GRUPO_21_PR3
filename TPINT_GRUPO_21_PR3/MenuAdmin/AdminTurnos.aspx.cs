@@ -118,6 +118,11 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             txtPaciente.Enabled = true;
             ddlAltaEspecialidad.Enabled = true;
             ddlAltaMedico.Enabled = true;
+            rfvDni.Enabled = true;
+            revDni.Enabled = true;
+            rfvEspecialidad.Enabled = true;
+            rfvMedico.Enabled = true;
+            Session["IdTurnoEditar"] = null;
 
             txtPaciente.Text = "";
             txtFecha.Text = "";
@@ -142,6 +147,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             lblMensajeErrorPopup.Visible = false;
             lblMensajeErrorPopup.Text = "";
+
+            txtPaciente.Enabled = true;
+            ddlAltaEspecialidad.Enabled = true;
+            ddlAltaMedico.Enabled = true;
+            rfvDni.Enabled = true;
+            revDni.Enabled = true;
+            rfvEspecialidad.Enabled = true;
+            rfvMedico.Enabled = true;
+            Session["IdTurnoEditar"] = null;
 
             fullscreenOverlay.Style["display"] = "none";
             divFormulario.Visible = false;
@@ -168,6 +182,12 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             lblMensajeGeneral.Text = "";
             lblMensajeErrorPopup.Visible = false;
             lblMensajeErrorPopup.Text = "";
+
+            if (Session["IdTurnoEditar"] != null)
+            {
+                GuardarModificacion();
+                return;
+            }
 
             int idMedico = Convert.ToInt32(ddlAltaMedico.SelectedValue);
             string dniPaciente = txtPaciente.Text.Trim();
@@ -209,6 +229,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void txtFechaHora_TextChanged(object sender, EventArgs e)
         {
+            if (Session["IdTurnoEditar"] != null) return;
             ddlAltaEspecialidad.SelectedIndex = 0;
             ddlAltaMedico.Items.Clear();
         }
@@ -237,8 +258,93 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void gvGestionTurnos_RowEditing(object sender, GridViewEditEventArgs e)
         {
-            gvGestionTurnos.EditIndex = e.NewEditIndex;
-            CargarGrillaTurnos();
+            e.Cancel = true;
+            string idTurno = gvGestionTurnos.Rows[e.NewEditIndex].Cells[1].Text;
+            AbrirEdicion(Convert.ToInt32(idTurno));
+        }
+
+        private void AbrirEdicion(int idTurno)
+        {
+            Negocio.NegocioTurnos negocio = new Negocio.NegocioTurnos();
+            DataTable dt = negocio.obtenerTurnoPorId(idTurno);
+            if (dt == null || dt.Rows.Count == 0) return;
+            DataRow r = dt.Rows[0];
+
+            Session["IdTurnoEditar"] = idTurno;
+
+            hCargarTurno.InnerText = "Modificar Turno";
+            btnCargar.Text = "Guardar Cambios";
+
+            txtPaciente.Text = r["DNI"].ToString();
+            txtFecha.Text = r["Fecha"].ToString();
+            txtHora.Text = r["Hora"].ToString();
+            txtObservacionAlta.Text = r["Observacion"] == DBNull.Value ? "" : r["Observacion"].ToString();
+
+            CargarEspecialidadesAlta();
+            ddlAltaEspecialidad.SelectedValue = r["Id_Especialidad"].ToString();
+            ddlAltaMedico.Items.Clear();
+            ddlAltaMedico.Items.Add(new ListItem(r["Medico"].ToString(), r["Id_Medico"].ToString()));
+
+            txtPaciente.Enabled = false;
+            ddlAltaEspecialidad.Enabled = false;
+            ddlAltaMedico.Enabled = false;
+            rfvDni.Enabled = false;
+            revDni.Enabled = false;
+            rfvEspecialidad.Enabled = false;
+            rfvMedico.Enabled = false;
+
+            lblMensajeGeneral.Visible = false;
+            lblMensajeErrorPopup.Visible = false;
+            lblMensajeErrorPopup.Text = "";
+            fullscreenOverlay.Style["display"] = "block";
+            divFormulario.Visible = true;
+            divEliminar.Visible = false;
+        }
+
+        private void GuardarModificacion()
+        {
+            int idTurno = Convert.ToInt32(Session["IdTurnoEditar"]);
+
+            Negocio.NegocioTurnos negocio = new Negocio.NegocioTurnos();
+            DataTable dt = negocio.obtenerTurnoPorId(idTurno);
+            if (dt == null || dt.Rows.Count == 0) return;
+            DataRow r = dt.Rows[0];
+
+            int idMedico = Convert.ToInt32(r["Id_Medico"]);
+            string dniPaciente = r["DNI"].ToString();
+            string fecha = txtFecha.Text;
+            string hora = txtHora.Text.Trim();
+            string observacion = txtObservacionAlta.Text.Trim();
+
+            int resultado = negocio.modificarTurno(idTurno, idMedico, dniPaciente, fecha, hora, observacion);
+
+            if (resultado == 1)
+            {
+                lblMensajeGeneral.Text = "¡El turno se modificó correctamente!";
+                lblMensajeGeneral.ForeColor = System.Drawing.Color.Green;
+                lblMensajeGeneral.Visible = true;
+
+                Session["IdTurnoEditar"] = null;
+                txtPaciente.Enabled = true;
+                ddlAltaEspecialidad.Enabled = true;
+                ddlAltaMedico.Enabled = true;
+                rfvDni.Enabled = true;
+                revDni.Enabled = true;
+                rfvEspecialidad.Enabled = true;
+                rfvMedico.Enabled = true;
+
+                fullscreenOverlay.Style["display"] = "none";
+                divFormulario.Visible = false;
+                CargarGrillaTurnos();
+            }
+            else
+            {
+                fullscreenOverlay.Style["display"] = "flex";
+                lblMensajeErrorPopup.Visible = true;
+                if (resultado == -2) lblMensajeErrorPopup.Text = "El paciente ya posee un turno para esa misma fecha y hora.";
+                else if (resultado == -3) lblMensajeErrorPopup.Text = "El médico ya se encuentra ocupado en esa misma fecha y hora.";
+                else lblMensajeErrorPopup.Text = "Hubo un error inesperado al modificar el turno.";
+            }
         }
 
         protected void gvGestionTurnos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)

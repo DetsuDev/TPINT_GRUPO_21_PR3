@@ -37,5 +37,16 @@ namespace Negocio
         {
             return dao.eliminarMedico(m) > 0;
         }
+
+        public DataTable getDiasDisponiblesPorEspecialidad()
+        {
+
+        }
+
+        public DataTable getDiasDisponiblesPorMedico()
+        {
+
+        }
+
     }
 }

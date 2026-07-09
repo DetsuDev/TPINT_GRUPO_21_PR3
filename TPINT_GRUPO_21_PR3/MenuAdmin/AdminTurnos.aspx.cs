@@ -405,5 +405,21 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             fullscreenOverlay.Style["display"] = "none";
             CargarGrillaTurnos();
         }
+
+        private void CargarFechasCalendar()
+        {
+        }
+
+        protected void cFechasTurnos_DayRender(object sender, DayRenderEventArgs e)
+        {
+            DateTime minDate = DateTime.Now;
+
+            if (e.Day.Date < minDate || e.Day.IsWeekend)
+            {
+                e.Day.IsSelectable = false;          
+                e.Cell.ForeColor = System.Drawing.Color.Gray;
+                e.Cell.BackColor = System.Drawing.Color.LightGray;
+            }
+        }
     }
 }

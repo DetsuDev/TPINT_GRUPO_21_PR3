@@ -173,6 +173,9 @@
                                     <asp:TextBox ID="txtFecha" runat="server" CssClass="form-control" TextMode="Date" AutoPostBack="True" OnTextChanged="txtFechaHora_TextChanged"></asp:TextBox>
                                 </div>
                                 <div class="col-md-3">
+                                    <asp:Calendar ID="cFechasTurnos" runat="server" OnDayRender="cFechasTurnos_DayRender"></asp:Calendar>
+                                </div>
+                                <div class="col-md-3">
                                     <label class="form-label">Hora</label>
                                     <asp:RequiredFieldValidator ID="rfvHora" runat="server" ErrorMessage="*" ControlToValidate="txtHora" ForeColor="Red" ValidationGroup="vgAltaTurno"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="revHora" runat="server" ErrorMessage="* Formato HH:MM" ValidationExpression="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" ControlToValidate="txtHora" ForeColor="Red" Display="Dynamic" ValidationGroup="vgAltaTurno"></asp:RegularExpressionValidator>

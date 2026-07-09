@@ -40,12 +40,12 @@ namespace Negocio
 
         public DataTable getDiasDisponiblesPorEspecialidad()
         {
-
+            return null;
         }
 
         public DataTable getDiasDisponiblesPorMedico()
         {
-
+            return null;
         }
 
     }

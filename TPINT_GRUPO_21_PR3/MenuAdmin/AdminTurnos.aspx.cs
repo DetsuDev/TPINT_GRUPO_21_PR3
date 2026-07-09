@@ -122,7 +122,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             revDni.Enabled = true;
             rfvEspecialidad.Enabled = true;
             rfvMedico.Enabled = true;
-            Session["IdTurnoEditar"] = null;
+            hdnIdTurnoEditar.Value = "";
 
             txtPaciente.Text = "";
             txtFecha.Text = "";
@@ -155,7 +155,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             revDni.Enabled = true;
             rfvEspecialidad.Enabled = true;
             rfvMedico.Enabled = true;
-            Session["IdTurnoEditar"] = null;
+            hdnIdTurnoEditar.Value = "";
 
             fullscreenOverlay.Style["display"] = "none";
             divFormulario.Visible = false;
@@ -183,7 +183,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             lblMensajeErrorPopup.Visible = false;
             lblMensajeErrorPopup.Text = "";
 
-            if (Session["IdTurnoEditar"] != null)
+            if (!string.IsNullOrEmpty(hdnIdTurnoEditar.Value))
             {
                 GuardarModificacion();
                 return;
@@ -229,7 +229,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void txtFechaHora_TextChanged(object sender, EventArgs e)
         {
-            if (Session["IdTurnoEditar"] != null) return;
+            if (!string.IsNullOrEmpty(hdnIdTurnoEditar.Value)) return;
             ddlAltaEspecialidad.SelectedIndex = 0;
             ddlAltaMedico.Items.Clear();
         }
@@ -270,7 +270,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             if (dt == null || dt.Rows.Count == 0) return;
             DataRow r = dt.Rows[0];
 
-            Session["IdTurnoEditar"] = idTurno;
+            hdnIdTurnoEditar.Value = idTurno.ToString();
 
             hCargarTurno.InnerText = "Modificar Turno";
             btnCargar.Text = "Guardar Cambios";
@@ -306,7 +306,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         private void GuardarModificacion()
         {
-            int idTurno = Convert.ToInt32(Session["IdTurnoEditar"]);
+            int idTurno = Convert.ToInt32(hdnIdTurnoEditar.Value);
 
             Negocio.NegocioTurnos negocio = new Negocio.NegocioTurnos();
             DataTable dt = negocio.obtenerTurnoPorId(idTurno);
@@ -327,7 +327,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 lblMensajeGeneral.ForeColor = System.Drawing.Color.Green;
                 lblMensajeGeneral.Visible = true;
 
-                Session["IdTurnoEditar"] = null;
+                hdnIdTurnoEditar.Value = "";
                 txtPaciente.Enabled = true;
                 ddlAltaEspecialidad.Enabled = true;
                 ddlAltaMedico.Enabled = true;
@@ -363,7 +363,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             lblMensajeGeneral.Visible = false;
 
             string idTurno = gvGestionTurnos.Rows[e.RowIndex].Cells[1].Text;
-            Session["IdTurnoAEliminar"] = idTurno;
+            hdnIdTurnoEliminar.Value = idTurno;
 
             fullscreenOverlay.Style["display"] = "block"; 
             divEliminar.Visible = true;                  
@@ -372,9 +372,9 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (Session["IdTurnoAEliminar"] != null)
+            if (!string.IsNullOrEmpty(hdnIdTurnoEliminar.Value))
             {
-                int idTurno = Convert.ToInt32(Session["IdTurnoAEliminar"]);
+                int idTurno = Convert.ToInt32(hdnIdTurnoEliminar.Value);
 
                 Negocio.NegocioTurnos negocio = new Negocio.NegocioTurnos();
                 bool exito = negocio.eliminarTurno(idTurno);
@@ -391,7 +391,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 }
 
                 lblMensajeGeneral.Visible = true;
-                Session["IdTurnoAEliminar"] = null; 
+                hdnIdTurnoEliminar.Value = "";
             }
 
             divEliminar.Visible = false;
@@ -401,6 +401,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void btnCancelar_Click(object sender, EventArgs e)
         {
+            hdnIdTurnoEliminar.Value = "";
             divEliminar.Visible = false;
             fullscreenOverlay.Style["display"] = "none";
             CargarGrillaTurnos();

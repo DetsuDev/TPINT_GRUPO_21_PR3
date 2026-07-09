@@ -28,11 +28,12 @@ namespace Datos
             INNER JOIN PERSONA P_Pac ON T.Id_Persona = P_Pac.Id_Persona
             INNER JOIN MEDICO Med ON T.Id_Medico = Med.Id_Medico
             INNER JOIN PERSONA P_Med ON Med.Id_Persona = P_Med.Id_Persona
-            INNER JOIN ESPECIALIDADES Esp ON Med.Id_Especialidad = Esp.Id_Especialidad";
+            INNER JOIN ESPECIALIDADES Esp ON Med.Id_Especialidad = Esp.Id_Especialidad
+            WHERE T.Estado = 1"; 
 
             if (idMedico > 0)
             {
-                consulta += " WHERE T.Id_Medico = " + idMedico;
+                consulta += " AND T.Id_Medico = " + idMedico;
             }
 
             return ds.obtenerTabla(consulta);

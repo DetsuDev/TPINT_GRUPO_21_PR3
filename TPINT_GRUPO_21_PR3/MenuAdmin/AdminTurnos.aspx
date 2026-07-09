@@ -152,6 +152,8 @@
                 <asp:Button ID="btnNuevoTurno" runat="server" Text="Nuevo Turno" CssClass="btn btn-primary" OnClick="btnNuevoTurno_Click" CausesValidation="false" />
 
                 <div id="fullscreenOverlay" runat="server"></div>
+                    <asp:HiddenField ID="hdnIdTurnoEliminar" runat="server" />
+                    <asp:HiddenField ID="hdnIdTurnoEditar" runat="server" />
                     <div id="divFormulario" class="card border-primary shadow-sm" runat="server">
                         <div class="card-header bg-primary text-white">
                             <h4 id="hCargarTurno" runat="server" class="mb-0">Cargar Nuevo Turno</h4>

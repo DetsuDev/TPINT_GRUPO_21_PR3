@@ -1,13 +1,14 @@
-﻿using System;
-using Entidades;
+﻿using Entidades;
+using Negocio;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using Negocio;
-using System.Collections;
 
 namespace TPINT_GRUPO_21_PR3.MenuAdmin
 {
@@ -62,15 +63,17 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             NegocioTurnos negTurnos = new NegocioTurnos();
 
-            float presentes = negTurnos.calcularPresentismo(fechaInicio, fechaFin);
-            float ausentes = 100 - presentes;
+            float[] presentismo = negTurnos.calcularPresentismo(fechaInicio, fechaFin);
+            float pPresentes = presentismo[0];
+            int cConfirmados = (int)presentismo[1];
+            int tTurnos = (int)presentismo[2];
 
-            presentesFecha.Attributes["style"] = $"width: {presentes}%";
-            presentesFecha.InnerText = $"{presentes}%";
 
-
-            ausentesFecha.Attributes["style"] = $"width: {ausentes}%";
-            ausentesFecha.InnerText = $"{ausentes}%";
+            presentesFecha.Style["width"] = $"{pPresentes.ToString("F2", CultureInfo.InvariantCulture)}%;";
+            presentesFecha.InnerText = $"{pPresentes:F2}% ({cConfirmados})";
+            
+            ausentesFecha.Style["width"] = $"{(100 - pPresentes).ToString("F2", CultureInfo.InvariantCulture)}%;";
+            ausentesFecha.InnerText = $"{100 - pPresentes:F2}% ({tTurnos - cConfirmados})";
 
             presentesFecha.Visible = true;
             ausentesFecha.Visible = true;

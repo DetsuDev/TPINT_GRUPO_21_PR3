@@ -49,9 +49,27 @@ namespace Negocio
             bool guardadoCorrecto = daoTurnos.agregarTurno(idMedico, dniPaciente, fecha, hora, observacion);
             return guardadoCorrecto ? 1 : -4;
         }
-        public float calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
+
+        public float[] calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
         {
-            return daoTurnos.calcularPresentismo(fechaInicio, fechaFin);
+            float[] presentismo = new float[3];
+            int totalTurnos = 0;
+            int totalConfirmados = 0;
+            DataTable dt = daoTurnos.getPresentismo(fechaInicio, fechaFin);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                totalTurnos++;
+                
+                if (row["EstadoTurno"] != DBNull.Value && row["EstadoTurno"].ToString() == "Confirmado")
+                {
+                    totalConfirmados++;
+                }
+            }
+            presentismo[0] = (float)Math.Round((float)totalConfirmados / totalTurnos * 100, 2);
+            presentismo[1] = totalConfirmados;
+            presentismo[2] = totalTurnos;
+            return presentismo;
         }
         public DataTable obtenerTurnoPorId(int idTurno)
         {

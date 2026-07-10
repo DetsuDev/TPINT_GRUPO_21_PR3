@@ -53,6 +53,7 @@ namespace TPINT_GRUPO_21_PR3
                     user.persona.Nombre = (string)row["Nombre"];
                     user.persona.Apellido = (string)row["Apellido"];
                     user.Rol = (string)row["Rol"];
+                    user.IdPersona = Convert.ToInt32(row["Id_Persona"]);
 
                     Session["UsuarioLogueado"] = user;
 

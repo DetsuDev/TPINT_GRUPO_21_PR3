@@ -126,7 +126,6 @@ namespace Datos
 
         public int eliminarMedico(Medico m)
         {
-            // Baja lógica del médico y de su usuario asociado
             string consulta = $@"
                 UPDATE MEDICO SET Estado = 0 WHERE Id_Medico = {m.IdMedico};
                 UPDATE USUARIO SET Estado = 0
@@ -140,6 +139,18 @@ namespace Datos
             {
                 return -1;
             }
+        }
+        public int obtenerIdMedicoPorIdPersona(int idPersona)
+        {
+            string consulta = $"SELECT Id_Medico FROM MEDICO WHERE Id_Persona = {idPersona}";
+
+            DataTable dt = accesoDatos.obtenerTabla(consulta);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return Convert.ToInt32(dt.Rows[0]["Id_Medico"]);
+            }
+            return 0;
         }
     }
 }

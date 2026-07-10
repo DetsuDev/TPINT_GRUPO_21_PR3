@@ -47,6 +47,9 @@ namespace Negocio
         {
             return null;
         }
-
+        public int obtenerIdMedicoPorIdPersona(int idPersona)
+        {
+            return dao.obtenerIdMedicoPorIdPersona(idPersona);
+        }
     }
 }

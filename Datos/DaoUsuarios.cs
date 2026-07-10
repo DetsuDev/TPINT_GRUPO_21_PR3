@@ -21,16 +21,17 @@ namespace Datos
         public DataTable buscarUsuarioConRol(string username, string password)
         {
             string consulta = $@"
-                SELECT 
-                    U.Usuario, 
-                    U.Estado,
-                    P.Nombre, 
-                    P.Apellido,
-                    U.Rol
-                FROM dbo.USUARIO U
-                INNER JOIN dbo.PERSONA P ON U.Id_Persona = P.Id_Persona
-                LEFT JOIN dbo.MEDICO M ON P.Id_Persona = M.Id_Persona
-                WHERE U.Usuario = '{username}' AND U.Contrasenia = '{password}';";
+            SELECT 
+                U.Id_Persona,  
+                U.Usuario, 
+                U.Estado,
+                P.Nombre, 
+                P.Apellido,
+                U.Rol
+            FROM dbo.USUARIO U
+            INNER JOIN dbo.PERSONA P ON U.Id_Persona = P.Id_Persona
+            LEFT JOIN dbo.MEDICO M ON P.Id_Persona = M.Id_Persona
+            WHERE U.Usuario = '{username}' AND U.Contrasenia = '{password}';";
 
             return accesoDatos.obtenerTabla(consulta);
         }

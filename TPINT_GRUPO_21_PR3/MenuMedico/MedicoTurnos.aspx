@@ -64,7 +64,8 @@
                     </div>
                     <div class="card-body p-4">
                         <div class="table-responsive">
-                            <asp:GridView ID="gvMedicoTurnos" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered align-middle">
+                            <asp:GridView ID="gvMedicoTurnos" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered align-middle"
+                                DataKeyNames="ID">
                                 <Columns>
                                     <asp:BoundField DataField="DNI" HeaderText="DNI" />
                                     <asp:BoundField DataField="Paciente" HeaderText="Paciente" />

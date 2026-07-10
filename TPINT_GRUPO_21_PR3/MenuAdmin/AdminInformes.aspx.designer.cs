@@ -69,6 +69,42 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.GridView gvRankingEspecialidades;
 
         /// <summary>
+        /// Control dpInformes.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList dpInformes;
+
+        /// <summary>
+        /// Control informeSegunFecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl informeSegunFecha;
+
+        /// <summary>
+        /// Control rfvFechaInicioPresentismo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFechaInicioPresentismo;
+
+        /// <summary>
+        /// Control revFechaInicioPresentismo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revFechaInicioPresentismo;
+
+        /// <summary>
         /// Control txtFechaInicioPresentismo.
         /// </summary>
         /// <remarks>
@@ -76,6 +112,24 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtFechaInicioPresentismo;
+
+        /// <summary>
+        /// Control rfvFinalPresentismo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFinalPresentismo;
+
+        /// <summary>
+        /// Control revFechaFinalPresentismo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revFechaFinalPresentismo;
 
         /// <summary>
         /// Control txtFechaFinPresentismo.
@@ -87,6 +141,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.TextBox txtFechaFinPresentismo;
 
         /// <summary>
+        /// Control cvFecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvFecha;
+
+        /// <summary>
         /// Control btnInformeFechas.
         /// </summary>
         /// <remarks>
@@ -96,84 +159,84 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.Button btnInformeFechas;
 
         /// <summary>
-        /// Control barraPresentismoFechas.
+        /// Control informeSegunEspecialidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraPresentismoFechas;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl informeSegunEspecialidad;
 
         /// <summary>
-        /// Control presentesFecha.
+        /// Control ddlEspecialidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl presentesFecha;
+        protected global::System.Web.UI.WebControls.DropDownList ddlEspecialidad;
 
         /// <summary>
-        /// Control ausentesFecha.
+        /// Control btnInformeEspecialidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ausentesFecha;
+        protected global::System.Web.UI.WebControls.Button btnInformeEspecialidad;
 
         /// <summary>
-        /// Control ddlPresentismoFiltrado.
+        /// Control informeSegunMedico.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPresentismoFiltrado;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl informeSegunMedico;
 
         /// <summary>
-        /// Control DropDownList1.
+        /// Control ddlMedicos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.DropDownList ddlMedicos;
 
         /// <summary>
-        /// Control Button2.
+        /// Control btnInformeMedicos.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.Button btnInformeMedicos;
 
         /// <summary>
-        /// Control barraEspecialidadMedico.
+        /// Control barraDeInforme.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraEspecialidadMedico;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraDeInforme;
 
         /// <summary>
-        /// Control presentismoEspecialidadMedico.
+        /// Control barraVerde.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl presentismoEspecialidadMedico;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraVerde;
 
         /// <summary>
-        /// Control ausentismoEspecialidadMedico.
+        /// Control barraRoja.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ausentismoEspecialidadMedico;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraRoja;
     }
 }

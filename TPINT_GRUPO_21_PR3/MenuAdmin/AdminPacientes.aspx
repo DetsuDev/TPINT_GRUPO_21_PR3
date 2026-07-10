@@ -171,7 +171,6 @@
                                         <asp:DropDownList ID="ddlSexo" runat="server" CssClass="form-select">
                                             <asp:ListItem Value="M">Masculino</asp:ListItem>
                                             <asp:ListItem Value="F">Femenino</asp:ListItem>
-                                            <asp:ListItem Value="O">Otro</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                     <div class="col-md-4">
@@ -215,7 +214,7 @@
                                     </div>
                                     <div class="col-12 text-end pt-3">
                                         <asp:Button ID="btnCargar" runat="server" Text="Cargar Paciente" CssClass="btn btn-primary px-4" OnClick="btnCargar_Click" ValidationGroup="GrupoPaciente" />
-                                        <asp:Button ID="btnCancelarEdicion" runat="server" Text="Cancelar" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancelarEdicion_Click" CausesValidation="false" />
+                                        <asp:Button ID="btnCancelarEdicion" runat="server" Text="Cancelar" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancelarEdicion_Click" CausesValidation="false"  />
                                     </div>
                                 </div>
                             </div>

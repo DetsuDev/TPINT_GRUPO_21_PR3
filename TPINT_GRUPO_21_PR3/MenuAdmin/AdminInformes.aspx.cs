@@ -16,11 +16,9 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            presentesFecha.Visible = false;
-            ausentesFecha.Visible = false;
-            /*
-            barraPresentismoFechas.Visible = false;
-            barraEspecialidadMedico.Visible = false;*/
+            ocultarInformes();
+            informeSegunFecha.Visible = true;
+            ocultarBarras();
 
             Usuario user = (Usuario)Session["UsuarioLogueado"];
 
@@ -55,6 +53,8 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             gvRankingEspecialidades.DataSource = dt;
             gvRankingEspecialidades.DataBind(); 
         }
+        
+
 
         protected void btnInformeFechas_Click(object sender, EventArgs e)
         {
@@ -68,17 +68,96 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             int cConfirmados = (int)presentismo[1];
             int tTurnos = (int)presentismo[2];
 
+            if (cConfirmados > 0)
+            {
+                barraVerde.Style["width"] = $"{pPresentes.ToString("F2", CultureInfo.InvariantCulture)}%;";
+                barraVerde.InnerText = $"{pPresentes:F2}% ({cConfirmados})";
 
-            presentesFecha.Style["width"] = $"{pPresentes.ToString("F2", CultureInfo.InvariantCulture)}%;";
-            presentesFecha.InnerText = $"{pPresentes:F2}% ({cConfirmados})";
-            
-            ausentesFecha.Style["width"] = $"{(100 - pPresentes).ToString("F2", CultureInfo.InvariantCulture)}%;";
-            ausentesFecha.InnerText = $"{100 - pPresentes:F2}% ({tTurnos - cConfirmados})";
+                barraRoja.Style["width"] = $"{(100 - pPresentes).ToString("F2", CultureInfo.InvariantCulture)}%;";
+                barraRoja.InnerText = $"{100 - pPresentes:F2}% ({tTurnos - cConfirmados})";
 
-            presentesFecha.Visible = true;
-            ausentesFecha.Visible = true;
+                barraVerde.Visible = true;
+            }
+            else
+            {
+                barraRoja.Style["width"] = $"100%";
+                barraRoja.InnerText = $"NO HAY DATOS EN EL INTERVALO INDICADO.";
 
+            }
+
+
+            barraRoja.Visible = true;
 
         }
+
+        protected void ocultarBarras()
+        {
+            barraVerde.Visible=false;
+            barraRoja.Visible=false;
+        }
+        protected void ocultarInformes()
+        {
+            informeSegunEspecialidad.Visible = false;
+            informeSegunFecha.Visible = false;
+            informeSegunMedico.Visible = false;
+        }
+        protected void dpInformes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (dpInformes.SelectedIndex)
+            {
+                case 0:
+                    ocultarInformes();
+                    informeSegunFecha.Visible = true;
+                    break;
+                case 1:
+                    ocultarInformes();
+                    cargarEspecialidad();
+                    informeSegunEspecialidad.Visible = true;
+                    break;
+                case 2:
+                    ocultarInformes();
+                    cargarMedicos();
+                    informeSegunMedico.Visible = true;
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+        protected void cargarEspecialidad()
+        {
+            NegocioEspecialidades neg = new NegocioEspecialidades();
+            DataTable dt = neg.getTabla();
+
+            ddlEspecialidad.DataSource = dt;
+            ddlEspecialidad.DataTextField = "Nombre";
+            ddlEspecialidad.DataValueField = "Id_Especialidad";
+            ddlEspecialidad.DataBind();
+
+        }
+
+        protected void cargarMedicos()
+        {
+            NegocioMedicos Neg = new NegocioMedicos();
+            DataTable dt = Neg.getTabla();
+
+            DataTable tablaINA = new DataTable();
+            tablaINA.Columns.Add("id");
+            tablaINA.Columns.Add("nombreApellido");
+
+            foreach (DataRow row in dt.Rows)
+            {
+                tablaINA.Rows.Add(row["Id_Medico"], row["Nombre"].ToString() + " " + row["Apellido"].ToString());
+            }
+
+            ddlMedicos.DataSource = tablaINA;
+            ddlMedicos.DataTextField = "nombreApellido";
+            ddlMedicos.DataValueField = "id";
+            ddlMedicos.DataBind();
+        }
+
+
+
     }
 }

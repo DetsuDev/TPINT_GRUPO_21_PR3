@@ -12,7 +12,7 @@
     
     <div  class="card text-center col-1" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
-        <p class="card-text" style="margin: -3px -6px 5px -6px;">Bienvenid@, <br> 
+        <p class="card-text" style="margin: -3px -6px 5px -6px;">Bienvenid@, <br/> 
           <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]" style="font-weight: bold;"></asp:Label>
           </p>
           <div class="text-center">
@@ -29,10 +29,10 @@
             <li class="nav-item"><a class="nav-link" href="AdminMedicos.aspx">Gestionar Medicos</a></li>
             <li class="nav-item"><a class="nav-link" href="AdminTurnos.aspx">Gestionar Turnos</a></li>    
         </ul>
-        
-        <div class="border border-top-0 p-5" style="background-color: white;" >
+
+        <div class="border border-top-0 p-5" style="background-color: white;">
             <form id="form1" runat="server">
-                <div class="row">     
+                <div class="row">
                     <div class="col-md-6">
                         <div class="card border-primary shadow-sm">
                             <div class="card-header bg-primary text-white">
@@ -67,67 +67,78 @@
                     <div class="col-md-6">
                         <div class="card border-primary shadow-sm mb-4">
                             <div class="card-header bg-primary text-white">
-                                <h5 class="mb-0">Presentismo segun fechas</h5>
+                                <h5 class="mb-0">Generar Informe </h5>
                             </div>
                             <div class="card-body p-4">
+                                    <label class="form-label font-weight-bold">Segun... </label>
+                                    <asp:DropDownList CssClass="form-control" ID="dpInformes" runat="server" OnSelectedIndexChanged="dpInformes_SelectedIndexChanged" AutoPostBack="True">
+                                        <asp:ListItem Selected="True" Value="0">Lapso de tiempo</asp:ListItem>
+                                        <asp:ListItem Value="1">Especialidad</asp:ListItem>
+                                        <asp:ListItem Value="2">Medico</asp:ListItem>
+                                    </asp:DropDownList>
+                            </div>
+
+                            <div runat="server" id="informeSegunFecha" class="card-body p-4">
                                 <div class="row g-3 mb-4">
                                     <div class="col-6">
                                         <label class="form-label font-weight-bold">Fecha Inicio</label>
+                                        <asp:RequiredFieldValidator ID="rfvFechaInicioPresentismo" runat="server" ErrorMessage="*" ControlToValidate="txtFechaInicioPresentismo" ForeColor="Red" ValidationGroup="informeFecha"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revFechaInicioPresentismo" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtFechaInicioPresentismo" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" ValidationGroup="informeFecha"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtFechaInicioPresentismo" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                     </div>
                                     <div class="col-6">
                                         <label class="form-label font-weight-bold">Fecha Fin</label>
+                                        <asp:RequiredFieldValidator ID="rfvFinalPresentismo" runat="server" ErrorMessage="*" ControlToValidate="txtFechaFinPresentismo" ForeColor="Red" ValidationGroup="informeFecha"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revFechaFinalPresentismo" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtFechaFinPresentismo" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" ValidationGroup="informeFecha"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtFechaFinPresentismo" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                     </div>
+                                    <asp:CompareValidator ID="cvFecha" runat="server" ControlToValidate="txtFechaFinPresentismo" ControlToCompare="txtFechaInicioPresentismo" Operator="GreaterThan" Type="Date" ErrorMessage="* La fecha de fin debe ser mayor que la fecha de inicio." ForeColor="Red" ValidationGroup="informeFecha" />
+
                                     <div class="col-12 text-end">
-                                        <asp:Button ID="btnInformeFechas" runat="server" Text="Generar" CssClass="btn btn-primary btn-sm px-4" OnClick="btnInformeFechas_Click" />
+
+                                        <asp:Button ID="btnInformeFechas" runat="server" Text="Generar" CssClass="btn btn-primary btn-sm px-4" OnClick="btnInformeFechas_Click" ValidationGroup="informeFecha" />
                                     </div>
                                 </div>
-                                <div runat="server" id="barraPresentismoFechas" class="progress">
-                                    <div class="progress-bar bg-success" id="presentesFecha" runat="server" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100">70%</div>
-                                    <div class="progress-bar bg-danger" id="ausentesFecha" runat="server" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">30%</div>
+                            </div>
+                            <div runat="server" id="informeSegunEspecialidad" class="card-body p-4">
+                                <div class="row g-3 mb-4">
+                                    <div class="form-group">
+                                        <label class="form-label font-weight-bold">Especialidad... </label>
+                                        <asp:DropDownList ID="ddlEspecialidad" runat="server" CssClass="form-control">
+                                        </asp:DropDownList>
+                                    </div>
+
+                                    <div class="text-end">
+                                        <asp:Button ID="btnInformeEspecialidad" runat="server" Text="Generar" CssClass="btn btn-primary btn-sm px-4" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div runat="server" id="informeSegunMedico" class="card-body p-4">
+                                <div class="row g-3 mb-4">
+                                        <div class="form-group">
+                                            <label class="form-label font-weight-bold">Medico... </label>
+                                            <asp:DropDownList ID="ddlMedicos" runat="server" CssClass="form-control">
+                                            </asp:DropDownList>
+                                        </div>
+                                    
+                                    <div class="text-end">
+                                        <asp:Button ID="btnInformeMedicos" runat="server" Text="Generar" CssClass="btn btn-primary btn-sm px-4" />
+                                        </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-4">
+                                <div runat="server" id="barraDeInforme" class="progress ">
+                                    <div class="progress-bar bg-success" id="barraVerde" runat="server" role="progressbar"></div>
+                                    <div class="progress-bar bg-danger" id="barraRoja" runat="server" role="progressbar"></div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="card border-primary shadow-sm">
-                             <div class="card-header bg-primary text-white">
-                                 <h5 class="mb-0">Presentismo segun especialidad / medico</h5>
-                             </div>
-                             <div class="card-body p-4">
-                                 <p class="fw-bold mb-3">Filtrar segun</p>
-                                 <div class="row g-3 mb-4">
-                                     <div class="col-6">
-                                         <div class="form-group">
-                                             <asp:DropDownList ID="ddlPresentismoFiltrado" runat="server" CssClass="form-control">
-                                                 <asp:ListItem Value="0"> -- seleccione una opcion -- </asp:ListItem>
-                                                 <asp:ListItem Value="1">Medico</asp:ListItem>
-                                                 <asp:ListItem Value="2">Especialidad</asp:ListItem>
-                                             </asp:DropDownList>
-                                         </div>
-                                     </div>
-                                     <div class="col-6">
-                                         <div class="form-group">
-                                             <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control">
-                                                 <asp:ListItem Value="0"> -- seleccione una opcion -- </asp:ListItem>
-                                             </asp:DropDownList>
-                                         </div>
-                                     </div>
-                                     <div class="col-12 text-end">
-                                         <asp:Button ID="Button2" runat="server" Text="Filtrar" CssClass="btn btn-primary btn-sm px-4" />
-                                     </div>
-                                 </div>
-                                 <div runat="server" id="barraEspecialidadMedico" class="progress">
-                                     <div class="progress-bar bg-success" id="presentismoEspecialidadMedico" runat="server" role="progressbar" style="width: 70%" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100"> 70% </div>
-                                     <div class="progress-bar bg-danger" id="ausentismoEspecialidadMedico" runat="server" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100"> 30% </div>
-                                 </div>
-                             </div>
-                        </div>
                     </div>
-                </div> 
+                </div>
             </form>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
 </body>

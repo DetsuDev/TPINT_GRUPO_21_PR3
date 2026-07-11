@@ -41,7 +41,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         private void CargarGrillaMedicos()
         {
             NegocioMedicos negocioMedicos = new NegocioMedicos();
-            gvGestionMedicos.DataSource = negocioMedicos.getTabla();
+            gvGestionMedicos.DataSource = negocioMedicos.getTablaCompleta();
             gvGestionMedicos.DataBind();
         }
 

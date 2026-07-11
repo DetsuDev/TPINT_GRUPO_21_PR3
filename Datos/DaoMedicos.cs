@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entidades;
 
 namespace Datos
 {
     public class DaoMedicos
     {
         AccesoDatos accesoDatos = new AccesoDatos();
-        public DataTable getTablaMedicos()
+        public DataTable getTablaMedicosCompleta()
         {
 
             string consulta = "SELECT M.Id_Medico, M.Legajo_Medico, P.Nombre, P.Apellido, " +
@@ -26,6 +27,40 @@ namespace Datos
                 "INNER JOIN PROVINCIA PR ON L.Id_Provincia = PR.Id_Provincia " +
                 "LEFT JOIN USUARIO U ON P.Id_Persona = U.Id_Persona " +
                 "WHERE M.Estado = 1";
+            return accesoDatos.obtenerTabla(consulta);
+        }
+
+
+        public DataTable getTablaINA()
+        {
+            string consulta = @"
+        SELECT 
+            M.Id_Medico,
+            P.Nombre + ' ' + P.Apellido AS NombreApellido
+        FROM MEDICO M
+        INNER JOIN PERSONA P
+            ON M.Id_Persona = P.Id_Persona";
+
+            return accesoDatos.obtenerTabla(consulta);
+        }
+        public DataTable getTablaPorEsp(int idEsp)
+        {
+            string consulta = @"
+        SELECT 
+            M.Id_Medico,
+            P.Nombre + ' ' + P.Apellido AS NombreApellido
+        FROM MEDICO M
+        INNER JOIN PERSONA P
+            ON M.Id_Persona = P.Id_Persona
+        WHERE M.Id_Especialidad = " + idEsp;
+
+            return accesoDatos.obtenerTabla(consulta);
+        }
+
+
+        public DataTable getTablaMedicos()
+        {
+            string consulta = "SELECT * FROM MEDICO";
             return accesoDatos.obtenerTabla(consulta);
         }
 
@@ -165,6 +200,7 @@ namespace Datos
             DataTable dt = accesoDatos.obtenerTabla(consulta);
 
             return dt;
+    
         }
     
     }

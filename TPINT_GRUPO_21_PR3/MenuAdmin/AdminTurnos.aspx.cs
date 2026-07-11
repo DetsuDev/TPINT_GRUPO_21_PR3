@@ -16,6 +16,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected void Page_Load(object sender, EventArgs e)
         {
             Usuario user = (Usuario)Session["UsuarioLogueado"];
+            Page.MaintainScrollPositionOnPostBack = true;
 
             if (user == null || user.Rol != "A")
             {
@@ -29,6 +30,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 fullscreenOverlay.Style["display"] = "none";
                 CargarGrillaTurnos();
                 CargarEspecialidadesAlta();
+                CargarMedicosAlta();
             }
         }
 
@@ -59,7 +61,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         private void CargarEspecialidadesAlta()
         {
-            Negocio.NegocioTurnos negocioTurnos = new Negocio.NegocioTurnos();
+            NegocioTurnos negocioTurnos = new NegocioTurnos();
             DataTable dt = negocioTurnos.obtenerEspecialidadesAlta();
 
             ddlAltaEspecialidad.DataSource = dt;
@@ -69,8 +71,57 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlAltaEspecialidad.Items.Insert(0, new ListItem("-- Seleccione Especialidad --", "0"));
         }
 
+        protected void CargarAltaMedicosSegunEsp()
+        {
+
+            if (ddlAltaEspecialidad.SelectedIndex == 0)
+            {
+                CargarMedicosAlta();
+                return;
+            }
+
+            NegocioMedicos neg = new NegocioMedicos();
+
+            ddlAltaMedico.Items.Clear();
+
+            int idEspecialidad = Convert.ToInt32(ddlAltaEspecialidad.SelectedValue);
+
+            DataTable dt = neg.getTablaPorEsp(idEspecialidad);
+            ddlAltaMedico.DataSource = dt;
+            ddlAltaMedico.DataValueField = "Id_Medico";
+            ddlAltaMedico.DataTextField = "NombreApellido";
+            ddlAltaMedico.DataBind();
+
+        }
+
+        protected string obtenerDiasDisp()
+        {
+            NegocioTurnos neg = new NegocioTurnos();
+            int idMedico = Convert.ToInt32(ddlAltaEspecialidad.SelectedValue);
+            DataTable dt = neg.getDisponibilidadPorMedico(idMedico);
+
+            string diasDisponibles = "";
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                string dias = dr["DiasDisponibles"].ToString();
+
+                foreach (char dia in dias)
+                {
+                    if (!diasDisponibles.Contains(dia))
+                    {
+                        diasDisponibles += dia;
+                    }
+                }
+            }
+            return diasDisponibles;
+        }
+
         protected void ddlAltaEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
+            CargarAltaMedicosSegunEsp();
+
+            /*
             ddlAltaMedico.Items.Clear();
 
             int idEspecialidad = Convert.ToInt32(ddlAltaEspecialidad.SelectedValue);
@@ -105,9 +156,47 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             catch (Exception)
             {
                 ddlAltaMedico.Items.Insert(0, new ListItem("Error al calcular disponibilidad", "0"));
-            }
+            }*/
         }
 
+        protected void cFechasTurnos_DayRender(object sender, DayRenderEventArgs e)
+        {
+
+            DateTime minDate = DateTime.Now;
+            string diasDisponibles = obtenerDiasDisp();
+
+            char dia = ' ';
+
+            switch (e.Day.Date.DayOfWeek)
+            {
+                case DayOfWeek.Monday:
+                    dia = 'L';
+                    break;
+
+                case DayOfWeek.Tuesday:
+                    dia = 'M';
+                    break;
+
+                case DayOfWeek.Wednesday:
+                    dia = 'X';
+                    break;
+
+                case DayOfWeek.Thursday:
+                    dia = 'J';
+                    break;
+
+                case DayOfWeek.Friday:
+                    dia = 'V';
+                    break;
+            }
+
+            if (!diasDisponibles.Contains(dia))
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Gray;
+                e.Cell.BackColor = System.Drawing.Color.LightGray;
+            }
+        }
         protected void btnNuevoTurno_Click(object sender, EventArgs e)
         {
             
@@ -132,7 +221,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             txtHora.Text = "";
             txtObservacionAlta.Text = "";
             ddlAltaEspecialidad.SelectedIndex = 0;
-            ddlAltaMedico.Items.Clear();
 
             fullscreenOverlay.Style["display"] = "block"; 
             divFormulario.Visible = true;                 
@@ -145,7 +233,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             txtHora.Text = string.Empty;
             txtObservacionAlta.Text = string.Empty;
             ddlAltaEspecialidad.SelectedIndex = 0;
-            ddlAltaMedico.Items.Clear();
 
             lblMensajeErrorPopup.Visible = false;
             lblMensajeErrorPopup.Text = "";
@@ -197,7 +284,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             string hora = txtHora.Text.Trim();
             string observacion = txtObservacionAlta.Text.Trim();
 
-            Negocio.NegocioTurnos negocioTurnos = new Negocio.NegocioTurnos();
+            NegocioTurnos negocioTurnos = new NegocioTurnos();
             int resultado = negocioTurnos.guardarTurno(idMedico, dniPaciente, fecha, hora, observacion);
 
             if (resultado == 1)
@@ -267,7 +354,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         private void AbrirEdicion(int idTurno)
         {
-            Negocio.NegocioTurnos negocio = new Negocio.NegocioTurnos();
+            NegocioTurnos negocio = new NegocioTurnos();
             DataTable dt = negocio.obtenerTurnoPorId(idTurno);
             if (dt == null || dt.Rows.Count == 0) return;
             DataRow r = dt.Rows[0];
@@ -284,8 +371,26 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             CargarEspecialidadesAlta();
             ddlAltaEspecialidad.SelectedValue = r["Id_Especialidad"].ToString();
+
             ddlAltaMedico.Items.Clear();
             ddlAltaMedico.Items.Add(new ListItem(r["Medico"].ToString(), r["Id_Medico"].ToString()));
+
+            ocultarEdicion();
+
+        }
+
+        protected void CargarMedicosAlta()
+        {
+            NegocioMedicos neg = new NegocioMedicos();
+            ddlAltaMedico.DataSource = neg.getTablaINA();
+            ddlAltaMedico.DataTextField = "NombreApellido";
+            ddlAltaMedico.DataValueField = "Id_Medico";
+            ddlAltaMedico.DataBind();
+            ddlAltaMedico.Items.Insert(0, new ListItem("-- Seleccione Medico --", "0"));
+        }
+
+        private void ocultarEdicion()
+        {
 
             txtPaciente.Enabled = false;
             ddlAltaEspecialidad.Enabled = false;
@@ -301,9 +406,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             fullscreenOverlay.Style["display"] = "block";
             divFormulario.Visible = true;
             divEliminar.Visible = false;
-
-
-
         }
 
         private void GuardarModificacion()
@@ -409,21 +511,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             CargarGrillaTurnos();
         }
 
-        private void CargarFechasCalendar()
-        {
-        }
-
-        protected void cFechasTurnos_DayRender(object sender, DayRenderEventArgs e)
-        {
-            DateTime minDate = DateTime.Now;
-
-            if (e.Day.Date < minDate || e.Day.IsWeekend)
-            {
-                e.Day.IsSelectable = false;          
-                e.Cell.ForeColor = System.Drawing.Color.Gray;
-                e.Cell.BackColor = System.Drawing.Color.LightGray;
-            }
-        }
 
         private void CargarHorarios(int idMedico)
         {
@@ -474,10 +561,24 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void ddlAltaMedico_SelectedIndexChanged(object sender, EventArgs e)
         {
+            NegocioMedicos neg = new NegocioMedicos();
+            DataTable dt = neg.getTabla();
+            ddlAltaEspecialidad.ClearSelection();
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (ddlAltaMedico.SelectedValue == dr["Id_Medico"].ToString())
+                {
+                    ddlAltaEspecialidad.SelectedValue = dr["Id_Especialidad"].ToString();
+                }
+            }
+            /*
+            
             if (int.TryParse(ddlAltaMedico.SelectedValue, out int idMedico))
             {
                 CargarHorarios(idMedico);
-            }
+            }*/
         }
+
     }
 }

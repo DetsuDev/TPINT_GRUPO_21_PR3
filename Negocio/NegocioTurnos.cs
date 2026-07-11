@@ -26,6 +26,10 @@ namespace Negocio
         {
             return daoTurnos.obtenerMedicosDisponibles(idEspecialidad, letraDia, horaTipeada);
         }
+        public DataTable getDisponibilidadPorMedico(int idMedico)
+        {
+            return daoTurnos.getDisponibilidadPorMedico(idMedico);
+        }
 
         public int guardarTurno(int idMedico, string dniPaciente, string fecha, string hora, string observacion)
         {

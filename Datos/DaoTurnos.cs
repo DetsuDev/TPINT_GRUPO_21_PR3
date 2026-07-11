@@ -100,6 +100,19 @@ namespace Datos
             return ds.obtenerTabla(consulta);
         }
 
+        public DataTable getDisponibilidadPorMedico(int idMedico)
+        {
+            string consulta = @"
+        SELECT
+            Id_Medico,
+            DiasDisponibles,
+            HoraInicio,
+            HoraFin
+        FROM DISPONIBILIDAD
+        WHERE Id_Medico = " + idMedico;
+
+            return ds.obtenerTabla(consulta);
+        }
         public DataTable obtenerMedicosDisponibles(int idEspecialidad, string letraDia, string horaTipeada)
         {
             string consultaMedicos = $@"

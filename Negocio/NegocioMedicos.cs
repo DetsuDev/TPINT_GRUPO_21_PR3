@@ -13,10 +13,27 @@ namespace Negocio
     {
         private DaoMedicos dao = new DaoMedicos();
 
+        public DataTable getTablaCompleta()
+        {
+            return dao.getTablaMedicosCompleta();
+        }
+
         public DataTable getTabla()
         {
             return dao.getTablaMedicos();
         }
+
+
+        public DataTable getTablaINA()
+        {
+            return dao.getTablaINA();
+        }
+
+        public DataTable getTablaPorEsp(int idEsp)
+        {
+            return dao.getTablaPorEsp(idEsp);
+        }
+
 
         public DataTable getMedicoPorId(int idMedico)
         {

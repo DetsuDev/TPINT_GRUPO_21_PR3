@@ -140,20 +140,10 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected void cargarMedicos()
         {
             NegocioMedicos Neg = new NegocioMedicos();
-            DataTable dt = Neg.getTabla();
 
-            DataTable tablaINA = new DataTable();
-            tablaINA.Columns.Add("id");
-            tablaINA.Columns.Add("nombreApellido");
-
-            foreach (DataRow row in dt.Rows)
-            {
-                tablaINA.Rows.Add(row["Id_Medico"], row["Nombre"].ToString() + " " + row["Apellido"].ToString());
-            }
-
-            ddlMedicos.DataSource = tablaINA;
-            ddlMedicos.DataTextField = "nombreApellido";
-            ddlMedicos.DataValueField = "id";
+            ddlMedicos.DataSource = Neg.getTablaINA();
+            ddlMedicos.DataTextField = "NombreApellido";
+            ddlMedicos.DataValueField = "Id_Medico";
             ddlMedicos.DataBind();
         }
 

@@ -14,6 +14,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 {
     public partial class Informes : System.Web.UI.Page
     {
+        DataTable informeTotal = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
             ocultarInformes();
@@ -30,16 +31,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             lblNombreUsuario.Text = user.persona.Nombre + " " + user.persona.Apellido;
 
-            if (!IsPostBack)
-            {
-                CargarRankingMock();
-            }
+
+                informeTotal = CargarRankingMock();
+            
 
         }
 
-        private void CargarRankingMock()
+        private DataTable CargarRankingMock()
         {
-            DataTable dt = new DataTable();
+            /*
             dt.Columns.Add("Especialidad");
             dt.Columns.Add("CantidadTurnos");
 
@@ -49,9 +49,54 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             dt.Rows.Add("Cardiologia", "15");
             dt.Rows.Add("Demartología", "14");
             dt.Rows.Add("Clinica Médica", "9");
+            */
 
-            gvRankingEspecialidades.DataSource = dt;
-            gvRankingEspecialidades.DataBind(); 
+            DataTable dt = new DataTable();
+            
+            NegocioTurnos negTurno = new NegocioTurnos();
+
+            dt = negTurno.getTabla();
+
+            int Pediatria = 0;
+            int Traumatologia = 0;
+            int Cardiologia = 0;
+            int Dermatologia = 0;
+
+            foreach (DataRow dr in dt.Rows) {
+                switch ((string)dr["Especialidad"])
+                {
+                    case "Cardiología":
+                        Cardiologia++;
+                        break;
+
+                    case "Pediatría":
+                        Pediatria++;
+                        break;
+
+                    case "Traumatología":
+                        Traumatologia++;
+                        break;
+
+                    case "Dermatología":
+                        Dermatologia++;
+                        break;
+                }
+            
+            }
+
+            DataTable dt2 = new DataTable();
+
+            dt2.Columns.Add("Especialidad");
+            dt2.Columns.Add("CantidadTurnos");
+            dt2.Rows.Add("Pediatria", $"{Pediatria}");
+            dt2.Rows.Add("Traumatologia", $"{Traumatologia}");
+            dt2.Rows.Add("Cardiologia", $"{Cardiologia}");
+            dt2.Rows.Add("Demartología", $"{Dermatologia}");
+
+            gvRankingEspecialidades.DataSource = dt2;
+            gvRankingEspecialidades.DataBind();
+
+            return dt;
         }
         
 
@@ -147,7 +192,61 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlMedicos.DataBind();
         }
 
+        protected void btnFiltrarRanking_Click(object sender, EventArgs e)
+        {
+            DataTable dt = informeTotal;
 
+            string minFechaString = txtFechaInicio.Text;
+            string maxFechaString = txtFechaFin.Text;
 
+            string formato = "yyyy-MM-dd";
+
+            DateTime.TryParseExact(minFechaString, formato, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime minFecha);
+            DateTime.TryParseExact(maxFechaString, formato, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime maxFecha);
+
+            DataTable dt2 = new DataTable();
+
+            int Pediatria = 0;
+            int Traumatologia = 0;
+            int Cardiologia = 0;
+            int Dermatologia = 0;
+
+            foreach (DataRow dr in dt.Rows)
+            {
+
+                    if (((DateTime)dr["FechaDateTime"] >= minFecha) && ((DateTime)dr["FechaDateTime"] <= maxFecha))
+                    {
+                        switch ((string)dr["Especialidad"])
+                        {
+                            case "Cardiología":
+                                Cardiologia++;
+                                break;
+
+                            case "Pediatría":
+                                Pediatria++;
+                                break;
+
+                            case "Traumatología":
+                                Traumatologia++;
+                                break;
+
+                            case "Dermatología":
+                                Dermatologia++;
+                                break;
+                        }
+                    }
+                
+            }
+
+            dt2.Columns.Add("Especialidad");
+            dt2.Columns.Add("CantidadTurnos");
+            dt2.Rows.Add("Pediatria", $"{Pediatria}");
+            dt2.Rows.Add("Traumatologia", $"{Traumatologia}");
+            dt2.Rows.Add("Cardiologia", $"{Cardiologia}");
+            dt2.Rows.Add("Demartología", $"{Dermatologia}");
+
+            gvRankingEspecialidades.DataSource = dt2;
+            gvRankingEspecialidades.DataBind();
+        }
     }
 }

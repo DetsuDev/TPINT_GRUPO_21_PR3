@@ -49,7 +49,7 @@
                                         <asp:TextBox ID="txtFechaFin" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                     </div>
                                     <div class="col-12 text-end">
-                                        <asp:Button ID="btnFiltrarRanking" runat="server" Text="Filtrar" CssClass="btn btn-primary btn-sm px-4" />
+                                        <asp:Button ID="btnFiltrarRanking" runat="server" Text="Filtrar" CssClass="btn btn-primary btn-sm px-4" OnClick="btnFiltrarRanking_Click" />
                                     </div>
                                 </div>
 

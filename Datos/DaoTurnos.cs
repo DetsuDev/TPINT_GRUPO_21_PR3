@@ -21,6 +21,7 @@ namespace Datos
                 P_Pac.DNI AS DNI,
                 (P_Pac.Nombre + ' ' + P_Pac.Apellido) AS Paciente,
                 CONVERT(VARCHAR(10), T.Fecha, 103) AS Fecha,
+                T.Fecha AS FechaDateTime, -- campo auxiliar para informes
                 CONVERT(VARCHAR(5), T.Hora) AS Hora,
                 T.Observacion AS Observacion,
                 T.EstadoTurno AS Estado

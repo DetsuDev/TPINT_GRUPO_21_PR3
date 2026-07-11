@@ -168,11 +168,12 @@
                                     <asp:RequiredFieldValidator ID="rfvDni" runat="server" ErrorMessage="*" ControlToValidate="txtPaciente" ForeColor="Red" ValidationGroup="vgAltaTurno"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="revDni" runat="server" ErrorMessage="* Solo números" ValidationExpression="^\d+$" ControlToValidate="txtPaciente" ForeColor="Red" Display="Dynamic" ValidationGroup="vgAltaTurno"></asp:RegularExpressionValidator>
                                     <asp:TextBox ID="txtPaciente" runat="server" CssClass="form-control" placeholder="Ej: 45123456"></asp:TextBox>
-                                </div>
-                                <div class="col-md-3">
-                                    <label class="form-label">Fecha</label>
-                                    <asp:RequiredFieldValidator ID="rfvFecha" runat="server" ErrorMessage="*" ControlToValidate="txtFecha" ForeColor="Red" ValidationGroup="vgAltaTurno"></asp:RequiredFieldValidator>
-                                    <asp:TextBox ID="txtFecha" runat="server" CssClass="form-control" TextMode="Date" AutoPostBack="True" OnTextChanged="txtFechaHora_TextChanged"></asp:TextBox>
+                                     <label class="form-label">Especialidad</label>
+                                    <asp:RequiredFieldValidator ID="rfvEspecialidad" runat="server" ErrorMessage="*" ControlToValidate="ddlAltaEspecialidad" InitialValue="0" ForeColor="Red" ValidationGroup="vgAltaTurno"></asp:RequiredFieldValidator>
+                                    <asp:DropDownList ID="ddlAltaEspecialidad" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlAltaEspecialidad_SelectedIndexChanged"></asp:DropDownList>
+                                    <label class="form-label">Médico Asignado</label>
+                                    <asp:RequiredFieldValidator ID="rfvMedico" runat="server" ErrorMessage="*" ControlToValidate="ddlAltaMedico" InitialValue="0" ForeColor="Red" ValidationGroup="vgAltaTurno"></asp:RequiredFieldValidator>
+                                    <asp:DropDownList ID="ddlAltaMedico" runat="server" CssClass="form-select" OnSelectedIndexChanged="ddlAltaMedico_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                 </div>
                                 <div class="col-md-3">
                                     <asp:Calendar ID="cFechasTurnos" runat="server" OnDayRender="cFechasTurnos_DayRender"></asp:Calendar>
@@ -182,16 +183,8 @@
                                     <asp:RequiredFieldValidator ID="rfvHora" runat="server" ErrorMessage="*" ControlToValidate="txtHora" ForeColor="Red" ValidationGroup="vgAltaTurno"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="revHora" runat="server" ErrorMessage="* Formato HH:MM" ValidationExpression="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" ControlToValidate="txtHora" ForeColor="Red" Display="Dynamic" ValidationGroup="vgAltaTurno"></asp:RegularExpressionValidator>
                                     <asp:TextBox ID="txtHora" runat="server" CssClass="form-control" placeholder="Ej: 10:30" AutoPostBack="True" OnTextChanged="txtFechaHora_TextChanged"></asp:TextBox>
+                                    <asp:DropDownList ID="ddlHora" runat="server"></asp:DropDownList>
                                 </div>
-                                <div class="col-md-3">
-                                    <label class="form-label">Especialidad</label>
-                                    <asp:RequiredFieldValidator ID="rfvEspecialidad" runat="server" ErrorMessage="*" ControlToValidate="ddlAltaEspecialidad" InitialValue="0" ForeColor="Red" ValidationGroup="vgAltaTurno"></asp:RequiredFieldValidator>
-                                    <asp:DropDownList ID="ddlAltaEspecialidad" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlAltaEspecialidad_SelectedIndexChanged"></asp:DropDownList>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="form-label">Médico Asignado</label>
-                                    <asp:RequiredFieldValidator ID="rfvMedico" runat="server" ErrorMessage="*" ControlToValidate="ddlAltaMedico" InitialValue="0" ForeColor="Red" ValidationGroup="vgAltaTurno"></asp:RequiredFieldValidator>
-                                    <asp:DropDownList ID="ddlAltaMedico" runat="server" CssClass="form-select"></asp:DropDownList>
                                 </div>
                                 <div class="col-md-8">
                                     <label class="form-label">Observación</label>
@@ -205,7 +198,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </form>
     
     <script src="../js/bootstrap.bundle.min.js"></script>

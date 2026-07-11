@@ -152,5 +152,20 @@ namespace Datos
             }
             return 0;
         }
+
+        public DataTable getHorariosMedicoSeleccionado(Medico med)
+        {
+            // Use the actual medico id in the query and join on Id_Medico
+            string consulta = $@"
+                SELECT D.HoraInicio AS Horas
+                FROM MEDICO M
+                INNER JOIN DISPONIBILIDAD D ON D.Id_Medico = M.Id_Medico
+                WHERE M.Id_Medico = {med.IdMedico}";
+
+            DataTable dt = accesoDatos.obtenerTabla(consulta);
+
+            return dt;
+        }
+    
     }
 }

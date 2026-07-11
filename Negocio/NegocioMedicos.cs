@@ -38,15 +38,12 @@ namespace Negocio
             return dao.eliminarMedico(m) > 0;
         }
 
-        public DataTable getDiasDisponiblesPorEspecialidad()
+        public DataTable getHorariosMedicoSeleccionado(Medico m)
         {
-            return null;
+            return dao.getHorariosMedicoSeleccionado(m);
         }
 
-        public DataTable getDiasDisponiblesPorMedico()
-        {
-            return null;
-        }
+
         public int obtenerIdMedicoPorIdPersona(int idPersona)
         {
             return dao.obtenerIdMedicoPorIdPersona(idPersona);

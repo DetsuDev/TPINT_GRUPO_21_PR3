@@ -193,7 +193,7 @@
                                     <asp:RequiredFieldValidator ID="rfvHora" runat="server" ErrorMessage="*" ControlToValidate="txtHora" ForeColor="Red" ValidationGroup="vgAltaTurno"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="revHora" runat="server" ErrorMessage="* Formato HH:MM" ValidationExpression="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" ControlToValidate="txtHora" ForeColor="Red" Display="Dynamic" ValidationGroup="vgAltaTurno"></asp:RegularExpressionValidator>
                                     <asp:TextBox ID="txtHora" runat="server" CssClass="form-control" placeholder="Ej: 10:30" AutoPostBack="True" OnTextChanged="txtFechaHora_TextChanged"></asp:TextBox>
-                                    <asp:DropDownList ID="ddlHora" runat="server"></asp:DropDownList>
+                                    <asp:DropDownList ID="ddlHora" CssClass="form-select" runat="server"></asp:DropDownList>
                                 </div>
                                 </div>
                                 <div class="col-md-8">

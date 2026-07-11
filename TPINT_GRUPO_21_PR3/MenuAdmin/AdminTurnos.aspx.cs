@@ -120,7 +120,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected void ddlAltaEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarAltaMedicosSegunEsp();
-
+            //CargarHorarios(ddlAltaEspecialidad.SelectedIndex);
             /*
             ddlAltaMedico.Items.Clear();
 

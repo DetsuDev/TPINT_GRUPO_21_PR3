@@ -190,7 +190,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                     break;
             }
 
-            if (!diasDisponibles.Contains(dia))
+            if (!diasDisponibles.Contains(dia) || e.Day.Date.AddDays(-1) < minDate)
             {
                 e.Day.IsSelectable = false;
                 e.Cell.ForeColor = System.Drawing.Color.Gray;

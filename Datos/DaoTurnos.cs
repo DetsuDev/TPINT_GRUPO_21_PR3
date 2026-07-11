@@ -173,6 +173,24 @@ namespace Datos
             }
         }
 
+        public bool marcarPresentismo(int idTurno, string estado, string observacion)
+        {
+            string consulta = $@"
+            UPDATE TURNO
+            SET EstadoTurno = '{estado}', Observacion = '{observacion.Trim().Replace("'", "''")}'
+            WHERE Id_Turno = {idTurno};";
+
+            try
+            {
+                ds.ejecutarConsulta(consulta);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public int eliminarTurno(int idTurno)
         {
             string consulta = $"UPDATE TURNO SET Estado = 0 WHERE Id_Turno = {idTurno};";

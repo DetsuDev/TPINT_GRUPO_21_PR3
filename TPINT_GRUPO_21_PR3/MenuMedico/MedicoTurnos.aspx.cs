@@ -71,5 +71,28 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
             txtBuscarFecha.Text = "";
             CargarGrillaTurnos();
         }
+
+        protected void btnConfirmarPresentismo_Click(object sender, EventArgs e)
+        {
+            GridViewRow fila = (GridViewRow)((Button)sender).NamingContainer;
+            int idTurno = Convert.ToInt32(gvMedicoTurnos.DataKeys[fila.RowIndex].Value);
+
+            RadioButtonList rbl = (RadioButtonList)fila.FindControl("rblPresentismo");
+            TextBox txtObs = (TextBox)fila.FindControl("txtObsPresentismo");
+
+            if (string.IsNullOrEmpty(rbl.SelectedValue))
+            {
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
+                lblMensaje.Text = "Seleccione Presente o Ausente.";
+                return;
+            }
+
+            Negocio.NegocioTurnos negocioTurnos = new Negocio.NegocioTurnos();
+            bool ok = negocioTurnos.marcarPresentismo(idTurno, rbl.SelectedValue, txtObs.Text.Trim());
+
+            lblMensaje.ForeColor = ok ? System.Drawing.Color.Green : System.Drawing.Color.Red;
+            lblMensaje.Text = ok ? "Presentismo registrado correctamente." : "Hubo un error al registrar el presentismo.";
+            CargarGrillaTurnos();
+        }
     }
 }

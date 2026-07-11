@@ -85,5 +85,10 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvMedicoTurnos;
+
+        /// <summary>
+        /// Control lblMensaje.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.Label lblMensaje;
     }
 }

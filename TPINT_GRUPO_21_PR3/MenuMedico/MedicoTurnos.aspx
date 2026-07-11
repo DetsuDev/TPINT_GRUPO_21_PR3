@@ -32,6 +32,7 @@
         <div class="border border-top-0 p-5" style="background-color: white;">
 
             <form id="form1" runat="server">
+                <asp:Label ID="lblMensaje" runat="server" Font-Bold="true"></asp:Label>
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
                         <h4 class="mb-0">Buscar Turnos</h4>
@@ -74,11 +75,13 @@
                                     <asp:BoundField DataField="Observacion" HeaderText="Observacion" />
                                     <asp:TemplateField HeaderText="Estado">
                                         <ItemTemplate>
+                                            <asp:Label ID="lblEstadoActual" runat="server" Text='<%# Eval("Estado") %>' CssClass="fw-bold d-block mb-1"></asp:Label>
                                             <asp:RadioButtonList ID="rblPresentismo" runat="server">
-                                                <asp:ListItem Value="1">Presente</asp:ListItem>
-                                                <asp:ListItem Value="2">Ausente</asp:ListItem>
+                                                <asp:ListItem Value="Presente">Presente</asp:ListItem>
+                                                <asp:ListItem Value="Ausente">Ausente</asp:ListItem>
                                             </asp:RadioButtonList>
-                                            <asp:Button ID="btnConfirmarPresentismo" runat="server" Text="Confirmar seleccion" />
+                                            <asp:TextBox ID="txtObsPresentismo" runat="server" CssClass="form-control form-control-sm mt-1" placeholder="Observación" Text='<%# Eval("Observacion") %>'></asp:TextBox>
+                                            <asp:Button ID="btnConfirmarPresentismo" runat="server" Text="Confirmar" CssClass="btn btn-sm btn-primary mt-1" OnClick="btnConfirmarPresentismo_Click" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

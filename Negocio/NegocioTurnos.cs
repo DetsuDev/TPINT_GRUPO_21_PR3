@@ -65,7 +65,7 @@ namespace Negocio
             {
                 totalTurnos++;
                 
-                if (row["EstadoTurno"] != DBNull.Value && row["EstadoTurno"].ToString() == "Confirmado")
+                if (row["EstadoTurno"] != DBNull.Value && row["EstadoTurno"].ToString() == "Presente")
                 {
                     totalConfirmados++;
                 }
@@ -78,6 +78,11 @@ namespace Negocio
         public DataTable obtenerTurnoPorId(int idTurno)
         {
             return daoTurnos.obtenerTurnoPorId(idTurno);
+        }
+
+        public bool marcarPresentismo(int idTurno, string estado, string observacion)
+        {
+            return daoTurnos.marcarPresentismo(idTurno, estado, observacion);
         }
 
         public int modificarTurno(int idTurno, int idMedico, string dniPaciente, string fecha, string hora, string observacion)

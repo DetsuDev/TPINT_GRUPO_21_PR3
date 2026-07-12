@@ -3,6 +3,7 @@ using Entidades;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -41,6 +42,105 @@ namespace Negocio
             return true;
         }
 
+        public DataTable filtrarRanking(string minFechaString, string maxFechaString)
+        {
+
+            DataTable tablaMedicos = getTabla();
+
+            DataTable negocioEspecialidad = new DataTable();
+
+            negocioEspecialidad.Columns.Add("Especialidad", typeof(string));
+            negocioEspecialidad.Columns.Add("Cantidad", typeof(int));
+
+
+            string formato = "yyyy-MM-dd";
+            //int cEspecialidades= 0;
+            //string especialidad = "";
+
+            DateTime.TryParseExact(minFechaString, formato, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime minFecha);
+            DateTime.TryParseExact(maxFechaString, formato, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime maxFecha);
+
+
+            foreach (DataRow dr in tablaMedicos.Rows)
+            {
+                DateTime fecha = (DateTime)dr["FechaDateTime"];
+
+                if (fecha >= minFecha && fecha <= maxFecha)
+                {
+                    string especialidad = dr["Especialidad"].ToString();
+                    bool encontrada = false;
+
+                    foreach (DataRow fila in negocioEspecialidad.Rows)
+                    {
+                        if (fila["Especialidad"].ToString() == especialidad)
+                        {
+                            fila["Cantidad"] = Convert.ToInt32(fila["Cantidad"]) + 1;
+                            encontrada = true;
+                            break;
+                        }
+                    }
+
+                    if (!encontrada)
+                    {
+                        negocioEspecialidad.Rows.Add(especialidad, 1);
+                    }
+                }
+            }
+
+
+
+            return negocioEspecialidad;
+
+            /*DataTable tablaTurns = new DataTable();*/
+
+
+
+
+
+
+
+            /*
+
+
+            int Pediatria = 0;
+            int Traumatologia = 0;
+            int Cardiologia = 0;
+            int Dermatologia = 0;
+
+            foreach (DataRow dr in tablaMedicos.Rows)
+            {
+
+                if (((DateTime)dr["FechaDateTime"] >= minFecha) && ((DateTime)dr["FechaDateTime"] <= maxFecha))
+                {
+                    switch ((string)dr["Especialidad"])
+                    {
+                        case "Cardiología":
+                            Cardiologia++;
+                            break;
+
+                        case "Pediatría":
+                            Pediatria++;
+                            break;
+
+                        case "Traumatología":
+                            Traumatologia++;
+                            break;
+
+                        case "Dermatología":
+                            Dermatologia++;
+                            break;
+                    }
+                }
+
+            }
+
+            dt2.Columns.Add("Especialidad");
+            dt2.Columns.Add("CantidadTurnos");
+            dt2.Rows.Add("Pediatria", $"{Pediatria}");
+            dt2.Rows.Add("Traumatologia", $"{Traumatologia}");
+            dt2.Rows.Add("Cardiologia", $"{Cardiologia}");
+            dt2.Rows.Add("Demartología", $"{Dermatologia}");*/
+        }
 
 
         public string obtenerDiasDisp(int idMedico)
@@ -65,7 +165,7 @@ namespace Negocio
             return diasDisponibles;
         }
 
-        public bool verificiarTurnoMedico(int idMedico, string fecha, string hora)
+        public bool verificarTurnoMedico(int idMedico, string fecha, string hora)
         {
             DataTable dt = daoTurnos.verificarTurnoMedico(idMedico, fecha, hora);
             if (dt != null && dt.Rows.Count > 0)
@@ -74,6 +174,19 @@ namespace Negocio
             }
             return true;
         }
+
+        public bool verificarTurnoPaciente(string dniPaciente, string fecha, string hora)
+        {
+            DataTable dt = daoTurnos.verificarTurnoPaciente(dniPaciente, fecha, hora);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+
         public int guardarTurno(int idMedico, string dniPaciente, string fecha, string hora, string observacion)
         {
             if (!daoTurnos.existePaciente(dniPaciente))
@@ -154,7 +267,7 @@ namespace Negocio
             if (!string.IsNullOrWhiteSpace(dni))
                 filtros.Add("DNI LIKE '%" + dni.Trim().Replace("'", "''") + "%'");
             if (!string.IsNullOrWhiteSpace(paciente))
-                filtros.Add("Paciente LIKE '%" + paciente.Trim().Replace("'", "''") + "%'");
+                filtros.Add("Paciente LIKE '%" + paciente.Trim().Replace("'", "''") + "% COLLATE Latin1_General_CI_AI;'");
             if (!string.IsNullOrWhiteSpace(fecha))
                 filtros.Add("Fecha LIKE '%" + fecha.Trim().Replace("'", "''") + "%'");
             if (!string.IsNullOrEmpty(estado))

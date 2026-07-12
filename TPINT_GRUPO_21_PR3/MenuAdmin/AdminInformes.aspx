@@ -64,7 +64,7 @@
                                     <asp:GridView ID="gvRankingEspecialidades" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered align-middle">
                                         <Columns>
                                             <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
-                                            <asp:BoundField DataField="CantidadTurnos" HeaderText="Cantidad de Turnos" />
+                                            <asp:BoundField DataField="Cantidad" HeaderText="Cantidad de Turnos" />
                                         </Columns>
                                     </asp:GridView>
                                 </div>

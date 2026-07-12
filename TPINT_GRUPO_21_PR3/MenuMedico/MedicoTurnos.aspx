@@ -77,7 +77,7 @@
                                     <asp:BoundField DataField="Observacion" HeaderText="Observacion" />
                                     <asp:TemplateField HeaderText="Estado">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblEstadoActual" runat="server" Text='<%# Eval("Estado") %>' class="btn btn-secondary dropdown-toggle"></asp:Label>
+                                            <asp:Label ID="lblEstadoActual" runat="server" Text='<%# Eval("Estado") %>' CssClass="fw-bold d-block mb-1"></asp:Label>
                                             <asp:RadioButtonList ID="rblPresentismo" runat="server">
                                                 <asp:ListItem Value="Presente">Presente</asp:ListItem>
                                                 <asp:ListItem Value="Ausente">Ausente</asp:ListItem>

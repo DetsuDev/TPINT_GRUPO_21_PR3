@@ -82,12 +82,13 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
             int idTurno = Convert.ToInt32(gvMedicoTurnos.DataKeys[fila.RowIndex].Value);
 
             RadioButtonList rbl = (RadioButtonList)fila.FindControl("rblPresentismo");
-            TextBox txtObs = (TextBox)fila.FindControl("txtObsPresentismo");
+
+            TextBox txtObs = (TextBox)fila.FindControl("txtObservacion");
 
             if (string.IsNullOrEmpty(rbl.SelectedValue))
             {
                 lblMensaje.ForeColor = System.Drawing.Color.Red;
-                lblMensaje.Text = "Seleccione Presente o Ausente.";
+                lblMensaje.Text = "Seleccione Presente o Ausente antes de guardar.";
                 return;
             }
 
@@ -95,8 +96,33 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
             bool ok = negocioTurnos.marcarPresentismo(idTurno, rbl.SelectedValue, txtObs.Text.Trim());
 
             lblMensaje.ForeColor = ok ? System.Drawing.Color.Green : System.Drawing.Color.Red;
-            lblMensaje.Text = ok ? "Presentismo registrado correctamente." : "Hubo un error al registrar el presentismo.";
+            lblMensaje.Text = ok ? "Cambios guardados correctamente." : "Hubo un error al guardar.";
             CargarGrillaTurnos();
+        }
+        protected void gvMedicoTurnos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Label lblEstado = (Label)e.Row.FindControl("lblEstadoActual");
+
+                if (lblEstado != null)
+                {
+                    string estadoActual = lblEstado.Text.Trim().ToUpper();
+
+                    switch (estadoActual)
+                    {
+                        case "PENDIENTE":
+                            lblEstado.ForeColor = System.Drawing.Color.Goldenrod;
+                            break;
+                        case "PRESENTE":
+                            lblEstado.ForeColor = System.Drawing.Color.Green;
+                            break;
+                        case "AUSENTE":
+                            lblEstado.ForeColor = System.Drawing.Color.Red;
+                            break;
+                    }
+                }
+            }
         }
     }
 }

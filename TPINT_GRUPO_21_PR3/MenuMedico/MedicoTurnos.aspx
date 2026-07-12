@@ -67,22 +67,28 @@
                     <div class="card-body p-4">
                         <div class="table-responsive">
                             <asp:GridView ID="gvMedicoTurnos" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered align-middle"
-                                DataKeyNames="ID">
+                                DataKeyNames="ID" OnRowDataBound="gvMedicoTurnos_RowDataBound">
                                 <Columns>
                                     <asp:BoundField DataField="DNI" HeaderText="DNI" />
                                     <asp:BoundField DataField="Paciente" HeaderText="Paciente" />
                                     <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
                                     <asp:BoundField DataField="Hora" HeaderText="Hora" />
-                                    <asp:BoundField DataField="Observacion" HeaderText="Observacion" />
+                                   <asp:TemplateField HeaderText="Observación">
+                                        <ItemTemplate>
+                                            <asp:TextBox ID="txtObservacion" runat="server" TextMode="MultiLine" Rows="2" CssClass="form-control form-control-sm mt-1" Text='<%# Eval("Observacion") %>'></asp:TextBox>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
                                     <asp:TemplateField HeaderText="Estado">
                                         <ItemTemplate>
                                             <asp:Label ID="lblEstadoActual" runat="server" Text='<%# Eval("Estado") %>' CssClass="fw-bold d-block mb-1"></asp:Label>
-                                            <asp:RadioButtonList ID="rblPresentismo" runat="server">
+        
+                                            <asp:RadioButtonList ID="rblPresentismo" runat="server" RepeatDirection="Horizontal" CssClass="d-inline-block">
                                                 <asp:ListItem Value="Presente">Presente</asp:ListItem>
                                                 <asp:ListItem Value="Ausente">Ausente</asp:ListItem>
                                             </asp:RadioButtonList>
-                                            <asp:TextBox ID="txtObsPresentismo" runat="server" CssClass="form-control form-control-sm mt-1" placeholder="Observación" Text='<%# Eval("Observacion") %>'></asp:TextBox>
-                                            <asp:Button ID="btnConfirmarPresentismo" runat="server" Text="Confirmar" CssClass="btn btn-sm btn-primary mt-1" OnClick="btnConfirmarPresentismo_Click" />
+        
+                                            <asp:Button ID="btnConfirmarPresentismo" runat="server" Text="Guardar Cambios" CssClass="btn btn-sm btn-primary mt-1 d-block" OnClick="btnConfirmarPresentismo_Click" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

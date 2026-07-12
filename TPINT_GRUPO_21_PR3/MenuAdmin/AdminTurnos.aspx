@@ -92,14 +92,13 @@
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Fecha</label>
-                                <asp:TextBox ID="txtBuscarFecha" runat="server" CssClass="form-control" placeholder="Ej: 15/06/2026"></asp:TextBox>
+                                <asp:TextBox ID="txtBuscarFecha" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Estado</label>
                                 <asp:DropDownList ID="ddlBuscarEstado" runat="server" CssClass="form-select">
                                     <asp:ListItem Value="">Todos</asp:ListItem>
-                                    <asp:ListItem Value="Presente">Presente</asp:ListItem>
-                                    <asp:ListItem Value="Ausente">Ausente</asp:ListItem>
+                                    <asp:ListItem Value="Confirmado">Confirmado</asp:ListItem>
                                     <asp:ListItem Value="Pendiente">Pendiente</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
@@ -109,6 +108,10 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                
+                <div class="mb-3 text-center">
+                    <asp:Label ID="lblMensajeGeneral" runat="server" CssClass="fw-bold fs-5" Visible="false"></asp:Label>
                 </div>
 
                 <div class="card border-primary mb-5 shadow-sm">
@@ -123,7 +126,6 @@
                                 OnRowDeleting="gvGestionTurnos_RowDeleting"
                                 OnRowEditing="gvGestionTurnos_RowEditing">
                                 <Columns>
-                                    <asp:CommandField ShowEditButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-warning" EditText="Editar" />
                                     <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true" />
                                     <asp:BoundField DataField="Medico" HeaderText="Médico" ReadOnly="true" />
                                     <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" ReadOnly="true" />
@@ -137,7 +139,9 @@
                                              <asp:Label ID="lblEstadoTurno" runat="server" Text='<%# Bind("Estado") %>'></asp:Label>
                                         </ItemTemplate>
                                     </asp:TemplateField>
-                                    <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" />
+                                    <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" >
+<ControlStyle CssClass="btn btn-sm btn-outline-danger"></ControlStyle>
+                                    </asp:CommandField>
                                 </Columns>
                                 <PagerStyle CssClass="pagination justify-content-center pt-3" />
                             </asp:GridView>
@@ -145,9 +149,6 @@
                     </div>
                 </div>
                
-                <div class="mb-3 text-center">
-                    <asp:Label ID="lblMensajeGeneral" runat="server" CssClass="fw-bold fs-5" Visible="false"></asp:Label>
-                </div>
 
                 <asp:Button ID="btnNuevoTurno" runat="server" Text="Nuevo Turno" CssClass="btn btn-primary" OnClick="btnNuevoTurno_Click" CausesValidation="false" />
 

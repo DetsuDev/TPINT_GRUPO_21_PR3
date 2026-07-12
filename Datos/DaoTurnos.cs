@@ -95,7 +95,7 @@ namespace Datos
             return ds.obtenerTabla(consulta);
         }
 
-        public DataTable verificarTurnoDia(int idMedica, DateTime dia)
+        public DataTable verificarDia(int idMedica, DateTime dia)
         {
             string consulta = $@"
             SELECT Id_Turno 
@@ -106,7 +106,7 @@ namespace Datos
             return ds.obtenerTabla(consulta);
         }
 
-        public DataTable obtenerEspecialidadesAlta()
+        public DataTable getEspecialidadesAlta()
         {
             string consulta = "SELECT Id_Especialidad, Nombre FROM ESPECIALIDADES";
             return ds.obtenerTabla(consulta);
@@ -126,7 +126,7 @@ namespace Datos
             return ds.obtenerTabla(consulta);
         }
 
-        public DataTable obtenerMedicosDisponibles(int idEspecialidad, string letraDia, string horaTipeada)
+        public DataTable getMedicosDisponibles(int idEspecialidad, string letraDia, string horaTipeada)
         {
             string consultaMedicos = $@"
             SELECT M.Id_Medico, (P.Nombre + ' ' + P.Apellido) AS NombreCompleto

@@ -42,14 +42,21 @@
                                 <div class="row g-3 mb-4">
                                     <div class="col-6">
                                         <label class="form-label font-weight-bold">Fecha Inicio</label>
-                                        <asp:TextBox ID="txtFechaInicio" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="rfvFechaInicioProductividad" runat="server" ErrorMessage="*" ControlToValidate="txtFechaInicioProductividad" ForeColor="Red" ValidationGroup="informeProductividad"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revFechaInicioProductividad" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtFechaInicioProductividad" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" ValidationGroup="informeProductividad"></asp:RegularExpressionValidator>
+                                        <asp:TextBox ID="txtFechaInicioProductividad" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                     </div>
                                     <div class="col-6">
                                         <label class="form-label font-weight-bold">Fecha Fin</label>
-                                        <asp:TextBox ID="txtFechaFin" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                                        <asp:RequiredFieldValidator ID="rfvFechaFinProductividad" runat="server" ErrorMessage="*" ControlToValidate="txtFechaFinProductividad" ForeColor="Red" ValidationGroup="informeProductividad"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revFechaFinProductividad" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtFechaFinProductividad" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" ValidationGroup="informeProductividad"></asp:RegularExpressionValidator>
+                                        <asp:TextBox ID="txtFechaFinProductividad" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                     </div>
+                                    
+                                    <asp:CompareValidator ID="cvFechaProd" runat="server" ControlToValidate="txtFechaFinProductividad" ControlToCompare="txtFechaInicioProductividad" Operator="GreaterThan" Type="Date" ErrorMessage="* La fecha de fin debe ser mayor que la fecha de inicio." ForeColor="Red" ValidationGroup="informeProductividad" />
+
                                     <div class="col-12 text-end">
-                                        <asp:Button ID="btnFiltrarRanking" runat="server" Text="Filtrar" CssClass="btn btn-primary btn-sm px-4" OnClick="btnFiltrarRanking_Click" />
+                                        <asp:Button ID="btnFiltrarRanking" runat="server" Text="Filtrar" CssClass="btn btn-primary btn-sm px-4" OnClick="btnFiltrarRanking_Click" ValidationGroup="informeProductividad" />
                                     </div>
                                 </div>
 

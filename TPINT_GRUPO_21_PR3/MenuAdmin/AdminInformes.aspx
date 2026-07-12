@@ -56,6 +56,9 @@
                                     <asp:CompareValidator ID="cvFechaProd" runat="server" ControlToValidate="txtFechaFinProductividad" ControlToCompare="txtFechaInicioProductividad" Operator="GreaterThan" Type="Date" ErrorMessage="* La fecha de fin debe ser mayor que la fecha de inicio." ForeColor="Red" ValidationGroup="informeProductividad" />
 
                                     <div class="col-12 text-end">
+
+                                        <asp:Button ID="btnLimpiarRanking" runat="server" Text="Limpiar" CssClass="btn btn-secondary btn-sm px-4" OnClick="btnLimpiarRanking_Click" />
+
                                         <asp:Button ID="btnFiltrarRanking" runat="server" Text="Filtrar" CssClass="btn btn-primary btn-sm px-4" OnClick="btnFiltrarRanking_Click" ValidationGroup="informeProductividad" />
                                     </div>
                                 </div>
@@ -64,7 +67,7 @@
                                     <asp:GridView ID="gvRankingEspecialidades" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered align-middle">
                                         <Columns>
                                             <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
-                                            <asp:BoundField DataField="CantidadTurnos" HeaderText="Cantidad de Turnos" />
+                                            <asp:BoundField DataField="Cantidad" HeaderText="Cantidad de Turnos" />
                                         </Columns>
                                     </asp:GridView>
                                 </div>
@@ -102,6 +105,8 @@
                                     <asp:CompareValidator ID="cvFecha" runat="server" ControlToValidate="txtFechaFinPresentismo" ControlToCompare="txtFechaInicioPresentismo" Operator="GreaterThan" Type="Date" ErrorMessage="* La fecha de fin debe ser mayor que la fecha de inicio." ForeColor="Red" ValidationGroup="informeFecha" />
 
                                     <div class="col-12 text-end">
+
+                                        <asp:Button ID="btnLimpiarRanking0" runat="server" Text="Limpiar" CssClass="btn btn-secondary btn-sm px-4" OnClick="btnLimpiarInforme_Click" />
 
                                         <asp:Button ID="btnInformeFechas" runat="server" Text="Generar" CssClass="btn btn-primary btn-sm px-4" OnClick="btnInformeFechas_Click" ValidationGroup="informeFecha" />
                                     </div>

@@ -95,6 +95,8 @@ namespace Datos
             return ds.obtenerTabla(consulta);
         }
 
+
+
         public DataTable verificarDia(int idMedica, DateTime dia)
         {
             string consulta = $@"

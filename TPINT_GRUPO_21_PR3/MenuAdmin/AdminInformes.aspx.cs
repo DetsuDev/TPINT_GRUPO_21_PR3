@@ -14,12 +14,11 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 {
     public partial class Informes : System.Web.UI.Page
     {
-        DataTable informeTotal = new DataTable();
         protected void Page_Load(object sender, EventArgs e)
         {
             ocultarInformes();
             informeSegunFecha.Visible = true;
-            ocultarBarras();
+            //ocultarBarras();
 
             Usuario user = (Usuario)Session["UsuarioLogueado"];
 
@@ -31,72 +30,19 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             lblNombreUsuario.Text = user.persona.Nombre + " " + user.persona.Apellido;
 
-
-                informeTotal = CargarRankingMock();
+             CargarRankingMock();
             
 
         }
-
-        private DataTable CargarRankingMock()
+        private void CargarRankingMock()
         {
-            /*
-            dt.Columns.Add("Especialidad");
-            dt.Columns.Add("CantidadTurnos");
+            NegocioTurnos negTurnos = new NegocioTurnos();
+            DataTable dt = negTurnos.filtrarRanking("2001-00-00", "2050-12-31");
 
-            dt.Rows.Add("Pediatria", "30");
-            dt.Rows.Add("Traumatologia", "22");
-            dt.Rows.Add("Odontologia", "19");
-            dt.Rows.Add("Cardiologia", "15");
-            dt.Rows.Add("Demartología", "14");
-            dt.Rows.Add("Clinica Médica", "9");
-            */
-
-            DataTable dt = new DataTable();
-            
-            NegocioTurnos negTurno = new NegocioTurnos();
-
-            dt = negTurno.getTabla();
-
-            int Pediatria = 0;
-            int Traumatologia = 0;
-            int Cardiologia = 0;
-            int Dermatologia = 0;
-
-            foreach (DataRow dr in dt.Rows) {
-                switch ((string)dr["Especialidad"])
-                {
-                    case "Cardiología":
-                        Cardiologia++;
-                        break;
-
-                    case "Pediatría":
-                        Pediatria++;
-                        break;
-
-                    case "Traumatología":
-                        Traumatologia++;
-                        break;
-
-                    case "Dermatología":
-                        Dermatologia++;
-                        break;
-                }
-            
-            }
-
-            DataTable dt2 = new DataTable();
-
-            dt2.Columns.Add("Especialidad");
-            dt2.Columns.Add("CantidadTurnos");
-            dt2.Rows.Add("Pediatria", $"{Pediatria}");
-            dt2.Rows.Add("Traumatologia", $"{Traumatologia}");
-            dt2.Rows.Add("Cardiologia", $"{Cardiologia}");
-            dt2.Rows.Add("Demartología", $"{Dermatologia}");
-
-            gvRankingEspecialidades.DataSource = dt2;
+            gvRankingEspecialidades.DataSource = dt;
             gvRankingEspecialidades.DataBind();
+            return;
 
-            return dt;
         }
         
 
@@ -132,6 +78,9 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
 
             barraRoja.Visible = true;
+
+            txtFechaInicioProductividad.Text = "dd/mm/aaaa";
+            txtFechaFinProductividad.Text = "dd/mm/aaaa";
 
         }
 
@@ -194,59 +143,38 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void btnFiltrarRanking_Click(object sender, EventArgs e)
         {
-            DataTable dt = informeTotal;
+
 
             string minFechaString = txtFechaInicioProductividad.Text;
             string maxFechaString = txtFechaFinProductividad.Text;
 
-            string formato = "yyyy-MM-dd";
+            NegocioTurnos neg = new NegocioTurnos();
 
-            DateTime.TryParseExact(minFechaString, formato, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime minFecha);
-            DateTime.TryParseExact(maxFechaString, formato, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime maxFecha);
-
-            DataTable dt2 = new DataTable();
-
-            int Pediatria = 0;
-            int Traumatologia = 0;
-            int Cardiologia = 0;
-            int Dermatologia = 0;
-
-            foreach (DataRow dr in dt.Rows)
-            {
-
-                    if (((DateTime)dr["FechaDateTime"] >= minFecha) && ((DateTime)dr["FechaDateTime"] <= maxFecha))
-                    {
-                        switch ((string)dr["Especialidad"])
-                        {
-                            case "Cardiología":
-                                Cardiologia++;
-                                break;
-
-                            case "Pediatría":
-                                Pediatria++;
-                                break;
-
-                            case "Traumatología":
-                                Traumatologia++;
-                                break;
-
-                            case "Dermatología":
-                                Dermatologia++;
-                                break;
-                        }
-                    }
-                
-            }
-
-            dt2.Columns.Add("Especialidad");
-            dt2.Columns.Add("CantidadTurnos");
-            dt2.Rows.Add("Pediatria", $"{Pediatria}");
-            dt2.Rows.Add("Traumatologia", $"{Traumatologia}");
-            dt2.Rows.Add("Cardiologia", $"{Cardiologia}");
-            dt2.Rows.Add("Demartología", $"{Dermatologia}");
-
+            DataTable dt2 = neg.filtrarRanking(minFechaString, maxFechaString);
+            
+           
             gvRankingEspecialidades.DataSource = dt2;
             gvRankingEspecialidades.DataBind();
+
+            txtFechaInicioPresentismo.Text = "dd/mm/aaaa";
+            txtFechaFinPresentismo.Text = "dd/mm/aaaa";
+        }
+
+        protected void btnLimpiarRanking_Click(object sender, EventArgs e)
+        {
+
+            CargarRankingMock();
+
+            txtFechaInicioProductividad.Text = "dd/mm/aaaa";
+            txtFechaFinProductividad.Text = "dd/mm/aaaa";
+
+        }
+
+        protected void btnLimpiarInforme_Click(object sender, EventArgs e)
+        {
+
+            txtFechaInicioPresentismo.Text = "dd/mm/aaaa";
+            txtFechaFinPresentismo.Text = "dd/mm/aaaa";
         }
     }
 }

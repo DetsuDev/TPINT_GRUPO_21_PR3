@@ -30,7 +30,25 @@ namespace Negocio
         {
             return daoTurnos.getDisponibilidadPorMedico(idMedico);
         }
-
+        public bool verificarTurnoDia(int idMedico, DateTime dia)
+        {
+            DataTable dt = daoTurnos.verificarTurnoDia(idMedico, dia);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return false;
+            }
+            return true;
+        }
+        
+        public bool verificarTurnoMedico(int idMedico, string fecha, string hora)
+        {
+            DataTable dt = daoTurnos.verificarTurnoMedico(idMedico, fecha, hora);
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return false;
+            }
+            return true;
+        }
         public int guardarTurno(int idMedico, string dniPaciente, string fecha, string hora, string observacion)
         {
             if (!daoTurnos.existePaciente(dniPaciente))

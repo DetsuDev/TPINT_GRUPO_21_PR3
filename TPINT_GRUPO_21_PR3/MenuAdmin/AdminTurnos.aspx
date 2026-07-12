@@ -177,7 +177,7 @@
                                     <asp:DropDownList ID="ddlAltaMedico" runat="server" CssClass="form-select" OnSelectedIndexChanged="ddlAltaMedico_SelectedIndexChanged" AutoPostBack="True"></asp:DropDownList>
                                 </div>
                                 <div class="col-md-3">
-                                    <asp:Calendar ID="cFechasTurnos" runat="server" OnDayRender="cFechasTurnos_DayRender" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="#003399" Height="200px" Width="220px">
+                                    <asp:Calendar ID="cFechasTurnos" runat="server" OnDayRender="cFechasTurnos_DayRender" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="#003399" Height="200px" Width="220px" OnSelectionChanged="cFechasTurnos_SelectionChanged">
                                         <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
                                         <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
                                         <OtherMonthDayStyle ForeColor="#999999" />
@@ -193,7 +193,10 @@
                                     <asp:RequiredFieldValidator ID="rfvHora" runat="server" ErrorMessage="*" ControlToValidate="txtHora" ForeColor="Red" ValidationGroup="vgAltaTurno"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="revHora" runat="server" ErrorMessage="* Formato HH:MM" ValidationExpression="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" ControlToValidate="txtHora" ForeColor="Red" Display="Dynamic" ValidationGroup="vgAltaTurno"></asp:RegularExpressionValidator>
                                     <asp:TextBox ID="txtHora" runat="server" CssClass="form-control" placeholder="Ej: 10:30" AutoPostBack="True" OnTextChanged="txtFechaHora_TextChanged"></asp:TextBox>
-                                    <asp:DropDownList ID="ddlHora" CssClass="form-select" runat="server"></asp:DropDownList>
+                                    
+                                
+                                    <asp:DropDownList ID="ddlHora" runat="server" CssClass="form-select">
+                                    </asp:DropDownList>
                                 </div>
                                 </div>
                                 <div class="col-md-8">

@@ -95,6 +95,17 @@ namespace Datos
             return ds.obtenerTabla(consulta);
         }
 
+        public DataTable verificarTurnoDia(int idMedica, DateTime dia)
+        {
+            string consulta = $@"
+            SELECT Id_Turno 
+            FROM TURNO 
+            WHERE Id_Medico = {idMedica} 
+              AND Fecha = '{dia:yyyy-MM-dd}' 
+              AND Estado = 1";
+            return ds.obtenerTabla(consulta);
+        }
+
         public DataTable obtenerEspecialidadesAlta()
         {
             string consulta = "SELECT Id_Especialidad, Nombre FROM ESPECIALIDADES";
@@ -114,6 +125,7 @@ namespace Datos
 
             return ds.obtenerTabla(consulta);
         }
+
         public DataTable obtenerMedicosDisponibles(int idEspecialidad, string letraDia, string horaTipeada)
         {
             string consultaMedicos = $@"

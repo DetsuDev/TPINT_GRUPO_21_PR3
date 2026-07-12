@@ -210,6 +210,52 @@ namespace Negocio
             return guardadoCorrecto ? 1 : -4;
         }
 
+        public float[] getPresentismoSegunEspecialidad(int idEspecialidad)
+        {
+
+            float[] presentismo = new float[3];
+            int totalTurnos = 0;
+            int totalConfirmados = 0;
+            DataTable dt = daoTurnos.getPresentismoSegunEspecialidad(idEspecialidad);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                totalTurnos++;
+
+                if (row["EstadoTurno"] != DBNull.Value && row["EstadoTurno"].ToString() == "Presente")
+                {
+                    totalConfirmados++;
+                }
+            }
+            presentismo[0] = (float)Math.Round((float)totalConfirmados / totalTurnos * 100, 2);
+            presentismo[1] = totalConfirmados;
+            presentismo[2] = totalTurnos;
+            return presentismo;
+        }
+
+
+        public float[] getPresentismoSegunMedico(int idMedico)
+        {
+
+            float[] presentismo = new float[3];
+            int totalTurnos = 0;
+            int totalConfirmados = 0;
+            DataTable dt = daoTurnos.getPresentismoSegunMedico(idMedico);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                totalTurnos++;
+
+                if (row["EstadoTurno"] != DBNull.Value && row["EstadoTurno"].ToString() == "Presente")
+                {
+                    totalConfirmados++;
+                }
+            }
+            presentismo[0] = (float)Math.Round((float)totalConfirmados / totalTurnos * 100, 2);
+            presentismo[1] = totalConfirmados;
+            presentismo[2] = totalTurnos;
+            return presentismo;
+        }
         public float[] calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
         {
             float[] presentismo = new float[3];
@@ -269,7 +315,7 @@ namespace Negocio
             if (!string.IsNullOrWhiteSpace(dni))
                 filtros.Add("DNI LIKE '%" + dni.Trim().Replace("'", "''") + "%'");
             if (!string.IsNullOrWhiteSpace(paciente))
-                filtros.Add("Paciente LIKE '%" + paciente.Trim().Replace("'", "''") + "% COLLATE Latin1_General_CI_AI;'");
+                filtros.Add("Paciente LIKE '%" + paciente.Trim().Replace("'", "''") + "%'");
             if (!string.IsNullOrWhiteSpace(fecha))
                 filtros.Add("Fecha LIKE '%" + fecha.Trim().Replace("'", "''") + "%'");
             if (!string.IsNullOrEmpty(estado))

@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using System;
+using Negocio;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -33,11 +34,11 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
         {
             Usuario user = (Usuario)Session["UsuarioLogueado"];
 
-            Negocio.NegocioMedicos negocioMedicos = new Negocio.NegocioMedicos();
+            NegocioMedicos negocioMedicos = new NegocioMedicos();
 
             int idMedico = negocioMedicos.obtenerIdMedicoPorIdPersona(user.IdPersona);
 
-            Negocio.NegocioTurnos negocioTurnos = new Negocio.NegocioTurnos();
+            NegocioTurnos negocioTurnos = new NegocioTurnos();
 
             DataTable dt = negocioTurnos.getTabla(idMedico);
 
@@ -54,6 +55,9 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
             {
                 dv.RowFilter = string.Join(" AND ", filtros);
             }
+
+
+
 
             gvMedicoTurnos.DataSource = dv;
             gvMedicoTurnos.DataBind();

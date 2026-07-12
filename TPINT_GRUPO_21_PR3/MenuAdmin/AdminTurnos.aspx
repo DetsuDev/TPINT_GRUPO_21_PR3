@@ -123,8 +123,7 @@
                             <asp:GridView ID="gvGestionTurnos" runat="server" AutoGenerateColumns="False" AllowPaging="True" PageSize="5"
                                 CssClass="table table-striped table-hover table-bordered align-middle"
                                 OnPageIndexChanging="gvGestionTurnos_PageIndexChanging"
-                                OnRowDeleting="gvGestionTurnos_RowDeleting"
-                                OnRowEditing="gvGestionTurnos_RowEditing">
+                                OnRowDeleting="gvGestionTurnos_RowDeleting">
                                 <Columns>
                                     <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true" />
                                     <asp:BoundField DataField="Medico" HeaderText="Médico" ReadOnly="true" />
@@ -168,7 +167,7 @@
                                     <label class="form-label font-weight-bold">DNI Paciente</label>
                                     <asp:RequiredFieldValidator ID="rfvDni" runat="server" ErrorMessage="*" ControlToValidate="txtPaciente" ForeColor="Red" ValidationGroup="vgAltaTurno"></asp:RequiredFieldValidator>
                                     <asp:RegularExpressionValidator ID="revDni" runat="server" ErrorMessage="* Solo números" ValidationExpression="^\d+$" ControlToValidate="txtPaciente" ForeColor="Red" Display="Dynamic" ValidationGroup="vgAltaTurno"></asp:RegularExpressionValidator>
-                                    <asp:TextBox ID="txtPaciente" runat="server" CssClass="form-control" placeholder="Ej: 45123456"></asp:TextBox>
+                                    <asp:TextBox ID="txtPaciente" runat="server" CssClass="form-control" placeholder="Ej: 45123456" OnTextChanged="txtPaciente_TextChanged"></asp:TextBox>
                                      <label class="form-label">Especialidad</label>
                                     <asp:RequiredFieldValidator ID="rfvEspecialidad" runat="server" ErrorMessage="*" ControlToValidate="ddlAltaEspecialidad" InitialValue="0" ForeColor="Red" ValidationGroup="vgAltaTurno"></asp:RequiredFieldValidator>
                                     <asp:DropDownList ID="ddlAltaEspecialidad" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlAltaEspecialidad_SelectedIndexChanged">
@@ -191,10 +190,6 @@
                                 </div>
                                 <div class="col-md-3">
                                     <label class="form-label">Hora</label>
-                                    <asp:RequiredFieldValidator ID="rfvHora" runat="server" ErrorMessage="*" ControlToValidate="txtHora" ForeColor="Red" ValidationGroup="vgAltaTurno"></asp:RequiredFieldValidator>
-                                    <asp:RegularExpressionValidator ID="revHora" runat="server" ErrorMessage="* Formato HH:MM" ValidationExpression="^(0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$" ControlToValidate="txtHora" ForeColor="Red" Display="Dynamic" ValidationGroup="vgAltaTurno"></asp:RegularExpressionValidator>
-                                    <asp:TextBox ID="txtHora" runat="server" CssClass="form-control" placeholder="Ej: 10:30" AutoPostBack="True" OnTextChanged="txtFechaHora_TextChanged"></asp:TextBox>
-                                    
                                 
                                     <asp:DropDownList ID="ddlHora" runat="server" CssClass="form-select">
                                     </asp:DropDownList>

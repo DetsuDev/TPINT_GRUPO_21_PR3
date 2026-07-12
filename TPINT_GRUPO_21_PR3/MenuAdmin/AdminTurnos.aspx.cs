@@ -29,6 +29,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 divFormulario.Visible = false; 
                 fullscreenOverlay.Style["display"] = "none";
                 CargarGrillaTurnos();
+
             }
         }
 
@@ -84,6 +85,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 return;
             }
             int idMedico = Convert.ToInt32(ddlAltaMedico.SelectedValue);
+            string dni = txtPaciente.Text.Trim();
             NegocioTurnos negTurnos = new NegocioTurnos();
             DataTable dtHorarios = negTurnos.getDisponibilidadPorMedico(idMedico);
 
@@ -92,13 +94,21 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             int horaInicio = horaInicioTS.Hours;
             int horaFin = horaFinTS.Hours;
+            bool turnoDisponibleMedico = false;
+            bool turnoPacienteDisponible = false;
+            string fechaSeleccionada = cFechasTurnos.SelectedDate.ToString("yyyy-MM-dd");
+            string horaSeleccionada = "";
 
             ddlHora.Items.Clear();
             for (int hora = horaInicio; hora < horaFin; hora++)
             {
-                if (negTurnos.verificiarTurnoMedico(idMedico, cFechasTurnos.SelectedDate.ToString("yyyy-MM-dd"), hora.ToString("D2") + ":00"))
+                horaSeleccionada = hora.ToString("D2") + ":00";
+                turnoDisponibleMedico = negTurnos.verificarTurnoMedico(idMedico, fechaSeleccionada, horaSeleccionada);
+                turnoPacienteDisponible = negTurnos.verificarTurnoPaciente(dni, fechaSeleccionada, horaSeleccionada);
+
+                if (turnoDisponibleMedico && turnoPacienteDisponible)
                 {
-                    ddlHora.Items.Add(new ListItem(hora.ToString("D2") + ":00", hora.ToString("D2") + ":00"));
+                    ddlHora.Items.Add(new ListItem(horaSeleccionada, horaSeleccionada));
                 }
             }
 
@@ -107,18 +117,20 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void ddlAltaEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cFechasTurnos.SelectedDates.Clear();
+            ddlHora.Items.Clear();
+            ddlHora.Items.Insert(0, new ListItem("Seleccione Medico y Fecha", "0"));
             CargarAltaMedicosSegunEsp();
         }
 
         protected void cFechasTurnos_DayRender(object sender, DayRenderEventArgs e)
         {
 
-
             int idMedico = Convert.ToInt32(ddlAltaMedico.SelectedValue);
 
             DateTime minDate = DateTime.Now;
             NegocioTurnos neg = new NegocioTurnos();
-            string diasDisponibles = neg.obtenerDiasDisp(Convert.ToInt32(ddlAltaEspecialidad.SelectedValue));
+            string diasDisponibles = neg.obtenerDiasDisp(Convert.ToInt32(ddlAltaMedico.SelectedValue));
             bool diaDisponible = false;
             char dia = ' ';
 
@@ -163,7 +175,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             for (int hora = horaInicio; hora < horaFin; hora++)
             {
-                if (neg.verificiarTurnoMedico(idMedico, e.Day.Date.ToString("yyyy-MM-dd"), hora.ToString("D2") + ":00"))
+                if (neg.verificarTurnoMedico(idMedico, e.Day.Date.ToString("yyyy-MM-dd"), hora.ToString("D2") + ":00"))
                 {
                     diaDisponible = true;
                     break;
@@ -209,8 +221,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             cFechasTurnos.SelectedDates.Clear();
             ddlHora.Items.Clear();
             ddlHora.Items.Insert(0, new ListItem("Seleccione Medico y Fecha", "0"));
-            txtHora.Text = "";
-            txtHora.Visible = false;
+
             txtObservacionAlta.Text = "";
             ddlAltaEspecialidad.SelectedIndex = 0;
             ddlAltaMedico.SelectedIndex = 0;
@@ -228,12 +239,17 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             rfvMedico.Enabled = true;
         }
 
-        protected void btnCancelarEdicion_Click(object sender, EventArgs e)
+        private void limpiarCampos()
         {
             txtPaciente.Text = string.Empty;
-            txtHora.Text = string.Empty;
+            ddlHora.Items.Clear();
             txtObservacionAlta.Text = string.Empty;
             ddlAltaEspecialidad.SelectedIndex = 0;
+        }
+        
+        protected void btnCancelarEdicion_Click(object sender, EventArgs e)
+        {
+            limpiarCampos();
 
             lblMensajeErrorPopup.Visible = false;
             lblMensajeErrorPopup.Text = "";
@@ -242,10 +258,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlAltaEspecialidad.Enabled = true;
             ddlAltaMedico.Enabled = true;
             CargarMedicosAlta();
-            /*rfvDni.Enabled = true;
-            revDni.Enabled = true;
-            rfvEspecialidad.Enabled = true;
-            rfvMedico.Enabled = true;*/
             hdnIdTurnoEditar.Value = "";
 
             fullscreenOverlay.Style["display"] = "none";
@@ -261,17 +273,12 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             lblMensajeErrorPopup.Visible = false;
             lblMensajeErrorPopup.Text = "";
 
-            if (!string.IsNullOrEmpty(hdnIdTurnoEditar.Value))
-            {
-                GuardarModificacion();
-                return;
-            }
-
             int idMedico = Convert.ToInt32(ddlAltaMedico.SelectedValue);
             string dniPaciente = txtPaciente.Text.Trim();
-            string fecha = cFechasTurnos.SelectedDate.ToString();
-            string hora = txtHora.Text.Trim();
+            string fecha = cFechasTurnos.SelectedDate.ToString("yyyy-MM-dd");
+            string hora = ddlHora.SelectedValue;
             string observacion = txtObservacionAlta.Text.Trim();
+
 
             NegocioTurnos negocioTurnos = new NegocioTurnos();
             int resultado = negocioTurnos.guardarTurno(idMedico, dniPaciente, fecha, hora, observacion);
@@ -284,7 +291,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
                 txtPaciente.Text = "";
                 cFechasTurnos.SelectedDates.Clear();
-                txtHora.Text = "";
+                ddlHora.Items.Clear();
                 txtObservacionAlta.Text = "";
                 ddlAltaEspecialidad.SelectedIndex = 0;
                 ddlAltaMedico.Items.Clear();
@@ -303,14 +310,13 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 else if (resultado == -3) lblMensajeErrorPopup.Text = "El médico seleccionado ya se encuentra ocupado con otro turno en esa misma fecha y hora.";
                 else lblMensajeErrorPopup.Text = "Hubo un error inesperado al procesar el alta del turno.";
             }
-        }
 
-        protected void txtFechaHora_TextChanged(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(hdnIdTurnoEditar.Value)) return;
-            ddlAltaEspecialidad.SelectedIndex = 0;
-            ddlAltaMedico.Items.Clear();
+            ddlAltaMedico.Items.Insert(0, new ListItem("-- Seleccione Especialidad --", "0"));
+            divFormulario.Visible = false;
+            fullscreenOverlay.Style["display"] = "none";
+
         }
+        
 
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
@@ -334,40 +340,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             CargarGrillaTurnos();
         }
 
-        protected void gvGestionTurnos_RowEditing(object sender, GridViewEditEventArgs e)
-        {
-            e.Cancel = true;
-            string idTurno = gvGestionTurnos.Rows[e.NewEditIndex].Cells[1].Text;
-            AbrirEdicion(Convert.ToInt32(idTurno));
-        }
-
-        private void AbrirEdicion(int idTurno)
-        {
-            NegocioTurnos negocio = new NegocioTurnos();
-            DataTable dt = negocio.obtenerTurnoPorId(idTurno);
-            if (dt == null || dt.Rows.Count == 0) return;
-            DataRow r = dt.Rows[0];
-
-            hdnIdTurnoEditar.Value = idTurno.ToString();
-
-            hCargarTurno.InnerText = "Modificar Turno";
-            btnCargar.Text = "Guardar Cambios";
-
-            txtPaciente.Text = r["DNI"].ToString();
-            cFechasTurnos.SelectedDate = Convert.ToDateTime(r["Fecha"]);
-            txtHora.Text = r["Hora"].ToString();
-            txtObservacionAlta.Text = r["Observacion"] == DBNull.Value ? "" : r["Observacion"].ToString();
-
-            CargarEspecialidadesAlta();
-            CargarMedicosAlta();
-            ddlAltaEspecialidad.SelectedValue = r["Id_Especialidad"].ToString();
-
-            ddlAltaMedico.Items.Clear();
-            ddlAltaMedico.Items.Add(new ListItem(r["Medico"].ToString(), r["Id_Medico"].ToString()));
-
-            ocultarEdicion();
-
-        }
 
         protected void CargarMedicosAlta()
         {
@@ -377,68 +349,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlAltaMedico.DataValueField = "Id_Medico";
             ddlAltaMedico.DataBind();
             ddlAltaMedico.Items.Insert(0, new ListItem("-- Seleccione Medico --", "0"));
-        }
-
-        private void ocultarEdicion()
-        {
-
-            txtPaciente.Enabled = false;
-            ddlAltaEspecialidad.Enabled = false;
-            ddlAltaMedico.Enabled = false;
-            rfvDni.Enabled = false;
-            revDni.Enabled = false;
-            rfvEspecialidad.Enabled = false;
-            rfvMedico.Enabled = false;
-
-            lblMensajeGeneral.Visible = false;
-            lblMensajeErrorPopup.Visible = false;
-            lblMensajeErrorPopup.Text = "";
-            fullscreenOverlay.Style["display"] = "block";
-            divFormulario.Visible = true;
-            divEliminar.Visible = false;
-        }
-
-        private void GuardarModificacion()
-        {
-            int idTurno = Convert.ToInt32(hdnIdTurnoEditar.Value);
-
-            Negocio.NegocioTurnos negocio = new Negocio.NegocioTurnos();
-            DataTable dt = negocio.obtenerTurnoPorId(idTurno);
-            if (dt == null || dt.Rows.Count == 0) return;
-            DataRow r = dt.Rows[0];
-
-            int idMedico = Convert.ToInt32(r["Id_Medico"]);
-            string dniPaciente = r["DNI"].ToString();
-            string fecha = cFechasTurnos.SelectedDate.ToString();
-            string hora = txtHora.Text.Trim();
-            string observacion = txtObservacionAlta.Text.Trim();
-
-            int resultado = negocio.modificarTurno(idTurno, idMedico, dniPaciente, fecha, hora, observacion);
-
-            if (resultado == 1)
-            {
-                lblMensajeGeneral.Text = "¡El turno se modificó correctamente!";
-                lblMensajeGeneral.ForeColor = System.Drawing.Color.Green;
-                lblMensajeGeneral.Visible = true;
-
-                hdnIdTurnoEditar.Value = "";
-                txtPaciente.Enabled = true;
-                ddlAltaEspecialidad.Enabled = true;
-                ddlAltaMedico.Enabled = true;
-                activarValidaciones();
-
-                fullscreenOverlay.Style["display"] = "none";
-                divFormulario.Visible = false;
-                CargarGrillaTurnos();
-            }
-            else
-            {
-                fullscreenOverlay.Style["display"] = "flex";
-                lblMensajeErrorPopup.Visible = true;
-                if (resultado == -2) lblMensajeErrorPopup.Text = "El paciente ya posee un turno para esa misma fecha y hora.";
-                else if (resultado == -3) lblMensajeErrorPopup.Text = "El médico ya se encuentra ocupado en esa misma fecha y hora.";
-                else lblMensajeErrorPopup.Text = "Hubo un error inesperado al modificar el turno.";
-            }
         }
 
         protected void gvGestionTurnos_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -453,7 +363,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             lblMensajeGeneral.Visible = false;
 
-            string idTurno = gvGestionTurnos.Rows[e.RowIndex].Cells[1].Text;
+            string idTurno = gvGestionTurnos.Rows[e.RowIndex].Cells[0].Text;
             hdnIdTurnoEliminar.Value = idTurno;
 
             fullscreenOverlay.Style["display"] = "block"; 
@@ -467,7 +377,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             {
                 int idTurno = Convert.ToInt32(hdnIdTurnoEliminar.Value);
 
-                Negocio.NegocioTurnos negocio = new Negocio.NegocioTurnos();
+                NegocioTurnos negocio = new NegocioTurnos();
                 bool exito = negocio.eliminarTurno(idTurno);
 
                 if (exito)
@@ -498,56 +408,13 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             CargarGrillaTurnos();
         }
 
-
-        private void CargarHorarios(int idMedico)
-        {
-            ddlHora.Items.Clear();
-            NegocioMedicos negMed = new NegocioMedicos();
-            Medico med = new Medico { IdMedico = idMedico };
-
-            DataTable dt = negMed.getHorariosMedicoSeleccionado(med);
-
-            ddlHora.Items.Clear();
-            if (dt == null || dt.Rows.Count == 0) return;
-
-            object raw = dt.Rows[0]["Horas"];
-            if (raw == null || raw == DBNull.Value) return;
-
-            string horaStr = null;
-            if (raw is TimeSpan ts) horaStr = ts.ToString(@"hh\:mm");
-            else if (raw is DateTime dtVal) horaStr = dtVal.ToString("HH:mm");
-            else horaStr = raw.ToString();
-
-            if (horaStr.Length >= 5) horaStr = horaStr.Substring(0, 5);
-
-            if (horaStr == "10:00")
-                {
-                    ddlHora.Items.Add(new ListItem("10:00hs", "1"));
-                    ddlHora.Items.Add(new ListItem("11:00hs", "2"));
-                    ddlHora.Items.Add(new ListItem("12:00hs", "3"));
-                    ddlHora.Items.Add(new ListItem("13:00hs", "4"));
-                    ddlHora.Items.Add(new ListItem("14:00hs", "5"));
-                    ddlHora.Items.Add(new ListItem("15:00hs", "6"));
-                    ddlHora.Items.Add(new ListItem("16:00hs", "7"));
-                    ddlHora.Items.Add(new ListItem("17:00hs", "8"));
-                    ddlHora.Items.Add(new ListItem("18:00hs", "9"));
-                }
-                else
-                {
-                    ddlHora.Items.Add(new ListItem("08:00hs", "10"));
-                    ddlHora.Items.Add(new ListItem("09:00hs", "11"));
-                    ddlHora.Items.Add(new ListItem("10:00hs", "12"));
-                    ddlHora.Items.Add(new ListItem("11:00hs", "13"));
-                    ddlHora.Items.Add(new ListItem("12:00hs", "14"));
-                    ddlHora.Items.Add(new ListItem("13:00hs", "15"));
-                    ddlHora.Items.Add(new ListItem("14:00hs", "16"));
-                    ddlHora.Items.Add(new ListItem("15:00hs", "17"));
-                    ddlHora.Items.Add(new ListItem("16:00hs", "18"));
-                }
-        }
-
         protected void ddlAltaMedico_SelectedIndexChanged(object sender, EventArgs e)
         {
+
+            cFechasTurnos.SelectedDates.Clear();
+            //cFechasTurnos.DataBind();
+            ddlHora.Items.Clear();
+            ddlHora.Items.Insert(0, new ListItem("Seleccione Medico y Fecha", "0"));
             NegocioMedicos neg = new NegocioMedicos();
             DataTable dt = neg.getTabla();
             ddlAltaEspecialidad.ClearSelection();
@@ -565,6 +432,13 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         {
 
             obtenerHorariosDisponibles();
+        }
+
+        protected void txtPaciente_TextChanged(object sender, EventArgs e)
+        {
+            cFechasTurnos.SelectedDates.Clear();
+            ddlHora.Items.Clear();
+            ddlHora.Items.Insert(0, new ListItem("Seleccione Medico y Fecha", "0"));
         }
     }
 }

@@ -96,6 +96,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.CompareValidator cvFechaProd;
 
         /// <summary>
+        /// Control btnLimpiarRanking.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLimpiarRanking;
+
+        /// <summary>
         /// Control btnFiltrarRanking.
         /// </summary>
         /// <remarks>
@@ -193,6 +202,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CompareValidator cvFecha;
+
+        /// <summary>
+        /// Control btnLimpiarRanking0.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLimpiarRanking0;
 
         /// <summary>
         /// Control btnInformeFechas.

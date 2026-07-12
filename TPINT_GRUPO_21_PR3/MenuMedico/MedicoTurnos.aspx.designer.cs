@@ -33,6 +33,15 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// Control lblMensaje.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensaje;
+
+        /// <summary>
         /// Control txtBuscarDni.
         /// </summary>
         /// <remarks>
@@ -60,6 +69,15 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
         protected global::System.Web.UI.WebControls.TextBox txtBuscarFecha;
 
         /// <summary>
+        /// Control revFecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revFecha;
+
+        /// <summary>
         /// Control btnBuscar.
         /// </summary>
         /// <remarks>
@@ -85,10 +103,5 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvMedicoTurnos;
-
-        /// <summary>
-        /// Control lblMensaje.
-        /// </summary>
-        protected global::System.Web.UI.WebControls.Label lblMensaje;
     }
 }

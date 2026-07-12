@@ -50,6 +50,8 @@
                             <div class="col-md-4">
                                 <label class="form-label">Fecha</label>
                                 <asp:TextBox ID="txtBuscarFecha" runat="server" CssClass="form-control" placeholder="Ej: 15/06/2026"></asp:TextBox>
+                                <asp:RegularExpressionValidator ID="revFecha" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtBuscarFecha" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" ValidationGroup="informeProductividad"></asp:RegularExpressionValidator>
+                                        
                             </div>
                             <div class="col-12 text-end pt-3">
                                 <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary px-4" OnClick="btnBuscar_Click" />
@@ -75,7 +77,7 @@
                                     <asp:BoundField DataField="Observacion" HeaderText="Observacion" />
                                     <asp:TemplateField HeaderText="Estado">
                                         <ItemTemplate>
-                                            <asp:Label ID="lblEstadoActual" runat="server" Text='<%# Eval("Estado") %>' CssClass="fw-bold d-block mb-1"></asp:Label>
+                                            <asp:Label ID="lblEstadoActual" runat="server" Text='<%# Eval("Estado") %>' class="btn btn-secondary dropdown-toggle"></asp:Label>
                                             <asp:RadioButtonList ID="rblPresentismo" runat="server">
                                                 <asp:ListItem Value="Presente">Presente</asp:ListItem>
                                                 <asp:ListItem Value="Ausente">Ausente</asp:ListItem>

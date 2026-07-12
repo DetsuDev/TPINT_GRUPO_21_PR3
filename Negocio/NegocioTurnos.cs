@@ -1,4 +1,5 @@
 ﻿using Datos;
+using Entidades;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -17,30 +18,54 @@ namespace Negocio
             return daoTurnos.getTabla(idMedico);
         }
 
-        public DataTable obtenerEspecialidadesAlta()
+        public DataTable getEspecialidadesAlta()
         {
-            return daoTurnos.obtenerEspecialidadesAlta();
+            return daoTurnos.getEspecialidadesAlta();
         }
 
-        public DataTable obtenerMedicosDisponibles(int idEspecialidad, string letraDia, string horaTipeada)
+        public DataTable getMedicosDisponibles(int idEspecialidad, string letraDia, string horaTipeada)
         {
-            return daoTurnos.obtenerMedicosDisponibles(idEspecialidad, letraDia, horaTipeada);
+            return daoTurnos.getMedicosDisponibles(idEspecialidad, letraDia, horaTipeada);
         }
         public DataTable getDisponibilidadPorMedico(int idMedico)
         {
             return daoTurnos.getDisponibilidadPorMedico(idMedico);
         }
-        public bool verificarTurnoDia(int idMedico, DateTime dia)
+        public bool verificarDia(int idMedico, DateTime dia)
         {
-            DataTable dt = daoTurnos.verificarTurnoDia(idMedico, dia);
+            DataTable dt = daoTurnos.verificarDia(idMedico, dia);
             if (dt != null && dt.Rows.Count > 0)
             {
                 return false;
             }
             return true;
         }
-        
-        public bool verificarTurnoMedico(int idMedico, string fecha, string hora)
+
+
+
+        public string obtenerDiasDisp(int idMedico)
+        {
+            NegocioTurnos neg = new NegocioTurnos();
+            DataTable dt = neg.getDisponibilidadPorMedico(idMedico);
+
+            string diasDisponibles = "";
+
+            foreach (DataRow dr in dt.Rows)
+            {
+                string dias = dr["DiasDisponibles"].ToString();
+
+                foreach (char dia in dias)
+                {
+                    if (!diasDisponibles.Contains(dia))
+                    {
+                        diasDisponibles += dia;
+                    }
+                }
+            }
+            return diasDisponibles;
+        }
+
+        public bool verificiarTurnoMedico(int idMedico, string fecha, string hora)
         {
             DataTable dt = daoTurnos.verificarTurnoMedico(idMedico, fecha, hora);
             if (dt != null && dt.Rows.Count > 0)
@@ -119,5 +144,28 @@ namespace Negocio
             return daoTurnos.eliminarTurno(idTurno) > 0;
         }
 
+        public DataTable getTurnos(string dni, string paciente, string fecha, string estado)
+        {
+
+            NegocioTurnos negocioTurnos = new NegocioTurnos();
+            DataTable dt = negocioTurnos.getTabla();
+
+            List<string> filtros = new List<string>();
+            if (!string.IsNullOrWhiteSpace(dni))
+                filtros.Add("DNI LIKE '%" + dni.Trim().Replace("'", "''") + "%'");
+            if (!string.IsNullOrWhiteSpace(paciente))
+                filtros.Add("Paciente LIKE '%" + paciente.Trim().Replace("'", "''") + "%'");
+            if (!string.IsNullOrWhiteSpace(fecha))
+                filtros.Add("Fecha LIKE '%" + fecha.Trim().Replace("'", "''") + "%'");
+            if (!string.IsNullOrEmpty(estado))
+                filtros.Add("Estado = '" + estado.Replace("'", "''") + "'");
+
+            DataView dv = dt.DefaultView;
+            if (filtros.Count > 0)
+            {
+                dv.RowFilter = string.Join(" AND ", filtros);
+            }
+            return dt;
+        }
     }
 }

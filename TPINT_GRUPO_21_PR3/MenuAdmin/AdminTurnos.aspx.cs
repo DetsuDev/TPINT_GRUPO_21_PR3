@@ -29,40 +29,21 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 divFormulario.Visible = false; 
                 fullscreenOverlay.Style["display"] = "none";
                 CargarGrillaTurnos();
-                CargarEspecialidadesAlta();
-                CargarMedicosAlta();
             }
         }
 
         private void CargarGrillaTurnos()
         {
-            Negocio.NegocioTurnos negocioTurnos = new Negocio.NegocioTurnos();
-            DataTable dt = negocioTurnos.getTabla();
-
-            List<string> filtros = new List<string>();
-            if (!string.IsNullOrWhiteSpace(txtBuscarDni.Text))
-                filtros.Add("DNI LIKE '%" + txtBuscarDni.Text.Trim().Replace("'", "''") + "%'");
-            if (!string.IsNullOrWhiteSpace(txtBuscarPaciente.Text))
-                filtros.Add("Paciente LIKE '%" + txtBuscarPaciente.Text.Trim().Replace("'", "''") + "%'");
-            if (!string.IsNullOrWhiteSpace(txtBuscarFecha.Text))
-                filtros.Add("Fecha LIKE '%" + txtBuscarFecha.Text.Trim().Replace("'", "''") + "%'");
-            if (!string.IsNullOrEmpty(ddlBuscarEstado.SelectedValue))
-                filtros.Add("Estado = '" + ddlBuscarEstado.SelectedValue.Replace("'", "''") + "'");
-
-            DataView dv = dt.DefaultView;
-            if (filtros.Count > 0)
-            {
-                dv.RowFilter = string.Join(" AND ", filtros);
-            }
-
-            gvGestionTurnos.DataSource = dv;
+            NegocioTurnos neg = new NegocioTurnos();
+            DataTable dt = neg.getTurnos(txtBuscarDni.Text, txtBuscarPaciente.Text, txtBuscarFecha.Text, ddlBuscarEstado.SelectedValue);
+            gvGestionTurnos.DataSource = dt;
             gvGestionTurnos.DataBind();
         }
 
         private void CargarEspecialidadesAlta()
         {
             NegocioTurnos negocioTurnos = new NegocioTurnos();
-            DataTable dt = negocioTurnos.obtenerEspecialidadesAlta();
+            DataTable dt = negocioTurnos.getEspecialidadesAlta();
 
             ddlAltaEspecialidad.DataSource = dt;
             ddlAltaEspecialidad.DataTextField = "Nombre";
@@ -94,29 +75,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         }
 
-        protected string obtenerDiasDisp()
-        {
-            NegocioTurnos neg = new NegocioTurnos();
-            int idMedico = Convert.ToInt32(ddlAltaEspecialidad.SelectedValue);
-            DataTable dt = neg.getDisponibilidadPorMedico(idMedico);
-
-            string diasDisponibles = "";
-
-            foreach (DataRow dr in dt.Rows)
-            {
-                string dias = dr["DiasDisponibles"].ToString();
-
-                foreach (char dia in dias)
-                {
-                    if (!diasDisponibles.Contains(dia))
-                    {
-                        diasDisponibles += dia;
-                    }
-                }
-            }
-            return diasDisponibles;
-        }
-
         protected void obtenerHorariosDisponibles()
         {
             if (ddlAltaEspecialidad.SelectedIndex == 0 || cFechasTurnos.SelectedDates.Count == 0)
@@ -138,18 +96,9 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlHora.Items.Clear();
             for (int hora = horaInicio; hora < horaFin; hora++)
             {
-                string horaBase = hora.ToString("D2");
-
-                string hora00 = horaBase + ":00";
-                if (negTurnos.verificarTurnoMedico(idMedico, cFechasTurnos.SelectedDate.ToString("yyyy-MM-dd"), hora00))
+                if (negTurnos.verificiarTurnoMedico(idMedico, cFechasTurnos.SelectedDate.ToString("yyyy-MM-dd"), hora.ToString("D2") + ":00"))
                 {
-                    ddlHora.Items.Add(new ListItem(hora00, hora00));
-                }
-
-                string hora30 = horaBase + ":30";
-                if (negTurnos.verificarTurnoMedico(idMedico, cFechasTurnos.SelectedDate.ToString("yyyy-MM-dd"), hora30))
-                {
-                    ddlHora.Items.Add(new ListItem(hora30, hora30));
+                    ddlHora.Items.Add(new ListItem(hora.ToString("D2") + ":00", hora.ToString("D2") + ":00"));
                 }
             }
 
@@ -159,52 +108,17 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected void ddlAltaEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarAltaMedicosSegunEsp();
-            //CargarHorarios(ddlAltaEspecialidad.SelectedIndex);
-            /*
-            ddlAltaMedico.Items.Clear();
-
-            int idEspecialidad = Convert.ToInt32(ddlAltaEspecialidad.SelectedValue);
-            if (idEspecialidad == 0 || cFechasTurnos.SelectedDates.Count == 0 || string.IsNullOrWhiteSpace(txtHora.Text))
-            {
-                ddlAltaMedico.Items.Insert(0, new ListItem("Complete Fecha, Hora y Especialidad", "0"));
-                return;
-            }
-
-            try
-            {
-                DateTime fechaSeleccionada = cFechasTurnos.SelectedDate;
-                string letraDia = ObtenerLetraDiaSemana(fechaSeleccionada);
-                string horaTipeada = txtHora.Text.Trim();
-
-                Negocio.NegocioTurnos negocioTurnos = new Negocio.NegocioTurnos();
-                DataTable dtMedicos = negocioTurnos.obtenerMedicosDisponibles(idEspecialidad, letraDia, horaTipeada);
-
-                if (dtMedicos != null && dtMedicos.Rows.Count > 0)
-                {
-                    ddlAltaMedico.DataSource = dtMedicos;
-                    ddlAltaMedico.DataTextField = "NombreCompleto";
-                    ddlAltaMedico.DataValueField = "Id_Medico";
-                    ddlAltaMedico.DataBind();
-                    ddlAltaMedico.Items.Insert(0, new ListItem("-- Seleccione Médico --", "0"));
-                }
-                else
-                {
-                    ddlAltaMedico.Items.Insert(0, new ListItem("No hay médicos disponibles en ese horario", "0"));
-                }
-            }
-            catch (Exception)
-            {
-                ddlAltaMedico.Items.Insert(0, new ListItem("Error al calcular disponibilidad", "0"));
-            }*/
         }
 
         protected void cFechasTurnos_DayRender(object sender, DayRenderEventArgs e)
         {
 
-            DateTime minDate = DateTime.Now;
-            string diasDisponibles = obtenerDiasDisp();
+
             int idMedico = Convert.ToInt32(ddlAltaMedico.SelectedValue);
+
+            DateTime minDate = DateTime.Now;
             NegocioTurnos neg = new NegocioTurnos();
+            string diasDisponibles = neg.obtenerDiasDisp(Convert.ToInt32(ddlAltaEspecialidad.SelectedValue));
             bool diaDisponible = false;
             char dia = ' ';
 
@@ -249,19 +163,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             for (int hora = horaInicio; hora < horaFin; hora++)
             {
-                string horaBase = hora.ToString("D2");
-
-                string hora00 = horaBase + ":00";
-
-                if (neg.verificarTurnoMedico(idMedico, e.Day.Date.ToString("yyyy-MM-dd"), hora00))
-                {
-                    diaDisponible = true;
-                    break;
-                }
-
-                string hora30 = horaBase + ":30";
-
-                if (neg.verificarTurnoMedico(idMedico,  e.Day.Date.ToString("yyyy-MM-dd"), hora30))
+                if (neg.verificiarTurnoMedico(idMedico, e.Day.Date.ToString("yyyy-MM-dd"), hora.ToString("D2") + ":00"))
                 {
                     diaDisponible = true;
                     break;
@@ -284,9 +186,12 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         }
 
+
         protected void btnNuevoTurno_Click(object sender, EventArgs e)
         {
-            
+
+            CargarEspecialidadesAlta();
+            CargarMedicosAlta();
             lblMensajeGeneral.Visible = false;
             lblMensajeErrorPopup.Visible = false;
             lblMensajeErrorPopup.Text = "";
@@ -297,10 +202,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             txtPaciente.Enabled = true;
             ddlAltaEspecialidad.Enabled = true;
             ddlAltaMedico.Enabled = true;
-            rfvDni.Enabled = true;
-            revDni.Enabled = true;
-            rfvEspecialidad.Enabled = true;
-            rfvMedico.Enabled = true;
+            activarValidaciones();
             hdnIdTurnoEditar.Value = "";
 
             txtPaciente.Text = "";
@@ -318,6 +220,14 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             divEliminar.Visible = false;
         }
 
+        private void activarValidaciones()
+        {
+            rfvDni.Enabled = true;
+            revDni.Enabled = true;
+            rfvEspecialidad.Enabled = true;
+            rfvMedico.Enabled = true;
+        }
+
         protected void btnCancelarEdicion_Click(object sender, EventArgs e)
         {
             txtPaciente.Text = string.Empty;
@@ -332,27 +242,14 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlAltaEspecialidad.Enabled = true;
             ddlAltaMedico.Enabled = true;
             CargarMedicosAlta();
-            rfvDni.Enabled = true;
+            /*rfvDni.Enabled = true;
             revDni.Enabled = true;
             rfvEspecialidad.Enabled = true;
-            rfvMedico.Enabled = true;
+            rfvMedico.Enabled = true;*/
             hdnIdTurnoEditar.Value = "";
 
             fullscreenOverlay.Style["display"] = "none";
             divFormulario.Visible = false;
-        }
-
-        private string ObtenerLetraDiaSemana(DateTime fecha)
-        {
-            switch (fecha.DayOfWeek)
-            {
-                case DayOfWeek.Monday: return "L";
-                case DayOfWeek.Tuesday: return "M";
-                case DayOfWeek.Wednesday: return "X";
-                case DayOfWeek.Thursday: return "J";
-                case DayOfWeek.Friday: return "V";
-                default: return "Z";
-            }
         }
 
         protected void btnCargar_Click(object sender, EventArgs e)
@@ -462,6 +359,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             txtObservacionAlta.Text = r["Observacion"] == DBNull.Value ? "" : r["Observacion"].ToString();
 
             CargarEspecialidadesAlta();
+            CargarMedicosAlta();
             ddlAltaEspecialidad.SelectedValue = r["Id_Especialidad"].ToString();
 
             ddlAltaMedico.Items.Clear();
@@ -527,10 +425,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 txtPaciente.Enabled = true;
                 ddlAltaEspecialidad.Enabled = true;
                 ddlAltaMedico.Enabled = true;
-                rfvDni.Enabled = true;
-                revDni.Enabled = true;
-                rfvEspecialidad.Enabled = true;
-                rfvMedico.Enabled = true;
+                activarValidaciones();
 
                 fullscreenOverlay.Style["display"] = "none";
                 divFormulario.Visible = false;
@@ -664,12 +559,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                     ddlAltaEspecialidad.SelectedValue = dr["Id_Especialidad"].ToString();
                 }
             }
-            /*
-            
-            if (int.TryParse(ddlAltaMedico.SelectedValue, out int idMedico))
-            {
-                CargarHorarios(idMedico);
-            }*/
         }
 
         protected void cFechasTurnos_SelectionChanged(object sender, EventArgs e)

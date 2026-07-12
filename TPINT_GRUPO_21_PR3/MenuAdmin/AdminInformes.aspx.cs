@@ -196,8 +196,8 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         {
             DataTable dt = informeTotal;
 
-            string minFechaString = txtFechaInicio.Text;
-            string maxFechaString = txtFechaFin.Text;
+            string minFechaString = txtFechaInicioProductividad.Text;
+            string maxFechaString = txtFechaFinProductividad.Text;
 
             string formato = "yyyy-MM-dd";
 

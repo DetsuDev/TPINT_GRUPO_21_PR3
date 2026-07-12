@@ -17,8 +17,10 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected void Page_Load(object sender, EventArgs e)
         {
             ocultarInformes();
-            informeSegunFecha.Visible = true;
-            //ocultarBarras();
+            if (dpInformes.SelectedIndex == 0)
+            {
+                informeSegunFecha.Visible = true;
+            }
 
             Usuario user = (Usuario)Session["UsuarioLogueado"];
 
@@ -30,7 +32,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             lblNombreUsuario.Text = user.persona.Nombre + " " + user.persona.Apellido;
 
-             CargarRankingMock();
+            CargarRankingMock();
             
 
         }
@@ -55,26 +57,9 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             NegocioTurnos negTurnos = new NegocioTurnos();
 
             float[] presentismo = negTurnos.calcularPresentismo(fechaInicio, fechaFin);
-            float pPresentes = presentismo[0];
-            int cConfirmados = (int)presentismo[1];
-            int tTurnos = (int)presentismo[2];
 
-            if (cConfirmados > 0)
-            {
-                barraVerde.Style["width"] = $"{pPresentes.ToString("F2", CultureInfo.InvariantCulture)}%;";
-                barraVerde.InnerText = $"{pPresentes:F2}% ({cConfirmados})";
 
-                barraRoja.Style["width"] = $"{(100 - pPresentes).ToString("F2", CultureInfo.InvariantCulture)}%;";
-                barraRoja.InnerText = $"{100 - pPresentes:F2}% ({tTurnos - cConfirmados})";
-
-                barraVerde.Visible = true;
-            }
-            else
-            {
-                barraRoja.Style["width"] = $"100%";
-                barraRoja.InnerText = $"NO HAY DATOS EN EL INTERVALO INDICADO.";
-
-            }
+            calcularBarra(presentismo[0], (int)presentismo[1], (int)presentismo[2]);
 
 
             barraRoja.Visible = true;
@@ -101,16 +86,21 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             {
                 case 0:
                     ocultarInformes();
+                    ocultarBarras();
                     informeSegunFecha.Visible = true;
+                    txtFechaInicioPresentismo.Text = "dd/mm/aaaa";
+                    txtFechaFinPresentismo.Text = "dd/mm/aaaa";
                     break;
                 case 1:
                     ocultarInformes();
                     cargarEspecialidad();
+                    ocultarBarras();
                     informeSegunEspecialidad.Visible = true;
                     break;
                 case 2:
                     ocultarInformes();
                     cargarMedicos();
+                    ocultarBarras();
                     informeSegunMedico.Visible = true;
                     break;
                 default:
@@ -144,7 +134,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected void btnFiltrarRanking_Click(object sender, EventArgs e)
         {
 
-
             string minFechaString = txtFechaInicioProductividad.Text;
             string maxFechaString = txtFechaFinProductividad.Text;
 
@@ -175,6 +164,59 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             txtFechaInicioPresentismo.Text = "dd/mm/aaaa";
             txtFechaFinPresentismo.Text = "dd/mm/aaaa";
+        }
+
+        private void calcularBarra(float pPresentes, int cPresentes, int tTurnos)
+        {
+
+            if (cPresentes > 0)
+            {
+                barraVerde.Style["width"] = $"{pPresentes.ToString("F2", CultureInfo.InvariantCulture)}%;";
+                barraVerde.InnerText = $"{pPresentes:F2}% ({cPresentes})";
+
+                barraRoja.Style["width"] = $"{(100 - pPresentes).ToString("F2", CultureInfo.InvariantCulture)}%;";
+                barraRoja.InnerText = $"{100 - pPresentes:F2}% ({tTurnos - cPresentes})";
+
+                barraVerde.Visible = true;
+            }
+            else
+            {
+                barraRoja.Style["width"] = $"100%";
+                barraRoja.InnerText = $"NO HAY DATOS CON LOS TERMINOS INDICADOS.";
+
+            }
+        }
+
+
+        protected void btnInformeEspecialidad_Click(object sender, EventArgs e)
+        {
+            int idEspecialiad = ddlEspecialidad.SelectedIndex;
+
+            NegocioTurnos negTurnos = new NegocioTurnos();
+
+            float[] presentismo = negTurnos.getPresentismoSegunEspecialidad(idEspecialiad);
+            
+            calcularBarra(presentismo[0], (int)presentismo[1], (int)presentismo[2]);
+
+            barraRoja.Visible = true;
+
+            informeSegunEspecialidad.Visible = true;
+        }
+
+        protected void btnInformeMedicos_Click(object sender, EventArgs e)
+        {
+
+            int idMedico = ddlMedicos.SelectedIndex;
+
+            NegocioTurnos negTurnos = new NegocioTurnos();
+
+            float[] presentismo = negTurnos.getPresentismoSegunMedico(idMedico);
+
+            calcularBarra(presentismo[0], (int)presentismo[1], (int)presentismo[2]);
+            
+            barraRoja.Visible = true;
+
+            informeSegunMedico.Visible = true;
         }
     }
 }

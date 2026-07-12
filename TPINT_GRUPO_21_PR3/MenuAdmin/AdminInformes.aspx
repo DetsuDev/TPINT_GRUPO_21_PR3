@@ -121,7 +121,7 @@
                                     </div>
 
                                     <div class="text-end">
-                                        <asp:Button ID="btnInformeEspecialidad" runat="server" Text="Generar" CssClass="btn btn-primary btn-sm px-4" />
+                                        <asp:Button ID="btnInformeEspecialidad" runat="server" Text="Generar" CssClass="btn btn-primary btn-sm px-4" OnClick="btnInformeEspecialidad_Click" />
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                         </div>
                                     
                                     <div class="text-end">
-                                        <asp:Button ID="btnInformeMedicos" runat="server" Text="Generar" CssClass="btn btn-primary btn-sm px-4" />
+                                        <asp:Button ID="btnInformeMedicos" runat="server" Text="Generar" CssClass="btn btn-primary btn-sm px-4" OnClick="btnInformeMedicos_Click" />
                                         </div>
                                 </div>
                             </div>

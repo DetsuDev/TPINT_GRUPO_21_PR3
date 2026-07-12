@@ -143,7 +143,28 @@ namespace Datos
 
             return ds.obtenerTabla(consultaMedicos);
         }
+        public DataTable getPresentismoSegunEspecialidad(int idEspecialidad)
+        {
+            string consulta = $@"
+        SELECT T.*
+        FROM TURNO T
+        INNER JOIN MEDICO M
+            ON T.Id_Medico = M.Id_Medico
+        WHERE M.Id_Especialidad = {idEspecialidad}
+          AND T.Estado = 1";
 
+            return ds.obtenerTabla(consulta);
+        }
+        public DataTable getPresentismoSegunMedico(int idMedico)
+        {
+            string consulta = $@"
+        SELECT *
+        FROM TURNO
+        WHERE Id_Medico = {idMedico}
+          AND Estado = 1";
+
+            return ds.obtenerTabla(consulta);
+        }
         public DataTable getPresentismo(DateTime fechaInicio, DateTime fechaFin)
         {
             string consulta = $@"

@@ -47,7 +47,11 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
             if (!string.IsNullOrWhiteSpace(txtBuscarPaciente.Text))
                 filtros.Add("Paciente LIKE '%" + txtBuscarPaciente.Text.Trim().Replace("'", "''") + "%'");
             if (!string.IsNullOrWhiteSpace(txtBuscarFecha.Text))
-                filtros.Add("Fecha LIKE '%" + txtBuscarFecha.Text.Trim().Replace("'", "''") + "%'");
+            {
+                // El calendario (input type=date) envía yyyy-MM-dd; la grilla muestra dd/MM/yyyy → convertir para que matchee
+                if (DateTime.TryParse(txtBuscarFecha.Text.Trim(), out DateTime fechaFiltro))
+                    filtros.Add("Fecha = '" + fechaFiltro.ToString("dd/MM/yyyy") + "'");
+            }
 
             DataView dv = dt.DefaultView;
             if (filtros.Count > 0)

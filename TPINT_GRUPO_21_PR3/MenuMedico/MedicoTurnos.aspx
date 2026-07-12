@@ -49,8 +49,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">Fecha</label>
-                                <asp:TextBox ID="txtBuscarFecha" runat="server" CssClass="form-control" placeholder="Ej: 15/06/2026"></asp:TextBox>
-                                <asp:RegularExpressionValidator ID="revFecha" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtBuscarFecha" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" ValidationGroup="informeProductividad"></asp:RegularExpressionValidator>
+                                <asp:TextBox ID="txtBuscarFecha" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                         
                             </div>
                             <div class="col-12 text-end pt-3">

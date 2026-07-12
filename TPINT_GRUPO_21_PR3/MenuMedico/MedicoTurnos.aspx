@@ -8,6 +8,12 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
 
     <title></title>
+    <style>
+        .table-separada {
+            border-collapse: separate !important;
+            border-spacing: 0 12px;
+        }
+    </style>
 </head>
 <body style="background-color: #f8f9fa;">
 
@@ -66,7 +72,7 @@
                     </div>
                     <div class="card-body p-4">
                         <div class="table-responsive">
-                            <asp:GridView ID="gvMedicoTurnos" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered align-middle"
+                            <asp:GridView ID="gvMedicoTurnos" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered align-middle table-separada"
                                 DataKeyNames="ID" OnRowDataBound="gvMedicoTurnos_RowDataBound">
                                 <Columns>
                                     <asp:BoundField DataField="DNI" HeaderText="DNI" />

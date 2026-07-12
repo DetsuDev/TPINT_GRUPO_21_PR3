@@ -107,20 +107,23 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
 
                 if (lblEstado != null)
                 {
-                    string estadoActual = lblEstado.Text.Trim().ToUpper();
-
-                    switch (estadoActual)
+                    string color;
+                    switch (lblEstado.Text.Trim().ToUpper())
                     {
-                        case "PENDIENTE":
-                            lblEstado.ForeColor = System.Drawing.Color.Goldenrod;
-                            break;
-                        case "PRESENTE":
-                            lblEstado.ForeColor = System.Drawing.Color.Green;
-                            break;
-                        case "AUSENTE":
-                            lblEstado.ForeColor = System.Drawing.Color.Red;
-                            break;
+                        case "PENDIENTE": color = "#FFC107"; break;
+                        case "PRESENTE": color = "#198754"; break;
+                        case "AUSENTE": color = "#DC3545"; break;
+                        default: return;
                     }
+
+                    string borde = "2px solid " + color;
+                    foreach (TableCell celda in e.Row.Cells)
+                    {
+                        celda.Style["border-top"] = borde;
+                        celda.Style["border-bottom"] = borde;
+                    }
+                    e.Row.Cells[0].Style["border-left"] = borde;
+                    e.Row.Cells[e.Row.Cells.Count - 1].Style["border-right"] = borde;
                 }
             }
         }

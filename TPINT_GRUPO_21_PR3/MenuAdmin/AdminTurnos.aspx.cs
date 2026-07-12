@@ -117,6 +117,45 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             return diasDisponibles;
         }
 
+        protected void obtenerHorariosDisponibles()
+        {
+            if (ddlAltaEspecialidad.SelectedIndex == 0 || cFechasTurnos.SelectedDates.Count == 0)
+            {
+                ddlHora.Items.Clear();
+                ddlHora.Items.Insert(0, new ListItem("Seleccione Medico y Fecha", "0"));
+                return;
+            }
+            int idMedico = Convert.ToInt32(ddlAltaMedico.SelectedValue);
+            NegocioTurnos negTurnos = new NegocioTurnos();
+            DataTable dtHorarios = negTurnos.getDisponibilidadPorMedico(idMedico);
+
+            TimeSpan horaInicioTS = (TimeSpan)dtHorarios.Rows[0]["HoraInicio"];
+            TimeSpan horaFinTS = (TimeSpan)dtHorarios.Rows[0]["HoraFin"];
+
+            int horaInicio = horaInicioTS.Hours;
+            int horaFin = horaFinTS.Hours;
+
+            ddlHora.Items.Clear();
+            for (int hora = horaInicio; hora < horaFin; hora++)
+            {
+                string horaBase = hora.ToString("D2");
+
+                string hora00 = horaBase + ":00";
+                if (negTurnos.verificarTurnoMedico(idMedico, cFechasTurnos.SelectedDate.ToString("yyyy-MM-dd"), hora00))
+                {
+                    ddlHora.Items.Add(new ListItem(hora00, hora00));
+                }
+
+                string hora30 = horaBase + ":30";
+                if (negTurnos.verificarTurnoMedico(idMedico, cFechasTurnos.SelectedDate.ToString("yyyy-MM-dd"), hora30))
+                {
+                    ddlHora.Items.Add(new ListItem(hora30, hora30));
+                }
+            }
+
+            return;
+        }
+
         protected void ddlAltaEspecialidad_SelectedIndexChanged(object sender, EventArgs e)
         {
             CargarAltaMedicosSegunEsp();
@@ -164,7 +203,9 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             DateTime minDate = DateTime.Now;
             string diasDisponibles = obtenerDiasDisp();
-
+            int idMedico = Convert.ToInt32(ddlAltaMedico.SelectedValue);
+            NegocioTurnos neg = new NegocioTurnos();
+            bool diaDisponible = false;
             char dia = ' ';
 
             switch (e.Day.Date.DayOfWeek)
@@ -190,13 +231,59 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                     break;
             }
 
+            DataTable dtHorarios = neg.getDisponibilidadPorMedico(idMedico);
+
+            if (dtHorarios == null || dtHorarios.Rows.Count == 0)
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Gray;
+                e.Cell.BackColor = System.Drawing.Color.LightGray;
+                return;
+            }
+
+            TimeSpan horaInicioTS = (TimeSpan)dtHorarios.Rows[0]["HoraInicio"];
+            TimeSpan horaFinTS = (TimeSpan)dtHorarios.Rows[0]["HoraFin"];
+
+            int horaInicio = horaInicioTS.Hours;
+            int horaFin = horaFinTS.Hours;
+
+            for (int hora = horaInicio; hora < horaFin; hora++)
+            {
+                string horaBase = hora.ToString("D2");
+
+                string hora00 = horaBase + ":00";
+
+                if (neg.verificarTurnoMedico(idMedico, e.Day.Date.ToString("yyyy-MM-dd"), hora00))
+                {
+                    diaDisponible = true;
+                    break;
+                }
+
+                string hora30 = horaBase + ":30";
+
+                if (neg.verificarTurnoMedico(idMedico,  e.Day.Date.ToString("yyyy-MM-dd"), hora30))
+                {
+                    diaDisponible = true;
+                    break;
+                }
+            }
+
             if (!diasDisponibles.Contains(dia) || e.Day.Date.AddDays(-1) < minDate)
             {
                 e.Day.IsSelectable = false;
                 e.Cell.ForeColor = System.Drawing.Color.Gray;
                 e.Cell.BackColor = System.Drawing.Color.LightGray;
             }
+            else if (!diaDisponible)
+            {
+                e.Day.IsSelectable = false;
+                e.Cell.ForeColor = System.Drawing.Color.Red;
+                e.Cell.BackColor = System.Drawing.Color.LightSalmon;
+            }
+
+
         }
+
         protected void btnNuevoTurno_Click(object sender, EventArgs e)
         {
             
@@ -218,9 +305,13 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             txtPaciente.Text = "";
             cFechasTurnos.SelectedDates.Clear();
+            ddlHora.Items.Clear();
+            ddlHora.Items.Insert(0, new ListItem("Seleccione Medico y Fecha", "0"));
             txtHora.Text = "";
+            txtHora.Visible = false;
             txtObservacionAlta.Text = "";
             ddlAltaEspecialidad.SelectedIndex = 0;
+            ddlAltaMedico.SelectedIndex = 0;
 
             fullscreenOverlay.Style["display"] = "block"; 
             divFormulario.Visible = true;                 
@@ -240,6 +331,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             txtPaciente.Enabled = true;
             ddlAltaEspecialidad.Enabled = true;
             ddlAltaMedico.Enabled = true;
+            CargarMedicosAlta();
             rfvDni.Enabled = true;
             revDni.Enabled = true;
             rfvEspecialidad.Enabled = true;
@@ -580,5 +672,10 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             }*/
         }
 
+        protected void cFechasTurnos_SelectionChanged(object sender, EventArgs e)
+        {
+
+            obtenerHorariosDisponibles();
+        }
     }
 }

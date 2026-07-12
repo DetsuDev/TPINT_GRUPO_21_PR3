@@ -231,6 +231,8 @@ namespace Negocio
             presentismo[2] = totalTurnos;
             return presentismo;
         }
+
+
         public DataTable obtenerTurnoPorId(int idTurno)
         {
             return daoTurnos.obtenerTurnoPorId(idTurno);

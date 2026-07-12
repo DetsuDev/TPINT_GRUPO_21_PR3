@@ -18,7 +18,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         {
             ocultarInformes();
             informeSegunFecha.Visible = true;
-            ocultarBarras();
+            //ocultarBarras();
 
             Usuario user = (Usuario)Session["UsuarioLogueado"];
 
@@ -30,12 +30,10 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             lblNombreUsuario.Text = user.persona.Nombre + " " + user.persona.Apellido;
 
-
-                CargarRankingMock();
+             CargarRankingMock();
             
 
         }
-        
         private void CargarRankingMock()
         {
             NegocioTurnos negTurnos = new NegocioTurnos();
@@ -80,6 +78,9 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
 
             barraRoja.Visible = true;
+
+            txtFechaInicioProductividad.Text = "dd/mm/aaaa";
+            txtFechaFinProductividad.Text = "dd/mm/aaaa";
 
         }
 
@@ -154,6 +155,26 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
            
             gvRankingEspecialidades.DataSource = dt2;
             gvRankingEspecialidades.DataBind();
+
+            txtFechaInicioPresentismo.Text = "dd/mm/aaaa";
+            txtFechaFinPresentismo.Text = "dd/mm/aaaa";
+        }
+
+        protected void btnLimpiarRanking_Click(object sender, EventArgs e)
+        {
+
+            CargarRankingMock();
+
+            txtFechaInicioProductividad.Text = "dd/mm/aaaa";
+            txtFechaFinProductividad.Text = "dd/mm/aaaa";
+
+        }
+
+        protected void btnLimpiarInforme_Click(object sender, EventArgs e)
+        {
+
+            txtFechaInicioPresentismo.Text = "dd/mm/aaaa";
+            txtFechaFinPresentismo.Text = "dd/mm/aaaa";
         }
     }
 }

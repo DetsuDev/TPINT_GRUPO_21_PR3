@@ -56,10 +56,10 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             NegocioTurnos negTurnos = new NegocioTurnos();
 
-            float[] presentismo = negTurnos.calcularPresentismo(fechaInicio, fechaFin);
+            float[] presentismo = negTurnos.calcularPresentismoPorFecha(fechaInicio, fechaFin);
 
 
-            calcularBarra(presentismo[0], (int)presentismo[1], (int)presentismo[2]);
+            calcularBarra(presentismo[0], presentismo[1], presentismo[2]);
 
 
             barraRoja.Visible = true;
@@ -166,20 +166,27 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             txtFechaFinPresentismo.Text = "dd/mm/aaaa";
         }
 
-        private void calcularBarra(float pPresentes, int cPresentes, int tTurnos)
+        private void calcularBarra(float pPresentes, float pPendientes, float pAusentes)
         {
+            /*
+            barraVerde.Style["width"] = $"0%";
+            barraAmarilla.Style["width"] = $"0%";
+            barraRoja.Style["width"] = $"0%";*/
 
-            if (cPresentes > 0)
+
+            if (pPresentes > 0 )
             {
                 barraVerde.Style["width"] = $"{pPresentes.ToString("F2", CultureInfo.InvariantCulture)}%;";
-                barraVerde.InnerText = $"{pPresentes:F2}% ({cPresentes})";
+                barraVerde.InnerText = $"{pPresentes:F2}% ({pPresentes})";
 
-                barraRoja.Style["width"] = $"{(100 - pPresentes).ToString("F2", CultureInfo.InvariantCulture)}%;";
-                barraRoja.InnerText = $"{100 - pPresentes:F2}% ({tTurnos - cPresentes})";
+                barraAmarilla.Style["width"] = $"{(100 - pPendientes).ToString("F2", CultureInfo.InvariantCulture)}%;";
+                barraAmarilla.InnerText = $"{(100 - pPendientes):F2}% ({pPendientes})";
 
-                barraVerde.Visible = true;
+                barraRoja.Style["width"] = $"{(100 - (pPendientes + pPresentes)).ToString("F2", CultureInfo.InvariantCulture)}%;";
+                barraRoja.InnerText = $"{(100 - (pPendientes + pPresentes)):F2}% ({pAusentes})";
             }
-            else
+
+            if (pPresentes == 0 && pPendientes == 0 && pAusentes == 0)
             {
                 barraRoja.Style["width"] = $"100%";
                 barraRoja.InnerText = $"NO HAY DATOS CON LOS TERMINOS INDICADOS.";

@@ -141,6 +141,7 @@
                             <div class="card-body p-4">
                                 <div runat="server" id="barraDeInforme" class="progress ">
                                     <div class="progress-bar bg-success" id="barraVerde" runat="server" role="progressbar"></div>
+                                    <div class="progress-bar bg-warning" id="barraAmarilla" runat="server" role="progressbar"></div>
                                     <div class="progress-bar bg-danger" id="barraRoja" runat="server" role="progressbar"></div>
                                 </div>
                             </div>

@@ -212,11 +212,12 @@ namespace Negocio
         }
 
 
-        public float[] calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
+        public float[] calcularPresentismoPorFecha(DateTime fechaInicio, DateTime fechaFin)
         {
-            float[] presentismo = new float[3];
+            float[] pPresentismo = new float[3];
             int totalTurnos = 0;
-            int totalConfirmados = 0;
+            int totalPresentes = 0;
+            int totalPendientes = 0;
             DataTable dt = daoTurnos.getPresentismo(fechaInicio, fechaFin);
 
             foreach (DataRow row in dt.Rows)
@@ -225,13 +226,18 @@ namespace Negocio
                 
                 if (row["EstadoTurno"] != DBNull.Value && row["EstadoTurno"].ToString() == "Presente")
                 {
-                    totalConfirmados++;
+                    totalPresentes++;
+                }
+                if (row["EstadoTurno"] != DBNull.Value && row["EstadoTurno"].ToString() == "Pendiente")
+                {
+                    totalPendientes++;
                 }
             }
-            presentismo[0] = (float)Math.Round((float)totalConfirmados / totalTurnos * 100, 2);
-            presentismo[1] = totalConfirmados;
-            presentismo[2] = totalTurnos;
-            return presentismo;
+
+            pPresentismo[0] = (float)Math.Round((float)totalPresentes / totalTurnos * 100, 2);
+            pPresentismo[1] = (float)Math.Round((float)totalPendientes / totalTurnos * 100, 2);
+            pPresentismo[2] = totalTurnos - (totalPresentes + totalPendientes);
+            return pPresentismo;
         }
 
 

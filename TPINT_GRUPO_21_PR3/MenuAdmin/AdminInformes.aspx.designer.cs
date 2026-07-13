@@ -294,6 +294,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraVerde;
 
         /// <summary>
+        /// Control barraAmarilla.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraAmarilla;
+
+        /// <summary>
         /// Control barraRoja.
         /// </summary>
         /// <remarks>

@@ -261,6 +261,22 @@ DBCC CHECKIDENT ('DISPONIBILIDAD', RESEED, 15);
 DBCC CHECKIDENT ('TURNO', RESEED, 15);
 GO
 
+
+-- ============================================================
+-- TURNOS ADICIONALES - Medico Id_Medico = 6 (Sofia Torres)
+-- Fecha: 23-07-2026 (jueves, dentro de su disponibilidad LMVJ 08-16 hs)
+-- ============================================================
+INSERT INTO TURNO (Id_Medico, Id_Persona, Fecha, Hora, Observacion, EstadoTurno, Estado) VALUES
+(6, 17, '2026-07-23', '08:00', 'Consulta programada', 'Pendiente', 1),
+(6, 18, '2026-07-23', '09:00', 'Consulta programada', 'Pendiente', 1),
+(6, 19, '2026-07-23', '10:00', 'Consulta programada', 'Pendiente', 1),
+(6, 20, '2026-07-23', '11:00', 'Consulta programada', 'Pendiente', 1),
+(6, 21, '2026-07-23', '12:00', 'Consulta programada', 'Pendiente', 1),
+(6, 22, '2026-07-23', '13:00', 'Consulta programada', 'Pendiente', 1),
+(6, 23, '2026-07-23', '14:00', 'Consulta programada', 'Pendiente', 1),
+(6, 24, '2026-07-23', '15:00', 'Consulta programada', 'Pendiente', 1);
+GO
+
 -- ============================================================
 -- FIN DEL SCRIPT
 -- ============================================================

@@ -22,6 +22,8 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             {
                 Response.Redirect("~/SesionInvalida.html");
             }
+            lblMensajeErrorPopup.Visible = false;
+
             if (!IsPostBack)
             {
                 lblNombreUsuario.Text = user.persona.Nombre + " " + user.persona.Apellido;

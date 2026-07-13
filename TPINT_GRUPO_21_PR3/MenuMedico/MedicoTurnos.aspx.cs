@@ -3,11 +3,7 @@ using System;
 using Negocio;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using TPINT_GRUPO_21_PR3.MenuAdmin;
 
 namespace TPINT_GRUPO_21_PR3.MenuMedico
 {
@@ -79,6 +75,9 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
 
         protected void btnConfirmarPresentismo_Click(object sender, EventArgs e)
         {
+            txtBuscarDni.Text = "";
+            txtBuscarPaciente.Text = "";
+            txtBuscarFecha.Text = "";
             GridViewRow fila = (GridViewRow)((Button)sender).NamingContainer;
             int idTurno = Convert.ToInt32(gvMedicoTurnos.DataKeys[fila.RowIndex].Value);
 

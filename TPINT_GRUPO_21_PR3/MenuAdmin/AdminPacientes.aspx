@@ -97,6 +97,8 @@
                 </div>
 
                 <div class="card border-primary mb-5 shadow-sm">
+                    
+                    
                     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                         <h4 class="mb-0">Listado de Pacientes</h4>
                         <asp:Button ID="btnMostrarForm" runat="server" Text="Agregar Paciente" OnClick="btnMostrarForm_Click" CssClass="btn btn-light" /></div>
@@ -183,6 +185,7 @@
                                     <div class="col-md-3">
                                         <label class="form-label">Fecha de Nacimiento</label>
                                         <asp:RequiredFieldValidator ID="rfvFechaNac" runat="server" ErrorMessage="*" ControlToValidate="txtFechaNac" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revFechaNac" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtFechaNac" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" ValidationGroup="informeFecha"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">

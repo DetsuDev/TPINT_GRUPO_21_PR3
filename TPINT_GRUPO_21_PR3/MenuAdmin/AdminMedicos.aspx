@@ -184,10 +184,10 @@
                                             <asp:ListItem Value="J">Jueves</asp:ListItem>
                                             <asp:ListItem Value="V">Viernes</asp:ListItem>
                                         </asp:CheckBoxList>
-                                        <asp:CustomValidator ID="cvDiasDisponibles" runat="server" 
-                                            ErrorMessage="* Debe seleccionar al menos un día" 
-                                            ForeColor="Red" 
-                                            Display="Dynamic" 
+                                        <asp:CustomValidator ID="cvDiasDisponibles" runat="server"
+                                            ErrorMessage="* Debe seleccionar al menos un día"
+                                            ForeColor="Red"
+                                            Display="Dynamic"
                                             ValidationGroup="GrupoMedico"
                                             OnServerValidate="cvDiasDisponibles_ServerValidate">
                                         </asp:CustomValidator>
@@ -209,6 +209,10 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label class="form-label">Fecha de Nacimiento</label>
+                                        
+                                             <asp:RequiredFieldValidator ID="rfvFecha" runat="server" ErrorMessage="*" ControlToValidate="txtFechaNac" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
+                                                <asp:RegularExpressionValidator ID="revFecha" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtFechaNac" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
+                                        
                                         <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">

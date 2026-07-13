@@ -271,5 +271,17 @@
 
         <script src="../js/bootstrap.bundle.min.js">
         </script>
+    <script>
+        ['input', 'change'].forEach(function (ev) {
+            document.addEventListener(ev, function (e) {
+                var m = document.querySelector("[id$='lblMensaje']");
+                if (m) m.textContent = '';
+                if (window.Page_Validators && window.ValidatorValidate)
+                    Page_Validators.forEach(function (v) {
+                        if (v.controltovalidate === e.target.id) ValidatorValidate(v);
+                    });
+            });
+        });
+    </script>
 </body>
 </html>

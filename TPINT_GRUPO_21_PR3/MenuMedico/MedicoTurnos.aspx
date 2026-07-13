@@ -8,6 +8,12 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet" />
 
     <title></title>
+    <style>
+        .table-separada {
+            border-collapse: separate !important;
+            border-spacing: 0 12px;
+        }
+    </style>
 </head>
 <body style="background-color: #f8f9fa;">
 
@@ -49,8 +55,7 @@
                             </div>
                             <div class="col-md-4">
                                 <label class="form-label">Fecha</label>
-                                <asp:TextBox ID="txtBuscarFecha" runat="server" CssClass="form-control" placeholder="Ej: 15/06/2026"></asp:TextBox>
-                                <asp:RegularExpressionValidator ID="revFecha" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtBuscarFecha" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" ValidationGroup="informeProductividad"></asp:RegularExpressionValidator>
+                                <asp:TextBox ID="txtBuscarFecha" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                         
                             </div>
                             <div class="col-12 text-end pt-3">
@@ -67,23 +72,29 @@
                     </div>
                     <div class="card-body p-4">
                         <div class="table-responsive">
-                            <asp:GridView ID="gvMedicoTurnos" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered align-middle"
-                                DataKeyNames="ID">
+                            <asp:GridView ID="gvMedicoTurnos" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered align-middle table-separada"
+                                DataKeyNames="ID" OnRowDataBound="gvMedicoTurnos_RowDataBound">
                                 <Columns>
                                     <asp:BoundField DataField="DNI" HeaderText="DNI" />
                                     <asp:BoundField DataField="Paciente" HeaderText="Paciente" />
                                     <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
                                     <asp:BoundField DataField="Hora" HeaderText="Hora" />
-                                    <asp:BoundField DataField="Observacion" HeaderText="Observacion" />
+                                   <asp:TemplateField HeaderText="Observación">
+                                        <ItemTemplate>
+                                            <asp:TextBox ID="txtObservacion" runat="server" TextMode="MultiLine" Rows="2" CssClass="form-control form-control-sm mt-1" Text='<%# Eval("Observacion") %>'></asp:TextBox>
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+
                                     <asp:TemplateField HeaderText="Estado">
                                         <ItemTemplate>
                                             <asp:Label ID="lblEstadoActual" runat="server" Text='<%# Eval("Estado") %>' CssClass="fw-bold d-block mb-1"></asp:Label>
-                                            <asp:RadioButtonList ID="rblPresentismo" runat="server">
+        
+                                            <asp:RadioButtonList ID="rblPresentismo" runat="server" RepeatDirection="Horizontal" CssClass="d-inline-block">
                                                 <asp:ListItem Value="Presente">Presente</asp:ListItem>
                                                 <asp:ListItem Value="Ausente">Ausente</asp:ListItem>
                                             </asp:RadioButtonList>
-                                            <asp:TextBox ID="txtObsPresentismo" runat="server" CssClass="form-control form-control-sm mt-1" placeholder="Observación" Text='<%# Eval("Observacion") %>'></asp:TextBox>
-                                            <asp:Button ID="btnConfirmarPresentismo" runat="server" Text="Confirmar" CssClass="btn btn-sm btn-primary mt-1" OnClick="btnConfirmarPresentismo_Click" />
+        
+                                            <asp:Button ID="btnConfirmarPresentismo" runat="server" Text="Guardar Cambios" CssClass="btn btn-sm btn-primary mt-1 d-block" OnClick="btnConfirmarPresentismo_Click" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

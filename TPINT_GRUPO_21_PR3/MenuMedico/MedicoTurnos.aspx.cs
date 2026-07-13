@@ -48,7 +48,11 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
             if (!string.IsNullOrWhiteSpace(txtBuscarPaciente.Text))
                 filtros.Add("Paciente LIKE '%" + txtBuscarPaciente.Text.Trim().Replace("'", "''") + "%'");
             if (!string.IsNullOrWhiteSpace(txtBuscarFecha.Text))
-                filtros.Add("Fecha LIKE '%" + txtBuscarFecha.Text.Trim().Replace("'", "''") + "%'");
+            {
+                // El calendario (input type=date) envía yyyy-MM-dd; la grilla muestra dd/MM/yyyy → convertir para que matchee
+                if (DateTime.TryParse(txtBuscarFecha.Text.Trim(), out DateTime fechaFiltro))
+                    filtros.Add("Fecha = '" + fechaFiltro.ToString("dd/MM/yyyy") + "'");
+            }
 
             DataView dv = dt.DefaultView;
             if (filtros.Count > 0)
@@ -80,12 +84,13 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
             int idTurno = Convert.ToInt32(gvMedicoTurnos.DataKeys[fila.RowIndex].Value);
 
             RadioButtonList rbl = (RadioButtonList)fila.FindControl("rblPresentismo");
-            TextBox txtObs = (TextBox)fila.FindControl("txtObsPresentismo");
+
+            TextBox txtObs = (TextBox)fila.FindControl("txtObservacion");
 
             if (string.IsNullOrEmpty(rbl.SelectedValue))
             {
                 lblMensaje.ForeColor = System.Drawing.Color.Red;
-                lblMensaje.Text = "Seleccione Presente o Ausente.";
+                lblMensaje.Text = "Seleccione Presente o Ausente antes de guardar.";
                 return;
             }
 
@@ -93,8 +98,36 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
             bool ok = negocioTurnos.marcarPresentismo(idTurno, rbl.SelectedValue, txtObs.Text.Trim());
 
             lblMensaje.ForeColor = ok ? System.Drawing.Color.Green : System.Drawing.Color.Red;
-            lblMensaje.Text = ok ? "Presentismo registrado correctamente." : "Hubo un error al registrar el presentismo.";
+            lblMensaje.Text = ok ? "Cambios guardados correctamente." : "Hubo un error al guardar.";
             CargarGrillaTurnos();
+        }
+        protected void gvMedicoTurnos_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                Label lblEstado = (Label)e.Row.FindControl("lblEstadoActual");
+
+                if (lblEstado != null)
+                {
+                    string color;
+                    switch (lblEstado.Text.Trim().ToUpper())
+                    {
+                        case "PENDIENTE": color = "#FFC107"; break;
+                        case "PRESENTE": color = "#198754"; break;
+                        case "AUSENTE": color = "#DC3545"; break;
+                        default: return;
+                    }
+
+                    string borde = "2px solid " + color;
+                    foreach (TableCell celda in e.Row.Cells)
+                    {
+                        celda.Style["border-top"] = borde;
+                        celda.Style["border-bottom"] = borde;
+                    }
+                    e.Row.Cells[0].Style["border-left"] = borde;
+                    e.Row.Cells[e.Row.Cells.Count - 1].Style["border-right"] = borde;
+                }
+            }
         }
     }
 }

@@ -230,19 +230,19 @@ GO
 SET IDENTITY_INSERT TURNO ON;
 INSERT INTO TURNO (Id_Turno, Id_Medico, Id_Persona, Fecha, Hora, Observacion, EstadoTurno, Estado) VALUES
 (1, 1, 17, '2026-07-13', '09:00', 'Control de rutina', 'Pendiente', 1),
-(2, 2, 18, '2026-07-13', '10:00', 'Primera consulta', 'Confirmado', 1),
+(2, 2, 18, '2026-07-13', '10:00', 'Primera consulta', 'Presente', 1),
 (3, 3, 19, '2026-07-14', '11:00', 'Dolor persistente', 'Pendiente', 1),
-(4, 4, 20, '2026-07-14', '12:00', 'Revision general', 'Confirmado', 1),
+(4, 4, 20, '2026-07-14', '12:00', 'Revision general', 'Presente', 1),
 (5, 5, 21, '2026-07-15', '13:00', 'Seguimiento tratamiento', 'Pendiente', 1),
-(6, 6, 22, '2026-07-15', '09:00', 'Chequeo anual', 'Confirmado', 1),
+(6, 6, 22, '2026-07-15', '09:00', 'Chequeo anual', 'Presente', 1),
 (7, 7, 23, '2026-07-16', '10:00', 'Consulta por sintomas', 'Pendiente', 1),
-(8, 8, 24, '2026-07-16', '11:00', 'Renovacion de receta', 'Confirmado', 1),
+(8, 8, 24, '2026-07-16', '11:00', 'Renovacion de receta', 'Presente', 1),
 (9, 9, 25, '2026-07-17', '12:00', 'Estudio de resultados', 'Pendiente', 1),
-(10, 10, 26, '2026-07-17', '13:00', 'Control post operatorio', 'Confirmado', 1),
+(10, 10, 26, '2026-07-17', '13:00', 'Control post operatorio', 'Presente', 1),
 (11, 11, 27, '2026-07-20', '09:00', 'Consulta de urgencia', 'Pendiente', 1),
-(12, 12, 28, '2026-07-20', '10:00', 'Evaluacion inicial', 'Confirmado', 1),
+(12, 12, 28, '2026-07-20', '10:00', 'Evaluacion inicial', 'Presente', 1),
 (13, 13, 29, '2026-07-21', '11:00', 'Control de rutina', 'Pendiente', 1),
-(14, 14, 30, '2026-07-21', '12:00', 'Segunda opinion', 'Confirmado', 1),
+(14, 14, 30, '2026-07-21', '12:00', 'Segunda opinion', 'Presente', 1),
 (15, 15, 31, '2026-07-22', '13:00', 'Consulta programada', 'Pendiente', 1);
 SET IDENTITY_INSERT TURNO OFF;
 GO

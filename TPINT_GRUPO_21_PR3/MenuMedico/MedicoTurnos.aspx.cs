@@ -3,11 +3,7 @@ using System;
 using Negocio;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
 using System.Web.UI.WebControls;
-using TPINT_GRUPO_21_PR3.MenuAdmin;
 
 namespace TPINT_GRUPO_21_PR3.MenuMedico
 {
@@ -49,7 +45,6 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
                 filtros.Add("Paciente LIKE '%" + txtBuscarPaciente.Text.Trim().Replace("'", "''") + "%'");
             if (!string.IsNullOrWhiteSpace(txtBuscarFecha.Text))
             {
-                // El calendario (input type=date) envía yyyy-MM-dd; la grilla muestra dd/MM/yyyy → convertir para que matchee
                 if (DateTime.TryParse(txtBuscarFecha.Text.Trim(), out DateTime fechaFiltro))
                     filtros.Add("Fecha = '" + fechaFiltro.ToString("dd/MM/yyyy") + "'");
             }
@@ -80,6 +75,9 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
 
         protected void btnConfirmarPresentismo_Click(object sender, EventArgs e)
         {
+            txtBuscarDni.Text = "";
+            txtBuscarPaciente.Text = "";
+            txtBuscarFecha.Text = "";
             GridViewRow fila = (GridViewRow)((Button)sender).NamingContainer;
             int idTurno = Convert.ToInt32(gvMedicoTurnos.DataKeys[fila.RowIndex].Value);
 
@@ -94,11 +92,20 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
                 return;
             }
 
-            Negocio.NegocioTurnos negocioTurnos = new Negocio.NegocioTurnos();
-            bool ok = negocioTurnos.marcarPresentismo(idTurno, rbl.SelectedValue, txtObs.Text.Trim());
+            NegocioTurnos negocioTurnos = new NegocioTurnos();
+            bool presentismo = negocioTurnos.marcarPresentismo(idTurno, rbl.SelectedValue, txtObs.Text.Trim());
 
-            lblMensaje.ForeColor = ok ? System.Drawing.Color.Green : System.Drawing.Color.Red;
-            lblMensaje.Text = ok ? "Cambios guardados correctamente." : "Hubo un error al guardar.";
+
+            if (presentismo)
+            {
+                lblMensaje.ForeColor = System.Drawing.Color.Green;
+                lblMensaje.Text = "Cambios guardados correctamente.";
+            }
+            else
+            {
+                lblMensaje.ForeColor = System.Drawing.Color.Red;
+                lblMensaje.Text = "Hubo un error al guardar.";
+            }
             CargarGrillaTurnos();
         }
         protected void gvMedicoTurnos_RowDataBound(object sender, GridViewRowEventArgs e)

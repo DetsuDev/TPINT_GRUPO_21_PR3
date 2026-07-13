@@ -78,15 +78,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.TextBox txtBuscarPaciente;
 
         /// <summary>
-        /// Control rfvFecha.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFecha;
-
-        /// <summary>
         /// Control revFecha.
         /// </summary>
         /// <remarks>

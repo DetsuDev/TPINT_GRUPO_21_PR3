@@ -28,6 +28,7 @@ namespace Negocio
         {
             return daoTurnos.getMedicosDisponibles(idEspecialidad, letraDia, horaTipeada);
         }
+
         public DataTable getDisponibilidadPorMedico(int idMedico)
         {
             return daoTurnos.getDisponibilidadPorMedico(idMedico);

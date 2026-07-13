@@ -131,6 +131,8 @@
                                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                                     <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
                                     <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
+                                    <asp:BoundField DataField="HoraInicio" HeaderText="Hora Inicio" />
+                                    <asp:BoundField DataField="HoraFin" HeaderText="Hora Fin" />
                                     <asp:BoundField DataField="Sexo" HeaderText="Sexo" />
                                     <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" />
                                     
@@ -279,7 +281,11 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label class="form-label">Confirmar contraseña</label>
+                                        <label class="form-label">
+                                        </label>
                                         <asp:CompareValidator ID="cvContrasenia" runat="server" ControlToValidate="txtConfirmarContrasenia" ControlToCompare="txtContrasenia" ErrorMessage="* No coinciden" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:CompareValidator>
+
+                                        <asp:Label ID="lblErrorContrasenia" runat="server" Font-Bold="False" CssClass="me-3" ForeColor="Red"></asp:Label>
                                         <asp:TextBox ID="txtConfirmarContrasenia" runat="server" CssClass="form-control" TextMode="Password"></asp:TextBox>
                                     </div>
                                     <div class="col-12 text-end pt-3">
@@ -311,5 +317,8 @@
             });
         });
     </script>
+    </label>
+    <p>
+        &nbsp;</p>
 </body>
 </html>

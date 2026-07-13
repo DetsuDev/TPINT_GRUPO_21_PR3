@@ -15,18 +15,20 @@ namespace Datos
         AccesoDatos accesoDatos = new AccesoDatos();
         public DataTable getTablaMedicosCompleta()
         {
-
             string consulta = "SELECT M.Id_Medico, M.Legajo_Medico, P.Nombre, P.Apellido, " +
                 "E.Nombre AS Especialidad, P.Sexo, P.Nacionalidad, P.FechaNacimiento AS FechaNac, " +
                 "P.Direccion, L.NombreLocalidad AS Localidad, PR.NombreProvincia AS Provincia, " +
-                "P.CorreoElectronico AS Email, P.Telefono, U.Usuario, U.Contrasenia " +
+                "P.CorreoElectronico AS Email, P.Telefono, U.Usuario, U.Contrasenia, " +
+                "D.HoraInicio, D.HoraFin " +
                 "FROM MEDICO M " +
                 "INNER JOIN PERSONA P ON M.Id_Persona = P.Id_Persona " +
                 "INNER JOIN ESPECIALIDADES E ON M.Id_Especialidad = E.Id_Especialidad " +
                 "INNER JOIN LOCALIDADES L ON P.Id_Localidad = L.Id_Localidad " +
                 "INNER JOIN PROVINCIA PR ON L.Id_Provincia = PR.Id_Provincia " +
                 "LEFT JOIN USUARIO U ON P.Id_Persona = U.Id_Persona " +
+                "LEFT JOIN DISPONIBILIDAD D ON M.Id_Medico = D.Id_Medico " +
                 "WHERE M.Estado = 1";
+
             return accesoDatos.obtenerTabla(consulta);
         }
 

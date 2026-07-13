@@ -210,6 +210,8 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void btnCargar_Click(object sender, EventArgs e)
         {
+
+            lblErrorContrasenia.Text = "";
             if (!Page.IsValid) return;
 
             if (string.IsNullOrWhiteSpace(txtLegajo.Text) ||
@@ -227,7 +229,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 return;
             }
 
-            // Si se asigna usuario en el alta, la contraseña es obligatoria (dos veces)
             bool esAlta = string.IsNullOrEmpty(hdnIdMedico.Value);
             if (esAlta && !string.IsNullOrWhiteSpace(txtUsuario.Text) &&
                 (txtContrasenia.Text.Length == 0 || txtConfirmarContrasenia.Text.Length == 0))
@@ -237,7 +238,8 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             }
             if (txtContrasenia.Text != txtConfirmarContrasenia.Text)
             {
-                MostrarMensaje("Las contraseñas no coinciden.", false);
+                lblErrorContrasenia.Text = " * Las contraseñas no coinciden.";
+                MostrarMensaje("", false);
                 return;
             }
 

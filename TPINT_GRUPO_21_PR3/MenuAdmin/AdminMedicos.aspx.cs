@@ -15,12 +15,21 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            Usuario user = (Usuario)Session["UsuarioLogueado"];
+
+            if (user == null || user.Rol != "A")
+            {
+                Response.Redirect("~/SesionInvalida.html");
+            }
+
             if (!IsPostBack)
             {
-
-                lblNombreUsuario.Text = Session["UsuarioLogeado"].ToString();
+                lblNombreUsuario.Text = user.persona.Nombre + " " + user.persona.Apellido;
                 divEliminar.Visible = false;
                 divFormulario.Visible = false;
+
+                CargarFiltroEspecialidadBusqueda();
                 CargarGrillaMedicos();
                 CargarDdlEspecialidades();
                 CargarProvincias();
@@ -34,7 +43,35 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         private void CargarGrillaMedicos()
         {
             NegocioMedicos negocioMedicos = new NegocioMedicos();
-            gvGestionMedicos.DataSource = negocioMedicos.getTabla();
+            DataTable dt = negocioMedicos.getTablaCompleta();
+
+            List<string> filtros = new List<string>();
+
+            if (!string.IsNullOrWhiteSpace(txtBuscarNombreApellido.Text))
+            {
+                string b = txtBuscarNombreApellido.Text.Trim().Replace("'", "''");
+                filtros.Add($"(Nombre LIKE '%{b}%' OR Apellido LIKE '%{b}%')");
+            }
+
+            if (!string.IsNullOrWhiteSpace(txtBuscarLegajo.Text))
+            {
+                string l = txtBuscarLegajo.Text.Trim().Replace("'", "''");
+                filtros.Add($"Legajo_Medico LIKE '%{l}%'");
+            }
+
+            if (ddlFiltroEspecialidad.SelectedIndex > 0)
+            {
+                string esp = ddlFiltroEspecialidad.SelectedItem.Text.Replace("'", "''");
+                filtros.Add($"Especialidad = '{esp}'");
+            }
+
+            DataView dv = dt.DefaultView;
+            if (filtros.Count > 0)
+            {
+                dv.RowFilter = string.Join(" AND ", filtros);
+            }
+
+            gvGestionMedicos.DataSource = dv;
             gvGestionMedicos.DataBind();
         }
 
@@ -45,6 +82,34 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlEspecialidad.DataTextField = "Nombre";
             ddlEspecialidad.DataValueField = "Id_Especialidad";
             ddlEspecialidad.DataBind();
+        }
+
+        private void CargarFiltroEspecialidadBusqueda()
+        {
+            NegocioEspecialidades negocioEspecialidades = new NegocioEspecialidades();
+            ddlFiltroEspecialidad.DataSource = negocioEspecialidades.getTabla();
+            ddlFiltroEspecialidad.DataTextField = "Nombre";
+            ddlFiltroEspecialidad.DataValueField = "Id_Especialidad";
+            ddlFiltroEspecialidad.DataBind();
+            ddlFiltroEspecialidad.Items.Insert(0, new ListItem("-- Todas --", ""));
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            gvGestionMedicos.EditIndex = -1;
+            gvGestionMedicos.PageIndex = 0;
+            CargarGrillaMedicos();
+        }
+
+        protected void btnLimpiarBusqueda_Click(object sender, EventArgs e)
+        {
+            txtBuscarNombreApellido.Text = "";
+            txtBuscarLegajo.Text = "";
+            ddlFiltroEspecialidad.SelectedIndex = 0;
+
+            gvGestionMedicos.EditIndex = -1;
+            gvGestionMedicos.PageIndex = 0;
+            CargarGrillaMedicos();
         }
 
         private void CargarProvincias()
@@ -338,6 +403,19 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             fullscreenOverlay.Style["display"] = "block";
             divFormulario.Visible = true;
         }
+        protected void cvDiasDisponibles_ServerValidate(object source, ServerValidateEventArgs args)
+        {
+            bool alMenosUno = false;
 
+            foreach (ListItem item in cblDiasDisponibles.Items)
+            {
+                if (item.Selected)
+                {
+                    alMenosUno = true;
+                    break;
+                }
+            }
+            args.IsValid = alMenosUno;
+        }
     }
 }

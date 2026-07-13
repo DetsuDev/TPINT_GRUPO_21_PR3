@@ -15,15 +15,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
     {
 
         /// <summary>
-        /// Control lblNombreUsuario.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNombreUsuario;
-
-        /// <summary>
         /// Control form1.
         /// </summary>
         /// <remarks>
@@ -31,6 +22,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+
+        /// <summary>
+        /// Control lblNombreUsuario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblNombreUsuario;
 
         /// <summary>
         /// Control divEliminar.
@@ -78,6 +78,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.TextBox txtBuscarPaciente;
 
         /// <summary>
+        /// Control revFecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revFecha;
+
+        /// <summary>
         /// Control txtBuscarFecha.
         /// </summary>
         /// <remarks>
@@ -114,6 +123,33 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.Button btnLimpiar;
 
         /// <summary>
+        /// Control lblMensajeGeneral.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensajeGeneral;
+
+        /// <summary>
+        /// Control lblMensajeErrorPopup.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMensajeErrorPopup;
+
+        /// <summary>
+        /// Control btnNuevoTurno.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnNuevoTurno;
+
+        /// <summary>
         /// Control gvGestionTurnos.
         /// </summary>
         /// <remarks>
@@ -123,13 +159,67 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.GridView gvGestionTurnos;
 
         /// <summary>
-        /// Control txtLegajoMedico.
+        /// Control fullscreenOverlay.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtLegajoMedico;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl fullscreenOverlay;
+
+        /// <summary>
+        /// Control hdnIdTurnoEliminar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnIdTurnoEliminar;
+
+        /// <summary>
+        /// Control hdnIdTurnoEditar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdnIdTurnoEditar;
+
+        /// <summary>
+        /// Control divFormulario.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divFormulario;
+
+        /// <summary>
+        /// Control hCargarTurno.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl hCargarTurno;
+
+        /// <summary>
+        /// Control rfvDni.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvDni;
+
+        /// <summary>
+        /// Control revDni.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revDni;
 
         /// <summary>
         /// Control txtPaciente.
@@ -141,31 +231,67 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.TextBox txtPaciente;
 
         /// <summary>
-        /// Control txtFecha.
+        /// Control rfvEspecialidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFecha;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvEspecialidad;
 
         /// <summary>
-        /// Control txtHora.
+        /// Control ddlAltaEspecialidad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtHora;
+        protected global::System.Web.UI.WebControls.DropDownList ddlAltaEspecialidad;
 
         /// <summary>
-        /// Control txtObservacion.
+        /// Control rfvMedico.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList txtObservacion;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvMedico;
+
+        /// <summary>
+        /// Control ddlAltaMedico.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAltaMedico;
+
+        /// <summary>
+        /// Control cFechasTurnos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Calendar cFechasTurnos;
+
+        /// <summary>
+        /// Control ddlHora.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlHora;
+
+        /// <summary>
+        /// Control txtObservacionAlta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtObservacionAlta;
 
         /// <summary>
         /// Control btnCargar.
@@ -175,5 +301,14 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCargar;
+
+        /// <summary>
+        /// Control btnCancelarEdicion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnCancelarEdicion;
     }
 }

@@ -72,7 +72,8 @@
     <Content Include="MenuAdmin\AdminTurnos.aspx" />
     <Content Include="MenuAdmin\AdminInformes.aspx" />
     <Content Include="MenuMedico\MedicoTurnos.aspx" />
-    <Content Include="Web.config" />
+    <Content Include="SesionInvalida.html" />
+    <Content Include="web.config" />
     <Content Include="login.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -122,11 +123,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Web.Debug.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <None Include="web.Debug.config">
+      <DependentUpon>web.config</DependentUpon>
     </None>
-    <None Include="Web.Release.config">
-      <DependentUpon>Web.config</DependentUpon>
+    <None Include="web.Release.config">
+      <DependentUpon>web.config</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -138,6 +139,9 @@
       <Project>{84ec3f88-da98-4799-89b3-e5929194e4dd}</Project>
       <Name>Negocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="assets\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

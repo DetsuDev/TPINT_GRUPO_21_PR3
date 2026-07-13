@@ -37,5 +37,6 @@ namespace Negocio
             }
             return dao.buscarUsuarioConRol(username, password);
         }
+
     }
 }

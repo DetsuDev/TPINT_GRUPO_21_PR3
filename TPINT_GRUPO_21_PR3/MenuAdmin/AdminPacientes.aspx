@@ -35,13 +35,18 @@
 </head>
 <body style="background-color: #f8f9fa;">
 
-  <div  class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
-  <div class="card-body" >
-    <p class="card-text">Bienvenido: </p>
-      <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]"></asp:Label>
-    <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
-  </div>
-</div>
+    <div  class="card text-center col-1" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
+      <div class="card-body" >
+        <p class="card-text" style="margin: -3px -6px 5px -6px;">Bienvenid@, <br/> 
+          <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]" style="font-weight: bold;"></asp:Label>
+          </p>
+          <div class="text-center">
+            <img src="../assets/admin-placeholder.png" alt="Administrador-placeholder" style="width:100px; height:auto; margin-bottom:5px;"/>
+          </div>
+        <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesión </a>
+      </div>
+    </div>
+
     <div style="padding: 50px; margin: 50px;">
         <ul class="nav nav-tabs" style="min-width: 1000px;">
             <li class="nav-item"><a class="nav-link" href="AdminInformes.aspx">Informes</a></li>
@@ -71,6 +76,7 @@
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
                         <h4 class="mb-0">Buscar Pacientes</h4>
+
                     </div>
                     <div class="card-body p-4">
                         <div class="row g-3">
@@ -91,9 +97,11 @@
                 </div>
 
                 <div class="card border-primary mb-5 shadow-sm">
-                    <div class="card-header bg-primary text-white">
+                    
+                    
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                         <h4 class="mb-0">Listado de Pacientes</h4>
-                    </div>
+                        <asp:Button ID="btnMostrarForm" runat="server" Text="Agregar Paciente" OnClick="btnMostrarForm_Click" CssClass="btn btn-light" /></div>
                     <div class="card-body p-4">
                         <div class="table-responsive">
                             <asp:GridView ID="gvGestionPacientes" runat="server"
@@ -131,8 +139,6 @@
                     </div>
                 </div>
 
-                <asp:Button ID="btnMostrarForm" runat="server" Text="Agregar Paciente" OnClick="btnMostrarForm_Click" class="btn btn-primary"/>
-
                 <div class="card" runat="server"
                     id="divFormulario">
                     <div class="card-body">
@@ -149,45 +155,44 @@
                                         <asp:TextBox ID="txtDni" runat="server" CssClass="form-control" placeholder="Ej: 45123456"></asp:TextBox>
                                     </div>
                                     <div class="col-md-4">
-                                 <label class="form-label">Nombre</label>
-
-<asp:RequiredFieldValidator ID="rfvNombre" runat="server" ErrorMessage="*" ControlToValidate="txtNombre" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-<asp:RegularExpressionValidator ID="revNombre" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNombre" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
-<asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <label class="form-label">Nombre</label>
+                                        <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ErrorMessage="*" ControlToValidate="txtNombre" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revNombre" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNombre" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                        <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
                                      </div>
                                     <div class="col-md-5">
                                           <label class="form-label">Apellido</label>
 
-      <asp:RequiredFieldValidator ID="rfvApellido" runat="server" ErrorMessage="*" ControlToValidate="txtApellido" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-      <asp:RegularExpressionValidator ID="revApellido" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtApellido" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
-      <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control"></asp:TextBox>
+                                          <asp:RequiredFieldValidator ID="rfvApellido" runat="server" ErrorMessage="*" ControlToValidate="txtApellido" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
+                                          <asp:RegularExpressionValidator ID="revApellido" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtApellido" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                          <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-2">
                                         <label class="form-label">Sexo</label>
                                         <asp:DropDownList ID="ddlSexo" runat="server" CssClass="form-select">
                                             <asp:ListItem Value="M">Masculino</asp:ListItem>
                                             <asp:ListItem Value="F">Femenino</asp:ListItem>
-                                            <asp:ListItem Value="O">Otro</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                     <div class="col-md-4">
-                                       <label class="form-label">Nacionalidad</label>
+                                        <label class="form-label">Nacionalidad</label>
 
-     <asp:RequiredFieldValidator ID="rfvNacionalidad" runat="server" ErrorMessage="*" ControlToValidate="txtNacionalidad" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-     <asp:RegularExpressionValidator ID="revNacionalidad" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNacionalidad" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                        <asp:RequiredFieldValidator ID="rfvNacionalidad" runat="server" ErrorMessage="*" ControlToValidate="txtNacionalidad" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revNacionalidad" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNacionalidad" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
 
-     &nbsp;<asp:TextBox ID="txtNacionalidad" runat="server" CssClass="form-control" placeholder="Ej: Argentina"></asp:TextBox>
-                                     </div>
+                                        &nbsp;<asp:TextBox ID="txtNacionalidad" runat="server" CssClass="form-control" placeholder="Ej: Argentina"></asp:TextBox>
+                                    </div>
                                     <div class="col-md-3">
                                         <label class="form-label">Fecha de Nacimiento</label>
                                         <asp:RequiredFieldValidator ID="rfvFechaNac" runat="server" ErrorMessage="*" ControlToValidate="txtFechaNac" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revFechaNac" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtFechaNac" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" ValidationGroup="informeFecha"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">
-                                       <label class="form-label">Telefono</label>
-    <asp:RequiredFieldValidator ID="rfvTelefono" runat="server" ErrorMessage="*" ControlToValidate="txtTelefono" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-    <asp:RegularExpressionValidator ID="revTelefono" runat="server" ErrorMessage="* Ingrese 10 digitos numericos" ValidationExpression="^\d{10}$" ControlToValidate="txtTelefono" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
-    &nbsp;<asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"></asp:TextBox>
+                                        <label class="form-label">Telefono</label>
+                                        <asp:RequiredFieldValidator ID="rfvTelefono" runat="server" ErrorMessage="*" ControlToValidate="txtTelefono" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
+                                        <asp:RegularExpressionValidator ID="revTelefono" runat="server" ErrorMessage="* Ingrese un teléfono válido (7 a 20 caracteres, puede incluir '+' y espacios)" ValidationExpression="^\+?[0-9\s()-]{7,20}$" ControlToValidate="txtTelefono" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                        &nbsp;<asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-6">
                                         <label class="form-label">Dirección</label>
@@ -196,22 +201,23 @@
                                     </div>
                                     <div class="col-md-3">
                                          <label class="form-label">Provincia</label>
-     <asp:RequiredFieldValidator ID="rfvProvincia" runat="server" ErrorMessage="*" ControlToValidate="ddlProvincia" ForeColor="Red" ValidationGroup="GrupoPaciente" InitialValue="-- Elija una provincia --"></asp:RequiredFieldValidator>
-     <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
+                                         <asp:RequiredFieldValidator ID="rfvProvincia" runat="server" ErrorMessage="*" ControlToValidate="ddlProvincia" ForeColor="Red" ValidationGroup="GrupoPaciente" InitialValue="-- Elija una provincia --"></asp:RequiredFieldValidator>
+                                         <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
                                    </div>
                                     <div class="col-md-3">
                                          <label class="form-label">Localidad</label>
-     <asp:RequiredFieldValidator ID="rfvLocalidad" runat="server" ErrorMessage="*" ControlToValidate="ddlLocalidad" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-     <asp:DropDownList ID="ddlLocalidad" runat="server" CssClass="form-select"></asp:DropDownList>
+                                         <asp:RequiredFieldValidator ID="rfvLocalidad" runat="server" ErrorMessage="*" ControlToValidate="ddlLocalidad" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
+                                         <asp:DropDownList ID="ddlLocalidad" runat="server" CssClass="form-select"></asp:DropDownList>
                                     </div>
                                     <div class="col-md-6">
+                                         <label class="form-label">Email</label>
                                          <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="*" ControlToValidate="txtEmail" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-     <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="* Correo no válido" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
-     &nbsp;<asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="medico@clinica.com"></asp:TextBox>
+                                         <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="* Correo no válido" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                         &nbsp;<asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="medico@clinica.com"></asp:TextBox>
                                     </div>
                                     <div class="col-12 text-end pt-3">
                                         <asp:Button ID="btnCargar" runat="server" Text="Cargar Paciente" CssClass="btn btn-primary px-4" OnClick="btnCargar_Click" ValidationGroup="GrupoPaciente" />
-                                        <asp:Button ID="btnCancelarEdicion" runat="server" Text="Cancelar" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancelarEdicion_Click" CausesValidation="false" />
+                                        <asp:Button ID="btnCancelarEdicion" runat="server" Text="Cancelar" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancelarEdicion_Click" CausesValidation="false"  />
                                     </div>
                                 </div>
                             </div>

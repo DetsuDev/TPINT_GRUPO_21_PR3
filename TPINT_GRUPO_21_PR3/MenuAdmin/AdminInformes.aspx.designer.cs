@@ -33,22 +33,76 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
-        /// Control txtFechaInicio.
+        /// Control rfvFechaInicioProductividad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaInicio;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFechaInicioProductividad;
 
         /// <summary>
-        /// Control txtFechaFin.
+        /// Control revFechaInicioProductividad.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtFechaFin;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revFechaInicioProductividad;
+
+        /// <summary>
+        /// Control txtFechaInicioProductividad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaInicioProductividad;
+
+        /// <summary>
+        /// Control rfvFechaFinProductividad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFechaFinProductividad;
+
+        /// <summary>
+        /// Control revFechaFinProductividad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revFechaFinProductividad;
+
+        /// <summary>
+        /// Control txtFechaFinProductividad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtFechaFinProductividad;
+
+        /// <summary>
+        /// Control cvFechaProd.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator cvFechaProd;
+
+        /// <summary>
+        /// Control btnLimpiarRanking.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLimpiarRanking;
 
         /// <summary>
         /// Control btnFiltrarRanking.
@@ -69,93 +123,129 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.GridView gvRankingEspecialidades;
 
         /// <summary>
-        /// Control TextBox1.
+        /// Control informeSegunFecha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl informeSegunFecha;
 
         /// <summary>
-        /// Control TextBox2.
+        /// Control rfvFechaInicioPresentismo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox2;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFechaInicioPresentismo;
 
         /// <summary>
-        /// Control Button1.
+        /// Control revFechaInicioPresentismo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revFechaInicioPresentismo;
 
         /// <summary>
-        /// Control barraPresentes.
+        /// Control txtFechaInicioPresentismo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraPresentes;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaInicioPresentismo;
 
         /// <summary>
-        /// Control barraAusentes.
+        /// Control rfvFinalPresentismo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraAusentes;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFinalPresentismo;
 
         /// <summary>
-        /// Control ddlPresentismoFiltrado.
+        /// Control revFechaFinalPresentismo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlPresentismoFiltrado;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revFechaFinalPresentismo;
 
         /// <summary>
-        /// Control DropDownList1.
+        /// Control txtFechaFinPresentismo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownList1;
+        protected global::System.Web.UI.WebControls.TextBox txtFechaFinPresentismo;
 
         /// <summary>
-        /// Control Button2.
+        /// Control cvFecha.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button2;
+        protected global::System.Web.UI.WebControls.CompareValidator cvFecha;
 
         /// <summary>
-        /// Control Div1.
+        /// Control btnLimpiarRanking0.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div1;
+        protected global::System.Web.UI.WebControls.Button btnLimpiarRanking0;
 
         /// <summary>
-        /// Control Div2.
+        /// Control btnInformeFechas.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Div2;
+        protected global::System.Web.UI.WebControls.Button btnInformeFechas;
+
+        /// <summary>
+        /// Control barraDeInforme.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraDeInforme;
+
+        /// <summary>
+        /// Control barraVerde.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraVerde;
+
+        /// <summary>
+        /// Control barraAmarilla.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraAmarilla;
+
+        /// <summary>
+        /// Control barraRoja.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl barraRoja;
     }
 }

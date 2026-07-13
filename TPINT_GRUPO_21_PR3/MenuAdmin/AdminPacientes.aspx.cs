@@ -17,9 +17,17 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            Usuario user = (Usuario)Session["UsuarioLogueado"];
+
+            if (user == null || user.Rol != "A")
+            {
+                Response.Redirect("~/SesionInvalida.html");
+            }
+
             if (!IsPostBack)
             {
-                lblNombreUsuario.Text = Session["UsuarioLogeado"].ToString();
+                lblNombreUsuario.Text = user.persona.Nombre + " " + user.persona.Apellido;
                 divEliminar.Visible = false;
                 divFormulario.Visible = false;
                 CargarGrillaPacientes();
@@ -118,10 +126,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             divEliminar.Visible = true;
         }
 
-        protected void gvGestionPacientes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {

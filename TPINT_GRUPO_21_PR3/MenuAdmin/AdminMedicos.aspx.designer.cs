@@ -96,13 +96,49 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.Button btnCancelar;
 
         /// <summary>
-        /// Control gvGestionMedicos.
+        /// Control txtBuscarNombreApellido.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvGestionMedicos;
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarNombreApellido;
+
+        /// <summary>
+        /// Control txtBuscarLegajo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtBuscarLegajo;
+
+        /// <summary>
+        /// Control ddlFiltroEspecialidad.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlFiltroEspecialidad;
+
+        /// <summary>
+        /// Control btnBuscar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnBuscar;
+
+        /// <summary>
+        /// Control btnLimpiarBusqueda.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLimpiarBusqueda;
 
         /// <summary>
         /// Control btnMostrarForm.
@@ -112,6 +148,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnMostrarForm;
+
+        /// <summary>
+        /// Control gvGestionMedicos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvGestionMedicos;
 
         /// <summary>
         /// Control divFormulario.
@@ -267,6 +312,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.CheckBoxList cblDiasDisponibles;
 
         /// <summary>
+        /// Control cvDiasDisponibles.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvDiasDisponibles;
+
+        /// <summary>
         /// Control ddlSexo.
         /// </summary>
         /// <remarks>
@@ -301,6 +355,24 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNacionalidad;
+
+        /// <summary>
+        /// Control rfvFecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvFecha;
+
+        /// <summary>
+        /// Control revFecha.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revFecha;
 
         /// <summary>
         /// Control txtFechaNac.

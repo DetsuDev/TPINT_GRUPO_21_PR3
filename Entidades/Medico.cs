@@ -20,6 +20,5 @@ namespace Entidades
         public string HoraInicio { get; set; }
         public string HoraFin { get; set; }
 
-        public Medico() : base() { }
     }
 }

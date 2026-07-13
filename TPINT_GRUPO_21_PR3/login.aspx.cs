@@ -1,4 +1,5 @@
-﻿using Negocio;
+﻿using Entidades;
+using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -20,7 +21,7 @@ namespace TPINT_GRUPO_21_PR3
 
             if (!IsPostBack)
             {
-                Session["UsuarioLogeado"] = null;
+                Session["UsuarioLogueado"] = null;
             }
         }
 
@@ -47,16 +48,22 @@ namespace TPINT_GRUPO_21_PR3
                         return;
                     }
 
-                    string nombreCompleto = $"{row["Nombre"]} {row["Apellido"]}";
-                    Session["UsuarioLogeado"] = nombreCompleto;
+                    Usuario user = new Usuario();
+
+                    user.persona.Nombre = (string)row["Nombre"];
+                    user.persona.Apellido = (string)row["Apellido"];
+                    user.Rol = (string)row["Rol"];
+                    user.IdPersona = Convert.ToInt32(row["Id_Persona"]);
+
+                    Session["UsuarioLogueado"] = user;
 
                     string rol = row["Rol"].ToString();
 
-                    if (rol == "Admin")
+                    if (rol == "A") /// Admin
                     {
                         Response.Redirect("~/MenuAdmin/AdminInformes.aspx");
                     }
-                    else if (rol == "Medico")
+                    else if (rol == "M") /// Medico
                     {
                         Response.Redirect("~/MenuMedico/MedicoTurnos.aspx");
                     }

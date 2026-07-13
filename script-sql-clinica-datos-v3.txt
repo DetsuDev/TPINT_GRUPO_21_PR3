@@ -1,0 +1,266 @@
+/* ============================================================
+   SCRIPT DE CARGA DE DATOS - SISTEMA DE TURNOS MEDICOS
+   Base: ClinicaDB
+   ------------------------------------------------------------
+   Version 3: 6 especialidades (en vez de 15) y varios medicos por
+   Ahora los IDs se fijan EXPLICITAMENTE con SET IDENTITY_INSERT
+   especialidad. Sigue usando SET IDENTITY_INSERT en vez del
+   autonumerico + DBCC CHECKIDENT, para no depender del historial
+   previo de la base. La limpieza se hace dentro de una transaccion
+   con XACT_ABORT ON: si algo falla, se revierte todo.
+
+   Contenido:
+     - 4 PROVINCIA / 5 LOCALIDADES (se reutilizan)
+     - 31 PERSONA  (15 medicos + 1 admin + 15 pacientes)
+     - 6 ESPECIALIDADES (varios medicos por especialidad)
+     - 15 MEDICO
+     - 16 USUARIO  (15 medicos con Rol 'M' + 1 admin con Rol 'A')
+     - 15 PACIENTE
+     - 15 DISPONIBILIDAD (ventanas de 8 horas, entre las 08 y las 20 hs)
+     - 15 TURNO (uno por medico, en horario valido segun su disponibilidad)
+   ============================================================ */
+
+USE ClinicaDB;
+GO
+
+SET NOCOUNT ON;
+GO
+
+-- ============================================================
+-- LIMPIEZA (orden de hijo a padre, dentro de una transaccion)
+-- ============================================================
+SET XACT_ABORT ON;
+BEGIN TRAN;
+
+DELETE FROM TURNO;
+DELETE FROM DISPONIBILIDAD;
+DELETE FROM USUARIO;
+DELETE FROM MEDICO;
+DELETE FROM PACIENTE;
+DELETE FROM PERSONA;
+DELETE FROM ESPECIALIDADES;
+DELETE FROM LOCALIDADES;
+DELETE FROM PROVINCIA;
+
+COMMIT TRAN;
+GO
+
+SET XACT_ABORT OFF;
+GO
+
+-- ============================================================
+-- PROVINCIA
+-- ============================================================
+SET IDENTITY_INSERT PROVINCIA ON;
+INSERT INTO PROVINCIA (Id_Provincia, NombreProvincia) VALUES
+(1, 'Buenos Aires'),
+(2, 'Cordoba'),
+(3, 'Santa Fe'),
+(4, 'Mendoza');
+SET IDENTITY_INSERT PROVINCIA OFF;
+GO
+
+-- ============================================================
+-- LOCALIDADES
+-- ============================================================
+SET IDENTITY_INSERT LOCALIDADES ON;
+INSERT INTO LOCALIDADES (Id_Localidad, Id_Provincia, NombreLocalidad) VALUES
+(1, 1, 'La Plata'),
+(2, 1, 'San Isidro'),
+(3, 2, 'Villa Carlos Paz'),
+(4, 3, 'Rosario'),
+(5, 4, 'San Rafael');
+SET IDENTITY_INSERT LOCALIDADES OFF;
+GO
+
+-- ============================================================
+-- PERSONA  (1-15 medicos, 16 admin, 17-31 pacientes)
+-- ============================================================
+SET IDENTITY_INSERT PERSONA ON;
+INSERT INTO PERSONA (Id_Persona, Id_Localidad, DNI, Nombre, Apellido, Sexo, Nacionalidad, FechaNacimiento, Direccion, CorreoElectronico, Telefono) VALUES
+(1, 1, '50111222', 'Juan', 'Perez', 'M', 'Argentina', '1978-03-14', 'Direccion 1', 'juan.perez@clinica.com', '114000000'),
+(2, 2, '50111223', 'Maria', 'Lopez', 'F', 'Argentina', '1980-06-22', 'Direccion 2', 'maria.lopez@clinica.com', '114000001'),
+(3, 3, '50111224', 'Roberto', 'Gomez', 'M', 'Argentina', '1975-11-09', 'Direccion 3', 'roberto.gomez@clinica.com', '114000002'),
+(4, 4, '50111225', 'Carla', 'Fernandez', 'F', 'Argentina', '1985-02-28', 'Direccion 4', 'carla.fernandez@clinica.com', '114000003'),
+(5, 5, '50111226', 'Diego', 'Alvarez', 'M', 'Argentina', '1979-09-17', 'Direccion 5', 'diego.alvarez@clinica.com', '114000004'),
+(6, 1, '50111227', 'Sofia', 'Torres', 'F', 'Argentina', '1982-05-04', 'Direccion 6', 'sofia.torres@clinica.com', '114000005'),
+(7, 2, '50111228', 'Martin', 'Diaz', 'M', 'Argentina', '1976-12-30', 'Direccion 7', 'martin.diaz@clinica.com', '114000006'),
+(8, 3, '50111229', 'Lucia', 'Romero', 'F', 'Argentina', '1988-07-19', 'Direccion 8', 'lucia.romero@clinica.com', '114000007'),
+(9, 4, '50111230', 'Pablo', 'Sosa', 'M', 'Argentina', '1974-01-25', 'Direccion 9', 'pablo.sosa@clinica.com', '114000008'),
+(10, 5, '50111231', 'Valentina', 'Ruiz', 'F', 'Argentina', '1983-10-11', 'Direccion 10', 'valentina.ruiz@clinica.com', '114000009'),
+(11, 1, '50111232', 'Federico', 'Molina', 'M', 'Argentina', '1977-04-08', 'Direccion 11', 'federico.molina@clinica.com', '114000010'),
+(12, 2, '50111233', 'Camila', 'Acosta', 'F', 'Argentina', '1986-08-23', 'Direccion 12', 'camila.acosta@clinica.com', '114000011'),
+(13, 3, '50111234', 'Nicolas', 'Suarez', 'M', 'Argentina', '1981-06-15', 'Direccion 13', 'nicolas.suarez@clinica.com', '114000012'),
+(14, 4, '50111235', 'Agustina', 'Ortiz', 'F', 'Argentina', '1984-03-02', 'Direccion 14', 'agustina.ortiz@clinica.com', '114000013'),
+(15, 5, '50111236', 'Ignacio', 'Herrera', 'M', 'Argentina', '1973-12-05', 'Direccion 15', 'ignacio.herrera@clinica.com', '114000014'),
+(16, 1, '50111237', 'Admin', 'Sistema', 'M', 'Argentina', '1990-01-01', 'Sede Central', 'admin@clinica.com', '1140000000'),
+(17, 1, '50111238', 'Pedro', 'Ramirez', 'M', 'Argentina', '1995-02-14', 'Direccion 16', 'pedro.ramirez@mail.com', '155000000'),
+(18, 2, '50111239', 'Lucia', 'Martinez', 'F', 'Argentina', '1999-12-01', 'Direccion 17', 'lucia.martinez@mail.com', '155000001'),
+(19, 3, '50111240', 'Ana', 'Castro', 'F', 'Argentina', '2001-05-19', 'Direccion 18', 'ana.castro@mail.com', '155000002'),
+(20, 4, '50111241', 'Gonzalo', 'Ibarra', 'M', 'Argentina', '1992-08-30', 'Direccion 19', 'gonzalo.ibarra@mail.com', '155000003'),
+(21, 5, '50111242', 'Florencia', 'Nunez', 'F', 'Argentina', '1997-03-22', 'Direccion 20', 'florencia.nunez@mail.com', '155000004'),
+(22, 1, '50111243', 'Emiliano', 'Vega', 'M', 'Argentina', '1988-11-11', 'Direccion 21', 'emiliano.vega@mail.com', '155000005'),
+(23, 2, '50111244', 'Julieta', 'Paz', 'F', 'Argentina', '2003-07-07', 'Direccion 22', 'julieta.paz@mail.com', '155000006'),
+(24, 3, '50111245', 'Santiago', 'Rios', 'M', 'Argentina', '1994-09-09', 'Direccion 23', 'santiago.rios@mail.com', '155000007'),
+(25, 4, '50111246', 'Micaela', 'Silva', 'F', 'Argentina', '1998-01-28', 'Direccion 24', 'micaela.silva@mail.com', '155000008'),
+(26, 5, '50111247', 'Tomas', 'Aguirre', 'M', 'Argentina', '1990-06-06', 'Direccion 25', 'tomas.aguirre@mail.com', '155000009'),
+(27, 1, '50111248', 'Rocio', 'Medina', 'F', 'Argentina', '2000-10-15', 'Direccion 26', 'rocio.medina@mail.com', '155000010'),
+(28, 2, '50111249', 'Franco', 'Godoy', 'M', 'Argentina', '1996-04-04', 'Direccion 27', 'franco.godoy@mail.com', '155000011'),
+(29, 3, '50111250', 'Antonella', 'Luna', 'F', 'Argentina', '2002-02-02', 'Direccion 28', 'antonella.luna@mail.com', '155000012'),
+(30, 4, '50111251', 'Bruno', 'Cabrera', 'M', 'Argentina', '1993-12-25', 'Direccion 29', 'bruno.cabrera@mail.com', '155000013'),
+(31, 5, '50111252', 'Milagros', 'Vargas', 'F', 'Argentina', '1991-05-17', 'Direccion 30', 'milagros.vargas@mail.com', '155000014');
+SET IDENTITY_INSERT PERSONA OFF;
+GO
+
+-- Id_Persona asignados:
+--   1-15  -> Medicos
+--   16    -> Admin
+--   17-31 -> Pacientes
+
+-- ============================================================
+-- ESPECIALIDADES
+-- ============================================================
+SET IDENTITY_INSERT ESPECIALIDADES ON;
+INSERT INTO ESPECIALIDADES (Id_Especialidad, Nombre) VALUES
+(1, 'Cardiologia'),
+(2, 'Pediatria'),
+(3, 'Traumatologia'),
+(4, 'Dermatologia'),
+(5, 'Clinica Medica'),
+(6, 'Ginecologia');
+SET IDENTITY_INSERT ESPECIALIDADES OFF;
+GO
+
+-- ============================================================
+-- MEDICO  (Id_Persona 1-15, varios medicos comparten especialidad)
+-- ============================================================
+SET IDENTITY_INSERT MEDICO ON;
+INSERT INTO MEDICO (Id_Medico, Legajo_Medico, Id_Persona, Id_Especialidad, Estado) VALUES
+(1, 'LEG-001', 1, 1, 1),
+(2, 'LEG-002', 2, 2, 1),
+(3, 'LEG-003', 3, 3, 1),
+(4, 'LEG-004', 4, 4, 1),
+(5, 'LEG-005', 5, 5, 1),
+(6, 'LEG-006', 6, 6, 1),
+(7, 'LEG-007', 7, 1, 1),
+(8, 'LEG-008', 8, 2, 1),
+(9, 'LEG-009', 9, 3, 1),
+(10, 'LEG-010', 10, 4, 1),
+(11, 'LEG-011', 11, 5, 1),
+(12, 'LEG-012', 12, 6, 1),
+(13, 'LEG-013', 13, 1, 1),
+(14, 'LEG-014', 14, 2, 1),
+(15, 'LEG-015', 15, 3, 1);
+SET IDENTITY_INSERT MEDICO OFF;
+GO
+
+-- ============================================================
+-- USUARIO  (todos los medicos + el admin tienen usuario y clave)
+-- ============================================================
+SET IDENTITY_INSERT USUARIO ON;
+INSERT INTO USUARIO (Id_Usuario, Id_Persona, Usuario, Contrasenia, Rol, Estado) VALUES
+(1, 1, 'jperez', 'hash001', 'M', 1),
+(2, 2, 'mlopez', 'hash002', 'M', 1),
+(3, 3, 'rgomez', 'hash003', 'M', 1),
+(4, 4, 'cfernandez', 'hash004', 'M', 1),
+(5, 5, 'dalvarez', 'hash005', 'M', 1),
+(6, 6, 'storres', 'hash006', 'M', 1),
+(7, 7, 'mdiaz', 'hash007', 'M', 1),
+(8, 8, 'lromero', 'hash008', 'M', 1),
+(9, 9, 'psosa', 'hash009', 'M', 1),
+(10, 10, 'vruiz', 'hash010', 'M', 1),
+(11, 11, 'fmolina', 'hash011', 'M', 1),
+(12, 12, 'cacosta', 'hash012', 'M', 1),
+(13, 13, 'nsuarez', 'hash013', 'M', 1),
+(14, 14, 'aortiz', 'hash014', 'M', 1),
+(15, 15, 'iherrera', 'hash015', 'M', 1),
+(16, 16, 'admin', 'hashAdmin1', 'A', 1);
+SET IDENTITY_INSERT USUARIO OFF;
+GO
+
+-- ============================================================
+-- PACIENTE  (Id_Persona 17-31)
+-- ============================================================
+SET IDENTITY_INSERT PACIENTE ON;
+INSERT INTO PACIENTE (Id_Paciente, Id_Persona, Estado) VALUES
+(1, 17, 1),
+(2, 18, 1),
+(3, 19, 1),
+(4, 20, 1),
+(5, 21, 1),
+(6, 22, 1),
+(7, 23, 1),
+(8, 24, 1),
+(9, 25, 1),
+(10, 26, 1),
+(11, 27, 1),
+(12, 28, 1),
+(13, 29, 1),
+(14, 30, 1),
+(15, 31, 1);
+SET IDENTITY_INSERT PACIENTE OFF;
+GO
+
+-- ============================================================
+-- DISPONIBILIDAD  (una franja de 8 hs por medico, entre 08 y 20 hs)
+-- ============================================================
+SET IDENTITY_INSERT DISPONIBILIDAD ON;
+INSERT INTO DISPONIBILIDAD (Id_Disponibilidad, Id_Medico, DiasDisponibles, HoraInicio, HoraFin) VALUES
+(1, 1, 'LMV', '08:00', '16:00'),
+(2, 2, 'LMVJ', '09:00', '17:00'),
+(3, 3, 'MJV', '10:00', '18:00'),
+(4, 4, 'LMJ', '11:00', '19:00'),
+(5, 5, 'LMV', '12:00', '20:00'),
+(6, 6, 'LMVJ', '08:00', '16:00'),
+(7, 7, 'MJV', '09:00', '17:00'),
+(8, 8, 'LMJ', '10:00', '18:00'),
+(9, 9, 'LMV', '11:00', '19:00'),
+(10, 10, 'LMVJ', '12:00', '20:00'),
+(11, 11, 'MJV', '08:00', '16:00'),
+(12, 12, 'LMJ', '09:00', '17:00'),
+(13, 13, 'LMV', '10:00', '18:00'),
+(14, 14, 'LMVJ', '11:00', '19:00'),
+(15, 15, 'MJV', '12:00', '20:00');
+SET IDENTITY_INSERT DISPONIBILIDAD OFF;
+GO
+
+-- ============================================================
+-- TURNO  (uno por medico, hora en punto dentro de su disponibilidad)
+-- ============================================================
+SET IDENTITY_INSERT TURNO ON;
+INSERT INTO TURNO (Id_Turno, Id_Medico, Id_Persona, Fecha, Hora, Observacion, EstadoTurno, Estado) VALUES
+(1, 1, 17, '2026-07-13', '09:00', 'Control de rutina', 'Pendiente', 1),
+(2, 2, 18, '2026-07-13', '10:00', 'Primera consulta', 'Presente', 1),
+(3, 3, 19, '2026-07-14', '11:00', 'Dolor persistente', 'Pendiente', 1),
+(4, 4, 20, '2026-07-14', '12:00', 'Revision general', 'Presente', 1),
+(5, 5, 21, '2026-07-15', '13:00', 'Seguimiento tratamiento', 'Pendiente', 1),
+(6, 6, 22, '2026-07-15', '09:00', 'Chequeo anual', 'Presente', 1),
+(7, 7, 23, '2026-07-16', '10:00', 'Consulta por sintomas', 'Pendiente', 1),
+(8, 8, 24, '2026-07-16', '11:00', 'Renovacion de receta', 'Presente', 1),
+(9, 9, 25, '2026-07-17', '12:00', 'Estudio de resultados', 'Pendiente', 1),
+(10, 10, 26, '2026-07-17', '13:00', 'Control post operatorio', 'Presente', 1),
+(11, 11, 27, '2026-07-20', '09:00', 'Consulta de urgencia', 'Pendiente', 1),
+(12, 12, 28, '2026-07-20', '10:00', 'Evaluacion inicial', 'Presente', 1),
+(13, 13, 29, '2026-07-21', '11:00', 'Control de rutina', 'Pendiente', 1),
+(14, 14, 30, '2026-07-21', '12:00', 'Segunda opinion', 'Presente', 1),
+(15, 15, 31, '2026-07-22', '13:00', 'Consulta programada', 'Pendiente', 1);
+SET IDENTITY_INSERT TURNO OFF;
+GO
+
+-- ============================================================
+-- Reseed final: para que futuros INSERT normales sigan la numeracion
+-- ============================================================
+DBCC CHECKIDENT ('PROVINCIA', RESEED, 4);
+DBCC CHECKIDENT ('LOCALIDADES', RESEED, 5);
+DBCC CHECKIDENT ('PERSONA', RESEED, 31);
+DBCC CHECKIDENT ('ESPECIALIDADES', RESEED, 6);
+DBCC CHECKIDENT ('MEDICO', RESEED, 15);
+DBCC CHECKIDENT ('USUARIO', RESEED, 16);
+DBCC CHECKIDENT ('PACIENTE', RESEED, 15);
+DBCC CHECKIDENT ('DISPONIBILIDAD', RESEED, 15);
+DBCC CHECKIDENT ('TURNO', RESEED, 15);
+GO
+
+-- ============================================================
+-- FIN DEL SCRIPT
+-- ============================================================

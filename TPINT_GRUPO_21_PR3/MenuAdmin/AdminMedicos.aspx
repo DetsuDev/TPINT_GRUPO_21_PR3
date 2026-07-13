@@ -39,13 +39,17 @@
 <body style="background-color: #f8f9fa;">
     
 
-    <div  class="card" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
-  <div class="card-body" >
-    <p class="card-text">Bienvenido: </p>
-      <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]"></asp:Label>
-    <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesion </a>
-  </div>
-</div>
+    <div  class="card text-center col-1" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
+      <div class="card-body" >
+        <p class="card-text" style="margin: -3px -6px 5px -6px;">Bienvenid@, <br/> 
+          <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]" style="font-weight: bold;"></asp:Label>
+          </p>
+          <div class="text-center">
+            <img src="../assets/admin-placeholder.png" alt="Administrador-placeholder" style="width:100px; height:auto; margin-bottom:5px;"/>
+          </div>
+        <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesión </a>
+      </div>
+    </div>
 
     <div style="padding: 50px; margin: 50px;">
         <ul class="nav nav-tabs" style="min-width: 1000px;">
@@ -78,8 +82,33 @@
 
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Listado de Médicos</h4>
+                        <h4 class="mb-0">Buscar Médicos</h4>
                     </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Búsqueda (Nombre o Apellido)</label>
+                                <asp:TextBox ID="txtBuscarNombreApellido" runat="server" CssClass="form-control" placeholder="Ej: Juan"></asp:TextBox>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Legajo</label>
+                                <asp:TextBox ID="txtBuscarLegajo" runat="server" CssClass="form-control" placeholder="Ej: MED-123"></asp:TextBox>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Especialidad</label>
+                                <asp:DropDownList ID="ddlFiltroEspecialidad" runat="server" CssClass="form-select"></asp:DropDownList>
+                            </div>
+                            <div class="col-12 text-end pt-3">
+                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary px-4" OnClick="btnBuscar_Click" CausesValidation="false" />
+                                <asp:Button ID="btnLimpiarBusqueda" runat="server" Text="Limpiar" CssClass="btn btn-outline-secondary px-4" OnClick="btnLimpiarBusqueda_Click" CausesValidation="false" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-primary mb-5 shadow-sm">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">Listado de Médicos</h4>
+                        <asp:Button ID="btnMostrarForm" runat="server" Text="Nuevo Médico" OnClick="btnMostrarForm_Click" CssClass="btn btn-light" /></div>
                     <div class="card-body p-4">
                         <div class="table-responsive">
                             <asp:GridView ID="gvGestionMedicos" runat="server"
@@ -126,7 +155,6 @@
                         </div>
                     </div>
                 </div>
-                <asp:Button ID="btnMostrarForm" runat="server" Text="Nuevo Medico" OnClick="btnMostrarForm_Click" class="btn btn-primary" />
                 <div class="card" runat="server"
                     id="divFormulario"
                     style="z-index: 9999; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 80%">
@@ -141,7 +169,7 @@
                                     <div class="col-md-3">
                                         <label class="form-label font-weight-bold">Legajo Médico</label>
                                         <asp:RequiredFieldValidator ID="rfvLegajoMedico" runat="server" ErrorMessage="*" ControlToValidate="txtLegajo" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="revLegajoMedico" runat="server" ErrorMessage="* Ingrese un valor valido" ValidationExpression="^[A-Z]{3}-\d{3}$" ControlToValidate="txtDni" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="revLegajoMedico" runat="server" ErrorMessage="* Ingrese un valor valido" ValidationExpression="^[A-Z]{3}-\d{3}$" ControlToValidate="txtLegajo" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtLegajo" runat="server" CssClass="form-control" placeholder="Ej: MED-999"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">
@@ -181,6 +209,13 @@
                                             <asp:ListItem Value="J">Jueves</asp:ListItem>
                                             <asp:ListItem Value="V">Viernes</asp:ListItem>
                                         </asp:CheckBoxList>
+                                        <asp:CustomValidator ID="cvDiasDisponibles" runat="server"
+                                            ErrorMessage="* Debe seleccionar al menos un día"
+                                            ForeColor="Red"
+                                            Display="Dynamic"
+                                            ValidationGroup="GrupoMedico"
+                                            OnServerValidate="cvDiasDisponibles_ServerValidate">
+                                        </asp:CustomValidator>
                                     </div>
                                     <div class="col-md-1">
                                         <label class="form-label">Sexo</label>
@@ -199,12 +234,16 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label class="form-label">Fecha de Nacimiento</label>
+                                        
+                                             <asp:RequiredFieldValidator ID="rfvFecha" runat="server" ErrorMessage="*" ControlToValidate="txtFechaNac" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
+                                                <asp:RegularExpressionValidator ID="revFecha" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtFechaNac" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
+                                        
                                         <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">
                                         <label class="form-label">Telefono</label>
                                         <asp:RequiredFieldValidator ID="rfvTelefono" runat="server" ErrorMessage="*" ControlToValidate="txtTelefono" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="revTelefono" runat="server" ErrorMessage="* Ingrese 10 digitos numericos" ValidationExpression="^\d{10}$" ControlToValidate="txtTelefono" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="revTelefono" runat="server" ErrorMessage="* Ingrese un teléfono válido (7 a 20 caracteres, puede incluir '+' y espacios)" ValidationExpression="^\+?[0-9\s()-]{7,20}$" ControlToValidate="txtTelefono" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
                                         &nbsp;<asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-6">
@@ -223,6 +262,8 @@
                                         <asp:DropDownList ID="ddlLocalidad" runat="server" CssClass="form-select"></asp:DropDownList>
                                     </div>
                                     <div class="col-md-6">
+                                        
+                                        <label class="form-label">Email</label>
                                         <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="*" ControlToValidate="txtEmail" ForeColor="Red" ValidationGroup="GrupoMedico"></asp:RequiredFieldValidator>
                                         <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="* Correo no válido" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoMedico"></asp:RegularExpressionValidator>
                                         &nbsp;<asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="medico@clinica.com"></asp:TextBox>
@@ -259,10 +300,16 @@
         <script src="../js/bootstrap.bundle.min.js">
         </script>
     <script>
-
-
-        </script>
-
-
+        ['input', 'change'].forEach(function (ev) {
+            document.addEventListener(ev, function (e) {
+                var m = document.querySelector("[id$='lblMensaje']");
+                if (m) m.textContent = '';
+                if (window.Page_Validators && window.ValidatorValidate)
+                    Page_Validators.forEach(function (v) {
+                        if (v.controltovalidate === e.target.id) ValidatorValidate(v);
+                    });
+            });
+        });
+    </script>
 </body>
 </html>

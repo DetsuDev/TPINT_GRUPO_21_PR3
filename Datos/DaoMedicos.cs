@@ -1,18 +1,19 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entidades;
 
 namespace Datos
 {
     public class DaoMedicos
     {
         AccesoDatos accesoDatos = new AccesoDatos();
-        public DataTable getTablaMedicos()
+        public DataTable getTablaMedicosCompleta()
         {
 
             string consulta = "SELECT M.Id_Medico, M.Legajo_Medico, P.Nombre, P.Apellido, " +
@@ -26,6 +27,40 @@ namespace Datos
                 "INNER JOIN PROVINCIA PR ON L.Id_Provincia = PR.Id_Provincia " +
                 "LEFT JOIN USUARIO U ON P.Id_Persona = U.Id_Persona " +
                 "WHERE M.Estado = 1";
+            return accesoDatos.obtenerTabla(consulta);
+        }
+
+
+        public DataTable getTablaINA()
+        {
+            string consulta = @"
+        SELECT 
+            M.Id_Medico,
+            P.Nombre + ' ' + P.Apellido AS NombreApellido
+        FROM MEDICO M
+        INNER JOIN PERSONA P
+            ON M.Id_Persona = P.Id_Persona";
+
+            return accesoDatos.obtenerTabla(consulta);
+        }
+        public DataTable getTablaPorEsp(int idEsp)
+        {
+            string consulta = @"
+        SELECT 
+            M.Id_Medico,
+            P.Nombre + ' ' + P.Apellido AS NombreApellido
+        FROM MEDICO M
+        INNER JOIN PERSONA P
+            ON M.Id_Persona = P.Id_Persona
+        WHERE M.Id_Especialidad = " + idEsp;
+
+            return accesoDatos.obtenerTabla(consulta);
+        }
+
+
+        public DataTable getTablaMedicos()
+        {
+            string consulta = "SELECT * FROM MEDICO";
             return accesoDatos.obtenerTabla(consulta);
         }
 
@@ -126,7 +161,6 @@ namespace Datos
 
         public int eliminarMedico(Medico m)
         {
-            // Baja lógica del médico y de su usuario asociado
             string consulta = $@"
                 UPDATE MEDICO SET Estado = 0 WHERE Id_Medico = {m.IdMedico};
                 UPDATE USUARIO SET Estado = 0
@@ -141,5 +175,32 @@ namespace Datos
                 return -1;
             }
         }
+        public int obtenerIdMedicoPorIdPersona(int idPersona)
+        {
+            string consulta = $"SELECT Id_Medico FROM MEDICO WHERE Id_Persona = {idPersona}";
+
+            DataTable dt = accesoDatos.obtenerTabla(consulta);
+
+            if (dt != null && dt.Rows.Count > 0)
+            {
+                return Convert.ToInt32(dt.Rows[0]["Id_Medico"]);
+            }
+            return 0;
+        }
+
+        public DataTable getHorariosMedicoSeleccionado(Medico med)
+        {
+            string consulta = $@"
+                SELECT D.HoraInicio AS Horas
+                FROM MEDICO M
+                INNER JOIN DISPONIBILIDAD D ON D.Id_Medico = M.Id_Medico
+                WHERE M.Id_Medico = {med.IdMedico}";
+
+            DataTable dt = accesoDatos.obtenerTabla(consulta);
+
+            return dt;
+    
+        }
+    
     }
 }

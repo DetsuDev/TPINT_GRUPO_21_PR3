@@ -307,26 +307,7 @@ namespace Negocio
 
         public DataTable getTurnos(string dni, string paciente, string fecha, string estado)
         {
-
-            NegocioTurnos negocioTurnos = new NegocioTurnos();
-            DataTable dt = negocioTurnos.getTabla();
-
-            List<string> filtros = new List<string>();
-            if (!string.IsNullOrWhiteSpace(dni))
-                filtros.Add("DNI LIKE '%" + dni.Trim().Replace("'", "''") + "%'");
-            if (!string.IsNullOrWhiteSpace(paciente))
-                filtros.Add("Paciente LIKE '%" + paciente.Trim().Replace("'", "''") + "%'");
-            if (!string.IsNullOrWhiteSpace(fecha))
-                filtros.Add("Fecha LIKE '%" + fecha.Trim().Replace("'", "''") + "%'");
-            if (!string.IsNullOrEmpty(estado))
-                filtros.Add("Estado = '" + estado.Replace("'", "''") + "'");
-
-            DataView dv = dt.DefaultView;
-            if (filtros.Count > 0)
-            {
-                dv.RowFilter = string.Join(" AND ", filtros);
-            }
-            return dt;
+            return daoTurnos.getTurnosFiltrados(dni,paciente,fecha,estado);
         }
     }
 }

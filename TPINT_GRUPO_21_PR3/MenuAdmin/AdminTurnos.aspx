@@ -113,7 +113,10 @@
                 <div class="mb-3 text-center">
                     <asp:Label ID="lblMensajeGeneral" runat="server" CssClass="fw-bold fs-5" Visible="false"></asp:Label>
                 </div>
-
+                
+                <div class="mb-3 text-center">
+                    <asp:Label ID="lblMensajeErrorPopup" runat="server" CssClass="fw-bold fs-6" ForeColor="Red" Visible="false"></asp:Label>
+                </div>
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
                         <h4 class="mb-0">Listado de Turnos</h4>
@@ -159,9 +162,6 @@
                             <h4 id="hCargarTurno" runat="server" class="mb-0">Cargar Nuevo Turno</h4>
                         </div>
                         <div class="card-body p-4">
-                            <div class="mb-3 text-center">
-                                <asp:Label ID="lblMensajeErrorPopup" runat="server" CssClass="fw-bold fs-6" ForeColor="Red" Visible="false"></asp:Label>
-                            </div>
                             <div class="row g-3">
                                 <div class="col-md-3">
                                     <label class="form-label font-weight-bold">DNI Paciente</label>

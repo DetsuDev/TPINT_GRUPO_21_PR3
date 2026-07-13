@@ -141,7 +141,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.Button btnLimpiarBusqueda;
 
         /// <summary>
-        /// Control gvGestionMedicos.
+        /// Control btnMostrarForm.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.

@@ -92,17 +92,16 @@
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Fecha</label>
-                                 <asp:RequiredFieldValidator ID="rfvFecha" runat="server" ErrorMessage="*" ControlToValidate="txtBuscarFecha" ForeColor="Red"></asp:RequiredFieldValidator>
-                                 <asp:RegularExpressionValidator ID="revFecha" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtBuscarFecha" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
-                                        
+                                 <asp:RegularExpressionValidator ID="revFecha" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtBuscarFecha" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>         
                                 <asp:TextBox ID="txtBuscarFecha" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
                                 <label class="form-label">Estado</label>
                                 <asp:DropDownList ID="ddlBuscarEstado" runat="server" CssClass="form-select">
                                     <asp:ListItem Value="">Todos</asp:ListItem>
-                                    <asp:ListItem Value="Confirmado">Confirmado</asp:ListItem>
+                                    <asp:ListItem Value="Presente">Presente</asp:ListItem>
                                     <asp:ListItem Value="Pendiente">Pendiente</asp:ListItem>
+                                    <asp:ListItem>Ausente</asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                             <div class="col-12 text-end pt-3">
@@ -126,7 +125,7 @@
                         <h4 class="mb-0">Listado de Turnos</h4>
 
                         <asp:Button ID="btnNuevoTurno" runat="server" Text="Nuevo Turno" CssClass="btn btn-light" OnClick="btnNuevoTurno_Click" CausesValidation="false" />
-
+                        
                     </div>
                     <div class="card-body p-4">
                         <div class="table-responsive">

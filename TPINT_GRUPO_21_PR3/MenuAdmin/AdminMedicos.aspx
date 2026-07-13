@@ -131,6 +131,8 @@
                                     <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
                                     <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
                                     <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
+                                    <asp:BoundField DataField="HoraInicio" HeaderText="Hora Inicio" />
+                                    <asp:BoundField DataField="HoraFin" HeaderText="Hora Fin" />
                                     <asp:BoundField DataField="Sexo" HeaderText="Sexo" />
                                     <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" />
                                     

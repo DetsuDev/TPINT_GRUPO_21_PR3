@@ -82,6 +82,31 @@
 
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Buscar Médicos</h4>
+                    </div>
+                    <div class="card-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label">Búsqueda (Nombre o Apellido)</label>
+                                <asp:TextBox ID="txtBuscarNombreApellido" runat="server" CssClass="form-control" placeholder="Ej: Juan"></asp:TextBox>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Legajo</label>
+                                <asp:TextBox ID="txtBuscarLegajo" runat="server" CssClass="form-control" placeholder="Ej: MED-123"></asp:TextBox>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label">Especialidad</label>
+                                <asp:DropDownList ID="ddlFiltroEspecialidad" runat="server" CssClass="form-select"></asp:DropDownList>
+                            </div>
+                            <div class="col-12 text-end pt-3">
+                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary px-4" OnClick="btnBuscar_Click" CausesValidation="false" />
+                                <asp:Button ID="btnLimpiarBusqueda" runat="server" Text="Limpiar" CssClass="btn btn-outline-secondary px-4" OnClick="btnLimpiarBusqueda_Click" CausesValidation="false" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card border-primary mb-5 shadow-sm">
+                    <div class="card-header bg-primary text-white">
                         <h4 class="mb-0">Listado de Médicos</h4>
                     </div>
                     <div class="card-body p-4">

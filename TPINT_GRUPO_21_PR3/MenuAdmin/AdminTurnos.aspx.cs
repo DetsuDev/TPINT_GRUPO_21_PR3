@@ -22,6 +22,8 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             {
                 Response.Redirect("~/SesionInvalida.html");
             }
+            lblMensajeErrorPopup.Visible = false;
+
             if (!IsPostBack)
             {
                 lblNombreUsuario.Text = user.persona.Nombre + " " + user.persona.Apellido;
@@ -278,7 +280,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             string fecha = cFechasTurnos.SelectedDate.ToString("yyyy-MM-dd");
             string hora = ddlHora.SelectedValue;
             string observacion = txtObservacionAlta.Text.Trim();
-
+            
 
             NegocioTurnos negocioTurnos = new NegocioTurnos();
             int resultado = negocioTurnos.guardarTurno(idMedico, dniPaciente, fecha, hora, observacion);
@@ -303,12 +305,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             else
             {
                 fullscreenOverlay.Style["display"] = "flex";
-                lblMensajeErrorPopup.Visible = true;
 
                 if (resultado == -1) lblMensajeErrorPopup.Text = "El DNI ingresado no pertenece a ningún paciente registrado.";
                 else if (resultado == -2) lblMensajeErrorPopup.Text = "El paciente ya posee un turno asignado para esa misma fecha y hora.";
                 else if (resultado == -3) lblMensajeErrorPopup.Text = "El médico seleccionado ya se encuentra ocupado con otro turno en esa misma fecha y hora.";
+                else if (resultado == -4) lblMensajeErrorPopup.Text = "No puede solicitar un turno para si mismo.";
                 else lblMensajeErrorPopup.Text = "Hubo un error inesperado al procesar el alta del turno.";
+
+                lblMensajeErrorPopup.Visible = true;
+                lblMensajeErrorPopup.ForeColor = System.Drawing.Color.Red;
             }
 
             ddlAltaMedico.Items.Insert(0, new ListItem("-- Seleccione Especialidad --", "0"));

@@ -16,6 +16,7 @@ namespace Datos
             string consulta = @"
             SELECT 
                 T.Id_Turno AS ID,
+                P_Med.DNI AS DNIMedico,
                 (P_Med.Nombre + ' ' + P_Med.Apellido) AS Medico,
                 Esp.Nombre AS Especialidad,
                 P_Pac.DNI AS DNI,

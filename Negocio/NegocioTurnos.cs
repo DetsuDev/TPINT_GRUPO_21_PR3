@@ -54,8 +54,6 @@ namespace Negocio
 
 
             string formato = "yyyy-MM-dd";
-            //int cEspecialidades= 0;
-            //string especialidad = "";
 
             DateTime.TryParseExact(minFechaString, formato, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime minFecha);
             DateTime.TryParseExact(maxFechaString, formato, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime maxFecha);
@@ -90,56 +88,6 @@ namespace Negocio
 
 
             return negocioEspecialidad;
-
-            /*DataTable tablaTurns = new DataTable();*/
-
-
-
-
-
-
-
-            /*
-
-
-            int Pediatria = 0;
-            int Traumatologia = 0;
-            int Cardiologia = 0;
-            int Dermatologia = 0;
-
-            foreach (DataRow dr in tablaMedicos.Rows)
-            {
-
-                if (((DateTime)dr["FechaDateTime"] >= minFecha) && ((DateTime)dr["FechaDateTime"] <= maxFecha))
-                {
-                    switch ((string)dr["Especialidad"])
-                    {
-                        case "Cardiología":
-                            Cardiologia++;
-                            break;
-
-                        case "Pediatría":
-                            Pediatria++;
-                            break;
-
-                        case "Traumatología":
-                            Traumatologia++;
-                            break;
-
-                        case "Dermatología":
-                            Dermatologia++;
-                            break;
-                    }
-                }
-
-            }
-
-            dt2.Columns.Add("Especialidad");
-            dt2.Columns.Add("CantidadTurnos");
-            dt2.Rows.Add("Pediatria", $"{Pediatria}");
-            dt2.Rows.Add("Traumatologia", $"{Traumatologia}");
-            dt2.Rows.Add("Cardiologia", $"{Cardiologia}");
-            dt2.Rows.Add("Demartología", $"{Dermatologia}");*/
         }
 
 
@@ -206,8 +154,14 @@ namespace Negocio
                 return -3;
             }
 
+            DataTable dtMedico = daoTurnos.getTabla(idMedico);
+            if (Convert.ToInt32(dtMedico.Rows[0]["DNIMedico"]) == Convert.ToInt32(dniPaciente))
+            {
+                return -4;
+            }
+
             bool guardadoCorrecto = daoTurnos.agregarTurno(idMedico, dniPaciente, fecha, hora, observacion);
-            return guardadoCorrecto ? 1 : -4;
+            return guardadoCorrecto ? 1 : -5;
         }
 
         public float[] getPresentismoSegunEspecialidad(int idEspecialidad)
@@ -256,6 +210,8 @@ namespace Negocio
             presentismo[2] = totalTurnos;
             return presentismo;
         }
+
+
         public float[] calcularPresentismo(DateTime fechaInicio, DateTime fechaFin)
         {
             float[] presentismo = new float[3];

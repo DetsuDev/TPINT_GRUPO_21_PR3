@@ -61,8 +61,6 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
             }
 
 
-
-
             gvMedicoTurnos.DataSource = dv;
             gvMedicoTurnos.DataBind();
         }

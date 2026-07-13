@@ -76,6 +76,7 @@
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
                         <h4 class="mb-0">Buscar Pacientes</h4>
+
                     </div>
                     <div class="card-body p-4">
                         <div class="row g-3">
@@ -96,9 +97,9 @@
                 </div>
 
                 <div class="card border-primary mb-5 shadow-sm">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                         <h4 class="mb-0">Listado de Pacientes</h4>
-                    </div>
+                        <asp:Button ID="btnMostrarForm" runat="server" Text="Agregar Paciente" OnClick="btnMostrarForm_Click" CssClass="btn btn-light" /></div>
                     <div class="card-body p-4">
                         <div class="table-responsive">
                             <asp:GridView ID="gvGestionPacientes" runat="server"
@@ -135,8 +136,6 @@
                         </div>
                     </div>
                 </div>
-
-                <asp:Button ID="btnMostrarForm" runat="server" Text="Agregar Paciente" OnClick="btnMostrarForm_Click" class="btn btn-primary"/>
 
                 <div class="card" runat="server"
                     id="divFormulario">

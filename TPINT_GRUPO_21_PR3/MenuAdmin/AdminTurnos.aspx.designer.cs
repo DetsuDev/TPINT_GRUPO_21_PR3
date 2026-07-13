@@ -132,15 +132,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.Label lblMensajeErrorPopup;
 
         /// <summary>
-        /// Control gvGestionTurnos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView gvGestionTurnos;
-
-        /// <summary>
         /// Control btnNuevoTurno.
         /// </summary>
         /// <remarks>
@@ -148,6 +139,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnNuevoTurno;
+
+        /// <summary>
+        /// Control gvGestionTurnos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView gvGestionTurnos;
 
         /// <summary>
         /// Control fullscreenOverlay.

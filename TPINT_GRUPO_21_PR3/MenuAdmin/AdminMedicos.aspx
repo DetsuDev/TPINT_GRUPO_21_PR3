@@ -81,9 +81,9 @@
                     </div>
 
                 <div class="card border-primary mb-5 shadow-sm">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
                         <h4 class="mb-0">Listado de Médicos</h4>
-                    </div>
+                        <asp:Button ID="btnMostrarForm" runat="server" Text="Nuevo Médico" OnClick="btnMostrarForm_Click" CssClass="btn btn-light" /></div>
                     <div class="card-body p-4">
                         <div class="table-responsive">
                             <asp:GridView ID="gvGestionMedicos" runat="server"
@@ -130,7 +130,6 @@
                         </div>
                     </div>
                 </div>
-                <asp:Button ID="btnMostrarForm" runat="server" Text="Nuevo Medico" OnClick="btnMostrarForm_Click" class="btn btn-primary" />
                 <div class="card" runat="server"
                     id="divFormulario"
                     style="z-index: 9999; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 80%">

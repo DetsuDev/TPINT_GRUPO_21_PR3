@@ -77,15 +77,7 @@
                     <div class="col-md-6">
                         <div class="card border-primary shadow-sm mb-4">
                             <div class="card-header bg-primary text-white">
-                                <h5 class="mb-0">Generar Informe </h5>
-                            </div>
-                            <div class="card-body p-4">
-                                    <label class="form-label font-weight-bold">Segun... </label>
-                                    <asp:DropDownList CssClass="form-control" ID="dpInformes" runat="server" OnSelectedIndexChanged="dpInformes_SelectedIndexChanged" AutoPostBack="True">
-                                        <asp:ListItem Selected="True" Value="0">Lapso de tiempo</asp:ListItem>
-                                        <asp:ListItem Value="1">Especialidad</asp:ListItem>
-                                        <asp:ListItem Value="2">Medico</asp:ListItem>
-                                    </asp:DropDownList>
+                                <h5 class="mb-0">Informe por intervalo de tiempo</h5>
                             </div>
 
                             <div runat="server" id="informeSegunFecha" class="card-body p-4">
@@ -107,44 +99,18 @@
                                     <div class="col-12 text-end">
 
                                         <asp:Button ID="btnLimpiarRanking0" runat="server" Text="Limpiar" CssClass="btn btn-secondary btn-sm px-4" OnClick="btnLimpiarInforme_Click" />
-
                                         <asp:Button ID="btnInformeFechas" runat="server" Text="Generar" CssClass="btn btn-primary btn-sm px-4" OnClick="btnInformeFechas_Click" ValidationGroup="informeFecha" />
                                     </div>
-                                </div>
-                            </div>
-                            <div runat="server" id="informeSegunEspecialidad" class="card-body p-4">
-                                <div class="row g-3 mb-4">
-                                    <div class="form-group">
-                                        <label class="form-label font-weight-bold">Especialidad... </label>
-                                        <asp:DropDownList ID="ddlEspecialidad" runat="server" CssClass="form-control">
-                                        </asp:DropDownList>
-                                    </div>
-
-                                    <div class="text-end">
-                                        <asp:Button ID="btnInformeEspecialidad" runat="server" Text="Generar" CssClass="btn btn-primary btn-sm px-4" OnClick="btnInformeEspecialidad_Click" />
+                                    <div class="card-body p-4">
+                                        <div runat="server" id="barraDeInforme" class="progress ">
+                                            <div class="progress-bar bg-success" id="barraVerde" runat="server" role="progressbar"></div>
+                                            <div class="progress-bar bg-warning" id="barraAmarilla" runat="server" role="progressbar"></div>
+                                            <div class="progress-bar bg-danger" id="barraRoja" runat="server" role="progressbar"></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                            <div runat="server" id="informeSegunMedico" class="card-body p-4">
-                                <div class="row g-3 mb-4">
-                                        <div class="form-group">
-                                            <label class="form-label font-weight-bold">Medico... </label>
-                                            <asp:DropDownList ID="ddlMedicos" runat="server" CssClass="form-control">
-                                            </asp:DropDownList>
-                                        </div>
-                                    
-                                    <div class="text-end">
-                                        <asp:Button ID="btnInformeMedicos" runat="server" Text="Generar" CssClass="btn btn-primary btn-sm px-4" OnClick="btnInformeMedicos_Click" />
-                                        </div>
-                                </div>
-                            </div>
-                            <div class="card-body p-4">
-                                <div runat="server" id="barraDeInforme" class="progress ">
-                                    <div class="progress-bar bg-success" id="barraVerde" runat="server" role="progressbar"></div>
-                                    <div class="progress-bar bg-warning" id="barraAmarilla" runat="server" role="progressbar"></div>
-                                    <div class="progress-bar bg-danger" id="barraRoja" runat="server" role="progressbar"></div>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                 </div>

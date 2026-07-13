@@ -126,10 +126,6 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             divEliminar.Visible = true;
         }
 
-        protected void gvGestionPacientes_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
 
         protected void btnEliminar_Click(object sender, EventArgs e)
         {

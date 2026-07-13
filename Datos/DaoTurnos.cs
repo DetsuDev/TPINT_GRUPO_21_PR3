@@ -219,5 +219,36 @@ namespace Datos
                 return -1;
             }
         }
+
+        public DataTable getTurnosFiltrados(string dni, string paciente, string fecha, string estado)
+        {
+            string consulta = @"
+            SELECT 
+                T.Id_Turno AS ID,
+                (P_Med.Nombre + ' ' + P_Med.Apellido) AS Medico,
+                Esp.Nombre AS Especialidad,
+                P_Pac.DNI AS DNI,
+                (P_Pac.Nombre + ' ' + P_Pac.Apellido) AS Paciente,
+                CONVERT(VARCHAR(10), T.Fecha, 103) AS Fecha,
+                T.Fecha AS FechaDateTime, -- campo auxiliar para informes
+                CONVERT(VARCHAR(5), T.Hora) AS Hora,
+                T.Observacion AS Observacion,
+                T.EstadoTurno AS Estado
+            FROM TURNO T
+            INNER JOIN PERSONA P_Pac ON T.Id_Persona = P_Pac.Id_Persona
+            INNER JOIN MEDICO Med ON T.Id_Medico = Med.Id_Medico
+            INNER JOIN PERSONA P_Med ON Med.Id_Persona = P_Med.Id_Persona
+            INNER JOIN ESPECIALIDADES Esp ON Med.Id_Especialidad = Esp.Id_Especialidad
+            WHERE T.Estado = 1";
+            if (!string.IsNullOrWhiteSpace(dni))
+                consulta += $" AND P_Pac.DNI LIKE '%{dni.Trim().Replace("'", "''")}%'";
+            if (!string.IsNullOrWhiteSpace(paciente))
+                consulta += $" AND (P_Pac.Nombre + ' ' + P_Pac.Apellido) COLLATE Latin1_General_CI_AI LIKE '%{paciente.Trim().Replace("'", "''")}%'";
+            if (!string.IsNullOrWhiteSpace(fecha))
+                consulta += $" AND CONVERT(VARCHAR(10), T.Fecha, 103) LIKE '%{fecha.Trim().Replace("'", "''")}%'";
+            if (!string.IsNullOrEmpty(estado))
+                consulta += $" AND T.EstadoTurno = '{estado.Replace("'", "''")}'";
+            return ds.obtenerTabla(consulta);
+        }
     }
 }

@@ -7,9 +7,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link href="../css/bootstrap.min.css" rel="stylesheet"/>
     <title>Informes Estadísticos</title>
+    <style>
+        #language-switch {
+              position: fixed;
+              top: 1em;
+              right: 5em;
+        }
+    </style>
 </head>
 <body style="background-color: #f8f9fa;">
-    
+    <form id="form1" runat="server">
+       <div id="language-switch">
+            <input type="radio" class="btn-check" name="options-outlined" id="english-btn" autocomplete="off" checked/>
+            <label class="btn btn-outline-primary" for="english-btn">EN</label>
+
+            <input type="radio" class="btn-check" name="options-outlined" id="spanish-btn" autocomplete="off"/>
+            <label class="btn btn-outline-primary" for="spanish-btn">ES</label>
+       </div>
     <div  class="card text-center col-1" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
         <p class="card-text" style="margin: -3px -6px 5px -6px;">Bienvenid@, <br/> 
@@ -31,7 +45,6 @@
         </ul>
 
         <div class="border border-top-0 p-5" style="background-color: white;">
-            <form id="form1" runat="server">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="card border-primary shadow-sm">
@@ -114,11 +127,11 @@
                         </div>
                     </div>
                 </div>
-            </form>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../js/bootstrap.bundle.min.js"></script>
+    </form>
 </body>
 </html>

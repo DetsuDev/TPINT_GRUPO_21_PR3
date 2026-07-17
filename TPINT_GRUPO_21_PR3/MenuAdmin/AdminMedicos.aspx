@@ -32,12 +32,25 @@
               align-items: center;
             }
 
+        #language-switch {
+              position: fixed;
+              top: 1em;
+              right: 5em;
+        }
+
     </style>
 </head>
 
 
 <body style="background-color: #f8f9fa;">
-    
+    <form id="form1" runat="server">
+        <div id="language-switch">
+            <input type="radio" class="btn-check" name="options-outlined" id="english-btn" autocomplete="off" checked/>
+            <label class="btn btn-outline-primary" for="english-btn">EN</label>
+
+            <input type="radio" class="btn-check" name="options-outlined" id="spanish-btn" autocomplete="off"/>
+            <label class="btn btn-outline-primary" for="spanish-btn">ES</label>
+        </div>
 
     <div  class="card text-center col-1" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
@@ -61,8 +74,6 @@
 
 
         <div class="border border-top-0 p-5" style="background-color: white;">
-
-            <form id="form1" runat="server">
                     <div id="fullscreenOverlay" runat="server"></div>
                 <asp:HiddenField ID="hdnIdMedico" runat="server" />
                 <asp:HiddenField ID="hdnIdPersona" runat="server" />
@@ -72,7 +83,7 @@
                         id="divEliminar"
                         style="z-index: 9999; width: 320px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; padding: 10px;">
                         <div class="card-body">
-                            <p class="card-text">Desea Eliminar a: [elemento]?</p>
+                            <p class="card-text">¿Está seguro que desea eliminar el registro?</p>
                             <div style="text-align: right">
                                 <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" class="btn btn-danger" OnClick="btnEliminar_Click"/>
                                 <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" class="btn btn-secondary" OnClick="btnCancelar_Click"/>
@@ -299,7 +310,6 @@
 
                     </div>
                 </div>
-            </form>
         </div>
     </div>
 
@@ -320,5 +330,6 @@
     </label>
     <p>
         &nbsp;</p>
+</form>
 </body>
 </html>

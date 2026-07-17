@@ -31,11 +31,24 @@
             border-radius: 8px;
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
         }
+
+        #language-switch {
+              position: fixed;
+              top: 1em;
+              right: 5em;
+        }
     </style>
 </head>
 <body style="background-color: #f8f9fa;">
     
     <form id="form1" runat="server">
+    <div id="language-switch">
+        <input type="radio" class="btn-check" name="options-outlined" id="english-btn" autocomplete="off" checked/>
+        <label class="btn btn-outline-primary" for="english-btn">EN</label>
+
+        <input type="radio" class="btn-check" name="options-outlined" id="spanish-btn" autocomplete="off"/>
+        <label class="btn btn-outline-primary" for="spanish-btn">ES</label>
+    </div>
         <div class="card text-center col-1" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
           <div class="card-body">
             <p class="card-text" style="margin: -3px -6px 5px -6px;">Bienvenid@, <br/> 

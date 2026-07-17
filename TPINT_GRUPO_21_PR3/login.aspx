@@ -14,10 +14,24 @@
             display: block;
             margin: 4px 0;
         }
+
+        #language-switch{
+              position: fixed;
+              top: 1em;
+              right: 5em;
+        }
     </style>
 </head>
 <body style=" font-family: Arial, sans-serif; background-color: #eef1f5;">
     <form id="form1" runat="server">
+    <div id="language-switch">
+        <input type="radio" class="btn-check" name="options-outlined" id="english-btn" autocomplete="off" checked/>
+        <label class="btn btn-outline-primary" for="english-btn">EN</label>
+
+        <input type="radio" class="btn-check" name="options-outlined" id="spanish-btn" autocomplete="off"/>
+        <label class="btn btn-outline-primary" for="spanish-btn">ES</label>
+    </div>
+
         <div class="card" style="width: 320px; margin: 120px auto; padding: 30px; text-align: center; top: 0px; left: 0px;">
             <h2>Bienvenido</h2>
 

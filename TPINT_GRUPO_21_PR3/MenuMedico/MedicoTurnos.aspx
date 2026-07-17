@@ -13,11 +13,25 @@
             border-collapse: separate !important;
             border-spacing: 0 12px;
         }
+
+        #language-switch {
+              position: fixed;
+              top: 1em;
+              right: 5em;
+        }
+
     </style>
 </head>
 <body style="background-color: #f8f9fa;">
+    <form id="form1" runat="server">
+         <div id="language-switch">
+            <input type="radio" class="btn-check" name="options-outlined" id="english-btn" autocomplete="off" checked/>
+            <label class="btn btn-outline-primary" for="english-btn">EN</label>
 
-    <div  class="card text-center col-1" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
+            <input type="radio" class="btn-check" name="options-outlined" id="spanish-btn" autocomplete="off"/>
+            <label class="btn btn-outline-primary" for="spanish-btn">ES</label>
+        </div>
+    <div class="card text-center col-1" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
         <p class="card-text" style="margin: -3px -6px 5px -6px;">Bienvenid@, <br/> 
           <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]" style="font-weight: bold;"></asp:Label>
@@ -36,8 +50,6 @@
             </li>
         </ul>
         <div class="border border-top-0 p-5" style="background-color: white;">
-
-            <form id="form1" runat="server">
                 <asp:Label ID="lblMensaje" runat="server" Font-Bold="true"></asp:Label>
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
@@ -105,10 +117,10 @@
                         </div>
                     </div>
                 </div>
-            </form>
         </div>
     </div>
 
     <script src="../js/bootstrap.bundle.min.js"></script>
+    </form>
 </body>
 </html>

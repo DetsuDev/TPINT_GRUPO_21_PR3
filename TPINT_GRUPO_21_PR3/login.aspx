@@ -15,25 +15,35 @@
             margin: 4px 0;
         }
 
-        #language-switch{
+        #languageswitch{
               position: fixed;
               top: 1em;
               right: 5em;
+        }
+        #languageswitch input[type="radio"] { display: none; }
+        #languageswitch label { cursor: pointer; }
+        #languageswitch input[type="radio"]:checked + label {
+            background-color: #0d6efd;
+            color: #fff;
+            border-color: #0d6efd;
         }
     </style>
 </head>
 <body style=" font-family: Arial, sans-serif; background-color: #eef1f5;">
     <form id="form1" runat="server">
-    <div id="language-switch">
-        <input type="radio" class="btn-check" name="options-outlined" id="english-btn" autocomplete="off" checked/>
-        <label class="btn btn-outline-primary" for="english-btn">EN</label>
+    <div id="languageswitch" runat="server">
+        <asp:RadioButton ID="rbtnEn" runat="server" GroupName="lang" AutoPostBack="true" OnCheckedChanged="rblLanguage_SelectedIndexChanged" ClientIDMode="Static" />
+        <label for="rbtnEn" class="btn btn-outline-primary" style="margin-right:0.25rem;">EN</label>
 
-        <input type="radio" class="btn-check" name="options-outlined" id="spanish-btn" autocomplete="off"/>
-        <label class="btn btn-outline-primary" for="spanish-btn">ES</label>
+        <asp:RadioButton ID="rbtnEs" runat="server" GroupName="lang" AutoPostBack="true" OnCheckedChanged="rblLanguage_SelectedIndexChanged" ClientIDMode="Static" />
+        <label for="rbtnEs" class="btn btn-outline-primary">ES</label>
     </div>
 
         <div class="card" style="width: 320px; margin: 120px auto; padding: 30px; text-align: center; top: 0px; left: 0px;">
-            <h2>Bienvenido</h2>
+            <div>
+                            <asp:Label ID="lblBienvenido" runat="server" Text="<%$ Resources:lang, lblWelcome %>" Font-Bold="True" Font-Size="X-Large"></asp:Label>
+
+            </div>
 
             <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control" placeholder="Usuario"></asp:TextBox>
             <asp:RequiredFieldValidator ID="rfvUsuario" runat="server"
@@ -48,7 +58,7 @@
                 ControlToValidate="txtContrasena"
                 ErrorMessage="Ingrese la contraseña"
                 class="alert alert-danger" Style="margin-top: 10px;" Display="Dynamic" ></asp:RequiredFieldValidator>
-            <asp:Button ID="btnLoguearse" runat="server" Text="Ingresar" CssClass="btn btn-primary" Style="margin-top: 10px;" OnClick="btnLogearse_Click" />
+            <asp:Button ID="btnLoguearse" runat="server" Text="<%$ Resources:lang, btnLoguearse %>" CssClass="btn btn-primary" Style="margin-top: 10px;" OnClick="btnLogearse_Click" />
 
             <asp:Label ID="lblMensaje" runat="server" CssClass="error" ></asp:Label>
         </div>

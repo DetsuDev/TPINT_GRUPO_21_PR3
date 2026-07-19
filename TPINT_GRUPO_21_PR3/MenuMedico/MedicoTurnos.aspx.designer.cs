@@ -103,5 +103,20 @@ namespace TPINT_GRUPO_21_PR3.MenuMedico
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView gvMedicoTurnos;
+
+        /// <summary>
+        /// languageswitch control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl languageswitch;
+
+        /// <summary>
+        /// rbtnEn control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnEn;
+
+        /// <summary>
+        /// rbtnEs control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnEs;
     }
 }

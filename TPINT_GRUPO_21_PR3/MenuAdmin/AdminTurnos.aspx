@@ -32,48 +32,55 @@
             box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
         }
 
-        #language-switch {
+        #languageswitch {
               position: fixed;
               top: 1em;
               right: 5em;
+        }
+        #languageswitch input[type="radio"] { display: none; }
+        #languageswitch label { cursor: pointer; }
+        #languageswitch input[type="radio"]:checked + label {
+            background-color: #0d6efd;
+            color: #fff;
+            border-color: #0d6efd;
         }
     </style>
 </head>
 <body style="background-color: #f8f9fa;">
     
     <form id="form1" runat="server">
-    <div id="language-switch">
-        <input type="radio" class="btn-check" name="options-outlined" id="english-btn" autocomplete="off" checked/>
-        <label class="btn btn-outline-primary" for="english-btn">EN</label>
+    <div id="languageswitch" runat="server">
+        <asp:RadioButton ID="rbtnEn" runat="server" GroupName="lang" AutoPostBack="true" OnCheckedChanged="rblLanguage_SelectedIndexChanged" ClientIDMode="Static" />
+        <label for="rbtnEn" class="btn btn-outline-primary" style="margin-right:0.25rem;">EN</label>
 
-        <input type="radio" class="btn-check" name="options-outlined" id="spanish-btn" autocomplete="off"/>
-        <label class="btn btn-outline-primary" for="spanish-btn">ES</label>
+        <asp:RadioButton ID="rbtnEs" runat="server" GroupName="lang" AutoPostBack="true" OnCheckedChanged="rblLanguage_SelectedIndexChanged" ClientIDMode="Static" />
+        <label for="rbtnEs" class="btn btn-outline-primary">ES</label>
     </div>
         <div class="card text-center col-1" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
           <div class="card-body">
-            <p class="card-text" style="margin: -3px -6px 5px -6px;">Bienvenid@, <br/> 
+            <p class="card-text" style="margin: -3px -6px 5px -6px;"> <asp:Label ID="lblWelcomePlaceholder" runat="server" Text="<%$ Resources:lang, lblWelcomePlaceholder %>"> </asp:Label> <br/> 
               <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]" style="font-weight: bold;"></asp:Label>
             </p>
             <div class="text-center">
                  <img src="../assets/admin-placeholder.png" alt="Administrador-placeholder" style="width:100px; height:auto; margin-bottom:5px;"/>
             </div>
-            <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesión </a>
+            <a href="../login.aspx" class="btn btn-primary"><asp:Literal runat="server" Text="<%$ Resources:lang, btnLogout %>" /></a>
           </div>
         </div>
 
         <div style="padding: 50px; margin: 50px;">
-            <ul class="nav nav-tabs" style="min-width: 1000px;">
+                <ul class="nav nav-tabs" style="min-width: 1000px;">
                 <li class="nav-item">
-                    <a class="nav-link" href="AdminInformes.aspx">Informes</a>
+                    <a class="nav-link" href="AdminInformes.aspx"><asp:Literal runat="server" Text="<%$ Resources:lang, navInformes %>" /></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="AdminPacientes.aspx">Gestionar Pacientes</a>
+                    <a class="nav-link" href="AdminPacientes.aspx"><asp:Literal runat="server" Text="<%$ Resources:lang, navPacientes %>" /></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="AdminMedicos.aspx">Gestionar Medicos</a>
+                    <a class="nav-link" href="AdminMedicos.aspx"><asp:Literal runat="server" Text="<%$ Resources:lang, navMedicos %>" /></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="AdminTurnos.aspx">Gestionar Turnos</a>
+                    <a class="nav-link active" aria-current="page" href="AdminTurnos.aspx"><asp:Literal runat="server" Text="<%$ Resources:lang, navTurnos %>" /></a>
                 </li>
             </ul>
             

@@ -10,7 +10,7 @@ using System.Web.UI.WebControls;
 
 namespace TPINT_GRUPO_21_PR3
 {
-    public partial class Login : System.Web.UI.Page
+    public partial class Login : Culture
     {
 
         public string usuario = "";
@@ -22,6 +22,10 @@ namespace TPINT_GRUPO_21_PR3
             if (!IsPostBack)
             {
                 Session["UsuarioLogueado"] = null;
+                var sel = Session["Culture"]?.ToString() ?? "en";
+                rbtnEn.Checked = sel == "en";
+                rbtnEs.Checked = sel == "es";
+
             }
         }
 
@@ -73,6 +77,13 @@ namespace TPINT_GRUPO_21_PR3
                     lblMensaje.Text = "Usuario o contraseña incorrectos.";
                 }
             }
+        }
+
+        protected void rblLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbtnEn.Checked) Session["Culture"] = "en";
+            else if (rbtnEs.Checked) Session["Culture"] = "es";
+            Response.Redirect(Request.RawUrl);
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Web.UI.WebControls;
 
 namespace TPINT_GRUPO_21_PR3.MenuAdmin
 {
-    public partial class GestionMedicos : System.Web.UI.Page
+    public partial class GestionMedicos : Culture
     {
         protected void Page_Load(object sender, EventArgs e)
         {

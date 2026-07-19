@@ -61,11 +61,65 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Patient.
+        /// </summary>
+        internal static string btnAddPatient {
+            get {
+                return ResourceManager.GetString("btnAddPatient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string btnCancel {
+            get {
+                return ResourceManager.GetString("btnCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         internal static string btnClear {
             get {
                 return ResourceManager.GetString("btnClear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        internal static string btnClearSearch {
+            get {
+                return ResourceManager.GetString("btnClearSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        internal static string btnConfirmDelete {
+            get {
+                return ResourceManager.GetString("btnConfirmDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Patient.
+        /// </summary>
+        internal static string btnCreatePatient {
+            get {
+                return ResourceManager.GetString("btnCreatePatient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        internal static string btnEditar {
+            get {
+                return ResourceManager.GetString("btnEditar", resourceCulture);
             }
         }
         
@@ -106,11 +160,38 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        internal static string btnSearch {
+            get {
+                return ResourceManager.GetString("btnSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search Patients.
+        /// </summary>
+        internal static string cardBuscarPacientes {
+            get {
+                return ResourceManager.GetString("cardBuscarPacientes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time Interval Report.
         /// </summary>
         internal static string cardIntervalo {
             get {
                 return ResourceManager.GetString("cardIntervalo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patient List.
+        /// </summary>
+        internal static string cardListadoPacientes {
+            get {
+                return ResourceManager.GetString("cardListadoPacientes", resourceCulture);
             }
         }
         
@@ -142,6 +223,51 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Name.
+        /// </summary>
+        internal static string lblApellido {
+            get {
+                return ResourceManager.GetString("lblApellido", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search (DNI, name or surname).
+        /// </summary>
+        internal static string lblBusqueda {
+            get {
+                return ResourceManager.GetString("lblBusqueda", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        internal static string lblDireccion {
+            get {
+                return ResourceManager.GetString("lblDireccion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DNI.
+        /// </summary>
+        internal static string lblDNI {
+            get {
+                return ResourceManager.GetString("lblDNI", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        internal static string lblEmail {
+            get {
+                return ResourceManager.GetString("lblEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End Date.
         /// </summary>
         internal static string lblFechaFin {
@@ -156,6 +282,69 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         internal static string lblFechaInicio {
             get {
                 return ResourceManager.GetString("lblFechaInicio", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date of Birth.
+        /// </summary>
+        internal static string lblFechaNac {
+            get {
+                return ResourceManager.GetString("lblFechaNac", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locality.
+        /// </summary>
+        internal static string lblLocalidad {
+            get {
+                return ResourceManager.GetString("lblLocalidad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nationality.
+        /// </summary>
+        internal static string lblNacionalidad {
+            get {
+                return ResourceManager.GetString("lblNacionalidad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First Name.
+        /// </summary>
+        internal static string lblNombre {
+            get {
+                return ResourceManager.GetString("lblNombre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Province.
+        /// </summary>
+        internal static string lblProvincia {
+            get {
+                return ResourceManager.GetString("lblProvincia", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gender.
+        /// </summary>
+        internal static string lblSexo {
+            get {
+                return ResourceManager.GetString("lblSexo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone.
+        /// </summary>
+        internal static string lblTelefono {
+            get {
+                return ResourceManager.GetString("lblTelefono", resourceCulture);
             }
         }
         
@@ -210,6 +399,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         internal static string navTurnos {
             get {
                 return ResourceManager.GetString("navTurnos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Patient.
+        /// </summary>
+        internal static string titleAddPatient {
+            get {
+                return ResourceManager.GetString("titleAddPatient", resourceCulture);
             }
         }
     }

@@ -13,7 +13,7 @@ namespace TPINT_GRUPO_21_PR3
     {
         protected override void InitializeCulture()
         {
-            string culture = Session["Culture"]?.ToString() ?? "en";
+            string culture = Session["Culture"]?.ToString() ?? "en"; // en resumidas cuentas: si la cultura no es nula, la convierte a string, y sino, la convierte a EN
 
             Thread.CurrentThread.CurrentCulture = new CultureInfo(culture);
             Thread.CurrentThread.CurrentUICulture = new CultureInfo(culture);
@@ -21,7 +21,7 @@ namespace TPINT_GRUPO_21_PR3
             base.InitializeCulture();
         }
 
-        protected override void OnInit(EventArgs e)
+        protected override void OnInit(EventArgs e) // se encarga de la persistencia de la seleccion del ES / EN
         {
             base.OnInit(e);
 
@@ -46,7 +46,7 @@ namespace TPINT_GRUPO_21_PR3
             }
         }
 
-        protected void rblLanguage_SelectedIndexChanged(object sender, EventArgs e)
+        protected void rblLanguage_SelectedIndexChanged(object sender, EventArgs e) // handlea el radiobutton cuando hay un nuevo checked
         {
             var rb = sender as RadioButton;
             if (rb == null) return;

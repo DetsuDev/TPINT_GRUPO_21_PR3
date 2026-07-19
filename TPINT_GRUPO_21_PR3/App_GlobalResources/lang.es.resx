@@ -162,10 +162,76 @@
   <data name="btnGenerate" xml:space="preserve">
     <value>Generar</value>
   </data>
+  <data name="cardBuscarPacientes" xml:space="preserve">
+    <value>Buscar Pacientes</value>
+  </data>
+  <data name="cardListadoPacientes" xml:space="preserve">
+    <value>Listado de Pacientes</value>
+  </data>
+  <data name="btnAddPatient" xml:space="preserve">
+    <value>Agregar Paciente</value>
+  </data>
+  <data name="titleAddPatient" xml:space="preserve">
+    <value>Agregar Nuevo Paciente</value>
+  </data>
+  <data name="lblBusqueda" xml:space="preserve">
+    <value>Búsqueda (DNI, nombre o apellido)</value>
+  </data>
+  <data name="lblProvincia" xml:space="preserve">
+    <value>Provincia</value>
+  </data>
+  <data name="lblDNI" xml:space="preserve">
+    <value>DNI</value>
+  </data>
+  <data name="lblNombre" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="lblApellido" xml:space="preserve">
+    <value>Apellido</value>
+  </data>
+  <data name="lblSexo" xml:space="preserve">
+    <value>Sexo</value>
+  </data>
+  <data name="lblNacionalidad" xml:space="preserve">
+    <value>Nacionalidad</value>
+  </data>
+  <data name="lblFechaNac" xml:space="preserve">
+    <value>Fecha de Nacimiento</value>
+  </data>
+  <data name="lblTelefono" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
+  <data name="lblDireccion" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="lblLocalidad" xml:space="preserve">
+    <value>Localidad</value>
+  </data>
+  <data name="lblEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="btnSearch" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
+  <data name="btnClearSearch" xml:space="preserve">
+    <value>Limpiar</value>
+  </data>
+  <data name="btnCreatePatient" xml:space="preserve">
+    <value>Cargar Paciente</value>
+  </data>
+  <data name="btnCancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="btnConfirmDelete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
   <data name="headerAppointments" xml:space="preserve">
     <value>Cantidad de Turnos</value>
   </data>
   <data name="headerSpeciality" xml:space="preserve">
     <value>Especialidad</value>
+  </data>
+  <data name="btnEditar" xml:space="preserve">
+    <value>Editar</value>
   </data>
 </root>

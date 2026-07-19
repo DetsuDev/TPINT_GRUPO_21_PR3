@@ -24,6 +24,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
+        /// lblWelcomePlaceholder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblWelcomePlaceholder;
+
+        /// <summary>
         /// lblNombreUsuario control.
         /// </summary>
         /// <remarks>
@@ -31,6 +40,21 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblNombreUsuario;
+
+        /// <summary>
+        /// languageswitch control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl languageswitch;
+
+        /// <summary>
+        /// rbtnEn control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnEn;
+
+        /// <summary>
+        /// rbtnEs control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnEs;
 
         /// <summary>
         /// rfvFechaInicioProductividad control.

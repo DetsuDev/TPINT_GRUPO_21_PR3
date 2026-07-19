@@ -60,6 +60,21 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected global::System.Web.UI.WebControls.HiddenField hdnIdPersona;
 
         /// <summary>
+        /// languageswitch control.
+        /// </summary>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl languageswitch;
+
+        /// <summary>
+        /// rbtnEn control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnEn;
+
+        /// <summary>
+        /// rbtnEs control.
+        /// </summary>
+        protected global::System.Web.UI.WebControls.RadioButton rbtnEs;
+
+        /// <summary>
         /// lblMensaje control.
         /// </summary>
         /// <remarks>

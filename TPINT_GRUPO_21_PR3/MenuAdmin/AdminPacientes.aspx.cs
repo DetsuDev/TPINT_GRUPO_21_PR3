@@ -136,12 +136,27 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             if (exito)
             {
                 lblMensaje.ForeColor = System.Drawing.Color.Green;
-                lblMensaje.Text = "Se eliminó correctamente de la base de datos.";
+                if (Session["Culture"]?.ToString() == "es")
+                {
+                    lblMensaje.Text = "Se eliminó correctamente de la base de datos.";
+                }
+                else 
+                {
+                    lblMensaje.Text = "Successfully deleted from the database.";
+                }
+                    
             }
             else
             {
                 lblMensaje.ForeColor = System.Drawing.Color.Red;
-                lblMensaje.Text = "Hubo un error al eliminar el registro.";
+                if (Session["Culture"]?.ToString() == "es")
+                {
+                    lblMensaje.Text = "Hubo un error al eliminar el registro.";
+                }
+                else
+                {
+                    lblMensaje.Text = "There was an error deleting the record.";
+                }
             }
 
             divEliminar.Visible = false;
@@ -173,7 +188,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 string.IsNullOrEmpty(ddlProvincia.SelectedValue) ||
                 string.IsNullOrEmpty(ddlLocalidad.SelectedValue))
             {
-                MostrarMensaje("Error: Todos los campos son obligatorios.", false);
+                if (Session["culture"]?.ToString() == "es")
+                {
+                    MostrarMensaje("Error: Todos los campos son obligatorios.", false);
+
+                }
+                else
+                {
+                    MostrarMensaje("Error: All fields are required.", false);
+                }
                 return;
             }
 
@@ -196,15 +219,55 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             if (string.IsNullOrEmpty(hdnIdPaciente.Value))
             {
                 exito = negocio.guardarPaciente(nuevoPaciente);
-                if (exito) MostrarMensaje("Se agregó correctamente en la base de datos.", true);
-                else MostrarMensaje("Error al guardar. Verifique DNI duplicado.", false);
+                if (exito)
+                {
+                    if (Session["culture"]?.ToString() == "es")
+                    {
+                        MostrarMensaje("Se agregó correctamente en la base de datos.", true);
+                    }
+                    else
+                    {
+                        MostrarMensaje("Successfully added to the database.", true);
+                    }
+                }
+                else
+                {
+                    if (Session["Culture"]?.ToString() == "es")
+                    {
+                        MostrarMensaje("Error al guardar. Verifique DNI duplicado.", false);
+                    }
+                    else
+                    {
+                        MostrarMensaje("Error saving. Check for duplicate DNI.", false);
+                    }
+                }
             }
             else
             {
                 nuevoPaciente._IdPaciente = Convert.ToInt32(hdnIdPaciente.Value);
                 exito = negocio.modificarPaciente(nuevoPaciente);
-                if (exito) MostrarMensaje("Se modificó correctamente en la base de datos.", true);
-                else MostrarMensaje("Hubo un error al modificar el paciente.", false);
+                if (exito)
+                {
+                    if (Session["Culture"]?.ToString() == "es")
+                    {
+                        MostrarMensaje("Se modificó correctamente en la base de datos.", true);
+                    }
+                    else
+                    {
+                        MostrarMensaje("Successfully modified in the database.", true);
+                    }
+                }
+                else 
+                {
+                    if(Session["Culture"]?.ToString() == "es")
+                    {
+                        MostrarMensaje("Hubo un error al modificar el paciente.", false);
+                    }
+                    else
+                    {
+                        MostrarMensaje("There was an error modifying the patient.", false);
+                    }
+                }
             }
 
             fullscreenOverlay.Style["display"] = "none";
@@ -265,8 +328,16 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
                 ddlLocalidad.SelectedValue = r["Id_Localidad"].ToString();
 
             txtDni.Enabled = false;
-            btnCargar.Text = "Actualizar Paciente";
-            hCargarPaciente.InnerText = "Editar Paciente";
+            if (Session["Culture"]?.ToString() == "es")
+            {
+                btnCargar.Text = "Actualizar Paciente";
+                hCargarPaciente.InnerText = "Editar Paciente";
+            }
+            else
+            {
+                btnCargar.Text = "Update Patient";
+                hCargarPaciente.InnerText = "Edit Patient";
+            }
         }
 
         private void CargarLocalidadesFormulario(string idProvincia)
@@ -300,8 +371,16 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlProvincia.SelectedIndex = 0; 
             ddlLocalidad.Items.Clear();
             txtDni.Enabled = true;
-            btnCargar.Text = "Cargar Paciente";
-            hCargarPaciente.InnerText = "Agregar Nuevo Paciente";
+            if (Session["Culture"]?.ToString() == "es")
+            {
+                btnCargar.Text = "Cargar Paciente";
+                hCargarPaciente.InnerText = "Agregar Nuevo Paciente";
+            }
+            else
+            {
+                btnCargar.Text = "Load Patient";
+                hCargarPaciente.InnerText = "Add New Patient";
+            }
         }
     }
 }

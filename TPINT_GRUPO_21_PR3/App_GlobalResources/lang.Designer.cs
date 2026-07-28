@@ -196,6 +196,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update Patient.
+        /// </summary>
+        internal static string btnUpdatePatient {
+            get {
+                return ResourceManager.GetString("btnUpdatePatient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search Patients.
         /// </summary>
         internal static string cardBuscarPacientes {

@@ -339,4 +339,7 @@
   <data name="lblStatus" xml:space="preserve">
     <value>Estado</value>
   </data>
+  <data name="btnUpdatePatient" xml:space="preserve">
+    <value>Actualizar Paciente</value>
+  </data>
 </root>

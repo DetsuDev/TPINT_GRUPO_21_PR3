@@ -259,6 +259,51 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to * Invalid e-mail.
+        /// </summary>
+        internal static string errEmail {
+            get {
+                return ResourceManager.GetString("errEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * Insert 8 numeric digits.
+        /// </summary>
+        internal static string errNumericDigits {
+            get {
+                return ResourceManager.GetString("errNumericDigits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * Only letters.
+        /// </summary>
+        internal static string errOnlyLetters {
+            get {
+                return ResourceManager.GetString("errOnlyLetters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * Only numbers.
+        /// </summary>
+        internal static string errOnlyNumbers {
+            get {
+                return ResourceManager.GetString("errOnlyNumbers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * Insert a valid phone number (from 7 to 20 characters,  &apos;+&apos; y and spaces are allowed).
+        /// </summary>
+        internal static string errPhone {
+            get {
+                return ResourceManager.GetString("errPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         internal static string headerAddress {
@@ -723,6 +768,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         internal static string navTurnos {
             get {
                 return ResourceManager.GetString("navTurnos", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to -- Choose a province --.
+        /// </summary>
+        internal static string rfvProvince {
+            get {
+                return ResourceManager.GetString("rfvProvince", resourceCulture);
             }
         }
         

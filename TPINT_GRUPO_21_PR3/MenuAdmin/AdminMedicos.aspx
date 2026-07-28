@@ -138,7 +138,6 @@
                                 OnPageIndexChanging="gvGestionMedicos_PageIndexChanging" 
                                 OnRowDeleting="gvGestionMedicos_RowDeleting">
                                 <Columns>
-                                    <%--<asp:BoundField DataField="Horario" HeaderText="Horario Atención" /> --%>
                                     <asp:TemplateField ShowHeader="False">
                                         <ItemTemplate>
                                             <asp:Button ID="btnEditar" runat="server" class="btn btn-outline-warning" CommandArgument='<%# Eval("Id_Medico") %>' OnClick="btnEditar_Click" Text="Editar" />
@@ -290,7 +289,8 @@
                                     </div>
                                     <div class="col-md-3">
                                         <label class="form-label">
-                                            Usuario de Login       
+                                            Usuario de Login     
+                                        </label>  
                                             <asp:TextBox ID="txtUsuario" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">

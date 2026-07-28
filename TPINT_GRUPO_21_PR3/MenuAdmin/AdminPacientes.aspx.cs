@@ -65,7 +65,14 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlFiltroProvincia.DataTextField = "NombreProvincia";
             ddlFiltroProvincia.DataValueField = "Id_Provincia";
             ddlFiltroProvincia.DataBind();
-            ddlFiltroProvincia.Items.Insert(0, new ListItem("-- Todas --", ""));
+            if (Session["Culture"]?.ToString() == "es")
+            {
+                ddlFiltroProvincia.Items.Insert(0, new ListItem("-- Todas --", ""));
+            }
+            else
+            {
+                ddlFiltroProvincia.Items.Insert(0, new ListItem("-- All --", ""));
+            }
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
@@ -94,8 +101,14 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlProvincia.DataTextField = "NombreProvincia";
             ddlProvincia.DataValueField = "Id_Provincia";
             ddlProvincia.DataBind();
-
-            ddlProvincia.Items.Insert(0, new ListItem("-- Elija una provincia --", ""));
+            if (Session["Culture"]?.ToString() == "es")
+            {
+                ddlProvincia.Items.Insert(0, new ListItem("-- Elija una provincia --", ""));
+            }
+            else
+            {
+                ddlProvincia.Items.Insert(0, new ListItem("-- Choose a province --", ""));
+            }
         }
 
         protected void gvGestionPacientes_PageIndexChanging(object sender, GridViewPageEventArgs e)

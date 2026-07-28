@@ -342,4 +342,22 @@
   <data name="btnUpdatePatient" xml:space="preserve">
     <value>Update Patient</value>
   </data>
+  <data name="rfvProvince" xml:space="preserve">
+    <value>-- Choose a province --</value>
+  </data>
+  <data name="errOnlyLetters" xml:space="preserve">
+    <value>* Only letters</value>
+  </data>
+  <data name="errOnlyNumbers" xml:space="preserve">
+    <value>* Only numbers</value>
+  </data>
+  <data name="errNumericDigits" xml:space="preserve">
+    <value>* Insert 8 numeric digits</value>
+  </data>
+  <data name="errPhone" xml:space="preserve">
+    <value>* Insert a valid phone number (from 7 to 20 characters,  '+' y and spaces are allowed)</value>
+  </data>
+  <data name="errEmail" xml:space="preserve">
+    <value>* Invalid e-mail</value>
+  </data>
 </root>

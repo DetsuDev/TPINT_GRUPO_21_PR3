@@ -169,20 +169,20 @@
                                     <div class="col-md-3">
                                         <label class="form-label font-weight-bold"><asp:Literal runat="server" Text="<%$ Resources:lang, lblDNI %>" /></label>
                                         <asp:RequiredFieldValidator ID="rfvDNI" runat="server" ErrorMessage="*" ControlToValidate="txtDni" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="revDNI" runat="server" ErrorMessage="* Ingrese 8 digitos numericos" ValidationExpression="^\d{8}$" ControlToValidate="txtDni" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="revDNI" runat="server" ErrorMessage="<%$ Resources:lang, errNumericDigits %>" ValidationExpression="^\d{8}$" ControlToValidate="txtDni" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtDni" runat="server" CssClass="form-control" placeholder="Ej: 45123456"></asp:TextBox>
                                     </div>
                                     <div class="col-md-4">
                                         <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblNombre %>" /></label>
                                         <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ErrorMessage="*" ControlToValidate="txtNombre" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="revNombre" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNombre" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="revNombre" runat="server" ErrorMessage="<%$ Resources:lang, errOnlyLetters %>" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNombre" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
                                      </div>
                                     <div class="col-md-5">
                                           <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblApellido %>" /></label>
 
                                           <asp:RequiredFieldValidator ID="rfvApellido" runat="server" ErrorMessage="*" ControlToValidate="txtApellido" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-                                          <asp:RegularExpressionValidator ID="revApellido" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtApellido" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                          <asp:RegularExpressionValidator ID="revApellido" runat="server" ErrorMessage="<%$ Resources:lang, errOnlyLetters %>" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtApellido" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
                                           <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-2">
@@ -196,7 +196,7 @@
                                         <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblNacionalidad %>" /></label>
 
                                         <asp:RequiredFieldValidator ID="rfvNacionalidad" runat="server" ErrorMessage="*" ControlToValidate="txtNacionalidad" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="revNacionalidad" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNacionalidad" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="revNacionalidad" runat="server" ErrorMessage="<%$ Resources:lang, errOnlyLetters %>" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNacionalidad" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
 
                                         &nbsp;<asp:TextBox ID="txtNacionalidad" runat="server" CssClass="form-control" placeholder="Ej: Argentina"></asp:TextBox>
                                     </div>
@@ -209,7 +209,7 @@
                                     <div class="col-md-3">
                                         <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblTelefono %>" /></label>
                                         <asp:RequiredFieldValidator ID="rfvTelefono" runat="server" ErrorMessage="*" ControlToValidate="txtTelefono" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="revTelefono" runat="server" ErrorMessage="* Ingrese un teléfono válido (7 a 20 caracteres, puede incluir '+' y espacios)" ValidationExpression="^\+?[0-9\s()-]{7,20}$" ControlToValidate="txtTelefono" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="revTelefono" runat="server" ErrorMessage="<%$ Resources:lang, errPhone %>" ValidationExpression="^\+?[0-9\s()-]{7,20}$" ControlToValidate="txtTelefono" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
                                         &nbsp;<asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-6">
@@ -219,7 +219,7 @@
                                     </div>
                                     <div class="col-md-3">
                                          <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblProvincia %>" /></label>
-                                         <asp:RequiredFieldValidator ID="rfvProvincia" runat="server" ErrorMessage="*" ControlToValidate="ddlProvincia" ForeColor="Red" ValidationGroup="GrupoPaciente" InitialValue="-- Elija una provincia --"></asp:RequiredFieldValidator>
+                                         <asp:RequiredFieldValidator ID="rfvProvincia" runat="server" ErrorMessage="*" ControlToValidate="ddlProvincia" ForeColor="Red" ValidationGroup="GrupoPaciente" InitialValue="<%$ Resources:lang, rfvProvince %>"></asp:RequiredFieldValidator>
                                          <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
                                    </div>
                                     <div class="col-md-3">
@@ -230,7 +230,7 @@
                                     <div class="col-md-6">
                                          <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblEmail %>" /></label>
                                          <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="*" ControlToValidate="txtEmail" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-                                         <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="* Correo no válido" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                         <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="<%$ Resources:lang, errEmail %>" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
                                          &nbsp;<asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="medico@clinica.com"></asp:TextBox>
                                     </div>
                                     <div class="col-12 text-end pt-3">

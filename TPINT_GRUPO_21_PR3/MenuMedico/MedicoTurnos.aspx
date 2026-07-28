@@ -15,7 +15,7 @@
         }
 
         #languageswitch {
-              position: fixed;
+              position: absolute;
               top: 1em;
               right: 5em;
         }

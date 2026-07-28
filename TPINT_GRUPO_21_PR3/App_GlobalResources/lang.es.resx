@@ -228,10 +228,106 @@
   <data name="headerAppointments" xml:space="preserve">
     <value>Cantidad de Turnos</value>
   </data>
-  <data name="headerSpeciality" xml:space="preserve">
+  <data name="headerSpecialty" xml:space="preserve">
     <value>Especialidad</value>
   </data>
   <data name="btnEditar" xml:space="preserve">
     <value>Editar</value>
+  </data>
+  <data name="headerAgregarPaciente" xml:space="preserve">
+    <value>Agregar Nuevo Paciente</value>
+  </data>
+  <data name="btnCargarPaciente" xml:space="preserve">
+    <value>Cargar Paciente</value>
+  </data>
+  <data name="headerName" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="headerSurname" xml:space="preserve">
+    <value>Apellido</value>
+  </data>
+  <data name="headerSex" xml:space="preserve">
+    <value>Sexo</value>
+  </data>
+  <data name="headerNationality" xml:space="preserve">
+    <value>Nacionalidad</value>
+  </data>
+  <data name="headerBirthDate" xml:space="preserve">
+    <value>Fecha Nac.</value>
+  </data>
+  <data name="headerAddress" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="headerLocality" xml:space="preserve">
+    <value>Localidad</value>
+  </data>
+  <data name="headerProvince" xml:space="preserve">
+    <value>Provincia</value>
+  </data>
+  <data name="headerEmail" xml:space="preserve">
+    <value>Correo Electrónico</value>
+  </data>
+  <data name="headerPhone" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
+  <data name="headerUser" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="headerPassword" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="headerStartingTime" xml:space="preserve">
+    <value>Hora de Inicio</value>
+  </data>
+  <data name="headerEndingTime" xml:space="preserve">
+    <value>Hora final</value>
+  </data>
+  <data name="headerEmployeeId" xml:space="preserve">
+    <value>Legajo</value>
+  </data>
+  <data name="cardSearchDoctors" xml:space="preserve">
+    <value>Buscar Médicos</value>
+  </data>
+  <data name="cardDoctorList" xml:space="preserve">
+    <value>Listado de Médicos</value>
+  </data>
+  <data name="lblSearchDoctors" xml:space="preserve">
+    <value>Búsqueda (por nombre o apellido)</value>
+  </data>
+  <data name="lblEmployeeId" xml:space="preserve">
+    <value>Legajo</value>
+  </data>
+  <data name="lblSpecialty" xml:space="preserve">
+    <value>Especialidad</value>
+  </data>
+  <data name="btnNewDoctor" xml:space="preserve">
+    <value>Nuevo Médico</value>
+  </data>
+  <data name="headerSearchAppointments" xml:space="preserve">
+    <value>Buscar Turnos</value>
+  </data>
+  <data name="headerAppointmentList" xml:space="preserve">
+    <value>Listado de Turnos</value>
+  </data>
+  <data name="btnNewAppointment" xml:space="preserve">
+    <value>Nuevo Turno</value>
+  </data>
+  <data name="headerDoctor" xml:space="preserve">
+    <value>Médico</value>
+  </data>
+  <data name="headerPatient" xml:space="preserve">
+    <value>Paciente</value>
+  </data>
+  <data name="headerDate" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="headerTime" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="headerObservation" xml:space="preserve">
+    <value>Observación</value>
+  </data>
+  <data name="headerStatus" xml:space="preserve">
+    <value>Estado</value>
   </data>
 </root>

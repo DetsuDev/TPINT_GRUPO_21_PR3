@@ -33,7 +33,7 @@
             }
 
         #languageswitch {
-              position: fixed;
+              position: absolute;
               top: 1em;
               right: 5em;
         }
@@ -139,16 +139,16 @@
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" />
                                     <asp:BoundField DataField="DNI" HeaderText="DNI" ReadOnly="True"/>
-                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                                    <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                                    <asp:BoundField DataField="Sexo" HeaderText="Sexo" />
-                                    <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" />
-                                    <asp:BoundField DataField="FechaNac" HeaderText="Fecha Nac" DataFormatString="{0:dd/MM/yyyy}" />
-                                    <asp:BoundField DataField="Direccion" HeaderText="Dirección" />
-                                    <asp:BoundField DataField="Localidad" HeaderText="Localidad" />
-                                    <asp:BoundField DataField="Provincia" HeaderText="Provincia" />
-                                    <asp:BoundField DataField="Email" HeaderText="Email" />
-                                    <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
+                                    <asp:BoundField DataField="Nombre" HeaderText="<%$ Resources:lang, headerName %>" />
+                                    <asp:BoundField DataField="Apellido" HeaderText="<%$ Resources:lang, headerSurname %>" />
+                                    <asp:BoundField DataField="Sexo" HeaderText="<%$ Resources:lang, headerSex %>" />
+                                    <asp:BoundField DataField="Nacionalidad" HeaderText="<%$ Resources:lang, headerNationality %>" />
+                                    <asp:BoundField DataField="FechaNac" HeaderText="<%$ Resources:lang, headerBirthDate %>" DataFormatString="{0:dd/MM/yyyy}" />
+                                    <asp:BoundField DataField="Direccion" HeaderText="<%$ Resources:lang, headerAddress %>" />
+                                    <asp:BoundField DataField="Localidad" HeaderText="<%$ Resources:lang, headerLocality %>" />
+                                    <asp:BoundField DataField="Provincia" HeaderText="<%$ Resources:lang, headerProvince %>" />
+                                    <asp:BoundField DataField="Email" HeaderText="<%$ Resources:lang, headerEmail %>" />
+                                    <asp:BoundField DataField="Telefono" HeaderText="<%$ Resources:lang, headerPhone %>" />
                                     <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" />
                                 </Columns>
                                 <PagerStyle CssClass="pagination justify-content-center pt-3" />

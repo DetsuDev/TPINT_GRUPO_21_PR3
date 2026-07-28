@@ -33,7 +33,7 @@
         }
 
         #languageswitch {
-              position: fixed;
+              position: absolute;
               top: 1em;
               right: 5em;
         }
@@ -156,7 +156,7 @@
                                 <Columns>
                                     <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true" />
                                     <asp:BoundField DataField="Medico" HeaderText="Médico" ReadOnly="true" />
-                                    <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" ReadOnly="true" />
+                                    <asp:BoundField DataField="Especialidad" HeaderText="<%$ Resources:lang, headerSpecialty %>" ReadOnly="true" />
                                     <asp:BoundField DataField="DNI" HeaderText="DNI" ReadOnly="true" />
                                     <asp:BoundField DataField="Paciente" HeaderText="Paciente" ReadOnly="true" />
                                     <asp:BoundField DataField="Fecha" HeaderText="Fecha" ReadOnly="true" />

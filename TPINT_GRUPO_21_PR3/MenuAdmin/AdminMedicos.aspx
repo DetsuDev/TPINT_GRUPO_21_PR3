@@ -33,7 +33,7 @@
             }
 
         #languageswitch {
-              position: fixed;
+              position: absolute;
               top: 1em;
               right: 5em;
         }
@@ -100,33 +100,33 @@
 
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Buscar Médicos</h4>
+                        <h4 class="mb-0"><asp:Literal runat="server" Text="<%$ Resources:lang, cardSearchDoctors %>" /></h4>
                     </div>
                     <div class="card-body p-4">
                         <div class="row g-3">
                             <div class="col-md-4">
-                                <label class="form-label">Búsqueda (Nombre o Apellido)</label>
+                                <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblSearchDoctors %>" /></label>
                                 <asp:TextBox ID="txtBuscarNombreApellido" runat="server" CssClass="form-control" placeholder="Ej: Juan"></asp:TextBox>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Legajo</label>
+                                <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblEmployeeId %>" /></label>
                                 <asp:TextBox ID="txtBuscarLegajo" runat="server" CssClass="form-control" placeholder="Ej: MED-123"></asp:TextBox>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Especialidad</label>
+                                <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblSpecialty %>" /></label>
                                 <asp:DropDownList ID="ddlFiltroEspecialidad" runat="server" CssClass="form-select"></asp:DropDownList>
                             </div>
                             <div class="col-12 text-end pt-3">
-                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary px-4" OnClick="btnBuscar_Click" CausesValidation="false" />
-                                <asp:Button ID="btnLimpiarBusqueda" runat="server" Text="Limpiar" CssClass="btn btn-outline-secondary px-4" OnClick="btnLimpiarBusqueda_Click" CausesValidation="false" />
+                                <asp:Button ID="btnBuscar" runat="server" Text="<%$ Resources:lang, btnSearch %>" CssClass="btn btn-primary px-4" OnClick="btnBuscar_Click" CausesValidation="false" />
+                                <asp:Button ID="btnLimpiarBusqueda" runat="server" Text="<%$ Resources:lang, btnClear %>" CssClass="btn btn-outline-secondary px-4" OnClick="btnLimpiarBusqueda_Click" CausesValidation="false" />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0">Listado de Médicos</h4>
-                        <asp:Button ID="btnMostrarForm" runat="server" Text="Nuevo Médico" OnClick="btnMostrarForm_Click" CssClass="btn btn-light" /></div>
+                        <h4 class="mb-0"><asp:Literal runat="server" Text="<%$ Resources:lang, cardDoctorList %>" /></h4>
+                        <asp:Button ID="btnMostrarForm" runat="server" Text="<%$ Resources:lang, btnNewDoctor %>" OnClick="btnMostrarForm_Click" CssClass="btn btn-light" /></div>
                     <div class="card-body p-4">
                         <div class="table-responsive">
                             <asp:GridView ID="gvGestionMedicos" runat="server"
@@ -145,23 +145,23 @@
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="Id_Medico" HeaderText="ID" ReadOnly="True" />
-                                    <asp:BoundField DataField="Legajo_Medico" HeaderText="Legajo" ReadOnly="True"/>
-                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                                    <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                                    <asp:BoundField DataField="Especialidad" HeaderText="Especialidad" />
-                                    <asp:BoundField DataField="HoraInicio" HeaderText="Hora Inicio" />
-                                    <asp:BoundField DataField="HoraFin" HeaderText="Hora Fin" />
-                                    <asp:BoundField DataField="Sexo" HeaderText="Sexo" />
-                                    <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" />
+                                    <asp:BoundField DataField="Legajo_Medico" HeaderText="<%$ Resources:lang, headerEmployeeId %>" ReadOnly="True"/>
+                                    <asp:BoundField DataField="Nombre" HeaderText="<%$ Resources:lang, headerName %>" />
+                                    <asp:BoundField DataField="Apellido" HeaderText="<%$ Resources:lang, headerSurname %>" />
+                                    <asp:BoundField DataField="Especialidad" HeaderText="<%$ Resources:lang, headerSpecialty %>" />
+                                    <asp:BoundField DataField="HoraInicio" HeaderText="<%$ Resources:lang, headerStartingTime %>" />
+                                    <asp:BoundField DataField="HoraFin" HeaderText="<%$ Resources:lang, headerEndingTime %>" />
+                                    <asp:BoundField DataField="Sexo" HeaderText="<%$ Resources:lang, headerSex %>" />
+                                    <asp:BoundField DataField="Nacionalidad" HeaderText="<%$ Resources:lang, headerNationality %>" />
                                     
-                                    <asp:BoundField DataField="FechaNac" HeaderText="Fecha Nac" DataFormatString="{0:dd/MM/yyyy}" />
-                                    <asp:BoundField DataField="Direccion" HeaderText="Direccion" />
-                                    <asp:BoundField DataField="Localidad" HeaderText="Localidad" />
-                                    <asp:BoundField DataField="Provincia" HeaderText="Provincia" />
-                                    <asp:BoundField DataField="Email" HeaderText="Email" />
-                                    <asp:BoundField DataField="Telefono" HeaderText="Telefono" />
-                                    <asp:BoundField DataField="Usuario" HeaderText="Usuario" />
-                                    <asp:TemplateField HeaderText="Contraseña">
+                                    <asp:BoundField DataField="FechaNac" HeaderText="<%$ Resources:lang, headerBirthDate %>" DataFormatString="{0:dd/MM/yyyy}" />
+                                    <asp:BoundField DataField="Direccion" HeaderText="<%$ Resources:lang, headerAddress %>" />
+                                    <asp:BoundField DataField="Localidad" HeaderText="<%$ Resources:lang, headerLocality %>" />
+                                    <asp:BoundField DataField="Provincia" HeaderText="<%$ Resources:lang, headerProvince %>" />
+                                    <asp:BoundField DataField="Email" HeaderText="<%$ Resources:lang, headerEmail %>" />
+                                    <asp:BoundField DataField="Telefono" HeaderText="<%$ Resources:lang, headerPhone %>" />
+                                    <asp:BoundField DataField="Usuario" HeaderText="<%$ Resources:lang, headerUser %>" />
+                                    <asp:TemplateField HeaderText="<%$ Resources:lang, headerPassword %>">
                                         <ItemTemplate>
                                             <asp:Label ID="pass" runat="server" Text="********"></asp:Label>
                                         </ItemTemplate>

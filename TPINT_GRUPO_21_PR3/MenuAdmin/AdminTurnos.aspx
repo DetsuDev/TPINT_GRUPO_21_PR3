@@ -98,7 +98,7 @@
               
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Buscar Turnos</h4>
+                        <h4 class="mb-0"><asp:Literal runat="server" Text="<%$ Resources:lang, headerSearchAppointments %>" /></h4>
                     </div>
                     <div class="card-body p-4">
                         <div class="row g-3">
@@ -107,16 +107,16 @@
                                 <asp:TextBox ID="txtBuscarDni" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label">Paciente</label>
+                                <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblPatient %>" /></label>
                                 <asp:TextBox ID="txtBuscarPaciente" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label">Fecha</label>
+                                <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblDate %>" /></label>
                                  <asp:RegularExpressionValidator ID="revFecha" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtBuscarFecha" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>         
                                 <asp:TextBox ID="txtBuscarFecha" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                             </div>
                             <div class="col-md-3">
-                                <label class="form-label">Estado</label>
+                                <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblStatus %>" /></label>
                                 <asp:DropDownList ID="ddlBuscarEstado" runat="server" CssClass="form-select">
                                     <asp:ListItem Value="">Todos</asp:ListItem>
                                     <asp:ListItem Value="Presente">Presente</asp:ListItem>
@@ -125,8 +125,8 @@
                                 </asp:DropDownList>
                             </div>
                             <div class="col-12 text-end pt-3">
-                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary px-4" OnClick="btnBuscar_Click" />
-                                <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" CssClass="btn btn-outline-secondary px-4" OnClick="btnLimpiar_Click" />
+                                <asp:Button ID="btnBuscar" runat="server" Text="<%$ Resources:lang, btnSearch %>" CssClass="btn btn-primary px-4" OnClick="btnBuscar_Click" />
+                                <asp:Button ID="btnLimpiar" runat="server" Text="<%$ Resources:lang, btnClear %>" CssClass="btn btn-outline-secondary px-4" OnClick="btnLimpiar_Click" />
                             </div>
                         </div>
                     </div>
@@ -142,9 +142,9 @@
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
 
-                        <h4 class="mb-0">Listado de Turnos</h4>
+                        <h4 class="mb-0"><asp:Literal runat="server" Text="<%$ Resources:lang, headerAppointmentList %>" /></h4>
 
-                        <asp:Button ID="btnNuevoTurno" runat="server" Text="Nuevo Turno" CssClass="btn btn-light" OnClick="btnNuevoTurno_Click" CausesValidation="false" />
+                        <asp:Button ID="btnNuevoTurno" runat="server" Text="<%$ Resources:lang, btnNewAppointment %>" CssClass="btn btn-light" OnClick="btnNuevoTurno_Click" CausesValidation="false" />
                         
                     </div>
                     <div class="card-body p-4">
@@ -155,14 +155,14 @@
                                 OnRowDeleting="gvGestionTurnos_RowDeleting">
                                 <Columns>
                                     <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="true" />
-                                    <asp:BoundField DataField="Medico" HeaderText="Médico" ReadOnly="true" />
+                                    <asp:BoundField DataField="Medico" HeaderText="<%$ Resources:lang, headerDoctor %>" ReadOnly="true" />
                                     <asp:BoundField DataField="Especialidad" HeaderText="<%$ Resources:lang, headerSpecialty %>" ReadOnly="true" />
                                     <asp:BoundField DataField="DNI" HeaderText="DNI" ReadOnly="true" />
-                                    <asp:BoundField DataField="Paciente" HeaderText="Paciente" ReadOnly="true" />
-                                    <asp:BoundField DataField="Fecha" HeaderText="Fecha" ReadOnly="true" />
-                                    <asp:BoundField DataField="Hora" HeaderText="Hora" ReadOnly="true" />
-                                    <asp:BoundField DataField="Observacion" HeaderText="Observacion" ReadOnly="true" />
-                                    <asp:TemplateField HeaderText="Estado">
+                                    <asp:BoundField DataField="Paciente" HeaderText="<%$ Resources:lang, headerPatient %>" ReadOnly="true" />
+                                    <asp:BoundField DataField="Fecha" HeaderText="<%$ Resources:lang, headerDate %>" ReadOnly="true" />
+                                    <asp:BoundField DataField="Hora" HeaderText="<%$ Resources:lang, headerTime %>" ReadOnly="true" />
+                                    <asp:BoundField DataField="Observacion" HeaderText="<%$ Resources:lang, headerObservation %>" ReadOnly="true" />
+                                    <asp:TemplateField HeaderText="<%$ Resources:lang, headerStatus %>">
                                         <ItemTemplate>
                                             <asp:Label ID="lblEstadoTurno" runat="server" Text='<%# Bind("Estado") %>'></asp:Label>
                                         </ItemTemplate>

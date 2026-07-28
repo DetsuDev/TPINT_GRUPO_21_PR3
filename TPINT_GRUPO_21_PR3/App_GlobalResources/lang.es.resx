@@ -330,4 +330,13 @@
   <data name="headerStatus" xml:space="preserve">
     <value>Estado</value>
   </data>
+  <data name="lblPatient" xml:space="preserve">
+    <value>Paciente</value>
+  </data>
+  <data name="lblDate" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="lblStatus" xml:space="preserve">
+    <value>Estado</value>
+  </data>
 </root>

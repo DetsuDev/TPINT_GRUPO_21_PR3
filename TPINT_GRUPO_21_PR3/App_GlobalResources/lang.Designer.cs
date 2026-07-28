@@ -502,6 +502,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        internal static string lblDate {
+            get {
+                return ResourceManager.GetString("lblDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         internal static string lblDireccion {
@@ -592,6 +601,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Patient.
+        /// </summary>
+        internal static string lblPatient {
+            get {
+                return ResourceManager.GetString("lblPatient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Province.
         /// </summary>
         internal static string lblProvincia {
@@ -624,6 +642,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         internal static string lblSpecialty {
             get {
                 return ResourceManager.GetString("lblSpecialty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        internal static string lblStatus {
+            get {
+                return ResourceManager.GetString("lblStatus", resourceCulture);
             }
         }
         

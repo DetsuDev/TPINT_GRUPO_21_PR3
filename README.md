@@ -1,9 +1,14 @@
-# TPINT_GRUPO_21_PR3
+#### TPINT_GRUPO_21_PR3
 
-• Integrante 1 – Tomas Bottelli (DetsuDev)
+# CLINIC MANAGEMENT SYSTEM
 
-• Integrante 2 – Santiago Romero (Sromero1905)
+This program is a management system that features the next items:
 
-• Integrante 3 – Renato Canavesi (Renacana)
+- Patients
+- Doctors
+- Appointments
+- Reports
 
-• Integrante 4 – Sebastian Fuentes (GreyTen1)
+It's written in C#, utilizing the ASP.NET WebForms framework. It also features BootStrap for its GUI.
+
+SQL Server was utilized for the architecture of the Database, there are 2 scripts, one for creating the database and another one for loading some instances for testing purposes.

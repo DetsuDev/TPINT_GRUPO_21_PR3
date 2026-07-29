@@ -360,4 +360,70 @@
   <data name="errEmail" xml:space="preserve">
     <value>* Correo inválido</value>
   </data>
+  <data name="msgDeleteRecord" xml:space="preserve">
+    <value>¿Está seguro que desea eliminar este registro?</value>
+  </data>
+  <data name="msgDeleteAppointment" xml:space="preserve">
+    <value>¿Está seguro que desea eliminar este turno?</value>
+  </data>
+  <data name="lblName" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="lblSurname" xml:space="preserve">
+    <value>Apellido</value>
+  </data>
+  <data name="lblAvailability" xml:space="preserve">
+    <value>Disponibilidad Horaria</value>
+  </data>
+  <data name="lblAvailableDays" xml:space="preserve">
+    <value>Días disponibles</value>
+  </data>
+  <data name="lblMonday" xml:space="preserve">
+    <value>Lunes</value>
+  </data>
+  <data name="lblTuesday" xml:space="preserve">
+    <value>Martes</value>
+  </data>
+  <data name="lblWednesday" xml:space="preserve">
+    <value>Miércoles</value>
+  </data>
+  <data name="lblThursday" xml:space="preserve">
+    <value>Jueves</value>
+  </data>
+  <data name="lblFriday" xml:space="preserve">
+    <value>Viernes</value>
+  </data>
+  <data name="lblSex" xml:space="preserve">
+    <value>Sexo</value>
+  </data>
+  <data name="lblNationality" xml:space="preserve">
+    <value>Nacionalidad</value>
+  </data>
+  <data name="lblBirthDate" xml:space="preserve">
+    <value>Fecha de Nacimiento</value>
+  </data>
+  <data name="lblPhone" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
+  <data name="lblAddress" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="lblProvince" xml:space="preserve">
+    <value>Provincia</value>
+  </data>
+  <data name="lblLocality" xml:space="preserve">
+    <value>Localidad</value>
+  </data>
+  <data name="lblPassword" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="lblUser" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="lblConfirmPassword" xml:space="preserve">
+    <value>Confirmar Contraseña</value>
+  </data>
+  <data name="btnEdit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
 </root>

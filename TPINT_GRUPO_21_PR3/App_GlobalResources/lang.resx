@@ -360,4 +360,70 @@
   <data name="errEmail" xml:space="preserve">
     <value>* Invalid e-mail</value>
   </data>
+  <data name="msgDeleteRecord" xml:space="preserve">
+    <value>Are you sure you want to delete this record?</value>
+  </data>
+  <data name="msgDeleteAppointment" xml:space="preserve">
+    <value>Are you sure you want to delete this appointment?</value>
+  </data>
+  <data name="lblName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="lblSurname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="lblAvailability" xml:space="preserve">
+    <value>Time Availability</value>
+  </data>
+  <data name="lblAvailableDays" xml:space="preserve">
+    <value>Available days</value>
+  </data>
+  <data name="lblMonday" xml:space="preserve">
+    <value>Monday</value>
+  </data>
+  <data name="lblTuesday" xml:space="preserve">
+    <value>Tuesday</value>
+  </data>
+  <data name="lblWednesday" xml:space="preserve">
+    <value>Wednesday</value>
+  </data>
+  <data name="lblThursday" xml:space="preserve">
+    <value>Thursday</value>
+  </data>
+  <data name="lblFriday" xml:space="preserve">
+    <value>Friday</value>
+  </data>
+  <data name="lblSex" xml:space="preserve">
+    <value>Sex</value>
+  </data>
+  <data name="lblNationality" xml:space="preserve">
+    <value>Nationality</value>
+  </data>
+  <data name="lblBirthDate" xml:space="preserve">
+    <value>Birth Date</value>
+  </data>
+  <data name="lblPhone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="lblAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="lblProvince" xml:space="preserve">
+    <value>Province</value>
+  </data>
+  <data name="lblLocality" xml:space="preserve">
+    <value>Locality</value>
+  </data>
+  <data name="lblPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="lblUser" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="lblConfirmPassword" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="btnEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
 </root>

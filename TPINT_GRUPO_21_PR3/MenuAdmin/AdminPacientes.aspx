@@ -84,7 +84,7 @@
                     id="divEliminar"
                     style="z-index: 9999; width: 320px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; padding: 10px;">
                     <div class="card-body">
-                        <p class="card-text">¿Está seguro que desea eliminar el registro?</p>
+                        <p class="card-text"><asp:Literal runat="server" Text="<%$ Resources:lang, msgDeleteRecord %>" /></p>
                         <div style="text-align: right">
                             <asp:Button ID="btnEliminar" runat="server" Text="<%$ Resources:lang, btnConfirmDelete %>" class="btn btn-danger" OnClick="btnEliminar_Click"/>
                             <asp:Button ID="btnCancelar" runat="server" Text="<%$ Resources:lang, btnCancel %>" class="btn btn-secondary" OnClick="btnCancelar_Click"/>

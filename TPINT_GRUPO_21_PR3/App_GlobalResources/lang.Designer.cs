@@ -126,6 +126,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
+        internal static string btnEdit {
+            get {
+                return ResourceManager.GetString("btnEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
         internal static string btnEditar {
             get {
                 return ResourceManager.GetString("btnEditar", resourceCulture);
@@ -538,6 +547,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        internal static string lblAddress {
+            get {
+                return ResourceManager.GetString("lblAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Last Name.
         /// </summary>
         internal static string lblApellido {
@@ -547,11 +565,47 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time Availability.
+        /// </summary>
+        internal static string lblAvailability {
+            get {
+                return ResourceManager.GetString("lblAvailability", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Available days.
+        /// </summary>
+        internal static string lblAvailableDays {
+            get {
+                return ResourceManager.GetString("lblAvailableDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Birth Date.
+        /// </summary>
+        internal static string lblBirthDate {
+            get {
+                return ResourceManager.GetString("lblBirthDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search (DNI, name or surname).
         /// </summary>
         internal static string lblBusqueda {
             get {
                 return ResourceManager.GetString("lblBusqueda", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Password.
+        /// </summary>
+        internal static string lblConfirmPassword {
+            get {
+                return ResourceManager.GetString("lblConfirmPassword", resourceCulture);
             }
         }
         
@@ -628,11 +682,38 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Friday.
+        /// </summary>
+        internal static string lblFriday {
+            get {
+                return ResourceManager.GetString("lblFriday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Locality.
         /// </summary>
         internal static string lblLocalidad {
             get {
                 return ResourceManager.GetString("lblLocalidad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Locality.
+        /// </summary>
+        internal static string lblLocality {
+            get {
+                return ResourceManager.GetString("lblLocality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monday.
+        /// </summary>
+        internal static string lblMonday {
+            get {
+                return ResourceManager.GetString("lblMonday", resourceCulture);
             }
         }
         
@@ -646,6 +727,24 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        internal static string lblName {
+            get {
+                return ResourceManager.GetString("lblName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Nationality.
+        /// </summary>
+        internal static string lblNationality {
+            get {
+                return ResourceManager.GetString("lblNationality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to First Name.
         /// </summary>
         internal static string lblNombre {
@@ -655,11 +754,38 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password.
+        /// </summary>
+        internal static string lblPassword {
+            get {
+                return ResourceManager.GetString("lblPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Patient.
         /// </summary>
         internal static string lblPatient {
             get {
                 return ResourceManager.GetString("lblPatient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Phone.
+        /// </summary>
+        internal static string lblPhone {
+            get {
+                return ResourceManager.GetString("lblPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Province.
+        /// </summary>
+        internal static string lblProvince {
+            get {
+                return ResourceManager.GetString("lblProvince", resourceCulture);
             }
         }
         
@@ -678,6 +804,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         internal static string lblSearchDoctors {
             get {
                 return ResourceManager.GetString("lblSearchDoctors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sex.
+        /// </summary>
+        internal static string lblSex {
+            get {
+                return ResourceManager.GetString("lblSex", resourceCulture);
             }
         }
         
@@ -709,11 +844,56 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Surname.
+        /// </summary>
+        internal static string lblSurname {
+            get {
+                return ResourceManager.GetString("lblSurname", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phone.
         /// </summary>
         internal static string lblTelefono {
             get {
                 return ResourceManager.GetString("lblTelefono", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thursday.
+        /// </summary>
+        internal static string lblThursday {
+            get {
+                return ResourceManager.GetString("lblThursday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tuesday.
+        /// </summary>
+        internal static string lblTuesday {
+            get {
+                return ResourceManager.GetString("lblTuesday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        internal static string lblUser {
+            get {
+                return ResourceManager.GetString("lblUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wednesday.
+        /// </summary>
+        internal static string lblWednesday {
+            get {
+                return ResourceManager.GetString("lblWednesday", resourceCulture);
             }
         }
         
@@ -732,6 +912,24 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         internal static string lblWelcomePlaceholder {
             get {
                 return ResourceManager.GetString("lblWelcomePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this appointment?.
+        /// </summary>
+        internal static string msgDeleteAppointment {
+            get {
+                return ResourceManager.GetString("msgDeleteAppointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to delete this record?.
+        /// </summary>
+        internal static string msgDeleteRecord {
+            get {
+                return ResourceManager.GetString("msgDeleteRecord", resourceCulture);
             }
         }
         

@@ -426,4 +426,28 @@
   <data name="btnEdit" xml:space="preserve">
     <value>Edit</value>
   </data>
+  <data name="errInvalidEmployeeId" xml:space="preserve">
+    <value>* Invalid employee id (expected format: AAA-123)</value>
+  </data>
+  <data name="errSelectAtLeastOneDay" xml:space="preserve">
+    <value>* You must select at least one day</value>
+  </data>
+  <data name="errDateFormat" xml:space="preserve">
+    <value>* dd/mm/yyyy</value>
+  </data>
+  <data name="errPasswordsDontMatch" xml:space="preserve">
+    <value>* Passwords do not match</value>
+  </data>
+  <data name="btnCargarMedico" xml:space="preserve">
+    <value>Create Doctor</value>
+  </data>
+  <data name="btnActualizarMedico" xml:space="preserve">
+    <value>Update Doctor</value>
+  </data>
+  <data name="titleAddDoctor" xml:space="preserve">
+    <value>Add New Doctor</value>
+  </data>
+  <data name="titleEditDoctor" xml:space="preserve">
+    <value>Edit Doctor</value>
+  </data>
 </root>

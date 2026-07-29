@@ -203,8 +203,8 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             txtLegajo.Enabled = false;
             txtDni.Enabled = false;
-            btnCargar.Text = "Actualizar Médico";
-            hCargarMedico.InnerText = "Editar Médico";
+            btnCargar.Text = GetGlobalResourceObject("lang", "btnActualizarMedico").ToString();
+            hCargarMedico.InnerText = GetGlobalResourceObject("lang", "titleEditDoctor")?.ToString() ?? "Editar Médico";
             lblMensaje.Text = "";
         }
 
@@ -347,8 +347,8 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             txtLegajo.Enabled = true;
             txtDni.Enabled = true;
-            btnCargar.Text = "Cargar Médico";
-            hCargarMedico.InnerText = "Cargar Nuevo Médico";
+            btnCargar.Text = GetGlobalResourceObject("lang", "btnCargarMedico").ToString();
+            hCargarMedico.InnerText = GetGlobalResourceObject("lang", "titleAddDoctor")?.ToString() ?? "Cargar Nuevo Médico";
         }
 
 

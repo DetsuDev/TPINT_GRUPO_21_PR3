@@ -11,6 +11,6 @@ This program is a management system that features:
 - Multi-language support (EN / ES)
 
 This project was written in C#, utilizing the ASP.NET WebForms framework and SQL queries. It uses a 3-Tier Architecture, Presentation, Business, and DAO (Data Access Object) layer.
-SQL Server was utilized for the architecture of the Database, there are 2 scripts, one for creating the database and another one for loading some instances for testing purposes.
+SQL Server was utilized for the architecture of the Database; on this project there are 2 scripts included, one for creating the database and another one for loading some instances for testing purposes.
 
 And lastly, the front-end is developed with Bootstrap for a neat design.

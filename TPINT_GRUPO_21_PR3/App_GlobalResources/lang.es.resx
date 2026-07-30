@@ -426,4 +426,52 @@
   <data name="btnEdit" xml:space="preserve">
     <value>Editar</value>
   </data>
+  <data name="errInvalidEmployeeId" xml:space="preserve">
+    <value>* Legajo inválido (formato esperado: AAA-123)</value>
+  </data>
+  <data name="errSelectAtLeastOneDay" xml:space="preserve">
+    <value>* Debe elegir al menos un dia</value>
+  </data>
+  <data name="errDateFormat" xml:space="preserve">
+    <value>* dd/mm/aaaa</value>
+  </data>
+  <data name="errPasswordsDontMatch" xml:space="preserve">
+    <value>* Las contraseñas no coinciden</value>
+  </data>
+  <data name="btnCargarMedico" xml:space="preserve">
+    <value>Cargar Médico</value>
+  </data>
+  <data name="btnActualizarMedico" xml:space="preserve">
+    <value>Actualizar Médico</value>
+  </data>
+  <data name="titleAddDoctor" xml:space="preserve">
+    <value>Cargar Nuevo Médico</value>
+  </data>
+  <data name="titleEditDoctor" xml:space="preserve">
+    <value>Editar Médico</value>
+  </data>
+  <data name="lblPatientsDni" xml:space="preserve">
+    <value>DNI del Paciente</value>
+  </data>
+  <data name="lblAssignedDoctor" xml:space="preserve">
+    <value>Médico Asignado</value>
+  </data>
+  <data name="lblTime" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="lblObservation" xml:space="preserve">
+    <value>Observación</value>
+  </data>
+  <data name="btnAppointment" xml:space="preserve">
+    <value>Agendar Turno</value>
+  </data>
+  <data name="titleAddAppointment" xml:space="preserve">
+    <value>Cargar Nuevo Turno</value>
+  </data>
+  <data name="btnScheduleAppointment" xml:space="preserve">
+    <value>Agendar Turno</value>
+  </data>
+  <data name="btnSaveChanges" xml:space="preserve">
+    <value>Guardar cambios</value>
+  </data>
 </root>

@@ -189,15 +189,15 @@
                         <div class="row g-4 align-items-start">
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold">DNI Paciente</label><asp:RequiredFieldValidator ID="rfvDni" runat="server" ErrorMessage="*" ControlToValidate="txtPaciente" ForeColor="Red" ValidationGroup="vgAltaTurno" /><asp:RegularExpressionValidator ID="revDni" runat="server" ErrorMessage="* Solo números" ValidationExpression="^\d+$" ControlToValidate="txtPaciente" ForeColor="Red" Display="Dynamic" ValidationGroup="vgAltaTurno" /><asp:TextBox ID="txtPaciente" runat="server" CssClass="form-control" placeholder="Ej: 45123456" OnTextChanged="txtPaciente_TextChanged" /></div>
+                                    <label class="form-label fw-bold"><asp:Literal runat="server" Text="<%$ Resources:lang, lblPatientsDni %>" /></label><asp:RequiredFieldValidator ID="rfvDni" runat="server" ErrorMessage="*" ControlToValidate="txtPaciente" ForeColor="Red" ValidationGroup="vgAltaTurno" /><asp:RegularExpressionValidator ID="revDni" runat="server" ErrorMessage="* Solo números" ValidationExpression="^\d+$" ControlToValidate="txtPaciente" ForeColor="Red" Display="Dynamic" ValidationGroup="vgAltaTurno" /><asp:TextBox ID="txtPaciente" runat="server" CssClass="form-control" placeholder="Ej: 45123456" OnTextChanged="txtPaciente_TextChanged" /></div>
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold">Especialidad</label><asp:RequiredFieldValidator ID="rfvEspecialidad" runat="server" ErrorMessage="*" ControlToValidate="ddlAltaEspecialidad" InitialValue="0" ForeColor="Red" ValidationGroup="vgAltaTurno" /><asp:DropDownList ID="ddlAltaEspecialidad" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlAltaEspecialidad_SelectedIndexChanged" /></div>
+                                    <label class="form-label fw-bold"><asp:Literal runat="server" Text="<%$ Resources:lang, lblSpecialty %>" /></label><asp:RequiredFieldValidator ID="rfvEspecialidad" runat="server" ErrorMessage="*" ControlToValidate="ddlAltaEspecialidad" InitialValue="0" ForeColor="Red" ValidationGroup="vgAltaTurno" /><asp:DropDownList ID="ddlAltaEspecialidad" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlAltaEspecialidad_SelectedIndexChanged" /></div>
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold">Médico Asignado</label><asp:RequiredFieldValidator ID="rfvMedico" runat="server" ErrorMessage="*" ControlToValidate="ddlAltaMedico" InitialValue="0" ForeColor="Red" ValidationGroup="vgAltaTurno" /><asp:DropDownList ID="ddlAltaMedico" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlAltaMedico_SelectedIndexChanged" /></div>
+                                    <label class="form-label fw-bold"><asp:Literal runat="server" Text="<%$ Resources:lang, lblAssignedDoctor %>" /></label><asp:RequiredFieldValidator ID="rfvMedico" runat="server" ErrorMessage="*" ControlToValidate="ddlAltaMedico" InitialValue="0" ForeColor="Red" ValidationGroup="vgAltaTurno" /><asp:DropDownList ID="ddlAltaMedico" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlAltaMedico_SelectedIndexChanged" /></div>
                             </div>
 
                             <div class="col-md-4">
-                                <label class="form-label fw-bold">Fecha</label>
+                                <label class="form-label fw-bold"><asp:Literal runat="server" Text="<%$ Resources:lang, lblDate %>" /></label>
                                 <asp:Calendar ID="cFechasTurnos" runat="server" OnDayRender="cFechasTurnos_DayRender" BackColor="White" BorderColor="#3366CC" BorderWidth="1px" CellPadding="1" DayNameFormat="Shortest" Font-Names="Verdana" Font-Size="8pt" ForeColor="#003399" Height="200px" Width="100%" OnSelectionChanged="cFechasTurnos_SelectionChanged">
                                     <DayHeaderStyle BackColor="#99CCCC" ForeColor="#336666" Height="1px" />
                                     <NextPrevStyle Font-Size="8pt" ForeColor="#CCCCFF" />
@@ -212,17 +212,17 @@
 
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label class="form-label fw-bold">Hora</label>
+                                    <label class="form-label fw-bold"><asp:Literal runat="server" Text="<%$ Resources:lang, lblTime %>" /></label>
                                     <asp:RequiredFieldValidator ID="rfvHora" runat="server" ErrorMessage="* Seleccione Horario" ControlToValidate="ddlHora" InitialValue="0" ForeColor="Red" ValidationGroup="vgAltaTurno" /><asp:DropDownList ID="ddlHora" runat="server" CssClass="form-select" />
                                 </div>
                             </div>
 
                             <div class="col-12">
-                                <label class="form-label">Observación</label><asp:TextBox ID="txtObservacionAlta" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3" /></div>
+                                <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblObservation %>" /></label><asp:TextBox ID="txtObservacionAlta" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="3" /></div>
 
                             <div class="col-12 text-end pt-2">
-                                <asp:Button ID="btnCargar" runat="server" Text="Agendar Turno" CssClass="btn btn-primary px-4" OnClick="btnCargar_Click" ValidationGroup="vgAltaTurno" />
-                                <asp:Button ID="btnCancelarEdicion" runat="server" Text="Cancelar" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancelarEdicion_Click" CausesValidation="false" /></div>
+                                <asp:Button ID="btnCargar" runat="server" Text="<%$ Resources:lang, btnAppointment %>" CssClass="btn btn-primary px-4" OnClick="btnCargar_Click" ValidationGroup="vgAltaTurno" />
+                                <asp:Button ID="btnCancelarEdicion" runat="server" Text="<%$ Resources:lang, btnCancel %>" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancelarEdicion_Click" CausesValidation="false" /></div>
                         </div>
                     </div>
                 </div>

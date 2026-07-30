@@ -210,8 +210,8 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             lblMensajeErrorPopup.Visible = false;
             lblMensajeErrorPopup.Text = "";
 
-            hCargarTurno.InnerText = "Cargar Nuevo Turno";
-            btnCargar.Text = "Agendar Turno";
+            hCargarTurno.InnerText = GetGlobalResourceObject("lang", "titleAddAppointment").ToString();
+            btnCargar.Text = GetGlobalResourceObject("lang", "btnScheduleAppointment").ToString();
 
             txtPaciente.Enabled = true;
             ddlAltaEspecialidad.Enabled = true;

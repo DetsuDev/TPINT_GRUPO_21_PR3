@@ -61,6 +61,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update Doctor.
+        /// </summary>
+        internal static string btnActualizarMedico {
+            get {
+                return ResourceManager.GetString("btnActualizarMedico", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Patient.
         /// </summary>
         internal static string btnAddPatient {
@@ -70,11 +79,29 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Schedule Appointment.
+        /// </summary>
+        internal static string btnAppointment {
+            get {
+                return ResourceManager.GetString("btnAppointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string btnCancel {
             get {
                 return ResourceManager.GetString("btnCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Doctor.
+        /// </summary>
+        internal static string btnCargarMedico {
+            get {
+                return ResourceManager.GetString("btnCargarMedico", resourceCulture);
             }
         }
         
@@ -196,6 +223,24 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save changes.
+        /// </summary>
+        internal static string btnSaveChanges {
+            get {
+                return ResourceManager.GetString("btnSaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schedule Appointment.
+        /// </summary>
+        internal static string btnScheduleAppointment {
+            get {
+                return ResourceManager.GetString("btnScheduleAppointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         internal static string btnSearch {
@@ -268,11 +313,29 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to * dd/mm/yyyy.
+        /// </summary>
+        internal static string errDateFormat {
+            get {
+                return ResourceManager.GetString("errDateFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to * Invalid e-mail.
         /// </summary>
         internal static string errEmail {
             get {
                 return ResourceManager.GetString("errEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * Invalid employee id (expected format: AAA-123).
+        /// </summary>
+        internal static string errInvalidEmployeeId {
+            get {
+                return ResourceManager.GetString("errInvalidEmployeeId", resourceCulture);
             }
         }
         
@@ -304,11 +367,29 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to * Passwords do not match.
+        /// </summary>
+        internal static string errPasswordsDontMatch {
+            get {
+                return ResourceManager.GetString("errPasswordsDontMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to * Insert a valid phone number (from 7 to 20 characters,  &apos;+&apos; y and spaces are allowed).
         /// </summary>
         internal static string errPhone {
             get {
                 return ResourceManager.GetString("errPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * You must select at least one day.
+        /// </summary>
+        internal static string errSelectAtLeastOneDay {
+            get {
+                return ResourceManager.GetString("errSelectAtLeastOneDay", resourceCulture);
             }
         }
         
@@ -565,6 +646,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assigned Doctor.
+        /// </summary>
+        internal static string lblAssignedDoctor {
+            get {
+                return ResourceManager.GetString("lblAssignedDoctor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Time Availability.
         /// </summary>
         internal static string lblAvailability {
@@ -754,6 +844,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Observation.
+        /// </summary>
+        internal static string lblObservation {
+            get {
+                return ResourceManager.GetString("lblObservation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         internal static string lblPassword {
@@ -768,6 +867,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         internal static string lblPatient {
             get {
                 return ResourceManager.GetString("lblPatient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Patient&apos;s DNI.
+        /// </summary>
+        internal static string lblPatientsDni {
+            get {
+                return ResourceManager.GetString("lblPatientsDni", resourceCulture);
             }
         }
         
@@ -867,6 +975,15 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         internal static string lblThursday {
             get {
                 return ResourceManager.GetString("lblThursday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        internal static string lblTime {
+            get {
+                return ResourceManager.GetString("lblTime", resourceCulture);
             }
         }
         
@@ -979,11 +1096,38 @@ namespace TPINT_GRUPO_21_PR3.App_GlobalResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Appointment.
+        /// </summary>
+        internal static string titleAddAppointment {
+            get {
+                return ResourceManager.GetString("titleAddAppointment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add New Doctor.
+        /// </summary>
+        internal static string titleAddDoctor {
+            get {
+                return ResourceManager.GetString("titleAddDoctor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New Patient.
         /// </summary>
         internal static string titleAddPatient {
             get {
                 return ResourceManager.GetString("titleAddPatient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Doctor.
+        /// </summary>
+        internal static string titleEditDoctor {
+            get {
+                return ResourceManager.GetString("titleEditDoctor", resourceCulture);
             }
         }
     }

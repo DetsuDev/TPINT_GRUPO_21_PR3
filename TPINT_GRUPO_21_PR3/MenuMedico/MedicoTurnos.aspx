@@ -61,20 +61,20 @@
                 <asp:Label ID="lblMensaje" runat="server" Font-Bold="true"></asp:Label>
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Buscar Turnos</h4>
+                        <h4 class="mb-0"><asp:Literal runat="server" Text="<%$ Resources:lang, headerSearchAppointments %>" /></h4>
                     </div>
                     <div class="card-body p-4">
                         <div class="row g-3">
                             <div class="col-md-4">
-                                <label class="form-label">DNI</label>
+                                <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblDNI %>" /></label>
                                 <asp:TextBox ID="txtBuscarDni" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Paciente</label>
+                                <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblPatient %>" /></label>
                                 <asp:TextBox ID="txtBuscarPaciente" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Fecha</label>
+                                <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblDate %>" /></label>
                                 
                                 <asp:RegularExpressionValidator ID="revFecha" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtBuscarFecha" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$"></asp:RegularExpressionValidator>
                                         
@@ -82,8 +82,8 @@
                                         
                             </div>
                             <div class="col-12 text-end pt-3">
-                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary px-4" OnClick="btnBuscar_Click" />
-                                <asp:Button ID="btnLimpiar" runat="server" Text="Limpiar" CssClass="btn btn-outline-secondary px-4" OnClick="btnLimpiar_Click" />
+                                <asp:Button ID="btnBuscar" runat="server" Text="<%$ Resources:lang, btnSearch %>" CssClass="btn btn-primary px-4" OnClick="btnBuscar_Click" />
+                                <asp:Button ID="btnLimpiar" runat="server" Text="<%$ Resources:lang, btnClear %>" CssClass="btn btn-outline-secondary px-4" OnClick="btnLimpiar_Click" />
                             </div>
                         </div>
                     </div>
@@ -91,7 +91,7 @@
 
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Listado de Turnos</h4>
+                        <h4 class="mb-0"><asp:Literal runat="server" Text="<%$ Resources:lang, headerAppointmentList %>" /></h4>
                     </div>
                     <div class="card-body p-4">
                         <div class="table-responsive">
@@ -99,16 +99,16 @@
                                 DataKeyNames="ID" OnRowDataBound="gvMedicoTurnos_RowDataBound">
                                 <Columns>
                                     <asp:BoundField DataField="DNI" HeaderText="DNI" />
-                                    <asp:BoundField DataField="Paciente" HeaderText="Paciente" />
-                                    <asp:BoundField DataField="Fecha" HeaderText="Fecha" />
-                                    <asp:BoundField DataField="Hora" HeaderText="Hora" />
-                                   <asp:TemplateField HeaderText="Observación">
+                                    <asp:BoundField DataField="Paciente" HeaderText="<%$ Resources:lang, lblPatient %>" />
+                                    <asp:BoundField DataField="Fecha" HeaderText="<%$ Resources:lang, lblDate %>" />
+                                    <asp:BoundField DataField="Hora" HeaderText="<%$ Resources:lang, lblTime %>" />
+                                   <asp:TemplateField HeaderText="<%$ Resources:lang, lblObservation %>">
                                         <ItemTemplate>
                                             <asp:TextBox ID="txtObservacion" runat="server" TextMode="MultiLine" Rows="2" CssClass="form-control form-control-sm mt-1" Text='<%# Eval("Observacion") %>'></asp:TextBox>
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
-                                    <asp:TemplateField HeaderText="Estado">
+                                    <asp:TemplateField HeaderText="<%$ Resources:lang, lblStatus %>">
                                         <ItemTemplate>
                                             <asp:Label ID="lblEstadoActual" runat="server" Text='<%# Eval("Estado") %>' CssClass="fw-bold d-block mb-1"></asp:Label>
         
@@ -117,7 +117,7 @@
                                                 <asp:ListItem Value="Ausente">Ausente</asp:ListItem>
                                             </asp:RadioButtonList>
         
-                                            <asp:Button ID="btnConfirmarPresentismo" runat="server" Text="Guardar Cambios" CssClass="btn btn-sm btn-primary mt-1 d-block" OnClick="btnConfirmarPresentismo_Click" />
+                                            <asp:Button ID="btnConfirmarPresentismo" runat="server" Text="<%$ Resources:lang, btnSaveChanges %>" CssClass="btn btn-sm btn-primary mt-1 d-block" OnClick="btnConfirmarPresentismo_Click" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>

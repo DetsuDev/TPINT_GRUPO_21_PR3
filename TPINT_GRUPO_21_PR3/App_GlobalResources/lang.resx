@@ -450,4 +450,28 @@
   <data name="titleEditDoctor" xml:space="preserve">
     <value>Edit Doctor</value>
   </data>
+  <data name="lblPatientsDni" xml:space="preserve">
+    <value>Patient's DNI</value>
+  </data>
+  <data name="lblAssignedDoctor" xml:space="preserve">
+    <value>Assigned Doctor</value>
+  </data>
+  <data name="lblTime" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="lblObservation" xml:space="preserve">
+    <value>Observation</value>
+  </data>
+  <data name="btnAppointment" xml:space="preserve">
+    <value>Schedule Appointment</value>
+  </data>
+  <data name="titleAddAppointment" xml:space="preserve">
+    <value>Add New Appointment</value>
+  </data>
+  <data name="btnScheduleAppointment" xml:space="preserve">
+    <value>Schedule Appointment</value>
+  </data>
+  <data name="btnSaveChanges" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
 </root>

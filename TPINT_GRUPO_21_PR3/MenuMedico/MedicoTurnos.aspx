@@ -19,10 +19,9 @@
               top: 1em;
               right: 5em;
         }
-        /* use Bootstrap btn-check pattern but keep server-side radios */
-        #languageswitch input.btn-check { position: absolute; opacity: 0; pointer-events: none; }
+        #languageswitch input[type="radio"] { display: none; }
         #languageswitch label { cursor: pointer; }
-        #languageswitch input.btn-check:checked + label {
+        #languageswitch input[type="radio"]:checked + label {
             background-color: #0d6efd;
             color: #fff;
             border-color: #0d6efd;
@@ -32,13 +31,13 @@
 </head>
 <body style="background-color: #f8f9fa;">
     <form id="form1" runat="server">
-        <div id="languageswitch" runat="server">
-            <asp:RadioButton ID="rbtnEn" runat="server" GroupName="lang" AutoPostBack="true" OnCheckedChanged="rblLanguage_SelectedIndexChanged" ClientIDMode="Static" CssClass="btn-check" />
-            <label for="rbtnEn" class="btn btn-outline-primary" style="margin-right:0.25rem;">EN</label>
+    <div id="languageswitch" runat="server">
+        <asp:RadioButton ID="rbtnEn" runat="server" GroupName="lang" AutoPostBack="true" OnCheckedChanged="rblLanguage_SelectedIndexChanged" ClientIDMode="Static" />
+        <label for="rbtnEn" class="btn btn-outline-primary" style="margin-right:0.25rem;">EN</label>
 
-            <asp:RadioButton ID="rbtnEs" runat="server" GroupName="lang" AutoPostBack="true" OnCheckedChanged="rblLanguage_SelectedIndexChanged" ClientIDMode="Static" CssClass="btn-check" />
-            <label for="rbtnEs" class="btn btn-outline-primary">ES</label>
-        </div>
+        <asp:RadioButton ID="rbtnEs" runat="server" GroupName="lang" AutoPostBack="true" OnCheckedChanged="rblLanguage_SelectedIndexChanged" ClientIDMode="Static" />
+        <label for="rbtnEs" class="btn btn-outline-primary">ES</label>
+    </div>
     <div class="card text-center col-1" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
         <p class="card-text" style="margin: -3px -6px 5px -6px;"> <asp:Label ID="lblWelcomePlaceholder" runat="server" Text="<%$ Resources:lang, lblWelcomePlaceholder %>"> </asp:Label> <br/> 

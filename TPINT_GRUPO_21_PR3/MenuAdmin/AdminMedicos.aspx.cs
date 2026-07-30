@@ -91,7 +91,14 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlFiltroEspecialidad.DataTextField = "Nombre";
             ddlFiltroEspecialidad.DataValueField = "Id_Especialidad";
             ddlFiltroEspecialidad.DataBind();
-            ddlFiltroEspecialidad.Items.Insert(0, new ListItem("-- Todas --", ""));
+            if (Session["Culture"]?.ToString() == "es")
+            {
+                ddlFiltroEspecialidad.Items.Insert(0, new ListItem("-- Todas --", ""));
+            }
+            else
+            {
+                ddlFiltroEspecialidad.Items.Insert(0, new ListItem("-- All --", ""));
+            }
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
@@ -119,7 +126,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlProvincia.DataTextField = "NombreProvincia";
             ddlProvincia.DataValueField = "Id_Provincia";
             ddlProvincia.DataBind();
-            ddlProvincia.Items.Insert(0, new ListItem("-- Elija una provincia --", ""));
+            if (Session["Culture"]?.ToString() == "es")
+            {
+                ddlProvincia.Items.Insert(0, new ListItem("-- Elija una provincia --", ""));
+
+            }
+            else 
+            {
+                ddlProvincia.Items.Insert(0, new ListItem("-- Select a province --", ""));
+            }
         }
 
         private void CargarLocalidades(string idProvincia)

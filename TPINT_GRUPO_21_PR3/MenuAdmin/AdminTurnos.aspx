@@ -88,7 +88,7 @@
                 
                 <div class="card" runat="server" id="divEliminar" style="z-index: 9999; width: 320px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; padding: 10px;">
                     <div class="card-body">
-                        <p class="card-text">Desea Eliminar el turno?</p>
+                        <p class="card-text"><asp:Literal runat="server" Text="<%$ Resources:lang, msgDeleteRecord %>" /></p>
                         <div style="text-align: right">
                             <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" class="btn btn-danger" OnClick="btnEliminar_Click"/>
                             <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" class="btn btn-secondary" OnClick="btnCancelar_Click"/>
@@ -118,10 +118,10 @@
                             <div class="col-md-3">
                                 <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblStatus %>" /></label>
                                 <asp:DropDownList ID="ddlBuscarEstado" runat="server" CssClass="form-select">
-                                    <asp:ListItem Value="">Todos</asp:ListItem>
-                                    <asp:ListItem Value="Presente">Presente</asp:ListItem>
-                                    <asp:ListItem Value="Pendiente">Pendiente</asp:ListItem>
-                                    <asp:ListItem>Ausente</asp:ListItem>
+                                    <asp:ListItem Text="<%$ Resources:lang, All %>" Value=""></asp:ListItem>
+                                    <asp:ListItem Text="<%$ Resources:lang, Present %>" Value="Presente"></asp:ListItem>
+                                    <asp:ListItem Text="<%$ Resources:lang, Pending %>" Value="Pendiente"></asp:ListItem>
+                                    <asp:ListItem Text="<%$ Resources:lang, Absent %>"></asp:ListItem>
                                 </asp:DropDownList>
                             </div>
                             <div class="col-12 text-end pt-3">

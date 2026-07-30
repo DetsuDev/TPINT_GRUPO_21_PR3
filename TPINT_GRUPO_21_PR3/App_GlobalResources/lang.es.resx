@@ -474,4 +474,16 @@
   <data name="btnSaveChanges" xml:space="preserve">
     <value>Guardar cambios</value>
   </data>
+  <data name="Present" xml:space="preserve">
+    <value>Presente</value>
+  </data>
+  <data name="Absent" xml:space="preserve">
+    <value>Ausente</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Pendiente</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Todos</value>
+  </data>
 </root>

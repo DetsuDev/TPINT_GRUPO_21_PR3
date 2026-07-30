@@ -12,7 +12,7 @@ using System.Web.UI.WebControls;
 
 namespace TPINT_GRUPO_21_PR3.MenuAdmin
 {
-    public partial class Informes : System.Web.UI.Page
+    public partial class Informes : Culture
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -64,6 +64,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
         protected void ocultarBarras()
         {
             barraVerde.Visible=false;
+            barraAmarilla.Visible = false;
             barraRoja.Visible=false;
         }
 
@@ -97,7 +98,7 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
         protected void btnLimpiarInforme_Click(object sender, EventArgs e)
         {
-
+            ocultarBarras();
             txtFechaInicioPresentismo.Text = "dd/mm/aaaa";
             txtFechaFinPresentismo.Text = "dd/mm/aaaa";
         }

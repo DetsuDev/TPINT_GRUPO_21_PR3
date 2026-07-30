@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace TPINT_GRUPO_21_PR3.MenuMedico
 {
-    public partial class MedicoTurnos : System.Web.UI.Page
+    public partial class MedicoTurnos : Culture
     {
         protected void Page_Load(object sender, EventArgs e)
         {

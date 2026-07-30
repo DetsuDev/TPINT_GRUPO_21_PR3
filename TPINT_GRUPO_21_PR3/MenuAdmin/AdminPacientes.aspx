@@ -31,32 +31,50 @@
               min-width: 80%;
               z-index: 9999;
             }
+
+        #languageswitch {
+              position: absolute;
+              top: 1em;
+              right: 5em;
+        }
+        #languageswitch input[type="radio"] { display: none; }
+        #languageswitch label { cursor: pointer; }
+        #languageswitch input[type="radio"]:checked + label {
+            background-color: #0d6efd;
+            color: #fff;
+            border-color: #0d6efd;
+        }
     </style>
 </head>
 <body style="background-color: #f8f9fa;">
+    <form id="form1" runat="server">
+       <div id="languageswitch" runat="server">
+            <asp:RadioButton ID="rbtnEn" runat="server" GroupName="lang" AutoPostBack="true" OnCheckedChanged="rblLanguage_SelectedIndexChanged" ClientIDMode="Static" />
+            <label for="rbtnEn" class="btn btn-outline-primary" style="margin-right:0.25rem;">EN</label>
 
+            <asp:RadioButton ID="rbtnEs" runat="server" GroupName="lang" AutoPostBack="true" OnCheckedChanged="rblLanguage_SelectedIndexChanged" ClientIDMode="Static" />
+            <label for="rbtnEs" class="btn btn-outline-primary">ES</label>
+       </div>
     <div  class="card text-center col-1" style="z-index: 999; position: fixed; right: 20px; bottom: 20px">
       <div class="card-body" >
-        <p class="card-text" style="margin: -3px -6px 5px -6px;">Bienvenid@, <br/> 
+        <p class="card-text" style="margin: -3px -6px 5px -6px;"> <asp:Label ID="lblWelcomePlaceholder" runat="server" Text="<%$ Resources:lang, lblWelcomePlaceholder %>"> </asp:Label> <br/> 
           <asp:Label ID="lblNombreUsuario" runat="server" Text="[Usuario]" style="font-weight: bold;"></asp:Label>
           </p>
           <div class="text-center">
             <img src="../assets/admin-placeholder.png" alt="Administrador-placeholder" style="width:100px; height:auto; margin-bottom:5px;"/>
           </div>
-        <a href="../login.aspx" class="btn btn-primary"> Cerrar Sesión </a>
+        <a href="../login.aspx" class="btn btn-primary"><asp:Literal runat="server" Text="<%$ Resources:lang, btnLogout %>" /></a>
       </div>
     </div>
 
     <div style="padding: 50px; margin: 50px;">
         <ul class="nav nav-tabs" style="min-width: 1000px;">
-            <li class="nav-item"><a class="nav-link" href="AdminInformes.aspx">Informes</a></li>
-            <li class="nav-item"><a class="nav-link active" aria-current="page" href="AdminPacientes.aspx">Gestionar Pacientes</a></li>
-            <li class="nav-item"><a class="nav-link" href="AdminMedicos.aspx">Gestionar Medicos</a></li>
-            <li class="nav-item"><a class="nav-link" href="AdminTurnos.aspx">Gestionar Turnos
-                </a></li>
+            <li class="nav-item"><a class="nav-link" href="AdminInformes.aspx"><asp:Literal runat="server" Text="<%$ Resources:lang, navInformes %>" /></a></li>
+            <li class="nav-item"><a class="nav-link active" aria-current="page" href="AdminPacientes.aspx"><asp:Literal runat="server" Text="<%$ Resources:lang, navPacientes %>" /></a></li>
+            <li class="nav-item"><a class="nav-link" href="AdminMedicos.aspx"><asp:Literal runat="server" Text="<%$ Resources:lang, navMedicos %>" /></a></li>
+            <li class="nav-item"><a class="nav-link" href="AdminTurnos.aspx"><asp:Literal runat="server" Text="<%$ Resources:lang, navTurnos %>" /></a></li>
         </ul>
         <div class="border border-top-0 p-5" style="background-color: white;">
-            <form id="form1" runat="server">
                 <div id="fullscreenOverlay" runat="server"></div>
                 <asp:HiddenField ID="hdnIdEliminar" runat="server" />
                 <asp:HiddenField ID="hdnIdPaciente" runat="server" />
@@ -66,31 +84,31 @@
                     id="divEliminar"
                     style="z-index: 9999; width: 320px; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; padding: 10px;">
                     <div class="card-body">
-                        <p class="card-text">¿Está seguro que desea eliminar el registro?</p>
+                        <p class="card-text"><asp:Literal runat="server" Text="<%$ Resources:lang, msgDeleteRecord %>" /></p>
                         <div style="text-align: right">
-                            <asp:Button ID="btnEliminar" runat="server" Text="Eliminar" class="btn btn-danger" OnClick="btnEliminar_Click"/>
-                            <asp:Button ID="btnCancelar" runat="server" Text="Cancelar" class="btn btn-secondary" OnClick="btnCancelar_Click"/>
+                            <asp:Button ID="btnEliminar" runat="server" Text="<%$ Resources:lang, btnConfirmDelete %>" class="btn btn-danger" OnClick="btnEliminar_Click"/>
+                            <asp:Button ID="btnCancelar" runat="server" Text="<%$ Resources:lang, btnCancel %>" class="btn btn-secondary" OnClick="btnCancelar_Click"/>
                         </div>
                     </div>
                 </div>
                 <div class="card border-primary mb-5 shadow-sm">
                     <div class="card-header bg-primary text-white">
-                        <h4 class="mb-0">Buscar Pacientes</h4>
+                        <h4 class="mb-0"><asp:Literal runat="server" Text="<%$ Resources:lang, cardBuscarPacientes %>" /></h4>
 
                     </div>
                     <div class="card-body p-4">
                         <div class="row g-3">
                             <div class="col-md-5">
-                                <label class="form-label">Búsqueda (DNI, nombre o apellido)</label>
+                                <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblBusqueda %>" /></label>
                                 <asp:TextBox ID="txtBuscar" runat="server" CssClass="form-control"></asp:TextBox>
                             </div>
                             <div class="col-md-4">
-                                <label class="form-label">Provincia</label>
+                                <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblProvincia %>" /></label>
                                 <asp:DropDownList ID="ddlFiltroProvincia" runat="server" CssClass="form-select"></asp:DropDownList>
                             </div>
                             <div class="col-12 text-end pt-3">
-                                <asp:Button ID="btnBuscar" runat="server" Text="Buscar" CssClass="btn btn-primary px-4" OnClick="btnBuscar_Click" CausesValidation="false" />
-                                <asp:Button ID="btnLimpiarBusqueda" runat="server" Text="Limpiar" CssClass="btn btn-outline-secondary px-4" OnClick="btnLimpiarBusqueda_Click" CausesValidation="false" />
+                                <asp:Button ID="btnBuscar" runat="server" Text="<%$ Resources:lang, btnSearch %>" CssClass="btn btn-primary px-4" OnClick="btnBuscar_Click" CausesValidation="false" />
+                                <asp:Button ID="btnLimpiarBusqueda" runat="server" Text="<%$ Resources:lang, btnClearSearch %>" CssClass="btn btn-outline-secondary px-4" OnClick="btnLimpiarBusqueda_Click" CausesValidation="false" />
                             </div>
                         </div>
                     </div>
@@ -100,8 +118,8 @@
                     
                     
                     <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
-                        <h4 class="mb-0">Listado de Pacientes</h4>
-                        <asp:Button ID="btnMostrarForm" runat="server" Text="Agregar Paciente" OnClick="btnMostrarForm_Click" CssClass="btn btn-light" /></div>
+                        <h4 class="mb-0"><asp:Literal runat="server" Text="<%$ Resources:lang, cardListadoPacientes %>" /></h4>
+                        <asp:Button ID="btnMostrarForm" runat="server" Text="<%$ Resources:lang, btnAddPatient %>" OnClick="btnMostrarForm_Click" CssClass="btn btn-light" /></div>
                     <div class="card-body p-4">
                         <div class="table-responsive">
                             <asp:GridView ID="gvGestionPacientes" runat="server"
@@ -116,21 +134,21 @@
                                 <Columns>
                                     <asp:TemplateField ShowHeader="False">
                                         <ItemTemplate>
-                                            <asp:Button ID="btnEditar" runat="server" class="btn btn-outline-warning" CommandArgument='<%# Eval("ID") %>' OnClick="btnEditar_Click" Text="Editar" />
+                                            <asp:Button ID="btnEditar" runat="server" class="btn btn-outline-warning" CommandArgument='<%# Eval("ID") %>' OnClick="btnEditar_Click" Text="<%$ Resources:lang, btnEditar %>" />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                     <asp:BoundField DataField="ID" HeaderText="ID" ReadOnly="True" />
                                     <asp:BoundField DataField="DNI" HeaderText="DNI" ReadOnly="True"/>
-                                    <asp:BoundField DataField="Nombre" HeaderText="Nombre" />
-                                    <asp:BoundField DataField="Apellido" HeaderText="Apellido" />
-                                    <asp:BoundField DataField="Sexo" HeaderText="Sexo" />
-                                    <asp:BoundField DataField="Nacionalidad" HeaderText="Nacionalidad" />
-                                    <asp:BoundField DataField="FechaNac" HeaderText="Fecha Nac" DataFormatString="{0:dd/MM/yyyy}" />
-                                    <asp:BoundField DataField="Direccion" HeaderText="Dirección" />
-                                    <asp:BoundField DataField="Localidad" HeaderText="Localidad" />
-                                    <asp:BoundField DataField="Provincia" HeaderText="Provincia" />
-                                    <asp:BoundField DataField="Email" HeaderText="Email" />
-                                    <asp:BoundField DataField="Telefono" HeaderText="Teléfono" />
+                                    <asp:BoundField DataField="Nombre" HeaderText="<%$ Resources:lang, headerName %>" />
+                                    <asp:BoundField DataField="Apellido" HeaderText="<%$ Resources:lang, headerSurname %>" />
+                                    <asp:BoundField DataField="Sexo" HeaderText="<%$ Resources:lang, headerSex %>" />
+                                    <asp:BoundField DataField="Nacionalidad" HeaderText="<%$ Resources:lang, headerNationality %>" />
+                                    <asp:BoundField DataField="FechaNac" HeaderText="<%$ Resources:lang, headerBirthDate %>" DataFormatString="{0:dd/MM/yyyy}" />
+                                    <asp:BoundField DataField="Direccion" HeaderText="<%$ Resources:lang, headerAddress %>" />
+                                    <asp:BoundField DataField="Localidad" HeaderText="<%$ Resources:lang, headerLocality %>" />
+                                    <asp:BoundField DataField="Provincia" HeaderText="<%$ Resources:lang, headerProvince %>" />
+                                    <asp:BoundField DataField="Email" HeaderText="<%$ Resources:lang, headerEmail %>" />
+                                    <asp:BoundField DataField="Telefono" HeaderText="<%$ Resources:lang, headerPhone %>" />
                                     <asp:CommandField ShowDeleteButton="True" ButtonType="Button" ControlStyle-CssClass="btn btn-sm btn-outline-danger" />
                                 </Columns>
                                 <PagerStyle CssClass="pagination justify-content-center pt-3" />
@@ -144,92 +162,90 @@
                     <div class="card-body">
                         <div class="card border-primary shadow-sm">
                             <div class="card-header bg-primary text-white">
-                                <h4 class="mb-0" id="hCargarPaciente" runat="server">Agregar Nuevo Paciente</h4>
+                                <h4 class="mb-0" id="hCargarPaciente" runat="server"><asp:Literal runat="server" Text="<%$ Resources:lang, titleAddPatient %>" /></h4>
                             </div>
                             <div class="card-body p-4">
                                 <div class="row g-3">
                                     <div class="col-md-3">
-                                        <label class="form-label font-weight-bold">DNI</label>
+                                        <label class="form-label font-weight-bold"><asp:Literal runat="server" Text="<%$ Resources:lang, lblDNI %>" /></label>
                                         <asp:RequiredFieldValidator ID="rfvDNI" runat="server" ErrorMessage="*" ControlToValidate="txtDni" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="revDNI" runat="server" ErrorMessage="* Ingrese 8 digitos numericos" ValidationExpression="^\d{8}$" ControlToValidate="txtDni" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="revDNI" runat="server" ErrorMessage="<%$ Resources:lang, errNumericDigits %>" ValidationExpression="^\d{8}$" ControlToValidate="txtDni" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtDni" runat="server" CssClass="form-control" placeholder="Ej: 45123456"></asp:TextBox>
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="form-label">Nombre</label>
+                                        <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblNombre %>" /></label>
                                         <asp:RequiredFieldValidator ID="rfvNombre" runat="server" ErrorMessage="*" ControlToValidate="txtNombre" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="revNombre" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNombre" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="revNombre" runat="server" ErrorMessage="<%$ Resources:lang, errOnlyLetters %>" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNombre" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtNombre" runat="server" CssClass="form-control"></asp:TextBox>
                                      </div>
                                     <div class="col-md-5">
-                                          <label class="form-label">Apellido</label>
+                                          <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblApellido %>" /></label>
 
                                           <asp:RequiredFieldValidator ID="rfvApellido" runat="server" ErrorMessage="*" ControlToValidate="txtApellido" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-                                          <asp:RegularExpressionValidator ID="revApellido" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtApellido" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                          <asp:RegularExpressionValidator ID="revApellido" runat="server" ErrorMessage="<%$ Resources:lang, errOnlyLetters %>" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtApellido" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
                                           <asp:TextBox ID="txtApellido" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-2">
-                                        <label class="form-label">Sexo</label>
+                                        <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblSexo %>" /></label>
                                         <asp:DropDownList ID="ddlSexo" runat="server" CssClass="form-select">
                                             <asp:ListItem Value="M">Masculino</asp:ListItem>
                                             <asp:ListItem Value="F">Femenino</asp:ListItem>
                                         </asp:DropDownList>
                                     </div>
                                     <div class="col-md-4">
-                                        <label class="form-label">Nacionalidad</label>
+                                        <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblNacionalidad %>" /></label>
 
                                         <asp:RequiredFieldValidator ID="rfvNacionalidad" runat="server" ErrorMessage="*" ControlToValidate="txtNacionalidad" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="revNacionalidad" runat="server" ErrorMessage="* Solo letras" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNacionalidad" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="revNacionalidad" runat="server" ErrorMessage="<%$ Resources:lang, errOnlyLetters %>" ValidationExpression="^[a-zA-ZÀ-ÿ\u00f1\u00d1]+(\s*[a-zA-ZÀ-ÿ\u00f1\u00d1]*)*[a-zA-ZÀ-ÿ\u00f1\u00d1]+$" ControlToValidate="txtNacionalidad" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
 
                                         &nbsp;<asp:TextBox ID="txtNacionalidad" runat="server" CssClass="form-control" placeholder="Ej: Argentina"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">
-                                        <label class="form-label">Fecha de Nacimiento</label>
+                                        <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblFechaNac %>" /></label>
                                         <asp:RequiredFieldValidator ID="rfvFechaNac" runat="server" ErrorMessage="*" ControlToValidate="txtFechaNac" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
                                         <asp:RegularExpressionValidator ID="revFechaNac" runat="server" ErrorMessage="* dd/mm/aaaa" ControlToValidate="txtFechaNac" ForeColor="Red" ValidationExpression="^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" ValidationGroup="informeFecha"></asp:RegularExpressionValidator>
                                         <asp:TextBox ID="txtFechaNac" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">
-                                        <label class="form-label">Telefono</label>
+                                        <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblTelefono %>" /></label>
                                         <asp:RequiredFieldValidator ID="rfvTelefono" runat="server" ErrorMessage="*" ControlToValidate="txtTelefono" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-                                        <asp:RegularExpressionValidator ID="revTelefono" runat="server" ErrorMessage="* Ingrese un teléfono válido (7 a 20 caracteres, puede incluir '+' y espacios)" ValidationExpression="^\+?[0-9\s()-]{7,20}$" ControlToValidate="txtTelefono" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                        <asp:RegularExpressionValidator ID="revTelefono" runat="server" ErrorMessage="<%$ Resources:lang, errPhone %>" ValidationExpression="^\+?[0-9\s()-]{7,20}$" ControlToValidate="txtTelefono" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
                                         &nbsp;<asp:TextBox ID="txtTelefono" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-6">
-                                        <label class="form-label">Dirección</label>
+                                        <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblDireccion %>" /></label>
                                         <asp:RequiredFieldValidator ID="rfvDireccion" runat="server" ErrorMessage="*" ControlToValidate="txtDireccion" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
                                         <asp:TextBox ID="txtDireccion" runat="server" CssClass="form-control"></asp:TextBox>
                                     </div>
                                     <div class="col-md-3">
-                                         <label class="form-label">Provincia</label>
-                                         <asp:RequiredFieldValidator ID="rfvProvincia" runat="server" ErrorMessage="*" ControlToValidate="ddlProvincia" ForeColor="Red" ValidationGroup="GrupoPaciente" InitialValue="-- Elija una provincia --"></asp:RequiredFieldValidator>
+                                         <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblProvincia %>" /></label>
+                                         <asp:RequiredFieldValidator ID="rfvProvincia" runat="server" ErrorMessage="*" ControlToValidate="ddlProvincia" ForeColor="Red" ValidationGroup="GrupoPaciente" InitialValue="<%$ Resources:lang, rfvProvince %>"></asp:RequiredFieldValidator>
                                          <asp:DropDownList ID="ddlProvincia" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddlProvincia_SelectedIndexChanged"></asp:DropDownList>
                                    </div>
                                     <div class="col-md-3">
-                                         <label class="form-label">Localidad</label>
+                                         <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblLocalidad %>" /></label>
                                          <asp:RequiredFieldValidator ID="rfvLocalidad" runat="server" ErrorMessage="*" ControlToValidate="ddlLocalidad" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
                                          <asp:DropDownList ID="ddlLocalidad" runat="server" CssClass="form-select"></asp:DropDownList>
                                     </div>
                                     <div class="col-md-6">
-                                         <label class="form-label">Email</label>
+                                         <label class="form-label"><asp:Literal runat="server" Text="<%$ Resources:lang, lblEmail %>" /></label>
                                          <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="*" ControlToValidate="txtEmail" ForeColor="Red" ValidationGroup="GrupoPaciente"></asp:RequiredFieldValidator>
-                                         <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="* Correo no válido" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
+                                         <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="<%$ Resources:lang, errEmail %>" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*" ControlToValidate="txtEmail" ForeColor="Red" Display="Dynamic" ValidationGroup="GrupoPaciente"></asp:RegularExpressionValidator>
                                          &nbsp;<asp:TextBox ID="txtEmail" runat="server" CssClass="form-control" placeholder="medico@clinica.com"></asp:TextBox>
                                     </div>
                                     <div class="col-12 text-end pt-3">
                                         <asp:Button ID="btnCargar" runat="server" Text="Cargar Paciente" CssClass="btn btn-primary px-4" OnClick="btnCargar_Click" ValidationGroup="GrupoPaciente" />
-                                        <asp:Button ID="btnCancelarEdicion" runat="server" Text="Cancelar" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancelarEdicion_Click" CausesValidation="false"  />
+                                        <asp:Button ID="btnCancelarEdicion" runat="server" Text="<%$ Resources:lang, btnCancel %>" CssClass="btn btn-outline-secondary px-4" OnClick="btnCancelarEdicion_Click" CausesValidation="false"  />
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-
-            </form>
         </div>
     </div>
 
         <script src="../js/bootstrap.bundle.min.js"></script>
-
+</form>
 </body>
 </html>

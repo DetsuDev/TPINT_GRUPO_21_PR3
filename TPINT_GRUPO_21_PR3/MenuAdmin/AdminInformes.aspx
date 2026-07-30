@@ -9,7 +9,7 @@
     <title>Informes Estadísticos</title>
     <style>
         #languageswitch {
-              position: fixed;
+              position: absolute;
               top: 1em;
               right: 5em;
         }
@@ -86,7 +86,7 @@
                                 <div class="table-responsive">
                                     <asp:GridView ID="gvRankingEspecialidades" runat="server" AutoGenerateColumns="False" CssClass="table table-striped table-hover table-bordered align-middle">
                                         <Columns>
-                                            <asp:BoundField DataField="Especialidad" HeaderText="<%$ Resources:lang, headerSpeciality %>" />
+                                            <asp:BoundField DataField="Especialidad" HeaderText="<%$ Resources:lang, headerSpecialty %>" />
                                             <asp:BoundField DataField="Cantidad" HeaderText="<%$ Resources:lang, headerAppointments %>" />
                                         </Columns>
                                     </asp:GridView>

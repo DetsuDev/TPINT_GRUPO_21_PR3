@@ -228,10 +228,262 @@
   <data name="headerAppointments" xml:space="preserve">
     <value>Cantidad de Turnos</value>
   </data>
-  <data name="headerSpeciality" xml:space="preserve">
+  <data name="headerSpecialty" xml:space="preserve">
     <value>Especialidad</value>
   </data>
   <data name="btnEditar" xml:space="preserve">
     <value>Editar</value>
+  </data>
+  <data name="headerAgregarPaciente" xml:space="preserve">
+    <value>Agregar Nuevo Paciente</value>
+  </data>
+  <data name="btnCargarPaciente" xml:space="preserve">
+    <value>Cargar Paciente</value>
+  </data>
+  <data name="headerName" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="headerSurname" xml:space="preserve">
+    <value>Apellido</value>
+  </data>
+  <data name="headerSex" xml:space="preserve">
+    <value>Sexo</value>
+  </data>
+  <data name="headerNationality" xml:space="preserve">
+    <value>Nacionalidad</value>
+  </data>
+  <data name="headerBirthDate" xml:space="preserve">
+    <value>Fecha Nac.</value>
+  </data>
+  <data name="headerAddress" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="headerLocality" xml:space="preserve">
+    <value>Localidad</value>
+  </data>
+  <data name="headerProvince" xml:space="preserve">
+    <value>Provincia</value>
+  </data>
+  <data name="headerEmail" xml:space="preserve">
+    <value>Correo Electrónico</value>
+  </data>
+  <data name="headerPhone" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
+  <data name="headerUser" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="headerPassword" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="headerStartingTime" xml:space="preserve">
+    <value>Hora de Inicio</value>
+  </data>
+  <data name="headerEndingTime" xml:space="preserve">
+    <value>Hora final</value>
+  </data>
+  <data name="headerEmployeeId" xml:space="preserve">
+    <value>Legajo</value>
+  </data>
+  <data name="cardSearchDoctors" xml:space="preserve">
+    <value>Buscar Médicos</value>
+  </data>
+  <data name="cardDoctorList" xml:space="preserve">
+    <value>Listado de Médicos</value>
+  </data>
+  <data name="lblSearchDoctors" xml:space="preserve">
+    <value>Búsqueda (por nombre o apellido)</value>
+  </data>
+  <data name="lblEmployeeId" xml:space="preserve">
+    <value>Legajo</value>
+  </data>
+  <data name="lblSpecialty" xml:space="preserve">
+    <value>Especialidad</value>
+  </data>
+  <data name="btnNewDoctor" xml:space="preserve">
+    <value>Nuevo Médico</value>
+  </data>
+  <data name="headerSearchAppointments" xml:space="preserve">
+    <value>Buscar Turnos</value>
+  </data>
+  <data name="headerAppointmentList" xml:space="preserve">
+    <value>Listado de Turnos</value>
+  </data>
+  <data name="btnNewAppointment" xml:space="preserve">
+    <value>Nuevo Turno</value>
+  </data>
+  <data name="headerDoctor" xml:space="preserve">
+    <value>Médico</value>
+  </data>
+  <data name="headerPatient" xml:space="preserve">
+    <value>Paciente</value>
+  </data>
+  <data name="headerDate" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="headerTime" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="headerObservation" xml:space="preserve">
+    <value>Observación</value>
+  </data>
+  <data name="headerStatus" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="lblPatient" xml:space="preserve">
+    <value>Paciente</value>
+  </data>
+  <data name="lblDate" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="lblStatus" xml:space="preserve">
+    <value>Estado</value>
+  </data>
+  <data name="btnUpdatePatient" xml:space="preserve">
+    <value>Actualizar Paciente</value>
+  </data>
+  <data name="rfvProvince" xml:space="preserve">
+    <value>-- Elija una provincia --</value>
+  </data>
+  <data name="errOnlyLetters" xml:space="preserve">
+    <value>* Solo letras</value>
+  </data>
+  <data name="errOnlyNumbers" xml:space="preserve">
+    <value>* Solo números</value>
+  </data>
+  <data name="errNumericDigits" xml:space="preserve">
+    <value>* Ingrese 8 dígitos numéricos</value>
+  </data>
+  <data name="errPhone" xml:space="preserve">
+    <value>* Ingrese un teléfono válido (7 a 20 caracteres, puede incluir '+' y espacios)</value>
+  </data>
+  <data name="errEmail" xml:space="preserve">
+    <value>* Correo inválido</value>
+  </data>
+  <data name="msgDeleteRecord" xml:space="preserve">
+    <value>¿Está seguro que desea eliminar este registro?</value>
+  </data>
+  <data name="msgDeleteAppointment" xml:space="preserve">
+    <value>¿Está seguro que desea eliminar este turno?</value>
+  </data>
+  <data name="lblName" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="lblSurname" xml:space="preserve">
+    <value>Apellido</value>
+  </data>
+  <data name="lblAvailability" xml:space="preserve">
+    <value>Disponibilidad Horaria</value>
+  </data>
+  <data name="lblAvailableDays" xml:space="preserve">
+    <value>Días disponibles</value>
+  </data>
+  <data name="lblMonday" xml:space="preserve">
+    <value>Lunes</value>
+  </data>
+  <data name="lblTuesday" xml:space="preserve">
+    <value>Martes</value>
+  </data>
+  <data name="lblWednesday" xml:space="preserve">
+    <value>Miércoles</value>
+  </data>
+  <data name="lblThursday" xml:space="preserve">
+    <value>Jueves</value>
+  </data>
+  <data name="lblFriday" xml:space="preserve">
+    <value>Viernes</value>
+  </data>
+  <data name="lblSex" xml:space="preserve">
+    <value>Sexo</value>
+  </data>
+  <data name="lblNationality" xml:space="preserve">
+    <value>Nacionalidad</value>
+  </data>
+  <data name="lblBirthDate" xml:space="preserve">
+    <value>Fecha de Nacimiento</value>
+  </data>
+  <data name="lblPhone" xml:space="preserve">
+    <value>Teléfono</value>
+  </data>
+  <data name="lblAddress" xml:space="preserve">
+    <value>Dirección</value>
+  </data>
+  <data name="lblProvince" xml:space="preserve">
+    <value>Provincia</value>
+  </data>
+  <data name="lblLocality" xml:space="preserve">
+    <value>Localidad</value>
+  </data>
+  <data name="lblPassword" xml:space="preserve">
+    <value>Contraseña</value>
+  </data>
+  <data name="lblUser" xml:space="preserve">
+    <value>Usuario</value>
+  </data>
+  <data name="lblConfirmPassword" xml:space="preserve">
+    <value>Confirmar Contraseña</value>
+  </data>
+  <data name="btnEdit" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="errInvalidEmployeeId" xml:space="preserve">
+    <value>* Legajo inválido (formato esperado: AAA-123)</value>
+  </data>
+  <data name="errSelectAtLeastOneDay" xml:space="preserve">
+    <value>* Debe elegir al menos un dia</value>
+  </data>
+  <data name="errDateFormat" xml:space="preserve">
+    <value>* dd/mm/aaaa</value>
+  </data>
+  <data name="errPasswordsDontMatch" xml:space="preserve">
+    <value>* Las contraseñas no coinciden</value>
+  </data>
+  <data name="btnCargarMedico" xml:space="preserve">
+    <value>Cargar Médico</value>
+  </data>
+  <data name="btnActualizarMedico" xml:space="preserve">
+    <value>Actualizar Médico</value>
+  </data>
+  <data name="titleAddDoctor" xml:space="preserve">
+    <value>Cargar Nuevo Médico</value>
+  </data>
+  <data name="titleEditDoctor" xml:space="preserve">
+    <value>Editar Médico</value>
+  </data>
+  <data name="lblPatientsDni" xml:space="preserve">
+    <value>DNI del Paciente</value>
+  </data>
+  <data name="lblAssignedDoctor" xml:space="preserve">
+    <value>Médico Asignado</value>
+  </data>
+  <data name="lblTime" xml:space="preserve">
+    <value>Hora</value>
+  </data>
+  <data name="lblObservation" xml:space="preserve">
+    <value>Observación</value>
+  </data>
+  <data name="btnAppointment" xml:space="preserve">
+    <value>Agendar Turno</value>
+  </data>
+  <data name="titleAddAppointment" xml:space="preserve">
+    <value>Cargar Nuevo Turno</value>
+  </data>
+  <data name="btnScheduleAppointment" xml:space="preserve">
+    <value>Agendar Turno</value>
+  </data>
+  <data name="btnSaveChanges" xml:space="preserve">
+    <value>Guardar cambios</value>
+  </data>
+  <data name="Present" xml:space="preserve">
+    <value>Presente</value>
+  </data>
+  <data name="Absent" xml:space="preserve">
+    <value>Ausente</value>
+  </data>
+  <data name="Pending" xml:space="preserve">
+    <value>Pendiente</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>Todos</value>
   </data>
 </root>

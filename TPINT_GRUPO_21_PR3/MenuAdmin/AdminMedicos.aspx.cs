@@ -91,7 +91,14 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlFiltroEspecialidad.DataTextField = "Nombre";
             ddlFiltroEspecialidad.DataValueField = "Id_Especialidad";
             ddlFiltroEspecialidad.DataBind();
-            ddlFiltroEspecialidad.Items.Insert(0, new ListItem("-- Todas --", ""));
+            if (Session["Culture"]?.ToString() == "es")
+            {
+                ddlFiltroEspecialidad.Items.Insert(0, new ListItem("-- Todas --", ""));
+            }
+            else
+            {
+                ddlFiltroEspecialidad.Items.Insert(0, new ListItem("-- All --", ""));
+            }
         }
 
         protected void btnBuscar_Click(object sender, EventArgs e)
@@ -119,7 +126,15 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
             ddlProvincia.DataTextField = "NombreProvincia";
             ddlProvincia.DataValueField = "Id_Provincia";
             ddlProvincia.DataBind();
-            ddlProvincia.Items.Insert(0, new ListItem("-- Elija una provincia --", ""));
+            if (Session["Culture"]?.ToString() == "es")
+            {
+                ddlProvincia.Items.Insert(0, new ListItem("-- Elija una provincia --", ""));
+
+            }
+            else 
+            {
+                ddlProvincia.Items.Insert(0, new ListItem("-- Select a province --", ""));
+            }
         }
 
         private void CargarLocalidades(string idProvincia)
@@ -203,8 +218,8 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             txtLegajo.Enabled = false;
             txtDni.Enabled = false;
-            btnCargar.Text = "Actualizar Médico";
-            hCargarMedico.InnerText = "Editar Médico";
+            btnCargar.Text = GetGlobalResourceObject("lang", "btnActualizarMedico").ToString();
+            hCargarMedico.InnerText = GetGlobalResourceObject("lang", "titleEditDoctor")?.ToString() ?? "Editar Médico";
             lblMensaje.Text = "";
         }
 
@@ -347,8 +362,8 @@ namespace TPINT_GRUPO_21_PR3.MenuAdmin
 
             txtLegajo.Enabled = true;
             txtDni.Enabled = true;
-            btnCargar.Text = "Cargar Médico";
-            hCargarMedico.InnerText = "Cargar Nuevo Médico";
+            btnCargar.Text = GetGlobalResourceObject("lang", "btnCargarMedico").ToString();
+            hCargarMedico.InnerText = GetGlobalResourceObject("lang", "titleAddDoctor")?.ToString() ?? "Cargar Nuevo Médico";
         }
 
 
